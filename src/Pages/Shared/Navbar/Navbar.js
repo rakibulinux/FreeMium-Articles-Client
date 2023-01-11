@@ -89,7 +89,7 @@ const Navbar = () => {
   );
 
   return (
-    <div>
+    <div className="container mx-auto">
       {user?.uid ? (
         <div className="navbar bg-base-100">
           <div className="navbar-start">

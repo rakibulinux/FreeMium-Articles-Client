@@ -5,7 +5,7 @@ const ArticlesCard = ({data}) => {
 const {articleDetails,articleRead,articleSubmitDate,articleTitle,writerImg,writerName, 
     articleImg,_id} = data;
 const descriptionSlice = articleDetails.length >170 ? articleDetails.slice(0, 170)+"..." : articleDetails;
-console.log(descriptionSlice);
+// console.log(descriptionSlice);
     return (
         <div>
             <Link to={''}>

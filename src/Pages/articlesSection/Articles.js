@@ -13,8 +13,8 @@ const Articles = () => {
     return (
         <div className='grid grid col-span-1 w-full'>
             {
-                articles.map(data=>
-                      <ArticlesCard data={data}></ArticlesCard>
+                articles.map((data)=>
+                      <ArticlesCard data={data} key={data?._id}></ArticlesCard>
                     )
             }
         </div>

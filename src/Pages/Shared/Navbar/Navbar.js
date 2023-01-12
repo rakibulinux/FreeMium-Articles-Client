@@ -9,7 +9,7 @@ const Navbar = () => {
   const { user, logoutUserAccount } = useContext(AuthContext);
   const handleLogOut = () => {
     logoutUserAccount()
-      .then(() => {
+      .then(() => {   
         toast.success("LogOut Success");
       })
       .catch((err) => {
@@ -120,7 +120,7 @@ const Navbar = () => {
           </div>
           <div className="navbar-center">
             <NavLink to="/" className="text-2xl font-medium">
-              FreeMium
+              FreeMium<span className="text-[#333333] text-2xl font-bold">.</span>
             </NavLink>
           </div>
           <div className="navbar-end">
@@ -219,7 +219,7 @@ const Navbar = () => {
               </ul>
             </div>
             <NavLink to="/" className="text-2xl font-medium">
-              FreeMium
+              FreeMium<span className="text-[#333333] text-2xl font-bold">.</span>
             </NavLink>
           </div>
           <div className="gap-7">

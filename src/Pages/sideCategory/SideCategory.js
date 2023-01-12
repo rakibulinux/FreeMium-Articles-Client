@@ -2,7 +2,7 @@ import React from 'react';
 
 const SideCategory = () => {
     return (
-        <div className='mt-[100px]'>
+        <div className='mt-5'>
             SideCategory
         </div>
     );

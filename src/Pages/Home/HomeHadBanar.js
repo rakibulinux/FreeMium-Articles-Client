@@ -12,7 +12,7 @@ const HomeHadBanar = () => {
       <button className="btn btn-primary"> Start bloging</button>
     </div>
   </div>
-</div> 
+</div>
         </div>
     );
 };

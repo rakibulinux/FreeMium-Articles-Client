@@ -167,10 +167,13 @@ const Navbar = () => {
               </label>
               <ul
                 tabIndex={0}
-                className="menu menu-compact dropdown-content mt-3 p-2 shadow rounded-box w-52 "
+                className="menu menu-compact dropdown-content mt-3 p-2 shadow rounded-sm bg-base-100 box-border"
               >
                 <li className="">
-                  <NavLink className="justify-between bg-white text-black">
+                  <NavLink
+                    to="/profile"
+                    className="justify-between bg-white text-black"
+                  >
                     Profile
                   </NavLink>
                 </li>
@@ -181,7 +184,7 @@ const Navbar = () => {
                 </li>
                 <li className="">
                   <NavLink className="justify-between bg-white text-black">
-                    Logout
+                    <button onClick={handleLogOut}>Logout</button>
                   </NavLink>
                 </li>
               </ul>

@@ -44,7 +44,6 @@ const Navbar = () => {
           Home
         </NavLink>
       </li>
-
       {!user?.uid ? (
         <>
           <li>

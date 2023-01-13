@@ -19,7 +19,7 @@ const ArticlesCard = ({ data }) => {
   // console.log(descriptionSlice);
   return (
     <div>
-      <Link to={`/${_id}`}>
+      <Link to={`/${_id}`}
         <div className="card w-[750px] mt-7 mx-auto bg-base-100 shadow-xl">
           <div className="card-body">
             <div className="flex items-center">

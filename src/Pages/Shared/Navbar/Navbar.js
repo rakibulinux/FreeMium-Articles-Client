@@ -142,7 +142,7 @@ const Navbar = () => {
                 FreeMium
                 <span className="text-[#333333] text-2xl font-bold">.</span>
               </NavLink>
-              <form>
+              <form className="sm:hidden md:block">
                 <div className="relative text-gray-600 focus-within:text-gray-400">
                   <span className="absolute inset-y-0 left-0 flex items-center pl-2">
                     <button

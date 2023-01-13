@@ -9,13 +9,32 @@ const Navbar = () => {
   const { user, logoutUserAccount } = useContext(AuthContext);
   const handleLogOut = () => {
     logoutUserAccount()
-      .then(() => {   
-        toast.success("LogOut Success");
+      .then(() => {
+        toast.success("User logout Success");
       })
       .catch((err) => {
         toast.error(err.message);
       });
   };
+  const writeIcon = (
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      aria-label="Write"
+    >
+      <path
+        d="M14 4a.5.5 0 0 0 0-1v1zm7 6a.5.5 0 0 0-1 0h1zm-7-7H4v1h10V3zM3 4v16h1V4H3zm1 17h16v-1H4v1zm17-1V10h-1v10h1zm-1 1a1 1 0 0 0 1-1h-1v1zM3 20a1 1 0 0 0 1 1v-1H3zM4 3a1 1 0 0 0-1 1h1V3z"
+        fill="currentColor"
+      ></path>
+      <path
+        d="M17.5 4.5l-8.46 8.46a.25.25 0 0 0-.06.1l-.82 2.47c-.07.2.12.38.31.31l2.47-.82a.25.25 0 0 0 .1-.06L19.5 6.5m-2-2l2.32-2.32c.1-.1.26-.1.36 0l1.64 1.64c.1.1.1.26 0 .36L19.5 6.5m-2-2l2 2"
+        stroke="currentColor"
+      ></path>
+    </svg>
+  );
+
   const navItemNotUser = (
     <>
       <li>
@@ -26,7 +45,9 @@ const Navbar = () => {
         <NavLink>Membership</NavLink>
       </li>
       <li>
-        <NavLink>Write</NavLink>
+        <NavLink className="flex gap-2" to="/new-story">
+          {writeIcon} Write
+        </NavLink>
       </li>
 
       <li>
@@ -39,7 +60,7 @@ const Navbar = () => {
       <li>
         <NavLink
           className={({ isActive }) => (isActive ? "text-sky-600" : "")}
-          to="/home"
+          to="/"
         >
           Home
         </NavLink>
@@ -92,7 +113,7 @@ const Navbar = () => {
       {user?.uid ? (
         <div className="navbar bg-base-100">
           <div className="navbar-start">
-            <div className="dropdown">
+            <div className="dropdown sm:block md:hidden">
               <label tabIndex={0} className="btn btn-ghost btn-circle">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -116,29 +137,49 @@ const Navbar = () => {
                 {navItems}
               </ul>
             </div>
-          </div>
-          <div className="navbar-center">
-            <NavLink to="/" className="text-2xl font-medium">
-              FreeMium<span className="text-[#333333] text-2xl font-bold">.</span>
-            </NavLink>
+            <div className="flex gap-2">
+              <NavLink to="/" className="text-2xl font-medium">
+                FreeMium
+                <span className="text-[#333333] text-2xl font-bold">.</span>
+              </NavLink>
+              <form>
+                <div className="relative text-gray-600 focus-within:text-gray-400">
+                  <span className="absolute inset-y-0 left-0 flex items-center pl-2">
+                    <button
+                      type="submit"
+                      className="p-1 focus:outline-none focus:shadow-outline"
+                    >
+                      <svg
+                        fill="none"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        viewBox="0 0 24 24"
+                        className="w-6 h-6"
+                      >
+                        <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                      </svg>
+                    </button>
+                  </span>
+                  <input
+                    type="search"
+                    name="q"
+                    className="py-2 text-sm text-white border rounded-3xl pl-10 focus:outline-none focus:bg-white focus:text-gray-900"
+                    placeholder="Search Freemium"
+                    autoComplete="off"
+                  />
+                </div>
+              </form>
+            </div>
           </div>
           <div className="navbar-end">
-            <button className="btn btn-ghost btn-circle">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                />
-              </svg>
-            </button>
+            <NavLink
+              className="flex gap-2 text-gray-500 hover:text-black"
+              to="/new-story"
+            >
+              {writeIcon} Write
+            </NavLink>
             <button className="btn btn-ghost btn-circle">
               <div className="indicator">
                 <svg
@@ -177,14 +218,17 @@ const Navbar = () => {
                   </NavLink>
                 </li>
                 <li className="">
-                  <NavLink className="justify-between bg-white text-black">
+                  <NavLink
+                    to="/settings"
+                    className="justify-between bg-white text-black"
+                  >
                     Settings
                   </NavLink>
                 </li>
-                <li className="">
-                  <NavLink className="justify-between bg-white text-black">
+                <li className="justify-between bg-white text-black">
+                  <>
                     <button onClick={handleLogOut}>Logout</button>
-                  </NavLink>
+                  </>
                 </li>
               </ul>
             </div>
@@ -218,7 +262,8 @@ const Navbar = () => {
               </ul>
             </div>
             <NavLink to="/" className="text-2xl font-medium">
-              FreeMium<span className="text-[#333333] text-2xl font-bold">.</span>
+              FreeMium
+              <span className="text-[#333333] text-2xl font-bold">.</span>
             </NavLink>
           </div>
           <div className="gap-7">

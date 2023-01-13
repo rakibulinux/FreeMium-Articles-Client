@@ -5,8 +5,10 @@ import WelcomeDashboard from "../Pages/Dashboard/Admin/WelcomeDashboard/WelcomeD
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Home from "../Pages/Home/Home/Home";
 import Login from "../Pages/Login/Login";
+import NewStory from "../Pages/NewStory/NewStory";
 import Profile from "../Pages/Profile/Profile";
 import Register from "../Pages/Register/Register";
+import Settings from "../Pages/Settings/Settings";
 import AdminRoute from "./AdminRoute";
 import PrivateRoute from "./PrivateRoute";
 
@@ -26,7 +28,27 @@ const router = createBrowserRouter([
       },
       {
         path: "/profile",
-        element: <Profile />,
+        element: (
+          <PrivateRoute>
+            <Profile />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/settings",
+        element: (
+          <PrivateRoute>
+            <Settings />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/new-story",
+        element: (
+          <PrivateRoute>
+            <NewStory />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/login",

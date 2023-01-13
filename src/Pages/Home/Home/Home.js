@@ -15,15 +15,15 @@ const Home = () => {
         user?.uid? 
         // after log in user  UI
        <div className="container mx-auto">
-         <div className="flex flex-col lg:flex-row ">
-          {/* left side conten */}
+         <div className={user?.uid ? "flex flex-col lg:flex-row":"flex flex-col lg:flex-row "}>
+          {/* left side content */}
           <div className="leftSideConten flex-auto w-64 mx-3">
           <AfterLoginHadBanar></AfterLoginHadBanar>
           <Manubar></Manubar>
           <Articles></Articles>
           </div>
-          
-          {/* right side conten */}
+        
+          {/* right side content */}
           <div className="flex-auto w-32">
           <SideCategory></SideCategory>
           </div>

@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import SideCategoryButton from './sideCategoryButton/SideCategoryButton';
+import { AuthContext } from './../../contexts/AuthProvider';
 
 const SideCategory = () => {
+    const {user} = useContext(AuthContext);
     const [categoryButtons, setCategoryButtons] = useState([]);
     console.log(categoryButtons);
     useEffect(()=>{
@@ -12,7 +14,9 @@ const SideCategory = () => {
         .then(data=>setCategoryButtons(data))
     },[])
     return (
-        <div className='mt-5 p-4 sticky top-0'>
+        
+            !user?.uid &&
+            <div className='mt-5 p-4 sticky top-0'>
             <p className='text-base font-semibold text-gray-800'>DISCOVER MORE OF WHAT MATTERS TO YOU</p>
             <div className="grid grid-cols-3 gap-2 mt-4">
             {
@@ -23,6 +27,8 @@ const SideCategory = () => {
             </div>
            
         </div>
+        
+        
     );
 };
 

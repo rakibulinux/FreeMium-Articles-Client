@@ -36,6 +36,7 @@ const ArticlesCard = ({ data }) => {
                 <p className="text-[16px] mt-3 text-[#757575] font-semibold">
                   {descriptionSlice}
                 </p>
+                {/*  */}
               </div>
               <div className="flex justify-center items-center p-2">
                 <img className="" src={articleImg} alt="" />

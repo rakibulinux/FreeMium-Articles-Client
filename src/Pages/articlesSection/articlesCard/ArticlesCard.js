@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from './../../../contexts/AuthProvider';
 
 const ArticlesCard = ({ data }) => {
+  const {user} = useContext(AuthContext)
   const {
     articleDetails,
     articleRead,
@@ -37,6 +39,7 @@ const ArticlesCard = ({ data }) => {
                 <p className="text-base mt-3 text-[#757575] font-semibold sm:none md:block ">
                   {descriptionSlice}
                 </p>
+                {/*  */}
               </div>
               {/* blog right img */}
               <div className="flex justify-center items-center p-2 ">

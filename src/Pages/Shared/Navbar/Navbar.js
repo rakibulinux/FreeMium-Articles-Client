@@ -141,7 +141,7 @@ const Navbar = () => {
             </div>
             <div className="flex gap-2">
               <NavLink to="/" className="text-2xl font-medium">
-               <img className="w-2" src={whiteScreen} alt="" />
+               <img className="w-56" src={whiteScreen} alt="" />
               </NavLink>
               <form className="sm:hidden md:block">
                 <div className="relative text-gray-600 focus-within:text-gray-400">

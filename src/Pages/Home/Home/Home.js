@@ -28,8 +28,9 @@ const Home = () => {
           <div className="flex-auto w-32">
           <div className=" w-30 mx-auto">
           <button className="btn btn-wide">Get unlimited access</button>
-         
-          <SideCategory></SideCategory>
+          
+         <p>category</p>
+          
           </div>
           </div>
         </div>

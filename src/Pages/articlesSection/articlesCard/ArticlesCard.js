@@ -36,7 +36,7 @@ const ArticlesCard = ({ data }) => {
                 <h1 className="text-2xl font-semibold text-gray-800">
                   {articleTitle}
                 </h1>
-                <p className="text-base mt-3 text-[#757575] font-semibold sm:none md:block ">
+                <p className="text-base mt-3 text-[#757575] font-semibold">
                   {descriptionSlice}
                 </p>
                 {/*  */}

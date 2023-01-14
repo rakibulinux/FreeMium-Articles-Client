@@ -6,14 +6,14 @@ import Manubar from "../AfterLoginHadBanar/Manubar/Manubar";
 
 import HomeHadBanar from "../HomeHadBanar";
 import { AuthContext } from './../../../contexts/AuthProvider';
-
+import "./Home.css";
 const Home = () => {
   const {user} = useContext(AuthContext);
   return (
     <div >
      
       {
-        user?.uid? 
+        user?.uid ? 
         // after log in user  UI
        <div className="container mx-auto">
          <div className="flex flex-col sm:flex-col-reverse  md:flex-col-reverse  lg:flex-row ">
@@ -38,7 +38,7 @@ const Home = () => {
         // before log in user UI
          <>
          <HomeHadBanar></HomeHadBanar>
-         <div className="grid my-5" style={{gridTemplateColumns:"4fr 2fr"}}>
+         <div className="grid my-5 articleSideCategory" style={{gridTemplateColumns:"4fr 2fr"}}>
         <Articles></Articles>
         <SideCategory></SideCategory>
     </div>

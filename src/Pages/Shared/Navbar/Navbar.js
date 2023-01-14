@@ -4,7 +4,9 @@ import toast from "react-hot-toast";
 import { NavLink } from "react-router-dom";
 import PrimaryButton from "../../../components/Button/PrimaryButton";
 import { AuthContext } from "../../../contexts/AuthProvider";
-
+import whiteScreen from '../../../Assets/white-screen.png'
+import BlackScreen from '../../../Assets/Black-screen-tp.png'
+import "./Navebar.css";
 const Navbar = () => {
   const { user, logoutUserAccount } = useContext(AuthContext);
   const handleLogOut = () => {
@@ -38,20 +40,20 @@ const Navbar = () => {
   const navItemNotUser = (
     <>
       <li>
-        <NavLink>Our story</NavLink>
+        <NavLink className="text-white border-animate">Our story</NavLink>
       </li>
 
       <li>
-        <NavLink>Membership</NavLink>
+        <NavLink className="text-white border-animate">Membership</NavLink>
       </li>
       <li>
-        <NavLink className="flex gap-2" to="/new-story">
+        <NavLink className="gap-2 text-white border-animate" style={{display:"flex"}} to="/new-story">
           {writeIcon} Write
         </NavLink>
       </li>
 
       <li>
-        <NavLink to="/login">Sign In</NavLink>
+        <NavLink className="text-white border-animate" to="/login">Sign In</NavLink>
       </li>
     </>
   );
@@ -111,7 +113,7 @@ const Navbar = () => {
   return (
     <div className="container mx-auto">
       {user?.uid ? (
-        <div className="navbar bg-base-100">
+        <div className="navbar">
           <div className="navbar-start">
             <div className="dropdown sm:block md:hidden">
               <label tabIndex={0} className="btn btn-ghost btn-circle">
@@ -139,8 +141,7 @@ const Navbar = () => {
             </div>
             <div className="flex gap-2">
               <NavLink to="/" className="text-2xl font-medium">
-                FreeMium
-                <span className="text-[#333333] text-2xl font-bold">.</span>
+               <img className="w-2" src={whiteScreen} alt="" />
               </NavLink>
               <form className="sm:hidden md:block">
                 <div className="relative text-gray-600 focus-within:text-gray-400">
@@ -202,7 +203,7 @@ const Navbar = () => {
             <div className="dropdown dropdown-end">
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                 <div className="w-10 rounded-full">
-                  <img src={user?.photoURL} alt="profile pictures" />
+                  <img className="w-4" src={user?.photoURL} alt="profile pictures" />
                 </div>
               </label>
               <ul
@@ -235,7 +236,7 @@ const Navbar = () => {
           </div>
         </div>
       ) : (
-        <div className="navbar justify-between bg-base-100">
+        <div className="navbar justify-between">
           <div className="">
             <div className="dropdown">
               <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -262,8 +263,7 @@ const Navbar = () => {
               </ul>
             </div>
             <NavLink to="/" className="text-2xl font-medium">
-              FreeMium
-              <span className="text-[#333333] text-2xl font-bold">.</span>
+              <img className="w-56" src={BlackScreen} alt="" />
             </NavLink>
           </div>
           <div className="gap-7">

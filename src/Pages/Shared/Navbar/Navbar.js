@@ -7,6 +7,7 @@ import { AuthContext } from "../../../contexts/AuthProvider";
 import whiteScreen from "../../../Assets/white-screen.png";
 import BlackScreen from "../../../Assets/Black-screen-tp.png";
 import "./Navebar.css";
+// 
 const Navbar = () => {
   const { user, logoutUserAccount } = useContext(AuthContext);
   const handleLogOut = () => {

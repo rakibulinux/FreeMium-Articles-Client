@@ -47,27 +47,13 @@ const Navbar = () => {
         <NavLink className="text-gray-900 border-animate">Membership</NavLink>
       </li>
       <li>
-<<<<<<< HEAD
         <NavLink className="gap-2 text-gray-900 border-animate" style={{display:"flex"}} to="/new-story">
-=======
-        <NavLink
-          className="gap-2 text-white border-animate"
-          style={{ display: "flex" }}
-          to="/new-story"
-        >
->>>>>>> fc42a2f5067b071294e7434d023add69c0b7ec43
           {writeIcon} Write
         </NavLink>
       </li>
 
       <li>
-<<<<<<< HEAD
         <NavLink className="text-gray-900 border-animate" to="/login">Sign In</NavLink>
-=======
-        <NavLink className="text-white border-animate" to="/login">
-          Sign In
-        </NavLink>
->>>>>>> fc42a2f5067b071294e7434d023add69c0b7ec43
       </li>
     </>
   );

@@ -7,6 +7,7 @@ import { setAuthToken } from "../../APIs/Auth";
 import Spinner from "../../components/Spinner/Spinner";
 import useToken from "../../hooks/useToken";
 import { FcGoogle } from "react-icons/fc";
+import Particle from "../../components/particleJS/Particle";
 
 const Login = () => {
   const {
@@ -86,6 +87,7 @@ const Login = () => {
 
   return (
     <div className="flex justify-center items-center pt-8">
+      <Particle />
       <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900">
         <div className="mb-8 text-center">
           <h1 className="my-3 text-4xl font-bold">Sign in</h1>

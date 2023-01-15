@@ -40,20 +40,20 @@ const Navbar = () => {
   const navItemNotUser = (
     <>
       <li>
-        <NavLink className="text-white border-animate">Our story</NavLink>
+        <NavLink className="text-gray-900 border-animate">Our story</NavLink>
       </li>
 
       <li>
-        <NavLink className="text-white border-animate">Membership</NavLink>
+        <NavLink className="text-gray-900 border-animate">Membership</NavLink>
       </li>
       <li>
-        <NavLink className="gap-2 text-white border-animate" style={{display:"flex"}} to="/new-story">
+        <NavLink className="gap-2 text-gray-900 border-animate" style={{display:"flex"}} to="/new-story">
           {writeIcon} Write
         </NavLink>
       </li>
 
       <li>
-        <NavLink className="text-white border-animate" to="/login">Sign In</NavLink>
+        <NavLink className="text-gray-900 border-animate" to="/login">Sign In</NavLink>
       </li>
     </>
   );
@@ -166,7 +166,7 @@ const Navbar = () => {
                   <input
                     type="search"
                     name="q"
-                    className="py-2 text-sm text-white border rounded-3xl pl-10 focus:outline-none focus:bg-white focus:text-gray-900"
+                    className="py-2 text-sm text-gray-900 border rounded-3xl pl-10 focus:outline-none focus:bg-white focus:text-gray-900"
                     placeholder="Search Freemium"
                     autoComplete="off"
                   />
@@ -272,7 +272,7 @@ const Navbar = () => {
             </div>
             <NavLink
               to="/login"
-              className="bg-black py-2 px-3 text-white rounded-3xl"
+              className="bg-black py-2 px-3 text-gray-100 rounded-3xl"
             >
               Get started
             </NavLink>

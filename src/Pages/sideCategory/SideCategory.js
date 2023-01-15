@@ -12,11 +12,11 @@ const SideCategory = () => {
       .then((data) => setCategoryButtons(data));
   }, []);
   return (
-    <div className="mt-5 p-4 sticky top-0">
-      <p className="text-base font-semibold text-gray-800">
+    <div className="mt-5 sticky top-0">
+      <p className="text-base font-semibold text-gray-800 my-3">
         DISCOVER MORE OF WHAT MATTERS TO YOU
       </p>
-      <div className="grid grid-cols-3 gap-2 mt-4">
+      <div className="flex flex-wrap gap-3">
         {categoryButtons.map((data) => (
           <SideCategoryButton data={data}></SideCategoryButton>
         ))}

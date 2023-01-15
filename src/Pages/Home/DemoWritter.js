@@ -5,7 +5,7 @@ const DemoWritter = ({writter}) => {
   console.log(writter)
     return (
         <div>
-            
+       
         </div>
     );
 };

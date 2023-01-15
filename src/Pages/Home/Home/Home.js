@@ -3,6 +3,7 @@ import Articles from "../../articlesSection/Articles";
 import SideCategory from "../../sideCategory/SideCategory";
 import AfterLoginHadBanar from "../AfterLoginHadBanar/AfterLoginHadBanar";
 import Manubar from "../AfterLoginHadBanar/Manubar/Manubar";
+import DemoWritter from "../DemoWritter";
 
 import HomeHadBanar from "../HomeHadBanar";
 import { AuthContext } from './../../../contexts/AuthProvider';
@@ -16,16 +17,18 @@ const Home = () => {
         user?.uid ? 
         // after log in user  UI
        <div className="container mx-auto">
-         <div className="flex flex-col sm:flex-col-reverse  md:flex-col-reverse  lg:flex-row ">
+       
+        {/* flex-col sm:flex-row-reverse  md:flex-row-reverse  lg:flex-row \ 1st flex-auto w-64 mx-3 2nd flex-auto w-32*/}
+         <div className=" flex lg:flex-row sm:flex-col-reverse md:flex-col-reverse">
           {/* left side conten */}
-          <div className="leftSideConten flex-auto w-64 mx-3">
+          <div className="leftSideConten  flex-auto w-64 mx-3">
           <AfterLoginHadBanar></AfterLoginHadBanar>
           <Manubar></Manubar>
           <Articles></Articles>
           </div>
           
           {/* right side conten here */}
-          <div className="flex-auto w-32">
+          <div className="  flex-auto w-32 ">
           <div className=" w-30 mx-auto">
           <button className="btn btn-wide">Get unlimited access</button>
           

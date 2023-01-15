@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { AuthContext } from './../../../contexts/AuthProvider';
+import { AuthContext } from "./../../../contexts/AuthProvider";
 
 const ArticlesCard = ({ data }) => {
-  const {user} = useContext(AuthContext)
+  const { user } = useContext(AuthContext);
   const {
     articleDetails,
     articleRead,
@@ -21,11 +21,10 @@ const ArticlesCard = ({ data }) => {
   // console.log(descr)
 
   return (
-    <div>
-      <Link to={`/${_id}`}>
-        <div className="my-7 max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
+    <>
+      <Link to={`/`}>
+        <div className="my-7 w-full mx-auto bg-white rounded-xl shadow-md ">
           <div className="card-body md:flex">
-
             <div className="flex items-center">
               {/* blog auther img */}
               <img className="rounded-full" src={writerImg} alt="" />
@@ -36,7 +35,7 @@ const ArticlesCard = ({ data }) => {
                 <h1 className="text-2xl font-semibold text-gray-800">
                   {articleTitle}
                 </h1>
-                <p className="text-base mt-3 text-[#757575] font-semibold">
+                <p className="text-base mt-3 hidden md:block text-[#757575] font-semibold">
                   {descriptionSlice}
                 </p>
                 {/*  */}
@@ -57,7 +56,7 @@ const ArticlesCard = ({ data }) => {
           </div>
         </div>
       </Link>
-    </div>
+    </>
   );
 };
 

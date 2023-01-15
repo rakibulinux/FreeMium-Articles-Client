@@ -10,11 +10,11 @@ const Articles = () => {
       .then((data) => setArticles(data));
   }, []);
   return (
-    <div className="grid col-span-1 w-full">
+    <>
       {articles.map((data) => (
         <ArticlesCard data={data} key={data?._id}></ArticlesCard>
       ))}
-    </div>
+    </>
   );
 };
 

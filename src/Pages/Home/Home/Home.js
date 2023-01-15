@@ -5,48 +5,49 @@ import AfterLoginHadBanar from "../AfterLoginHadBanar/AfterLoginHadBanar";
 import Manubar from "../AfterLoginHadBanar/Manubar/Manubar";
 
 import HomeHadBanar from "../HomeHadBanar";
-import { AuthContext } from './../../../contexts/AuthProvider';
+import { AuthContext } from "./../../../contexts/AuthProvider";
 import "./Home.css";
 const Home = () => {
-  const {user} = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   return (
-    <div >
-     
-      {
-        user?.uid ? 
+    <div className="w-11/12 mx-auto">
+      {user?.uid ? (
         // after log in user  UI
-       <div className="container mx-auto">
-         <div className="flex flex-col sm:flex-col-reverse  md:flex-col-reverse  lg:flex-row ">
+        <>
+          <div className="grid sm:grid-rows-1 md:grid-cols-3 gap-4">
+            <section className="col-span-2 sm:order-last md:order-first">
+              <AfterLoginHadBanar />
+              <Manubar />
+              <Articles />
+            </section>
+            <aside className="">
+              <button className="bg-black text-white rounded-3xl py-3 w-10/12">
+                Get unlimited access
+              </button>
+              {/* <p>category</p> */}
+
+              <SideCategory />
+            </aside>
+          </div>
+
           {/* left side conten */}
-          <div className="leftSideConten flex-auto w-64 mx-3">
-          <AfterLoginHadBanar></AfterLoginHadBanar>
-          <Manubar></Manubar>
-          <Articles></Articles>
-          </div>
-          
+
           {/* right side conten here */}
-          <div className="flex-auto w-32">
-          <div className=" w-30 mx-auto">
-          <button className="btn btn-wide">Get unlimited access</button>
-          
-         <p>category</p>
-          
-          </div>
-          </div>
-        </div>
-       </div>
-        :
+        </>
+      ) : (
         // before log in user UI
-         <>
-         <HomeHadBanar></HomeHadBanar>
-         <div className="grid my-5 articleSideCategory" style={{gridTemplateColumns:"4fr 2fr"}}>
-        <Articles></Articles>
-        <SideCategory></SideCategory>
-    </div>
-         </>
-        
-      }
-    
+        <>
+          <HomeHadBanar />
+          <div className="grid sm:grid-rows-1 md:grid-cols-3 gap-4">
+            <section className="col-span-2 sm:order-last md:order-first">
+              <Articles />
+            </section>
+            <aside className="">
+              <SideCategory />
+            </aside>
+          </div>
+        </>
+      )}
     </div>
   );
 };

@@ -11,6 +11,7 @@ import Register from "../Pages/Register/Register";
 import Settings from "../Pages/Settings/Settings";
 import AdminRoute from "./AdminRoute";
 import PrivateRoute from "./PrivateRoute";
+import ArticlesDetails from './../Pages/articlesSection/articlesDetails/ArticlesDetails';
 
 const router = createBrowserRouter([
   {
@@ -23,7 +24,7 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/home",
+        path: "/home/:id",
         element: <Home />,
       },
       {
@@ -58,6 +59,11 @@ const router = createBrowserRouter([
         path: "/register",
         element: <Register />,
       },
+      {
+        path:"/articleDetails/:id",
+        element: <ArticlesDetails />,
+        loader: async ({ params }) => await fetch(`http://localhost:5000/details/${params.id}`)
+      }
     ],
   },
   {

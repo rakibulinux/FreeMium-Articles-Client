@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { useLoaderData } from "react-router-dom";
 import Articles from "../../articlesSection/Articles";
 import SideCategory from "../../sideCategory/SideCategory";
 import AfterLoginHadBanar from "../AfterLoginHadBanar/AfterLoginHadBanar";
@@ -10,6 +11,8 @@ import { AuthContext } from "./../../../contexts/AuthProvider";
 import "./Home.css";
 const Home = () => {
   const { user } = useContext(AuthContext);
+  const articleData = useLoaderData();
+  console.log(articleData)
   return (
     <div className="w-11/12 mx-auto">
       {user?.uid ? (
@@ -21,7 +24,7 @@ const Home = () => {
               <Manubar />
               <Articles />
             </section>
-            <aside className="">
+            <aside className="mt-8">
               <button className="bg-black text-white rounded-3xl py-3 w-10/12">
                 Get unlimited access
               </button>

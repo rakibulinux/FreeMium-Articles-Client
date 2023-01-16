@@ -2,7 +2,10 @@ import React from "react";
 import Particle from "../../components/particleJS/Particle";
 // import ParticlesComponent from '../../components/particleJS/Particle';
 import penimg from "../../Assets/pen-pic.png";
+import testImg from '../../Assets/img3.jpg'
+
 const HomeHadBanar = () => {
+
   return (
     <div className="flex lg:justify-around items-center lg:flex-row">
       {/* import particle js */}
@@ -18,12 +21,13 @@ const HomeHadBanar = () => {
               other blogging tool. Tap into intuitive, flexible tools that put
               writers, bloggers, and creators first..
             </p>
-            <button className="btn btn-primary bg-black"> Start bloging</button>
+            <button className="btn btn-primary bg-black">Start bloging</button>
           </div>
         </div>
       </div>
-      <div>
+      <div id="slideshow">
         <img className="hidden lg:block" src={penimg} alt="" />
+        <img className="hidden lg:block" src={testImg} alt="" />
       </div>
     </div>
   );

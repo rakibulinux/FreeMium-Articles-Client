@@ -145,7 +145,7 @@ const Navbar = () => {
                 <img className="w-56" src={whiteScreen} alt="" />
               </NavLink>
               <form className="sm:hidden md:block">
-                <div className="relative text-gray-600 focus-within:text-gray-400">
+                <div className="relative mt-4 text-gray-600 focus-within:text-gray-400">
                   <span className="absolute inset-y-0 left-0 flex items-center pl-2">
                     <button
                       type="submit"

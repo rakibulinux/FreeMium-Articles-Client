@@ -5,7 +5,7 @@ import SideCategoryButton from "./sideCategoryButton/SideCategoryButton";
 
 const SideCategory = () => {
   const [categoryButtons, setCategoryButtons] = useState([]);
-  console.log(categoryButtons);
+  // console.log(categoryButtons);
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/categoryButton`)
       .then((res) => res.json())
@@ -17,8 +17,8 @@ const SideCategory = () => {
         DISCOVER MORE OF WHAT MATTERS TO YOU
       </p>
       <div className="flex flex-wrap gap-3">
-        {categoryButtons.map((data) => (
-          <SideCategoryButton data={data}></SideCategoryButton>
+        {categoryButtons.map((data, i) => (
+          <SideCategoryButton data={data} key={i}></SideCategoryButton>
         ))}
       </div>
     </div>

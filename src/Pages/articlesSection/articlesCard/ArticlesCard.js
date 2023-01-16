@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "./../../../contexts/AuthProvider";
 
@@ -18,12 +18,13 @@ const ArticlesCard = ({ data }) => {
     articleDetails.length > 170
       ? articleDetails.slice(0, 170) + "..."
       : articleDetails;
+  
   // console.log(descr)
-
+ 
   return (
     <>
-      <Link to={`/`}>
-        <div className="my-7 w-full mx-auto bg-white rounded-xl shadow-md ">
+      <Link to={`/articleDetails/${_id}`}>
+        <div className="my-7 w-full mx-auto bg-white rounded-xl shadow-md">
           <div className="card-body md:flex">
             <div className="flex items-center">
               {/* blog auther img */}

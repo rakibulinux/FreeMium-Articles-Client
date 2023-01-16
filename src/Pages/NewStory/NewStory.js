@@ -9,8 +9,9 @@ const NewStory = () => {
     }
   };
   return (
-    <>
+    <div>
       <Editor
+        apiKey={process.env.REACT_APP_TINY_API}
         onInit={(evt, editor) => (editorRef.current = editor)}
         initialValue="<p>This is the initial content of the editor.</p>"
         init={{
@@ -50,7 +51,7 @@ const NewStory = () => {
         }}
       />
       <button onClick={log}>Log editor content</button>
-    </>
+    </div>
   );
 };
 

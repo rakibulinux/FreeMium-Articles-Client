@@ -14,6 +14,7 @@
     "axios": "^1.2.2",
     "daisyui": "^2.46.1",
     "firebase": "^9.15.0",
+    "medium-editor": "^5.23.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-helmet-async": "^1.3.0",

@@ -18,7 +18,7 @@ const ArticlesCard = ({ data }) => {
     articleDetails.length > 170
       ? articleDetails.slice(0, 170) + "..."
       : articleDetails;
-  // console.log(descr)
+  console.log(descriptionSlice);
 
   return (
     <>
@@ -35,9 +35,10 @@ const ArticlesCard = ({ data }) => {
                 <h1 className="text-2xl font-semibold text-gray-800">
                   {articleTitle}
                 </h1>
-                <p className="text-base mt-3 hidden md:block text-[#757575] font-semibold">
+                {/* <p className="text-base mt-3 hidden md:block text-[#757575] font-semibold">
                   {descriptionSlice}
-                </p>
+                </p> */}
+                <div dangerouslySetInnerHTML={{ __html: descriptionSlice }} />
                 {/*  */}
               </div>
               {/* blog right img */}

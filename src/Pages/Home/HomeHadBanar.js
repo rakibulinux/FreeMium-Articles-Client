@@ -2,7 +2,6 @@ import React from "react";
 import Particle from "../../components/particleJS/Particle";
 // import ParticlesComponent from '../../components/particleJS/Particle';
 import penimg from "../../Assets/pen-pic.png";
-import testImg from '../../Assets/img3.jpg'
 
 const HomeHadBanar = () => {
 
@@ -27,7 +26,6 @@ const HomeHadBanar = () => {
       </div>
       <div id="slideshow">
         <img className="hidden lg:block" src={penimg} alt="" />
-        <img className="hidden lg:block" src={testImg} alt="" />
       </div>
     </div>
   );

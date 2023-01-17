@@ -17,8 +17,13 @@ const SideCategory = () => {
         DISCOVER MORE OF WHAT MATTERS TO YOU
       </p>
       <div className="flex flex-wrap gap-3">
+<<<<<<< HEAD
         {categoryButtons.map((data, i) => (
           <SideCategoryButton data={data} key={i}></SideCategoryButton>
+=======
+        {categoryButtons.map((data) => (
+          <SideCategoryButton key={data?._id} data={data}></SideCategoryButton>
+>>>>>>> rakibul
         ))}
       </div>
     </div>

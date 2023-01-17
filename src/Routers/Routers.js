@@ -9,6 +9,7 @@ import NewStory from "../Pages/NewStory/NewStory";
 import Profile from "../Pages/Profile/Profile";
 import Register from "../Pages/Register/Register";
 import Settings from "../Pages/Settings/Settings";
+import WriteStories from "../Pages/WriteStories/WriteStories";
 import AdminRoute from "./AdminRoute";
 import PrivateRoute from "./PrivateRoute";
 import ArticlesDetails from './../Pages/articlesSection/articlesDetails/ArticlesDetails';
@@ -45,9 +46,13 @@ const router = createBrowserRouter([
       },
       {
         path: "/new-story",
+        element: <PrivateRoute>{/* <NewStory /> */}</PrivateRoute>,
+      },
+      {
+        path: "/write-stories",
         element: (
           <PrivateRoute>
-            <NewStory />
+            <WriteStories />
           </PrivateRoute>
         ),
       },

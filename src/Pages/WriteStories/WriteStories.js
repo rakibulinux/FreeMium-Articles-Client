@@ -30,49 +30,20 @@ const WriteStories = ({ userDetails }) => {
       articleRead: 12,
       articleImg: "",
     };
-    console.log(body);
-    const confHeader = {
-      "Content-Type": "application/json",
-    };
-
     fetch(`${process.env.REACT_APP_API_URL}/add-story`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
-        authorization: `bearer ${localStorage.getItem("usedPhoneToken")}`,
+        authorization: `bearer ${localStorage.getItem("freeMiumToken")}`,
       },
       body: JSON.stringify(body),
     })
       .then((res) => res.json())
       .then((data) => {
         toast.success(`${user?.displayName} added new story`);
-        //   navigate("/dashboard/seller/my-products");
+        navigate("/");
       });
   };
-  //   });
-  //     fetch(
-  //       `${process.env.REACT_APP_API_URL}/add-story`,
-
-  //       {
-  //         method: "POST",
-  //         headers: {
-  //           confHeader,
-  //           authorization: `bearer ${localStorage.getItem("freeMiumToken")}`,
-  //         },
-  //         body: JSON.stringify(body),
-  //       }
-  //     )
-  //       .then((res) => res.json())
-  //       .then((data) => {
-  //         if (data.status) {
-  //           console.log(data.message);
-  //           //   navigate(`/new-storystory/${res.data.data}`);
-  //         }
-  //       })
-  //       .catch((err) => {
-  //         console.log(err.message);
-  //       });
-  //   };
 
   return (
     <>

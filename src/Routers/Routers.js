@@ -12,7 +12,7 @@ import Settings from "../Pages/Settings/Settings";
 import WriteStories from "../Pages/WriteStories/WriteStories";
 import AdminRoute from "./AdminRoute";
 import PrivateRoute from "./PrivateRoute";
-import ArticlesDetails from './../Pages/articlesSection/articlesDetails/ArticlesDetails';
+import ArticlesDetails from "./../Pages/articlesSection/articlesDetails/ArticlesDetails";
 
 const router = createBrowserRouter([
   {
@@ -65,10 +65,11 @@ const router = createBrowserRouter([
         element: <Register />,
       },
       {
-        path:"/articleDetails/:id",
+        path: "/view-story/:id",
         element: <ArticlesDetails />,
-        loader: async ({ params }) => await fetch(`http://localhost:5000/details/${params.id}`)
-      }
+        loader: async ({ params }) =>
+          await fetch(`http://localhost:5000/view-story/${params.id}`),
+      },
     ],
   },
   {

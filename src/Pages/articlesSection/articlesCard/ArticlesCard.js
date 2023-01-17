@@ -34,7 +34,7 @@ const ArticlesCard = ({ data }) => {
   }
   return (
     <>
-      <Link to={`/articleDetails/${_id}`}>
+      <Link to={`/view-story/${_id}`}>
         <div className="my-7 w-full mx-auto bg-white rounded-xl shadow-md">
           <div className="card-body md:flex">
             <div className="flex items-center">

@@ -1,9 +1,19 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "./../../../contexts/AuthProvider";
+import parse, { domToReact, htmlToDOM, Element } from "html-react-parser";
+import Spinner from "../../../components/Spinner/Spinner";
 
+const parser = (input) =>
+  parse(input, {
+    replace: (domNode) => {
+      if (domNode instanceof Element && domNode.attribs.class === "remove") {
+        return <></>;
+      }
+    },
+  });
 const ArticlesCard = ({ data }) => {
-  const { user } = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext);
   const {
     articleDetails,
     articleRead,
@@ -19,7 +29,9 @@ const ArticlesCard = ({ data }) => {
       ? articleDetails.slice(0, 170) + "..."
       : articleDetails;
   console.log(descriptionSlice);
-
+  if (loading) {
+    return <Spinner />;
+  }
   return (
     <>
       <Link to={`/`}>
@@ -36,7 +48,7 @@ const ArticlesCard = ({ data }) => {
                   {articleTitle}
                 </h1>
                 {/* <p className="text-base mt-3 hidden md:block text-[#757575] font-semibold">
-                  {descriptionSlice}
+                  {parser(`${html}`)}
                 </p> */}
                 <div dangerouslySetInnerHTML={{ __html: descriptionSlice }} />
                 {/*  */}

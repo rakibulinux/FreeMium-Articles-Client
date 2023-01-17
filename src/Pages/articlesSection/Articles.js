@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import Spinner from "../../components/Spinner/Spinner";
 import ArticlesCard from "./articlesCard/ArticlesCard";
 
 const Articles = () => {
@@ -9,6 +10,9 @@ const Articles = () => {
       .then((res) => res.json())
       .then((data) => setArticles(data));
   }, []);
+  if (!articles) {
+    return <Spinner />;
+  }
   return (
     <>
       {articles.map((data) => (

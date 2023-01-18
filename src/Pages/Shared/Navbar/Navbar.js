@@ -7,7 +7,7 @@ import { AuthContext } from "../../../contexts/AuthProvider";
 import whiteScreen from "../../../Assets/white-screen.png";
 import BlackScreen from "../../../Assets/Black-screen-tp.png";
 import "./Navebar.css";
-// 
+//
 const Navbar = () => {
   const { user, logoutUserAccount } = useContext(AuthContext);
   const handleLogOut = () => {
@@ -48,13 +48,19 @@ const Navbar = () => {
         <NavLink className="text-gray-900 border-animate">Membership</NavLink>
       </li>
       <li>
-        <NavLink className="gap-2 text-gray-900 border-animate" style={{display:"flex"}} to="/new-story">
+        <NavLink
+          className="gap-2 text-gray-900 border-animate"
+          style={{ display: "flex" }}
+          to="/write-stories"
+        >
           {writeIcon} Write
         </NavLink>
       </li>
 
       <li>
-        <NavLink className="text-gray-900 border-animate" to="/login">Sign In</NavLink>
+        <NavLink className="text-gray-900 border-animate" to="/login">
+          Sign In
+        </NavLink>
       </li>
     </>
   );
@@ -178,7 +184,7 @@ const Navbar = () => {
           <div className="navbar-end">
             <NavLink
               className="flex gap-2 text-gray-500 hover:text-black"
-              to="/new-story"
+              to="/write-stories"
             >
               {writeIcon} Write
             </NavLink>

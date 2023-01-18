@@ -70,9 +70,32 @@ const router = createBrowserRouter([
       {
         path: "/view-story/:id",
         element: <ArticlesDetails />,
-        loader: async ({ params }) =>
-          await fetch(`http://localhost:5000/view-story/${params.id}`),
+        loader: async ({ params }) => await fetch(`http://localhost:5000/view-story/${params.id}`)
       },
+      {
+        path: "/list",
+        element:( 
+        <PrivateRoute>
+          <List></List>
+        </PrivateRoute>
+        ),
+      },
+      {
+        path: "/stories",
+        element:( 
+        <PrivateRoute>
+          <Stories></Stories>
+        </PrivateRoute>
+        ),
+      },
+      {
+        path: "/stats",
+        element:( 
+        <PrivateRoute>
+          <Stats />
+        </PrivateRoute>
+        ),
+      }
     ],
   },
   {

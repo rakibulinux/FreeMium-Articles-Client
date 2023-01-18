@@ -12,7 +12,10 @@ import Settings from "../Pages/Settings/Settings";
 import WriteStories from "../Pages/WriteStories/WriteStories";
 import AdminRoute from "./AdminRoute";
 import PrivateRoute from "./PrivateRoute";
-import ArticlesDetails from "./../Pages/articlesSection/articlesDetails/ArticlesDetails";
+import ArticlesDetails from './../Pages/articlesSection/articlesDetails/ArticlesDetails';
+import List from './../Pages/List/List';
+import Stories from "../Pages/Stories/Stories";
+import Stats from './../Pages/Stats/Stats';
 
 const router = createBrowserRouter([
   {
@@ -93,6 +96,7 @@ const router = createBrowserRouter([
           </AdminRoute>
         ),
       },
+      
     ],
   },
 ]);

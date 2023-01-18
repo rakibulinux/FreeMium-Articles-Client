@@ -12,6 +12,7 @@ import Settings from "../Pages/Settings/Settings";
 import AdminRoute from "./AdminRoute";
 import PrivateRoute from "./PrivateRoute";
 import ArticlesDetails from './../Pages/articlesSection/articlesDetails/ArticlesDetails';
+import StaffPicks from "../Pages/sideCategory/StaffPicks";
 
 const router = createBrowserRouter([
   {

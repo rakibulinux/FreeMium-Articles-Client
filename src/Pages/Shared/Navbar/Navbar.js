@@ -8,7 +8,7 @@ import whiteScreen from "../../../Assets/white-screen.png";
 import BlackScreen from "../../../Assets/Black-screen-tp.png";
 import { CgProfile } from "react-icons/cg";
 import { AiFillSetting, AiOutlineLogout } from "react-icons/ai";
-import { BsList } from "react-icons/bs";
+import { BsBookmarksFill } from "react-icons/bs";
 import { MdAmpStories } from "react-icons/md";
 import { GiNetworkBars } from "react-icons/gi";
 import "./Navebar.css";
@@ -224,24 +224,24 @@ const Navbar = () => {
               </label>
               <ul
                 tabIndex={0}
-                className="menu menu-compact dropdown-content mt-3 p-2 shadow rounded-sm bg-base-100 box-border w-40
+                className="menu menu-compact dropdown-content mt-3 p-2 shadow rounded-sm bg-base-100 box-border w-max
                 border-[1px] border-[#e4e0e0]
                 "
               >
                 <li className="justify-between bg-white text-black text-lg font-semibold text-semibold">
                   <NavLink
                     to="/profile"
-                  
+
                   >
-                  <CgProfile className="text-lg" />
-                  Profile
+                    <CgProfile className="text-lg" />
+                    Profile
                   </NavLink>
                 </li>
                 <li className="justify-between bg-white text-black text-lg font-semibold text-semibold">
                   <NavLink
                     to="/list"
                   >
-                    <BsList className="text-lg" />
+                    <BsBookmarksFill className="text-lg" />
                     List
                   </NavLink>
                 </li>
@@ -261,35 +261,63 @@ const Navbar = () => {
                     Stats
                   </NavLink>
                 </li>
-                <li className="justify-between bg-white text-black text-lg font-semibold text-semibold">
-                  <NavLink
-                    to="/profile"
-                    className="justify-between bg-white text-black"
-                  >
-                    Profile
-                  </NavLink>
-                </li>
-                <li className="">
-                  <NavLink
-                    to="/profile"
-                    className="justify-between bg-white text-black"
-                  >
-                    Profile
-                  </NavLink>
-                </li>
+                <div className="divider"></div> 
                 <li className="">
                   <NavLink
                     to="/settings"
                   >
-                    <AiFillSetting className="text-lg" />
+                    
                     Settings
                   </NavLink>
                 </li>
-                <hr className="text-gray-400 shadow-2xl my-2" />
+                <li className="">
+                  <NavLink
+                    to="/list"
+                  >
+
+                    Refine recommendations
+                  </NavLink>
+                </li>
+                <li className="">
+                  <NavLink
+                    to="/"
+                  >
+
+                    Manage publications
+                  </NavLink>
+                </li>
+                <div className="divider"></div> 
+                <li className="">
+                  <NavLink
+                    to="/">
+                    Become a member
+                  </NavLink>
+                </li>
+                <li className="">
+                  <NavLink
+                    to="/">
+                    Apply to the Partner Program
+                  </NavLink>
+                </li>
+                <li className="">
+                  <NavLink
+                    to="/">
+                    Gift membership
+
+                  </NavLink>
+                </li>
+                <div className="divider"></div> 
                 <li className="justify-between bg-white text-black text-lg font-semibold">
                   <>
                     <button onClick={handleLogOut} className="text-red-500 hover:text-red-600">
-                     <AiOutlineLogout className="text-lg" /> Sign out
+                      <AiOutlineLogout className="text-lg" /> Sign out
+                      {/* {
+                        user?.uid ? <>
+                          <p>{user.email}</p>
+                        </> : <>
+                        <p>no mail</p>
+                          </>
+                      } */}
                     </button>
                   </>
                 </li>

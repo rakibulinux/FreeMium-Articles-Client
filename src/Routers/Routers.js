@@ -8,14 +8,15 @@ import Login from "../Pages/Login/Login";
 import NewStory from "../Pages/NewStory/NewStory";
 import Profile from "../Pages/Profile/Profile";
 import Register from "../Pages/Register/Register";
-import Settings from "../Pages/Settings/Settings";
+import Settings from "../Pages/UserProfileMenu/Settings/Settings";
 import WriteStories from "../Pages/WriteStories/WriteStories";
 import AdminRoute from "./AdminRoute";
 import PrivateRoute from "./PrivateRoute";
 import ArticlesDetails from './../Pages/articlesSection/articlesDetails/ArticlesDetails';
-import List from './../Pages/List/List';
-import Stories from "../Pages/Stories/Stories";
-import Stats from './../Pages/Stats/Stats';
+
+import Stories from "../Pages/UserProfileMenu/Stories/Stories";
+import Stats from '../Pages/UserProfileMenu/Stats/Stats';
+import List from "../Pages/UserProfileMenu/Lists/List";
 
 const router = createBrowserRouter([
   {
@@ -51,7 +52,7 @@ const router = createBrowserRouter([
         path: "/settings",
         element: (
           <PrivateRoute>
-            <Settings />
+            <Settings></Settings>
           </PrivateRoute>
         ),
       },

@@ -12,6 +12,9 @@ import Settings from "../Pages/Settings/Settings";
 import AdminRoute from "./AdminRoute";
 import PrivateRoute from "./PrivateRoute";
 import ArticlesDetails from './../Pages/articlesSection/articlesDetails/ArticlesDetails';
+import List from './../Pages/List/List';
+import Stories from "../Pages/Stories/Stories";
+import Stats from './../Pages/Stats/Stats';
 
 const router = createBrowserRouter([
   {
@@ -63,6 +66,30 @@ const router = createBrowserRouter([
         path:"/articleDetails/:id",
         element: <ArticlesDetails />,
         loader: async ({ params }) => await fetch(`http://localhost:5000/details/${params.id}`)
+      },
+      {
+        path: "/list",
+        element:( 
+        <PrivateRoute>
+          <List></List>
+        </PrivateRoute>
+        ),
+      },
+      {
+        path: "/stories",
+        element:( 
+        <PrivateRoute>
+          <Stories></Stories>
+        </PrivateRoute>
+        ),
+      },
+      {
+        path: "/stats",
+        element:( 
+        <PrivateRoute>
+          <Stats />
+        </PrivateRoute>
+        ),
       }
     ],
   },
@@ -87,6 +114,7 @@ const router = createBrowserRouter([
           </AdminRoute>
         ),
       },
+      
     ],
   },
 ]);

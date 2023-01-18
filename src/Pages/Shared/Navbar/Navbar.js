@@ -225,6 +225,22 @@ const Navbar = () => {
                 </li>
                 <li className="">
                   <NavLink
+                    to="/profile"
+                    className="justify-between bg-white text-black"
+                  >
+                    Profile
+                  </NavLink>
+                </li>
+                <li className="">
+                  <NavLink
+                    to="/profile"
+                    className="justify-between bg-white text-black"
+                  >
+                    Profile
+                  </NavLink>
+                </li>
+                <li className="">
+                  <NavLink
                     to="/settings"
                     className="justify-between bg-white text-black"
                   >

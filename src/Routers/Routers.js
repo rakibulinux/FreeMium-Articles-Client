@@ -13,6 +13,7 @@ import WriteStories from "../Pages/WriteStories/WriteStories";
 import AdminRoute from "./AdminRoute";
 import PrivateRoute from "./PrivateRoute";
 import ArticlesDetails from "./../Pages/articlesSection/articlesDetails/ArticlesDetails";
+import OurStory from "../Pages/OurStory/OurStory";
 
 const router = createBrowserRouter([
   {
@@ -63,6 +64,10 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register />,
+      },
+      {
+        path: "/ourstory",
+        element: <OurStory></OurStory>,
       },
       {
         path: "/view-story/:id",

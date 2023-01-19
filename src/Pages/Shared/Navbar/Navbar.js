@@ -41,7 +41,7 @@ const Navbar = () => {
   const navItemNotUser = (
     <>
       <li>
-        <NavLink className="text-gray-900 border-animate">Our story</NavLink>
+        <NavLink to='/ourstory' className="text-gray-900 border-animate">Our story</NavLink>
       </li>
 
       <li>

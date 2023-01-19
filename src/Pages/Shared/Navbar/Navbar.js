@@ -12,7 +12,7 @@ import { BsList } from "react-icons/bs";
 import { MdAmpStories } from "react-icons/md";
 import { GiNetworkBars } from "react-icons/gi";
 import "./Navebar.css";
-// 
+//
 const Navbar = () => {
   const { user, logoutUserAccount } = useContext(AuthContext);
   const handleLogOut = () => {
@@ -53,13 +53,19 @@ const Navbar = () => {
         <NavLink className="text-gray-900 border-animate">Membership</NavLink>
       </li>
       <li>
-        <NavLink className="gap-2 text-gray-900 border-animate" style={{display:"flex"}} to="/new-story">
+        <NavLink
+          className="gap-2 text-gray-900 border-animate"
+          style={{ display: "flex" }}
+          to="/write-stories"
+        >
           {writeIcon} Write
         </NavLink>
       </li>
 
       <li>
-        <NavLink className="text-gray-900 border-animate" to="/login">Sign In</NavLink>
+        <NavLink className="text-gray-900 border-animate" to="/login">
+          Sign In
+        </NavLink>
       </li>
     </>
   );

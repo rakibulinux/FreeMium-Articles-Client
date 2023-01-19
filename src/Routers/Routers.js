@@ -6,6 +6,9 @@ import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Home from "../Pages/Home/Home/Home";
 import Login from "../Pages/Login/Login";
 import NewStory from "../Pages/NewStory/NewStory";
+import PaymentFail from "../Pages/Payment/PaymentFail/PaymentFail";
+import PaymentForm from "../Pages/Payment/PaymentForm/PaymentForm";
+import PaymentSuccess from "../Pages/Payment/PaymentSuccess/PaymentSuccess";
 import Profile from "../Pages/Profile/Profile";
 import Register from "../Pages/Register/Register";
 import Settings from "../Pages/Settings/Settings";
@@ -58,6 +61,19 @@ const router = createBrowserRouter([
         path: "/register",
         element: <Register />,
       },
+      {
+        path: "/payment",
+        element: <PaymentForm></PaymentForm>
+        
+      },
+      {
+        path: "/success",
+        element: <PaymentSuccess></PaymentSuccess>
+      },
+      {
+        path: "/fail",
+        element: <PaymentFail/>
+      }
     ],
   },
   {

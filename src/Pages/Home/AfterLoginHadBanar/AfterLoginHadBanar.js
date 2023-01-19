@@ -12,7 +12,7 @@ const AfterLoginHadBanar = () => {
       </button>
     </div>
     <Link to='/'>Get unlimited access to all of FreeMium for less than $1/week.</Link>
-   <Link to='/' className='text-[red]'>Become a member</Link>
+   <Link to='/payment' className='text-[red]'>Become a member</Link>
   
   </div>
 </div>

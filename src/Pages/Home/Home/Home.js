@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import Articles from "../../articlesSection/Articles";
 import SideCategory from "../../sideCategory/SideCategory";
 import AfterLoginHadBanar from "../AfterLoginHadBanar/AfterLoginHadBanar";
@@ -27,7 +28,7 @@ const Home = () => {
           {/* right side conten here */}
           <div className="flex-auto w-32">
           <div className=" w-30 mx-auto">
-          <button className="btn btn-wide">Get unlimited access</button>
+          <Link to='/payment' className="btn btn-wide">Get unlimited access</Link>
          
           <SideCategory></SideCategory>
           </div>

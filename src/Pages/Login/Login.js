@@ -16,6 +16,7 @@ const Login = () => {
     resetUserAccountPassword,
     loading,
     setLoading,
+    user
   } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
@@ -84,7 +85,9 @@ const Login = () => {
   if (loading) {
     return <Spinner />;
   }
-
+  // if(user?.uid){
+  //   navigate('/')
+  // }
   return (
     <div className="flex justify-center items-center pt-8">
       <Particle />

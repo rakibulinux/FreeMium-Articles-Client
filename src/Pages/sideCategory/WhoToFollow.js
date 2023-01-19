@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const WhoToFollow = () => {
     return (
         <div className=''>
-            <h1 className='my-7 '>Who to follow</h1>
+            <h1 className='my-8 '>Who to follow</h1>
             <div>
                 <div className='flex mb-5'>
                     <div className=''>

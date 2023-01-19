@@ -12,15 +12,11 @@ import Settings from "../Pages/Settings/Settings";
 import WriteStories from "../Pages/WriteStories/WriteStories";
 import AdminRoute from "./AdminRoute";
 import PrivateRoute from "./PrivateRoute";
-<<<<<<< HEAD
-import ArticlesDetails from "./../Pages/articlesSection/articlesDetails/ArticlesDetails";
-import OurStory from "../Pages/OurStory/OurStory";
-=======
 import ArticlesDetails from './../Pages/articlesSection/articlesDetails/ArticlesDetails';
 import List from './../Pages/List/List';
 import Stories from "../Pages/Stories/Stories";
 import Stats from './../Pages/Stats/Stats';
->>>>>>> 8950e6c375b446e6ed22868157ad31cfb88562dc
+import OurStory from "../Pages/OurStory/OurStory";
 
 const router = createBrowserRouter([
   {

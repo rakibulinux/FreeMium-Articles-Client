@@ -12,10 +12,10 @@ import Settings from "../Pages/Settings/Settings";
 import WriteStories from "../Pages/WriteStories/WriteStories";
 import AdminRoute from "./AdminRoute";
 import PrivateRoute from "./PrivateRoute";
-import ArticlesDetails from './../Pages/articlesSection/articlesDetails/ArticlesDetails';
-import List from './../Pages/List/List';
+import ArticlesDetails from "./../Pages/articlesSection/articlesDetails/ArticlesDetails";
+import List from "./../Pages/List/List";
 import Stories from "../Pages/Stories/Stories";
-import Stats from './../Pages/Stats/Stats';
+import Stats from "./../Pages/Stats/Stats";
 import OurStory from "../Pages/OurStory/OurStory";
 
 const router = createBrowserRouter([
@@ -75,32 +75,35 @@ const router = createBrowserRouter([
       {
         path: "/view-story/:id",
         element: <ArticlesDetails />,
-        loader: async ({ params }) => await fetch(`http://localhost:5000/view-story/${params.id}`)
+        loader: async ({ params }) =>
+          await fetch(
+            `${process.env.REACT_APP_API_URL}/view-story/${params.id}`
+          ),
       },
       {
         path: "/list",
-        element:( 
-        <PrivateRoute>
-          <List></List>
-        </PrivateRoute>
+        element: (
+          <PrivateRoute>
+            <List></List>
+          </PrivateRoute>
         ),
       },
       {
         path: "/stories",
-        element:( 
-        <PrivateRoute>
-          <Stories></Stories>
-        </PrivateRoute>
+        element: (
+          <PrivateRoute>
+            <Stories></Stories>
+          </PrivateRoute>
         ),
       },
       {
         path: "/stats",
-        element:( 
-        <PrivateRoute>
-          <Stats />
-        </PrivateRoute>
+        element: (
+          <PrivateRoute>
+            <Stats />
+          </PrivateRoute>
         ),
-      }
+      },
     ],
   },
   {
@@ -124,7 +127,6 @@ const router = createBrowserRouter([
           </AdminRoute>
         ),
       },
-      
     ],
   },
 ]);

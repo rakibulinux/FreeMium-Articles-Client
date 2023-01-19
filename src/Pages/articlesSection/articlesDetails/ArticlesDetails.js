@@ -9,15 +9,15 @@ const ArticlesDetails = () => {
     return (
         <div className='border-t-2'>
            
-            <div className='container mx-auto grid grid-cols-3 '> 
+            <div className='container mx-auto grid lg:grid-cols-3 sm:grid-cols-1'> 
              {/* left side content */}
-           <div className='col-span-2 border-r-2 '>
+           <div className=' border-r-2 col-span-2  '>
            <div className='mr-10 my-10'>
-           {/* <ArticleDetailsCard articleData={articleData} /> */}
+           <ArticleDetailsCard articleData={articleData} />
            </div>
            </div>
-           {/* right side condtent*/}
-          <div className='mx-auto my-10 px-10'>
+           {/* right side content*/}
+          <div className='mx-auto my-10 px-10 '>
           <button className="btn btn-wide rounded-full text-white">Get unlimited access</button>
           {/* wirtter info card */}         
   <div className="card-body px-0">
@@ -28,9 +28,9 @@ const ArticlesDetails = () => {
   </div>
 </div>
     {/* avater end */}
-    <h2 className="card-title">Tim Denning</h2>
+    <h2 className="card-title text-md c">Tim Denning</h2>
     <p>308K Followers</p>
-    <p>Aussie Blogger with 500M+ views — Writer for CNBC & Business Insider. Inspiring the world through Personal Development and Entrepreneurship — timdenning.com/mb Follow</p>
+    <p className='text-sm'>Aussie Blogger with 500M+ views — Writer for CNBC & Business Insider. Inspiring the world through Personal Development and Entrepreneurship — timdenning.com/mb Follow</p>
     <div className="card-actions ">
       <button className="btn btn-sm rounded-full bg-gray-500 border-0 text-white">Follow</button>
       <Link className="  bg-gray-500 border-0 rounded-full p-2">
@@ -40,7 +40,7 @@ const ArticlesDetails = () => {
   </div>
   {/* more form section */}
   <div>
-<h1 className='text-xl font-semibold'>More form Freemium</h1>
+<h1 className='text-xl font-semibold text-black'>More form Freemium</h1>
 {/* dremo writter card */}
 <div className="hero  ">
   <div className="hero-content flex-col lg:flex-row ">

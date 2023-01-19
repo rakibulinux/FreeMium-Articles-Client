@@ -4,7 +4,7 @@ import { AuthContext } from "./../../../contexts/AuthProvider";
 import Spinner from "../../../components/Spinner/Spinner";
 
 const ArticlesCard = ({ data }) => {
-  const { user, loading } = useContext(AuthContext);
+  const { loading } = useContext(AuthContext);
   const {
     articleDetails,
     articleRead,
@@ -19,7 +19,6 @@ const ArticlesCard = ({ data }) => {
     articleDetails?.length > 170
       ? articleDetails?.slice(0, 170) + "..."
       : articleDetails;
-  console.log(descriptionSlice);
   if (loading) {
     return <Spinner />;
   }

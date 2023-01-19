@@ -4,22 +4,40 @@ import React, { createContext } from "react";
 export const APIContext = createContext();
 const APIProvider = ({ children }) => {
   const {
-    data: categories,
+    data: categoryButton,
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["categories"],
+    queryKey: ["categoryButton"],
     queryFn: async () => {
-      const res = await fetch(`${process.env.REACT_APP_API_URL}/categories`);
+      const res = await fetch(
+        `${process.env.REACT_APP_API_URL}/categoryButton`
+      );
+      const data = res.json();
+      return data;
+    },
+  });
+
+  const {
+    data: articles,
+    isLoading: articlesLoading,
+    refetch: articlesRefetch,
+  } = useQuery({
+    queryKey: ["allArticles"],
+    queryFn: async () => {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/allArticles`);
       const data = res.json();
       return data;
     },
   });
 
   const apiInfo = {
-    categories,
+    categoryButton,
     isLoading,
     refetch,
+    articles,
+    articlesLoading,
+    articlesRefetch,
   };
   return <APIContext.Provider value={apiInfo}>{children}</APIContext.Provider>;
 };

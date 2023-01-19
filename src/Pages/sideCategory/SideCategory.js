@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import SideCategoryButton from "./sideCategoryButton/SideCategoryButton";
 import StaffPicks from "./StaffPicks";
+import WhoToFollow from "./WhoToFollow";
 
 const SideCategory = () => {
   const [categoryButtons, setCategoryButtons] = useState([]);
@@ -13,15 +14,19 @@ const SideCategory = () => {
       .then((data) => setCategoryButtons(data));
   }, []);
   return (
-    <div className="mt-5 sticky top-0">
-      <p className="text-base font-semibold text-gray-800 my-3">
-        DISCOVER MORE OF WHAT MATTERS TO YOU
-      </p>
-      <div className="flex flex-wrap gap-3">
-        {categoryButtons.map((data) => (
-          <SideCategoryButton key={data?._id} data={data}></SideCategoryButton>
-        ))}
+    <div className="sticky top-0">
+      <StaffPicks></StaffPicks>
+      <div className="mt-5 ">
+        <p className="text-base font-semibold text-gray-800 my-3">
+          DISCOVER MORE OF WHAT MATTERS TO YOU
+        </p>
+        <div className="flex flex-wrap gap-3">
+          {categoryButtons.map((data) => (
+            <SideCategoryButton key={data?._id} data={data}></SideCategoryButton>
+          ))}
+        </div>
       </div>
+      <WhoToFollow></WhoToFollow>
     </div>
   );
 };

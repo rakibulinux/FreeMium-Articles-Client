@@ -1,17 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "./../../../contexts/AuthProvider";
-import parse, { domToReact, htmlToDOM, Element } from "html-react-parser";
 import Spinner from "../../../components/Spinner/Spinner";
 
-const parser = (input) =>
-  parse(input, {
-    replace: (domNode) => {
-      if (domNode instanceof Element && domNode.attribs.class === "remove") {
-        return <></>;
-      }
-    },
-  });
 const ArticlesCard = ({ data }) => {
   const { user, loading } = useContext(AuthContext);
   const {
@@ -39,19 +30,18 @@ const ArticlesCard = ({ data }) => {
           <div className="card-body md:flex">
             <div className="flex items-center">
               {/* blog auther img */}
-              <img className="rounded-full" src={writerImg} alt="" />
+              <img className="rounded-full w-10 h-10" src={writerImg} alt="" />
               <h3 className="ml-2 font-bold text-gray-900">{writerName}</h3>
             </div>
             <div className="grid" style={{ gridTemplateColumns: "4fr 2fr" }}>
               <div>
-                <h1 className="text-2xl font-semibold text-gray-800">
-                  {articleTitle}
-                </h1>
-                {/* <p className="text-base mt-3 hidden md:block text-[#757575] font-semibold">
-                  {parser(`${html}`)}
-                </p> */}
+                <h1
+                  className="text-2xl font-semibold text-gray-800"
+                  dangerouslySetInnerHTML={{ __html: articleTitle }}
+                />
+                {/* {articleTitle}
+                </h1> */}
                 <div dangerouslySetInnerHTML={{ __html: descriptionSlice }} />
-                {/*  */}
               </div>
               {/* blog right img */}
               <div className="flex justify-center items-center p-2 ">

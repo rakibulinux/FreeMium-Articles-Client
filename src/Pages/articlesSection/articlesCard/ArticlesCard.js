@@ -15,8 +15,8 @@ const ArticlesCard = ({ data }) => {
     _id,
   } = data;
   const descriptionSlice =
-    articleDetails.length > 170
-      ? articleDetails.slice(0, 170) + "..."
+    articleDetails?.length > 170
+      ? articleDetails?.slice(0, 170) + "..."
       : articleDetails;
   
   // console.log(descr)

@@ -16,6 +16,7 @@ import ArticlesDetails from './../Pages/articlesSection/articlesDetails/Articles
 import List from './../Pages/List/List';
 import Stories from "../Pages/Stories/Stories";
 import Stats from './../Pages/Stats/Stats';
+import OurStory from "../Pages/OurStory/OurStory";
 
 const router = createBrowserRouter([
   {
@@ -66,6 +67,10 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register />,
+      },
+      {
+        path: "/ourstory",
+        element: <OurStory></OurStory>,
       },
       {
         path: "/view-story/:id",

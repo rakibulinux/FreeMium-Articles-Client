@@ -4,7 +4,7 @@ import { AuthContext } from '../../../contexts/AuthProvider';
 const PaymentForm = () => {
     const { user} = useContext(AuthContext);
     
-    console.log(user, user?.email, user?.displayName);
+    // console.log(user, user?.email, user?.displayName);
 
         const handlePayment = (e) => {
             e.preventDefault();

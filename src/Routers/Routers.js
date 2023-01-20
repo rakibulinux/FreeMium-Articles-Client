@@ -5,10 +5,10 @@ import WelcomeDashboard from "../Pages/Dashboard/Admin/WelcomeDashboard/WelcomeD
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Home from "../Pages/Home/Home/Home";
 import Login from "../Pages/Login/Login";
-import NewStory from "../Pages/NewStory/NewStory";
+
 import PaymentFail from "../Pages/Payment/PaymentFail/PaymentFail";
 import PaymentForm from "../Pages/Payment/PaymentForm/PaymentForm";
-import PaymentSuccess from "../Pages/Payment/PaymentSuccess/PaymentSuccess";
+
 import Profile from "../Pages/Profile/Profile";
 import Register from "../Pages/Register/Register";
 import Settings from "../Pages/Settings/Settings";
@@ -20,6 +20,7 @@ import List from "./../Pages/List/List";
 import Stories from "../Pages/Stories/Stories";
 import Stats from "./../Pages/Stats/Stats";
 import OurStory from "../Pages/OurStory/OurStory";
+import PaymentSuccess from "../Pages/Payment/PaymentSuccess/PaymentSuccess";
 
 const router = createBrowserRouter([
   {
@@ -82,6 +83,42 @@ const router = createBrowserRouter([
       {
         path: "/fail",
         element: <PaymentFail />,
+      },
+      {
+        path: "/ourstory",
+        element: <OurStory></OurStory>,
+      },
+      {
+        path: "/view-story/:id",
+        element: <ArticlesDetails />,
+        loader: async ({ params }) =>
+          await fetch(
+            `${process.env.REACT_APP_API_URL}/view-story/${params.id}`
+          ),
+      },
+      {
+        path: "/list",
+        element: (
+          <PrivateRoute>
+            <List></List>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/stories",
+        element: (
+          <PrivateRoute>
+            <Stories></Stories>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/stats",
+        element: (
+          <PrivateRoute>
+            <Stats />
+          </PrivateRoute>
+        ),
       },
     ],
   },

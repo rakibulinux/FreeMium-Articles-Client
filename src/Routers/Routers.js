@@ -60,9 +60,9 @@ const router = createBrowserRouter([
       {
         path: "/write-stories",
         element: (
-          <PrivateRoute>
-            <WriteStories />
-          </PrivateRoute>
+          // <PrivateRoute>
+          <WriteStories />
+          // </PrivateRoute>
         ),
       },
       {
@@ -86,7 +86,7 @@ const router = createBrowserRouter([
         element: <PaymentFail />,
       },
       {
-        path: "/ourstory",
+        path: "/our-story",
         element: <OurStory></OurStory>,
       },
       {
@@ -122,9 +122,9 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path:"/membership",
-        element:<MemberShipMain></MemberShipMain>
-      }
+        path: "/membership",
+        element: <MemberShipMain></MemberShipMain>,
+      },
     ],
   },
   {

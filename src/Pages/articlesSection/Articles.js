@@ -1,16 +1,12 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useContext } from "react";
 import Spinner from "../../components/Spinner/Spinner";
+import { APIContext } from "../../contexts/APIProvider";
 import ArticlesCard from "./articlesCard/ArticlesCard";
 
 const Articles = () => {
-  const [articles, setArticles] = useState([]);
-  useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/allArticles`)
-      .then((res) => res.json())
-      .then((data) => setArticles(data));
-  }, []);
-  if (!articles) {
+  const { articles, articlesLoading } = useContext(APIContext);
+  if (articlesLoading) {
     return <Spinner />;
   }
   return (

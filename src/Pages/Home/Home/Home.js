@@ -1,10 +1,9 @@
 import React, { useContext } from "react";
-import { Link, useLoaderData } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Articles from "../../articlesSection/Articles";
 import SideCategory from "../../sideCategory/SideCategory";
 import AfterLoginHadBanar from "../AfterLoginHadBanar/AfterLoginHadBanar";
 import Manubar from "../AfterLoginHadBanar/Manubar/Manubar";
-// import DemoWritter from "../DemoWritter";
 
 import HomeHadBanar from "../HomeHadBanar";
 import { AuthContext } from "./../../../contexts/AuthProvider";
@@ -12,7 +11,7 @@ import "./Home.css";
 const Home = () => {
   const { user } = useContext(AuthContext);
   return (
-    <div className="w-11/12 mx-auto">
+    <div className="w-11/12 mx-auto my-10">
       {user?.uid ? ( // after log in user  UI
         <div>
           <div className="grid sm:grid-rows-1 md:grid-cols-3 gap-4">
@@ -37,7 +36,7 @@ const Home = () => {
           {/* left side conten */}
 
           {/* right side conten here */}
-          <div className="flex-auto w-32">
+          {/* <div className="flex-auto w-32">
             <div className=" w-30 mx-auto">
               <Link
                 to="/payment"
@@ -47,7 +46,7 @@ const Home = () => {
               </Link>
               <SideCategory></SideCategory>
             </div>
-          </div>
+          </div> */}
         </div>
       ) : (
         // before log in user UI
@@ -58,6 +57,12 @@ const Home = () => {
               <Articles />
             </section>
             <aside className="">
+              <Link
+                to="/payment"
+                className="bg-black text-white rounded-3xl py-3 px-20 w-full"
+              >
+                Get unlimited access
+              </Link>
               <SideCategory />
             </aside>
           </div>

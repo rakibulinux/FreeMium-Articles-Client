@@ -7,7 +7,7 @@ import { AuthContext } from "../../../contexts/AuthProvider";
 import whiteScreen from "../../../Assets/white-screen.png";
 import BlackScreen from "../../../Assets/Black-screen-tp.png";
 import { CgProfile } from "react-icons/cg";
-import {  AiOutlineLogout } from "react-icons/ai";
+import { AiOutlineLogout } from "react-icons/ai";
 import { BsBookmarksFill } from "react-icons/bs";
 import { MdAmpStories } from "react-icons/md";
 import { GiNetworkBars } from "react-icons/gi";
@@ -231,142 +231,142 @@ const Navbar = () => {
               >
                 <li className="justify-between bg-white text-black text-lg font-semibold text-semibold">
 
-                 <NavLink to="/profile">
+                  <NavLink to="/profile">
 
-      <CgProfile className="text-lg" />
-      Profile
-    </NavLink>
-  </li>
-    <li className="justify-between bg-white text-black text-lg font-semibold text-semibold">
+                    <CgProfile className="text-lg" />
+                    Profile
+                  </NavLink>
+                </li>
+                <li className="justify-between bg-white text-black text-lg font-semibold text-semibold">
 
                   <NavLink
                     to="/list"
                   >
                     <BsBookmarksFill className="text-lg" />
 
-      List
-    </NavLink>
-  </li>
-    <li className="justify-between bg-white text-black text-lg font-semibold text-semibold">
-      <NavLink to="/stories">
-        <MdAmpStories className="text-lg" />
-        Stories
-      </NavLink>
-    </li>
-    <li className="justify-between bg-white text-black text-lg font-semibold text-semibold">
-      <NavLink to="/stats">
-        <GiNetworkBars className="text-lg" />
-        Stats
-      </NavLink>
-    </li>
+                    List
+                  </NavLink>
+                </li>
+                <li className="justify-between bg-white text-black text-lg font-semibold text-semibold">
+                  <NavLink to="/stories">
+                    <MdAmpStories className="text-lg" />
+                    Stories
+                  </NavLink>
+                </li>
+                <li className="justify-between bg-white text-black text-lg font-semibold text-semibold">
+                  <NavLink to="/stats">
+                    <GiNetworkBars className="text-lg" />
+                    Stats
+                  </NavLink>
+                </li>
 
-    <div className="divider"></div>
-    <li className="">
-      <NavLink
-        to="/settings"
-      >
+                <div className="divider"></div>
+                <li className="">
+                  <NavLink
+                    to="/settings"
+                  >
 
 
-            Settings
-          </NavLink>
-        </li>
-        <li className="">
-          <NavLink
+                    Settings
+                  </NavLink>
+                </li>
+                <li className="">
+                  <NavLink
                     to="/refinerecommendations"
-          >
+                  >
 
-            Refine recommendations
-          </NavLink>
-        </li>
-        <li className="">
-          <NavLink
-            to="/"
-          >
+                    Refine recommendations
+                  </NavLink>
+                </li>
+                <li className="">
+                  <NavLink
+                    to="/"
+                  >
 
-            Manage publications
-          </NavLink>
-        </li>
-        <div className="divider"></div>
-        <li className="">
-          <NavLink
-            to="/">
-            Become a member
-          </NavLink>
-        </li>
-        <li className="">
-          <NavLink
-            to="/">
-            Apply to the Partner Program
-          </NavLink>
-        </li>
-        <li className="">
-          <NavLink
-            to="/">
-            Gift membership
+                    Manage publications
+                  </NavLink>
+                </li>
+                <div className="divider"></div>
+                <li className="">
+                  <NavLink
+                    to="/">
+                    Become a member
+                  </NavLink>
+                </li>
+                <li className="">
+                  <NavLink
+                    to="/applyToThePartnerProgram">
+                    Apply to the Partner Program
+                  </NavLink>
+                </li>
+                <li className="">
+                  <NavLink
+                    to="/">
+                    Gift membership
 
-          </NavLink>
-        </li>
-        <div className="divider"></div>
-        <li className="justify-between bg-white text-black text-lg font-semibold">
-          <>
+                  </NavLink>
+                </li>
+                <div className="divider"></div>
+                <li className="justify-between bg-white text-black text-lg font-semibold">
+                  <>
 
                     <button
-      onClick={handleLogOut}
-      className="text-red-500 hover:text-red-600"
-    >
-      <AiOutlineLogout className="text-lg" /> Sign out
+                      onClick={handleLogOut}
+                      className="text-red-500 hover:text-red-600"
+                    >
+                      <AiOutlineLogout className="text-lg" /> Sign out
 
-    </button>
-  </>
+                    </button>
+                  </>
                 </li >
               </ul >
             </div >
           </div >
         </div >
       ) : (
-  <div className="navbar justify-between items-center">
-    <div className="">
-      <div className="dropdown">
-        <label tabIndex={0} className="btn btn-ghost lg:hidden">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M4 6h16M4 12h8m-8 6h16"
-            />
-          </svg>
-        </label>
-        <ul
-          tabIndex={0}
-          className="dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box"
-        >
-          {navItemNotUser}
-        </ul>
-      </div>
-      <NavLink to="/" className="text-2xl font-medium">
-        <img className="w-56" src={BlackScreen} alt="" />
-      </NavLink>
-    </div>
-    <div className="flex items-center gap-7">
-      <div className="hidden lg:flex">
-        <ul className="flex items-center gap-7">{navItemNotUser}</ul>
-      </div>
-      <NavLink
-        to="/login"
-        className="bg-black py-2 px-3 text-gray-100 rounded-3xl"
-      >
-        Get started
-      </NavLink>
-    </div>
-  </div>
-)}
+        <div className="navbar justify-between items-center">
+          <div className="">
+            <div className="dropdown">
+              <label tabIndex={0} className="btn btn-ghost lg:hidden">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M4 6h16M4 12h8m-8 6h16"
+                  />
+                </svg>
+              </label>
+              <ul
+                tabIndex={0}
+                className="dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box"
+              >
+                {navItemNotUser}
+              </ul>
+            </div>
+            <NavLink to="/" className="text-2xl font-medium">
+              <img className="w-56" src={BlackScreen} alt="" />
+            </NavLink>
+          </div>
+          <div className="flex items-center gap-7">
+            <div className="hidden lg:flex">
+              <ul className="flex items-center gap-7">{navItemNotUser}</ul>
+            </div>
+            <NavLink
+              to="/login"
+              className="bg-black py-2 px-3 text-gray-100 rounded-3xl"
+            >
+              Get started
+            </NavLink>
+          </div>
+        </div>
+      )}
     </div >
   );
 };

@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import Articles from "../../articlesSection/Articles";
 import SideCategory from "../../sideCategory/SideCategory";
 import AfterLoginHadBanar from "../AfterLoginHadBanar/AfterLoginHadBanar";
@@ -13,7 +14,7 @@ const Home = () => {
     <div className="w-11/12 mx-auto">
       {user?.uid ? (
         // after log in user  UI
-        <>
+        <div>
           <div className="grid sm:grid-rows-1 md:grid-cols-3 gap-4">
             <section className="col-span-2 sm:order-last md:order-first">
               <AfterLoginHadBanar />
@@ -32,8 +33,16 @@ const Home = () => {
           {/* left side conten */}
 
           {/* right side conten here */}
-        </>
-      ) : (
+          <div className="flex-auto w-32">
+          <div className=" w-30 mx-auto">
+          <Link to='/payment' className="btn btn-wide">Get unlimited access</Link>
+         
+          <SideCategory></SideCategory>
+          </div>
+          </div>
+        </div>
+       </div>
+        :
         // before log in user UI
         <>
           <HomeHadBanar />

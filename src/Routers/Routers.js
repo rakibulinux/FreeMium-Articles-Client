@@ -6,6 +6,9 @@ import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Home from "../Pages/Home/Home/Home";
 import Login from "../Pages/Login/Login";
 import NewStory from "../Pages/NewStory/NewStory";
+import PaymentFail from "../Pages/Payment/PaymentFail/PaymentFail";
+import PaymentForm from "../Pages/Payment/PaymentForm/PaymentForm";
+import PaymentSuccess from "../Pages/Payment/PaymentSuccess/PaymentSuccess";
 import Profile from "../Pages/Profile/Profile";
 import Register from "../Pages/Register/Register";
 import Settings from "../Pages/Settings/Settings";
@@ -69,40 +72,16 @@ const router = createBrowserRouter([
         element: <Register />,
       },
       {
-        path: "/ourstory",
-        element: <OurStory></OurStory>,
+        path: "/payment",
+        element: <PaymentForm></PaymentForm>,
       },
       {
-        path: "/view-story/:id",
-        element: <ArticlesDetails />,
-        loader: async ({ params }) =>
-          await fetch(
-            `${process.env.REACT_APP_API_URL}/view-story/${params.id}`
-          ),
+        path: "/success",
+        element: <PaymentSuccess></PaymentSuccess>,
       },
       {
-        path: "/list",
-        element: (
-          <PrivateRoute>
-            <List></List>
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "/stories",
-        element: (
-          <PrivateRoute>
-            <Stories></Stories>
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "/stats",
-        element: (
-          <PrivateRoute>
-            <Stats />
-          </PrivateRoute>
-        ),
+        path: "/fail",
+        element: <PaymentFail />,
       },
     ],
   },

@@ -50,7 +50,7 @@ const Navbar = () => {
       </li>
 
       <li>
-        <NavLink className="text-gray-900 border-animate">Membership</NavLink>
+        <NavLink className="text-gray-900 border-animate" to="/membership">Membership</NavLink>
       </li>
       <li className=" gap-2">
         <NavLink

@@ -16,9 +16,11 @@ const ArticlesDetails = () => {
         </div>
         {/* right side content*/}
         <div className="mx-auto my-10 px-10 ">
-          <button className="btn btn-wide rounded-full text-white">
-            Get unlimited access
-          </button>
+          <Link to="/payment">
+            <button className="bg-black text-white rounded-3xl py-3 px-2 w-9/12">
+              Get unlimited access
+            </button>
+          </Link>
           {/* wirtter info card */}
           <div className="card-body px-0">
             {/* avater start */}

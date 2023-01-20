@@ -5,7 +5,10 @@ import WelcomeDashboard from "../Pages/Dashboard/Admin/WelcomeDashboard/WelcomeD
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Home from "../Pages/Home/Home/Home";
 import Login from "../Pages/Login/Login";
-import NewStory from "../Pages/NewStory/NewStory";
+
+import PaymentFail from "../Pages/Payment/PaymentFail/PaymentFail";
+import PaymentForm from "../Pages/Payment/PaymentForm/PaymentForm";
+
 import Profile from "../Pages/Profile/Profile";
 import Register from "../Pages/Register/Register";
 import Settings from "../Pages/UserProfileMenu/Settings/Settings";
@@ -19,9 +22,6 @@ import Stories from "../Pages/UserProfileMenu/Stories/Stories";
 import Stats from '../Pages/UserProfileMenu/Stats/Stats';
 import List from "../Pages/UserProfileMenu/Lists/List";
 import OurStory from "../Pages/OurStory/OurStory";
-import RefineRecommendations from "../Pages/UserProfileMenu/RefineRecommendations/RefineRecommendations";
-import ApplyToThePartnerProgram from "../Pages/UserProfileMenu/ApplyToThePartnerProgram/ApplyToThePartnerProgram";
-
 
 const router = createBrowserRouter([
   {
@@ -68,9 +68,7 @@ const router = createBrowserRouter([
       {
         path: "/write-stories",
         element: (
-          <PrivateRoute>
             <WriteStories />
-          </PrivateRoute>
         ),
       },
       {
@@ -80,6 +78,18 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register />,
+      },
+      {
+        path: "/payment",
+        element: <PaymentForm></PaymentForm>,
+      },
+      {
+        path: "/success",
+        element: <PaymentSuccess></PaymentSuccess>,
+      },
+      {
+        path: "/fail",
+        element: <PaymentFail />,
       },
       {
         path: "/ourstory",
@@ -114,30 +124,6 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <Stats />
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "/refinerecommendations",
-        element: (
-          <PrivateRoute>
-           <RefineRecommendations></RefineRecommendations>
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "/applyToThePartnerProgram",
-        element: (
-          <PrivateRoute>
-            <ApplyToThePartnerProgram></ApplyToThePartnerProgram>
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "/applyToThePartnerProgram",
-        element: (
-          <PrivateRoute>
-            <ApplyToThePartnerProgram></ApplyToThePartnerProgram>
           </PrivateRoute>
         ),
       },

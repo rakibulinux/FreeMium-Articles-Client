@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
+import { AuthContext } from "../../contexts/AuthProvider";
 import SideCategoryButton from "./sideCategoryButton/SideCategoryButton";
 import StaffPicks from "./StaffPicks";
 import WhoToFollow from "./WhoToFollow";
 
 const SideCategory = () => {
   const [categoryButtons, setCategoryButtons] = useState([]);
+  const {user} =useContext(AuthContext)
   // console.log(categoryButtons);
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/categoryButton`)
@@ -15,7 +17,10 @@ const SideCategory = () => {
   }, []);
   return (
     <div className="sticky top-0">
-      <StaffPicks></StaffPicks>
+      {
+        user && <StaffPicks></StaffPicks>
+      }
+      
       <div className="mt-5 ">
         <p className="text-base font-semibold text-gray-800 my-3">
           DISCOVER MORE OF WHAT MATTERS TO YOU
@@ -26,7 +31,9 @@ const SideCategory = () => {
           ))}
         </div>
       </div>
-      <WhoToFollow></WhoToFollow>
+      {
+        user && <WhoToFollow></WhoToFollow>
+      }
     </div>
   );
 };

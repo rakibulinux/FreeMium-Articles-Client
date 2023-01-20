@@ -23,7 +23,7 @@ const AfterLoginHadBanar = () => {
               X
             </button>
           </div>
-          <Link to="/" className="underline">
+          <Link to="/payment" className="underline">
             Become a member
           </Link>
         </div>

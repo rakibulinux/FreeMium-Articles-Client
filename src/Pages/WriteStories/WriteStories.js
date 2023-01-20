@@ -12,7 +12,7 @@ import Spinner from "../../components/Spinner/Spinner";
 
 const WriteStories = ({ userDetails }) => {
   const { user } = useContext(AuthContext);
-  const { articlesLoading } = useContext(APIContext);
+  const { articlesRefetch } = useContext(APIContext);
   const { categoryButton, isLoading } = useContext(APIContext);
   console.log(categoryButton);
   const [title, setTitle] = useState("");
@@ -64,8 +64,8 @@ const WriteStories = ({ userDetails }) => {
             .then((res) => res.json())
             .then((data) => {
               toast.success(`${user?.displayName} added new story`);
+              articlesRefetch();
               navigate("/");
-              articlesLoading();
             });
         }
       });

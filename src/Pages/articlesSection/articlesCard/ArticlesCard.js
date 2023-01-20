@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { AuthContext } from './../../../contexts/AuthProvider';
+import { AuthContext } from "./../../../contexts/AuthProvider";
+import Spinner from "../../../components/Spinner/Spinner";
 
 const ArticlesCard = ({ data }) => {
-  const {user} = useContext(AuthContext)
+  const { loading } = useContext(AuthContext);
   const {
     articleDetails,
     articleRead,
@@ -15,31 +16,31 @@ const ArticlesCard = ({ data }) => {
     _id,
   } = data;
   const descriptionSlice =
-    articleDetails.length > 170
-      ? articleDetails.slice(0, 170) + "..."
+    articleDetails?.length > 170
+      ? articleDetails?.slice(0, 170) + "..."
       : articleDetails;
-  // console.log(descr)
-
+  if (loading) {
+    return <Spinner />;
+  }
   return (
-    <div>
-      <Link to={`/${_id}`}>
-        <div className="my-7 max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
+    <>
+      <Link to={`/view-story/${_id}`}>
+        <div className="my-7 w-full mx-auto bg-white rounded-xl shadow-md">
           <div className="card-body md:flex">
-
             <div className="flex items-center">
               {/* blog auther img */}
-              <img className="rounded-full" src={writerImg} alt="" />
+              <img className="rounded-full w-10 h-10" src={writerImg} alt="" />
               <h3 className="ml-2 font-bold text-gray-900">{writerName}</h3>
             </div>
             <div className="grid" style={{ gridTemplateColumns: "4fr 2fr" }}>
               <div>
-                <h1 className="text-2xl font-semibold text-gray-800">
-                  {articleTitle}
-                </h1>
-                <p className="text-base mt-3 text-[#757575] font-semibold sm:none md:block ">
-                  {descriptionSlice}
-                </p>
-                {/*  */}
+                <h1
+                  className="text-2xl font-semibold text-gray-800"
+                  dangerouslySetInnerHTML={{ __html: articleTitle }}
+                />
+                {/* {articleTitle}
+                </h1> */}
+                <div dangerouslySetInnerHTML={{ __html: descriptionSlice }} />
               </div>
               {/* blog right img */}
               <div className="flex justify-center items-center p-2 ">
@@ -57,7 +58,7 @@ const ArticlesCard = ({ data }) => {
           </div>
         </div>
       </Link>
-    </div>
+    </>
   );
 };
 

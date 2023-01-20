@@ -4,7 +4,6 @@ import Articles from "../../articlesSection/Articles";
 import SideCategory from "../../sideCategory/SideCategory";
 import AfterLoginHadBanar from "../AfterLoginHadBanar/AfterLoginHadBanar";
 import Manubar from "../AfterLoginHadBanar/Manubar/Manubar";
-
 import HomeHadBanar from "../HomeHadBanar";
 import { AuthContext } from "./../../../contexts/AuthProvider";
 import "./Home.css";
@@ -21,11 +20,10 @@ const Home = () => {
               <Articles />
             </section>
             <aside className="mt-8">
-              <Link
-                to="/payment"
-                className="bg-black text-white rounded-3xl py-3 px-20 w-full"
-              >
-                Get unlimited access
+              <Link to="/payment">
+                <button className="bg-black text-white rounded-3xl py-3 px-2 w-9/12">
+                  Get unlimited access
+                </button>
               </Link>
               {/* <p>category</p> */}
 
@@ -57,11 +55,10 @@ const Home = () => {
               <Articles />
             </section>
             <aside className="">
-              <Link
-                to="/payment"
-                className="bg-black text-white rounded-3xl py-3 px-20 w-full"
-              >
-                Get unlimited access
+              <Link to="/payment">
+                <button className="bg-black text-white rounded-3xl py-3 px-2 w-9/12">
+                  Get unlimited access
+                </button>
               </Link>
               <SideCategory />
             </aside>

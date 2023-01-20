@@ -19,6 +19,7 @@ import Stories from "../Pages/UserProfileMenu/Stories/Stories";
 import Stats from '../Pages/UserProfileMenu/Stats/Stats';
 import List from "../Pages/UserProfileMenu/Lists/List";
 import OurStory from "../Pages/OurStory/OurStory";
+import RefineRecommendations from "../Pages/UserProfileMenu/RefineRecommendations/RefineRecommendations";
 
 
 const router = createBrowserRouter([
@@ -112,6 +113,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <Stats />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/refinerecommendations",
+        element: (
+          <PrivateRoute>
+           <RefineRecommendations></RefineRecommendations>
           </PrivateRoute>
         ),
       },

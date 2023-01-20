@@ -272,7 +272,7 @@ const Navbar = () => {
         </li>
         <li className="">
           <NavLink
-            to="/list"
+                    to="/refinerecommendations"
           >
 
             Refine recommendations

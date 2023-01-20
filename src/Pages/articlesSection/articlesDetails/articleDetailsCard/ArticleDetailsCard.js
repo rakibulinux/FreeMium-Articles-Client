@@ -2,7 +2,6 @@ import {
   HomeIcon,
   LanguageIcon,
   LinkIcon,
-  ListBulletIcon,
   MoonIcon,
   ShareIcon,
 } from "@heroicons/react/24/solid";
@@ -13,13 +12,11 @@ import DemoWritter from "../../../Home/DemoWritter";
 const ArticleDetailsCard = ({ articleData }) => {
   const {
     articleDetails,
-    articleImg,
     articleRead,
     articleSubmitDate,
     articleTitle,
     writerImg,
     writerName,
-    _id,
   } = articleData;
   return (
     <div>
@@ -41,15 +38,13 @@ const ArticleDetailsCard = ({ articleData }) => {
                 <ul className="-m-1 flex flex-wrap">
                   <li className="p-1 leading-none">
                     <span className="text-xs font-medium text-gray-600">
-                      {" "}
-                      Sep 22, 2022
+                      {articleSubmitDate}
                     </span>
                   </li>
 
                   <li className="p-1 leading-none">
                     <span className="text-xs font-medium text-gray-600">
-                      {" "}
-                      10 min read
+                      {articleRead} min read
                     </span>
                   </li>
 
@@ -155,12 +150,10 @@ const ArticleDetailsCard = ({ articleData }) => {
         </div>
 
         <div className="mt-4 space-y-2">
-          <h1 className="block h-full  p-4">
-            <strong
-              className=" text-3xl font-bold  text-black"
-              dangerouslySetInnerHTML={{ __html: articleTitle }}
-            />
-          </h1>
+          <h1
+            className="text-3xl font-bold  text-black"
+            dangerouslySetInnerHTML={{ __html: articleTitle }}
+          />
           <div dangerouslySetInnerHTML={{ __html: articleDetails }} />
         </div>
         {/* bottom link */}
@@ -169,13 +162,13 @@ const ArticleDetailsCard = ({ articleData }) => {
             <div className="">
               {/* <p className="text-xs text-left text-gray-500"> */}
               <button className="text-gray-500 hover:text-black ">
-                <Link className=" ">
+                <Link to="/" className=" ">
                   <LanguageIcon className="h-6 w-6  text-gray " />
                 </Link>
               </button>
               {/* </p> */}
               <button className="text-gray-500 hover:text-black ml-6">
-                <Link className=" ">
+                <Link to="/" className=" ">
                   <HomeIcon className="h-6 w-6  text-gray " />
                 </Link>
               </button>
@@ -217,13 +210,13 @@ const ArticleDetailsCard = ({ articleData }) => {
           <div className="bg-gray-100">
             <div className="py-4 px-2">
               <h1 className="text-xl font-bold text-gray-900">
-                More from Alfred I.
+                More from {writerName}
               </h1>
               <p>
                 Top Writer in Self Improvement | Here to help you live and think
                 better. Reach out: alfredeye@tutamail.com
               </p>
-              <DemoWritter></DemoWritter>
+              <DemoWritter articleData={articleData}></DemoWritter>
             </div>
           </div>
 

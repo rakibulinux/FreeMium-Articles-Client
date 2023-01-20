@@ -6,7 +6,6 @@ import { AuthContext } from "../../contexts/AuthProvider";
 import { setAuthToken } from "../../APIs/Auth";
 import Spinner from "../../components/Spinner/Spinner";
 import useToken from "../../hooks/useToken";
-import { FcGoogle } from "react-icons/fc";
 import Particle from "../../components/particleJS/Particle";
 
 const Login = () => {
@@ -16,7 +15,7 @@ const Login = () => {
     resetUserAccountPassword,
     loading,
     setLoading,
-    user
+    user,
   } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
@@ -85,11 +84,11 @@ const Login = () => {
   if (loading) {
     return <Spinner />;
   }
-  // if(user?.uid){
-  //   navigate('/')
-  // }
+  if (user?.uid) {
+    navigate("/");
+  }
   return (
-    <div className="flex justify-center items-center pt-8">
+    <div className="flex justify-center items-center pt-8 my-10">
       <Particle />
       <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900">
         <div className="mb-8 text-center">
@@ -144,7 +143,7 @@ const Login = () => {
               type="submit"
               classes="w-full px-8 py-3 font-semibold rounded-md bg-gray-900 hover:bg-gray-700 hover:text-white text-gray-100"
             >
-              Sign in
+              Login
             </PrimaryButton>
           </div>
         </form>
@@ -162,7 +161,7 @@ const Login = () => {
           <button
             onClick={handleGoogleLogin}
             aria-label="Log in with Google"
-            className="w-9/12 mx-auto p-2 border-2 border-gray-400 rounded-3xl flex justify-center items-center gap-2"
+            className="mx-auto p-2 border-2 border-gray-400 rounded-3xl flex justify-center items-center gap-2"
           >
             <svg width="25" height="25">
               <g fill="none" fill-rule="evenodd">

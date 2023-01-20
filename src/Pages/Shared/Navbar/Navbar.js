@@ -50,7 +50,7 @@ const Navbar = () => {
       </li>
 
       <li>
-        <NavLink className="text-gray-900 border-animate">Membership</NavLink>
+        <NavLink className="text-gray-900 border-animate" to="/membership">Membership</NavLink>
       </li>
       <li className=" gap-2">
         <NavLink
@@ -122,7 +122,7 @@ const Navbar = () => {
   );
 
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto print:hidden">
       {user?.uid ? (
         <div className="navbar">
           <div className="navbar-start">

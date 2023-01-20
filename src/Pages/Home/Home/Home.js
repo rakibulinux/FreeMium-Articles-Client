@@ -24,7 +24,7 @@ const Home = () => {
             <aside className="mt-8">
               <Link
                 to="/payment"
-                className="bg-black text-white rounded-3xl py-3 w-10/12"
+                className="bg-black text-white rounded-3xl py-3 px-20 w-full"
               >
                 Get unlimited access
               </Link>
@@ -39,7 +39,10 @@ const Home = () => {
           {/* right side conten here */}
           <div className="flex-auto w-32">
             <div className=" w-30 mx-auto">
-              <Link to="/payment" className="btn btn-wide">
+              <Link
+                to="/payment"
+                className="bg-black text-white rounded-3xl py-3 px-20 w-full"
+              >
                 Get unlimited access
               </Link>
               <SideCategory></SideCategory>

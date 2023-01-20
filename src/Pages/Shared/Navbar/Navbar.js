@@ -46,11 +46,15 @@ const Navbar = () => {
   const navItemNotUser = (
     <>
       <li>
-        <NavLink to='/ourstory' className="text-gray-900 border-animate">Our story</NavLink>
+        <NavLink to="/ourstory" className="text-gray-900 border-animate">
+          Our story
+        </NavLink>
       </li>
 
       <li>
-        <NavLink className="text-gray-900 border-animate" to="/membership">Membership</NavLink>
+        <NavLink className="text-gray-900 border-animate" to="/membership">
+          Membership
+        </NavLink>
       </li>
       <li className=" gap-2">
         <NavLink
@@ -154,7 +158,7 @@ const Navbar = () => {
               <NavLink to="/" className="text-2xl font-medium">
                 <img className="w-56" src={whiteScreen} alt="" />
               </NavLink>
-              <form className="sm:hidden md:block">
+              <form className="hidden md:block">
                 <div className="relative mt-4 text-gray-600 focus-within:text-gray-400">
                   <span className="absolute inset-y-0 left-0 flex items-center pl-2">
                     <button
@@ -302,7 +306,7 @@ const Navbar = () => {
               </ul>
             </div>
             <NavLink to="/" className="text-2xl font-medium">
-              <img className="w-56" src={BlackScreen} alt="" />
+              <img className="w-44" src={whiteScreen} alt="" />
             </NavLink>
           </div>
           <div className="flex items-center gap-7">

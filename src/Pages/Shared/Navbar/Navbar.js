@@ -46,16 +46,19 @@ const Navbar = () => {
   const navItemNotUser = (
     <>
       <li>
-        <NavLink to='/ourstory' className="text-gray-900 border-animate">Our story</NavLink>
+        <NavLink to="/our-story" className="text-gray-900 border-animate">
+          Our story
+        </NavLink>
       </li>
 
       <li>
-        <NavLink className="text-gray-900 border-animate">Membership</NavLink>
+        <NavLink className="text-gray-900 border-animate" to="/membership">
+          Membership
+        </NavLink>
       </li>
-      <li>
+      <li className=" gap-2">
         <NavLink
-          className="gap-2 text-gray-900 border-animate"
-          style={{ display: "flex" }}
+          className="flex gap-2 text-gray-900 hover:text-black"
           to="/write-stories"
         >
           {writeIcon} Write
@@ -123,7 +126,7 @@ const Navbar = () => {
   );
 
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto print:hidden">
       {user?.uid ? (
         <div className="navbar">
           <div className="navbar-start">
@@ -155,7 +158,7 @@ const Navbar = () => {
               <NavLink to="/" className="text-2xl font-medium">
                 <img className="w-56" src={whiteScreen} alt="" />
               </NavLink>
-              <form className="sm:hidden md:block">
+              <form className="hidden md:block">
                 <div className="relative mt-4 text-gray-600 focus-within:text-gray-400">
                   <span className="absolute inset-y-0 left-0 flex items-center pl-2">
                     <button
@@ -189,7 +192,7 @@ const Navbar = () => {
           <div className="navbar-end">
             <NavLink
               className="flex gap-2 text-gray-900 hover:text-black"
-              to="/new-story"
+              to="/write-stories"
             >
               {writeIcon} Write
             </NavLink>
@@ -209,7 +212,9 @@ const Navbar = () => {
                     d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
                   />
                 </svg>
-                <span className="badge badge-xs badge-primary indicator-item">1</span>
+                <span className="badge badge-xs badge-primary indicator-item">
+                  1
+                </span>
               </div>
             </button>
             <div className="dropdown dropdown-end">
@@ -229,42 +234,31 @@ const Navbar = () => {
                 "
               >
                 <li className="justify-between bg-white text-black text-lg font-semibold text-semibold">
-                  <NavLink
-                    to="/profile"
-                  
-                  >
-                  <CgProfile className="text-lg" />
-                  Profile
+                  <NavLink to="/profile">
+                    <CgProfile className="text-lg" />
+                    Profile
                   </NavLink>
                 </li>
                 <li className="justify-between bg-white text-black text-lg font-semibold text-semibold">
-                  <NavLink
-                    to="/list"
-                  >
+                  <NavLink to="/list">
                     <BsList className="text-lg" />
                     List
                   </NavLink>
                 </li>
                 <li className="justify-between bg-white text-black text-lg font-semibold text-semibold">
-                  <NavLink
-                    to="/stories"
-                  >
+                  <NavLink to="/stories">
                     <MdAmpStories className="text-lg" />
                     Stories
                   </NavLink>
                 </li>
                 <li className="justify-between bg-white text-black text-lg font-semibold text-semibold">
-                  <NavLink
-                    to="/stats"
-                  >
+                  <NavLink to="/stats">
                     <GiNetworkBars className="text-lg" />
                     Stats
                   </NavLink>
                 </li>
                 <li className="justify-between bg-white text-black text-lg font-semibold text-semibold">
-                  <NavLink
-                    to="/settings"
-                  >
+                  <NavLink to="/settings">
                     <AiFillSetting className="text-lg" />
                     Settings
                   </NavLink>
@@ -272,8 +266,11 @@ const Navbar = () => {
                 <hr className="text-gray-400 shadow-2xl my-2" />
                 <li className="justify-between bg-white text-black text-lg font-semibold">
                   <>
-                    <button onClick={handleLogOut} className="text-red-500 hover:text-red-600">
-                     <AiOutlineLogout className="text-lg" /> Sign out
+                    <button
+                      onClick={handleLogOut}
+                      className="text-red-500 hover:text-red-600"
+                    >
+                      <AiOutlineLogout className="text-lg" /> Sign out
                     </button>
                   </>
                 </li>
@@ -282,7 +279,7 @@ const Navbar = () => {
           </div>
         </div>
       ) : (
-        <div className="navbar justify-between">
+        <div className="navbar justify-between items-center">
           <div className="">
             <div className="dropdown">
               <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -309,12 +306,12 @@ const Navbar = () => {
               </ul>
             </div>
             <NavLink to="/" className="text-2xl font-medium">
-              <img className="w-56" src={BlackScreen} alt="" />
+              <img className="w-44" src={whiteScreen} alt="" />
             </NavLink>
           </div>
-          <div className="gap-7">
+          <div className="flex items-center gap-7">
             <div className="hidden lg:flex">
-              <ul className="flex gap-7">{navItemNotUser}</ul>
+              <ul className="flex items-center gap-7">{navItemNotUser}</ul>
             </div>
             <NavLink
               to="/login"

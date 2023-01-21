@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="footer p-10 hover:text-gray-100 bg-gradient-to-r from-gray-500 to-gray-600 text-white">
+    <footer className="print:hidden footer p-10 hover:text-gray-100 bg-gradient-to-r from-gray-500 to-gray-600 text-white">
       <div>
         <span className="footer-title">Services</span>
         <Link className="link link-hover">Branding</Link>

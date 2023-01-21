@@ -74,7 +74,7 @@ const Register = () => {
   };
 
   return (
-    <div className="flex justify-center items-center pt-8">
+    <div className="flex justify-center items-center pt-8 my-10">
       <Particle />
       <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900">
         <div className="mb-8 text-center">
@@ -161,7 +161,7 @@ const Register = () => {
           <button
             onClick={handleGoogleLogin}
             aria-label="Log in with Google"
-            className="w-8/12 mx-auto p-2 border-2 border-gray-400 rounded-3xl flex justify-center items-center gap-2"
+            className="mx-auto p-2 border-2 border-gray-400 rounded-3xl flex justify-center items-center gap-2"
           >
             <svg width="25" height="25">
               <g fill="none" fill-rule="evenodd">

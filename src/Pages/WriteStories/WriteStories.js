@@ -9,7 +9,6 @@ import { toast } from "react-hot-toast";
 import { format } from "date-fns";
 import { APIContext } from "../../contexts/APIProvider";
 import Spinner from "../../components/Spinner/Spinner";
-import Creator from "../CreatorPage/Creator";
 
 const WriteStories = ({ userDetails }) => {
   const { user } = useContext(AuthContext);
@@ -265,8 +264,9 @@ const WriteStories = ({ userDetails }) => {
       />
     </form>
     :
-    <Creator />
+    ''
   );
 };
 
 export default WriteStories;
+// dfdfdfd

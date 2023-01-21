@@ -71,7 +71,7 @@ const QuestionsPage = () => {
                     <FaLongArrowAltDown className='text-xl' />
                 </div>
                 <div className="collapse-content bg-[#000000] text-[#000000] peer-checked:bg-[#000000] peer-checked:text-white"> 
-                    <p className='text-lg font-normal'>Medium has a number of tools to connect you with over 100 million readers on the platform and beyond. Some ways you can build your audience are by starting a newsletter, submitting to publications, following the distribution standards, and sharing your stories on social media. We also encourage you to check out our blog, 3 Minute Read, for more helpful tips and tricks – like how to write a great headline and SEO tips to make your stories more discoverable.</p>
+                    <p className='text-lg font-normal'>FreeMium has a number of tools to connect you with over 100 million readers on the platform and beyond. Some ways you can build your audience are by starting a newsletter, submitting to publications, following the distribution standards, and sharing your stories on social media. We also encourage you to check out our blog, 3 Minute Read, for more helpful tips and tricks – like how to write a great headline and SEO tips to make your stories more discoverable.</p>
                 </div>
         </div>
         <div className='flex justify-center items-center'>

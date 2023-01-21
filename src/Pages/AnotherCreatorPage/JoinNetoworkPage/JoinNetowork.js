@@ -14,7 +14,7 @@ const JoinNetowork = () => {
     return (
         <div className='bg-[#000000] grid grid-cols-2 px-10 py-2'>
             <div>
-                <h1 className='text-7xl font-serif text font-semibold text-gray-300 mt-8'>Join a network <br /> of curious <br /> minds.</h1>
+                <h1 className='text-7xl font-serif text font-semibold text-gray-100 mt-8'>Join a network <br /> of curious <br /> minds.</h1>
             </div>
            <div className='px-5 mt-8'>
             {

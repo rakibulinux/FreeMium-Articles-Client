@@ -3,7 +3,7 @@ import CreateSpacePageText from '../CreateSpacePageText/CreateSpacePageText';
 
 const CreateSpaceBaner = () => {
     return (
-        <div className='px-10 py-20'>
+        <div className='px-10 pt-20'>
           <div className='flex justify-between'>
           <div>
            <h1 className='text-7xl font-semibold text-[#000000]'>Create <br /> your space.</h1>
@@ -16,5 +16,4 @@ const CreateSpaceBaner = () => {
         </div>
     );
 };
-//    dffd
 export default CreateSpaceBaner;

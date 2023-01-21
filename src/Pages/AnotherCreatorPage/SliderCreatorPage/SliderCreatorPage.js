@@ -8,8 +8,8 @@ const SliderCreatorPage = () => {
       };
       const { View } = useLottie(options);
     return (
-        <div className='bg-[#F24D2E] px-10 py-20 border-t-[1px] border-black grid grid-cols-2'>
-            <div className='border-r-[1px] border-gray-900 px-6'>
+        <div className='bg-[#F24D2E] px-10 py-1 border-t-[1px] border-black grid grid-cols-2'>
+            <div className='border-r-[1px] border-gray-900 px-6 mt-10'>
                 <span className='tracking-widest font-semibold text-white'>START A BLOG FOR FREE</span>
                 <h1 className='text-7xl mt-1 leading-tight font-bold text-[#000000]'>Publish, grow, <br /> and earn, all in <br /> one place.</h1>
                 <p className='text-[#000000] my-3'>If dou have a story to tell, knowledge to share, or a perspective to offer — welcome home. Sign up for free so your writing can thrive in a network supported by millions of readers — not ads.</p>

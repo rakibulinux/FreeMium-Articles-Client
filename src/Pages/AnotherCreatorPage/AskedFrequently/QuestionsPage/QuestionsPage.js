@@ -74,8 +74,8 @@ const QuestionsPage = () => {
                     <p className='text-lg font-normal'>FreeMium has a number of tools to connect you with over 100 million readers on the platform and beyond. Some ways you can build your audience are by starting a newsletter, submitting to publications, following the distribution standards, and sharing your stories on social media. We also encourage you to check out our blog, 3 Minute Read, for more helpful tips and tricks – like how to write a great headline and SEO tips to make your stories more discoverable.</p>
                 </div>
         </div>
-        <div className='flex justify-center items-center'>
-        <h5 className='text-xl mt-4 font-semibold text-gray-100'><a href="#">Looking for help getting started?</a></h5>
+        <div className='flex justify-center items-center flex-col lg:flex-row'>
+        <h5 className='text-xl mt-7 lg:mt-4 font-semibold text-gray-100'><a href="#">Looking for help getting started?</a></h5>
         <button className="btn bg-gray-100 hover:bg-[#000000] hover:text-white text-xl text-gray-900 border-0 hover:border-2 hover:border-gray-100 w-72 btn-accent mt-7 ml-7">start writing</button>
         </div>
         </div>

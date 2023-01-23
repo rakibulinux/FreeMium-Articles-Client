@@ -21,7 +21,7 @@ const SideCategory = () => {
         user && <StaffPicks></StaffPicks>
       }
       
-      <div className="mt-5 ">
+      <div className={user?.uid ? "hidden" :"mt-5"}>
         <p className="text-base font-semibold text-gray-800 my-3">
           DISCOVER MORE OF WHAT MATTERS TO YOU
         </p>

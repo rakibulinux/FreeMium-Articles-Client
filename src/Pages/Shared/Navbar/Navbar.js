@@ -5,12 +5,13 @@ import { NavLink } from "react-router-dom";
 import PrimaryButton from "../../../components/Button/PrimaryButton";
 import { AuthContext } from "../../../contexts/AuthProvider";
 import whiteScreen from "../../../Assets/white-screen.png";
-import BlackScreen from "../../../Assets/Black-screen-tp.png";
+// import BlackScreen from "../../../Assets/Black-screen-tp.png";
 import { CgProfile } from "react-icons/cg";
-import { AiFillSetting, AiOutlineLogout } from "react-icons/ai";
+import { AiFillSetting, AiOutlineLogout, AiOutlineHome } from "react-icons/ai";
 import { BsList } from "react-icons/bs";
 import { MdAmpStories } from "react-icons/md";
 import { GiNetworkBars } from "react-icons/gi";
+import { CiLogin } from "react-icons/ci";
 import "./Navebar.css";
 //
 const Navbar = () => {
@@ -56,7 +57,7 @@ const Navbar = () => {
           Membership
         </NavLink>
       </li>
-      <li className=" gap-2">
+      <li className="gap-2 lg:block">
         <NavLink
           className="flex gap-2 text-gray-900 hover:text-black"
           to="/write-stories"
@@ -72,16 +73,45 @@ const Navbar = () => {
       </li>
     </>
   );
+  const responsiveNavItemNotUser = (
+    <>
+      <li className="justify-between bg-white text-black text-normal font-semibold text-semibold py-1">
+      <NavLink to="/our-story" className="text-gray-900 border-animate">
+          Our story
+        </NavLink>
+                </li>         
+        <li className="justify-between bg-white text-black text-normal font-semibold text-semibold py-1">
+         <NavLink className="text-gray-900 border-animate" to="/membership">
+          Membership
+        </NavLink>
+</li>
+                <li className="justify-between bg-white text-black text-normal font-semibold text-semibold py-1">
+                <NavLink
+          className="flex items-center gap-2 text-gray-900 hover:text-black"
+          to="/write-stories"
+        >
+         {writeIcon} Write
+        </NavLink>
+                </li>
+              
+                <hr className="text-gray-400 shadow-2xl my-2" />
+                <li className="justify-between bg-white text-black text-normal font-semibold py-1">
+                  <>
+                    <button
+                      onClick={handleLogOut}
+                      className="text-gray-900 hover:text-gray-600 flex items-center"
+                    >
+                      <CiLogin className="text-xl font-semibold mr-3" />  
+                      <NavLink className="text-gray-900 border-animate" to="/login">
+          Sign In
+        </NavLink>
+                    </button>
+                  </>
+                </li>
+    </>
+  );
   const navItems = (
     <>
-      <li>
-        <NavLink
-          className={({ isActive }) => (isActive ? "text-sky-600" : "")}
-          to="/"
-        >
-          Home
-        </NavLink>
-      </li>
       {!user?.uid ? (
         <>
           <li>
@@ -107,24 +137,59 @@ const Navbar = () => {
         </>
       ) : (
         <>
-          <li>
-            <NavLink
-              className={({ isActive }) =>
-                isActive ? "text-sky-600 bg-none hover:bg-none" : ""
-              }
-              to="/dashboard"
-            >
-              Dashboard
-            </NavLink>
-          </li>
-          <li>
-            <button onClick={handleLogOut}>SignOut</button>
-          </li>
+        <li className="justify-between bg-white text-black text-lg font-semibold text-semibold">
+                  <NavLink to="/profile">
+                    <AiOutlineHome className="text-lg" />
+                    Home
+                  </NavLink>
+                </li>
+                <li className="justify-between bg-white text-black text-lg font-semibold text-semibold">
+                  <NavLink to="/profile">
+                    <CgProfile className="text-lg" />
+                    Profile
+                  </NavLink>
+                </li>
+                <li className="justify-between bg-white text-black text-lg font-semibold text-semibold">
+                  <NavLink to="/list">
+                    <BsList className="text-lg" />
+                    List
+                  </NavLink>
+                </li>
+                <li className="justify-between bg-white text-black text-lg font-semibold text-semibold">
+                  <NavLink to="/stories">
+                    <MdAmpStories className="text-lg" />
+                    Stories
+                  </NavLink>
+                </li>
+                <li className="justify-between bg-white text-black text-lg font-semibold text-semibold">
+                  <NavLink to="/stats">
+                    <GiNetworkBars className="text-lg" />
+                    Stats
+                  </NavLink>
+                </li>
+                <li className="justify-between bg-white text-black text-lg font-semibold text-semibold">
+                  <NavLink to="/settings">
+                    <AiFillSetting className="text-lg" />
+                    Settings
+                  </NavLink>
+                </li>
+                <hr className="text-gray-400 shadow-2xl my-2" />
+                <li className="justify-between bg-white text-black text-lg font-semibold">
+                  <>
+                    <button
+                      onClick={handleLogOut}
+                      className="text-red-500 hover:text-red-600"
+                    >
+                      <AiOutlineLogout className="text-lg" /> Sign out
+                    </button>
+                  </>
+                </li>
+              
         </>
       )}
     </>
   );
-
+ 
   return (
     <div className="container mx-auto print:hidden">
       {user?.uid ? (
@@ -190,12 +255,14 @@ const Navbar = () => {
             </div>
           </div>
           <div className="navbar-end">
-            <NavLink
+           <div className="hidden lg:block">
+           <NavLink
               className="flex gap-2 text-gray-900 hover:text-black"
               to="/write-stories"
             >
               {writeIcon} Write
             </NavLink>
+           </div>
             <button className="btn btn-ghost btn-circle">
               <div className="indicator">
                 <svg
@@ -300,9 +367,9 @@ const Navbar = () => {
               </label>
               <ul
                 tabIndex={0}
-                className="dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box"
+                className="dropdown-content mt-3 px-5 py-1 shadow bg-base-100 rounded-box w-[12rem]"
               >
-                {navItemNotUser}
+                {responsiveNavItemNotUser}
               </ul>
             </div>
             <NavLink to="/" className="text-2xl font-medium">

@@ -1,9 +1,14 @@
 import React from "react";
 // import ParticlesComponent from '../../components/particleJS/Particle';
 import penimg from "../../Assets/pen-pic.png";
-
+import Lottie, { useLottie } from "lottie-react";
+import journalist from "../../Lottie/Journalist.json";
 const HomeHadBanar = () => {
-
+  const options = {
+    animationData: journalist,
+    loop: true
+  };
+  const { View } = useLottie(options);
   return (
     <div className="flex lg:justify-around items-center lg:flex-row">
       {/* import particle js */}

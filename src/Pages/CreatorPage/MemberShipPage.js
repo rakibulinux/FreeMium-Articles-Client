@@ -1,16 +1,16 @@
 import React from 'react';
-import AnotherSlide from './AnotherSlide/AnotherSlide';
 import Feedback from './Feedback/Feedback';
 import SliderPage from './SliderPage/SliderPage';
+import AnotherSlide from './AnotherSlide/AnotherSlide';
 
-const Creator = () => {
+const MemberShipPage = () => {
     return (
         <div>
             <SliderPage />
-            <Feedback />
+              <Feedback />
             <AnotherSlide />
         </div>
     );
 };
 
-export default Creator;
+export default MemberShipPage;

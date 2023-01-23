@@ -22,6 +22,8 @@ import Stories from "../Pages/UserProfileMenu/Stories/Stories";
 import Stats from '../Pages/UserProfileMenu/Stats/Stats';
 import List from "../Pages/UserProfileMenu/Lists/List";
 import OurStory from "../Pages/OurStory/OurStory";
+import MemberShipMain from "../Pages/MemberShipPage/MemberShipMain/MemberShipMain";
+import PaymentSuccess from "../Pages/Payment/PaymentSuccess/PaymentSuccess";
 
 const router = createBrowserRouter([
   {
@@ -67,9 +69,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/write-stories",
-        element: (
-            <WriteStories />
-        ),
+        element: <WriteStories />,
       },
       {
         path: "/login",
@@ -92,7 +92,7 @@ const router = createBrowserRouter([
         element: <PaymentFail />,
       },
       {
-        path: "/ourstory",
+        path: "/our-story",
         element: <OurStory></OurStory>,
       },
       {
@@ -127,6 +127,12 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+
+      {
+        path: "/membership",
+        element: <MemberShipMain></MemberShipMain>,
+      },
+
     ],
   },
   {

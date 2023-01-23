@@ -9,10 +9,11 @@ import { toast } from "react-hot-toast";
 import { format } from "date-fns";
 import { APIContext } from "../../contexts/APIProvider";
 import Spinner from "../../components/Spinner/Spinner";
+import Creator from "../AnotherCreatorPage/Creator";
 
 const WriteStories = ({ userDetails }) => {
   const { user } = useContext(AuthContext);
-  const { articlesLoading } = useContext(APIContext);
+  const { articlesRefetch } = useContext(APIContext);
   const { categoryButton, isLoading } = useContext(APIContext);
   console.log(categoryButton);
   const [title, setTitle] = useState("");
@@ -64,8 +65,8 @@ const WriteStories = ({ userDetails }) => {
             .then((res) => res.json())
             .then((data) => {
               toast.success(`${user?.displayName} added new story`);
+              articlesRefetch();
               navigate("/");
-              articlesLoading();
             });
         }
       });
@@ -75,6 +76,7 @@ const WriteStories = ({ userDetails }) => {
     return <Spinner />;
   }
   return (
+    user?.uid ? 
     <form onSubmit={handleSubmitStories} className=" w-10/12 mx-auto">
       <div className="flex">
         <button
@@ -262,7 +264,10 @@ const WriteStories = ({ userDetails }) => {
         }}
       />
     </form>
+    :
+    <Creator />
   );
 };
 
 export default WriteStories;
+// dfdfdfd

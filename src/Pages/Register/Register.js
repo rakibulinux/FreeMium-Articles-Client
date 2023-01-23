@@ -4,7 +4,6 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import PrimaryButton from "../../components/Button/PrimaryButton";
 import { AuthContext } from "../../contexts/AuthProvider";
 import { setAuthToken } from "../../APIs/Auth";
-import Particle from "../../components/particleJS/Particle";
 const Register = () => {
   const [role, setRole] = useState("user");
   const { createUserAccount, updateUserProfile, signInWithGoogle, setLoading } =
@@ -75,7 +74,6 @@ const Register = () => {
 
   return (
     <div className="flex justify-center items-center pt-8 my-10">
-      <Particle />
       <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900">
         <div className="mb-8 text-center">
           <h1 className="my-3 text-4xl font-bold">Signup</h1>

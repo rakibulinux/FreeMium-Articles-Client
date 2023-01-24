@@ -52,6 +52,7 @@ const WriteStories = ({ userDetails }) => {
             articleSubmitDate: date,
             articleRead: number,
             articleImg: imgData.data.url,
+            category,
           };
           // Update in database
           fetch(`${process.env.REACT_APP_API_URL}/add-story`, {
@@ -75,8 +76,7 @@ const WriteStories = ({ userDetails }) => {
   if (isLoading) {
     return <Spinner />;
   }
-  return (
-    user?.uid ? 
+  return user?.uid ? (
     <form onSubmit={handleSubmitStories} className=" w-10/12 mx-auto">
       <div className="flex">
         <button
@@ -116,7 +116,7 @@ const WriteStories = ({ userDetails }) => {
               "outdent",
               "indent",
               "code",
-              "image",
+              // "image",
             ],
           },
           placeholder: {
@@ -240,7 +240,7 @@ const WriteStories = ({ userDetails }) => {
               "indent",
               "code",
               "horizontal",
-              "image",
+              // "image",
             ],
           },
           placeholder: {
@@ -264,7 +264,7 @@ const WriteStories = ({ userDetails }) => {
         }}
       />
     </form>
-    :
+  ) : (
     <Creator />
   );
 };

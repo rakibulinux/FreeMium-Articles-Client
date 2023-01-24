@@ -1,11 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Navbar from '../../Shared/Navbar/Navbar';
 
 const ApplyToThePartnerProgram = () => {
     return (
         <div >
             {/* <Navbar></Navbar> */}
-            <div className='bg-green-500 text-white p-8 leading-loose '>
+            <div className='bg-green-500 text-white p-8 leading-loose earnWriting'>
                 <div className='basis-1/2'>
                     <h1 className='text-8xl font-extrabold'>Write.<br/>
                         Connect.<br />
@@ -13,10 +14,12 @@ const ApplyToThePartnerProgram = () => {
                     <p>
                         Writing has its rewards when you join the Partner<br /> Program. Learn how to get paid for the content <br /> you publish and the audiences you build.
                     </p>   
+                  
                     <button className='btn rounded-full text-white mt-8'>Apply now</button>
+                    
                 </div>
                 <div className='basis-1/2'>
-
+                    
                 </div>
             </div>
 
@@ -76,9 +79,34 @@ const ApplyToThePartnerProgram = () => {
                     </div>
                 </div>
             </div>
-            {/* <div>
+            <div>
                 <h3 className='text-4xl text-center font-semibold bg-pink-500 p-8 text-white' >Eligibility criteria.</h3>
-            </div> */}
+            </div>
+            <div className='grid grid-cols-3 '>
+                <div className='border border-black p-8 leading-loose'>
+                    <h1 className='text-6xl font-semibold mb-3'>Publish a story.</h1>
+                    <p>You must publish at least one story to apply to the Partner Program.</p>
+                    <p className='link'>Start writing</p>
+                </div>
+                <div className='border border-black p-8 leading-loose'>
+                    <h1 className='text-6xl font-semibold mb-3'>Gain 100+ followers.</h1>
+                    <p>You need to have at least 100 followers to apply.</p>
+                    <p className='link'>Get tips on building a following</p>
+                </div>
+                <div className='border border-black p-8 leading-loose'>
+                    <h1 className='text-6xl font-semibold mb-3'>Stay active.</h1>
+                    <p>You should publish at least once every six months to keep earning.</p>
+                    <p className='link'>Read writing prompts to spark an idea</p>
+                </div>
+            </div>
+            <div className='bg-pink-200 text-black text-center '>
+                <h1 className='text-9xl font-semibold text-center p-12 px-36'>Grow your audience and your engagement.</h1>
+                <p>Medium gives you the tools to connect and build relationships with over<br /> 100 million readers around the world.</p>
+                <div className='flex justify-center p-16'>
+                    <Link className='btn rounded-full mr-6'>Start writing</Link>
+                    <Link className='btn btn-outline rounded-full'>Explore tools</Link>
+                </div>
+            </div>
 
 
         </div>

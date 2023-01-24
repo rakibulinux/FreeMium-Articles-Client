@@ -7,7 +7,7 @@ const StaffPicks = () => {
     return (
         <div>
            <div>
-           <h1 className='my-5 font-semibold'>Staff Picks</h1>
+           <h1 className='my-5 text-lg font-semibold text-gray-900'>Staff Picks</h1>
             <div>
             <div className='flex mb-3'>
                 <img className='rounded-full' src="https://miro.medium.com/fit/c/20/20/1*XL5QclUh4RwVmsq8szytzg.png" alt="" />

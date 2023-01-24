@@ -22,10 +22,11 @@ import Stories from "../Pages/UserProfileMenu/Stories/Stories";
 import Stats from '../Pages/UserProfileMenu/Stats/Stats';
 import List from "../Pages/UserProfileMenu/Lists/List";
 import OurStory from "../Pages/OurStory/OurStory";
-import MemberShipMain from "../Pages/MemberShipPage/MemberShipMain/MemberShipMain";
 import PaymentSuccess from "../Pages/Payment/PaymentSuccess/PaymentSuccess";
-import RefineRecommendations from "../Pages/UserProfileMenu/RefineRecommendations/RefineRecommendations";
+// import MemberShipMain from "../Pages/MemberShipPage/MemberShipMain/MemberShipMain";
 import ApplyToThePartnerProgram from "../Pages/UserProfileMenu/ApplyToThePartnerProgram/ApplyToThePartnerProgram";
+import RefineRecommendations from "../Pages/UserProfileMenu/RefineRecommendations/RefineRecommendations";
+import MemberShipPage from "../Pages/CreatorPage/MemberShipPage";
 
 const router = createBrowserRouter([
   {
@@ -148,7 +149,7 @@ const router = createBrowserRouter([
 
       {
         path: "/membership",
-        element: <MemberShipMain></MemberShipMain>,
+        element: <MemberShipPage />,
       },
 
     ],

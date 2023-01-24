@@ -6,9 +6,9 @@ import { AuthContext } from "../../contexts/AuthProvider";
 import { setAuthToken } from "../../APIs/Auth";
 import Spinner from "../../components/Spinner/Spinner";
 import useToken from "../../hooks/useToken";
-import Particle from "../../components/particleJS/Particle";
 
 const Login = () => {
+  const [role, setRole] = useState("user");
   const {
     signInWithGoogle,
     loginUserAccount,
@@ -23,9 +23,9 @@ const Login = () => {
   const [loginUserEmail, setLoginUserEmail] = useState("");
   const [token] = useToken(loginUserEmail);
   // const token = localStorage.getItem("freeMiumToken");
-  if (token) {
-    navigate(from, { replace: true });
-  }
+  // if (token) {
+
+  // }
   const [userEmail, setUserEmail] = useState("");
 
   const handleSubmit = (e) => {
@@ -44,7 +44,8 @@ const Login = () => {
         const user = result.user;
         toast.success("Login with email success");
         setLoginUserEmail(user?.email);
-        setAuthToken(user);
+        setAuthToken(user, role);
+        navigate(from, { replace: true });
       })
       .catch((err) => {
         toast.error(err.message);
@@ -60,7 +61,7 @@ const Login = () => {
         const user = result.user;
         toast.success("Login with google success");
         setLoginUserEmail(user?.email);
-        setAuthToken(user);
+        setAuthToken(user, role);
       })
       .catch((err) => {
         toast.error(err.message);
@@ -89,7 +90,6 @@ const Login = () => {
   }
   return (
     <div className="flex justify-center items-center pt-8 my-10">
-      <Particle />
       <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900">
         <div className="mb-8 text-center">
           <h1 className="my-3 text-4xl font-bold">Sign in</h1>

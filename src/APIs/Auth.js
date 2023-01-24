@@ -1,10 +1,10 @@
 export const setAuthToken = (user, role) => {
   const currentUser = {
-    name: user.displayName,
-    picture: user.photoURL,
-    email: user.email,
+    name: user?.displayName,
+    picture: user?.photoURL,
+    email: user?.email,
     verify: false,
-    role: role,
+    role,
   };
   console.log(user);
   // Save user is DB
@@ -12,6 +12,7 @@ export const setAuthToken = (user, role) => {
     method: "PUT",
     headers: {
       "content-type": "application/json",
+      authorization: `bearer ${localStorage.getItem("freeMiumToken")}`,
     },
     body: JSON.stringify(currentUser),
   })

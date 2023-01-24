@@ -24,6 +24,8 @@ import List from "../Pages/UserProfileMenu/Lists/List";
 import OurStory from "../Pages/OurStory/OurStory";
 import MemberShipMain from "../Pages/MemberShipPage/MemberShipMain/MemberShipMain";
 import PaymentSuccess from "../Pages/Payment/PaymentSuccess/PaymentSuccess";
+import RefineRecommendations from "../Pages/UserProfileMenu/RefineRecommendations/RefineRecommendations";
+import ApplyToThePartnerProgram from "../Pages/UserProfileMenu/ApplyToThePartnerProgram/ApplyToThePartnerProgram";
 
 const router = createBrowserRouter([
   {
@@ -124,6 +126,22 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <Stats />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/refineRecommendations",
+        element: (
+          <PrivateRoute>
+            <RefineRecommendations></RefineRecommendations>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/applyToThePartnerProgram",
+        element: (
+          <PrivateRoute>
+            <ApplyToThePartnerProgram></ApplyToThePartnerProgram>
           </PrivateRoute>
         ),
       },

@@ -3,7 +3,7 @@ import Navbar from '../../Shared/Navbar/Navbar';
 
 const ApplyToThePartnerProgram = () => {
     return (
-        <div>
+        <div >
             {/* <Navbar></Navbar> */}
             <div className='bg-green-500 text-white p-8 leading-loose '>
                 <div className='basis-1/2'>

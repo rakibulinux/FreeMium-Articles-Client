@@ -1,7 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Navbar from '../../Shared/Navbar/Navbar';
-
 const ApplyToThePartnerProgram = () => {
     return (
         <div >
@@ -26,7 +24,7 @@ const ApplyToThePartnerProgram = () => {
             <div>
                 <h1 className='text-8xl font-bold text-center p-9'>Two ways to earn.</h1>
             </div>
-            <div className='flex'>
+            <div className='lg:flex'>
                 <div className=' basis-1/2'>
                     <div className="divider"></div>
                     {/* <div className="divider divider-horizontal  bg-red-700 text-center"></div> */}
@@ -45,7 +43,7 @@ const ApplyToThePartnerProgram = () => {
                 </div> 
             </div>
             <div className='lg:flex justify-around'>
-                <h1 className='text-9xl font-bold'>How to get<br className='hidden lg:block md:block'/> started.</h1>
+                <h1 className='lg:text-9xl text-4xl font-bold'>How to get<br className='hidden lg:block md:block'/> started.</h1>
                 <div>
                     <div className="overflow-x-auto">
                         <table className="table w-full">
@@ -82,7 +80,7 @@ const ApplyToThePartnerProgram = () => {
             <div>
                 <h3 className='text-4xl text-center font-semibold bg-pink-500 p-8 text-white' >Eligibility criteria.</h3>
             </div>
-            <div className='grid grid-cols-3 '>
+            <div className='grid lg:grid-cols-3 grid-cols'>
                 <div className='border border-black p-8 leading-loose'>
                     <h1 className='text-6xl font-semibold mb-3'>Publish a story.</h1>
                     <p>You must publish at least one story to apply to the Partner Program.</p>
@@ -100,11 +98,11 @@ const ApplyToThePartnerProgram = () => {
                 </div>
             </div>
             <div className='bg-pink-200 text-black text-center '>
-                <h1 className='text-9xl font-semibold text-center p-12 px-36'>Grow your audience and your engagement.</h1>
+                <h1 className='md:text-6xl text-4xl lg:text-9xl font-semibold text-center lg:p-12 lg:px-36'>Grow your audience and your engagement.</h1>
                 <p>Medium gives you the tools to connect and build relationships with over<br /> 100 million readers around the world.</p>
-                <div className='flex justify-center p-16'>
-                    <Link className='btn rounded-full mr-6'>Start writing</Link>
-                    <Link className='btn btn-outline rounded-full'>Explore tools</Link>
+                <div className='lg:flex justify-center p-16'>
+                    <Link className='btn rounded-full sm:mb-6 lg:mb-2 lg:mr-6'>Start writing</Link>
+                    <Link className='btn btn-outline rounded-full '>Explore tools</Link>
                 </div>
             </div>
 

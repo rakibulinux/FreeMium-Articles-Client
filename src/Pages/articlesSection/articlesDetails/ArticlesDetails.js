@@ -5,6 +5,7 @@ import writerImg from "../../../Assets/img1.jpg";
 import { EnvelopeIcon } from "@heroicons/react/24/solid";
 const ArticlesDetails = () => {
   const articleData = useLoaderData();
+  console.log(articleData);
   return (
     <div className="border-t-2">
       <div className="container mx-auto grid lg:grid-cols-3 sm:grid-cols-1">

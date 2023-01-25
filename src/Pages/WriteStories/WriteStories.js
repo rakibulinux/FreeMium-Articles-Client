@@ -45,7 +45,7 @@ const WriteStories = ({ userDetails }) => {
           toast.success("Image upload success");
           const body = {
             articleDetails: desc,
-            userId: user?.uid,
+            userId: user?.email,
             writerName: user?.displayName,
             writerImg: user?.photoURL,
             articleTitle: title,

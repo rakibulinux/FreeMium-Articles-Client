@@ -26,6 +26,7 @@ const Login = () => {
   // if (token) {
 
   // }
+
   const [userEmail, setUserEmail] = useState("");
 
   const handleSubmit = (e) => {
@@ -44,7 +45,7 @@ const Login = () => {
         const user = result.user;
         toast.success("Login with email success");
         setLoginUserEmail(user?.email);
-        setAuthToken(user, role);
+        setAuthToken(user);
         navigate(from, { replace: true });
       })
       .catch((err) => {

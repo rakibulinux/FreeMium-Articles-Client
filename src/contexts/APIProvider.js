@@ -5,15 +5,15 @@ export const APIContext = createContext();
 const APIProvider = ({ children }) => {
   const {
     data: categoryButton,
-    isLoading,
-    refetch,
+    isLoading: isCategoryLoading,
+    refetch: reFetchCategory,
   } = useQuery({
     queryKey: ["categoryButton"],
     queryFn: async () => {
       const res = await fetch(
         `${process.env.REACT_APP_API_URL}/categoryButton`
       );
-      const data = res.json();
+      const data = await res.json();
       return data;
     },
   });
@@ -33,8 +33,8 @@ const APIProvider = ({ children }) => {
 
   const apiInfo = {
     categoryButton,
-    isLoading,
-    refetch,
+    isCategoryLoading,
+    reFetchCategory,
     articles,
     articlesLoading,
     articlesRefetch,

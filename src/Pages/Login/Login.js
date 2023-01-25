@@ -8,6 +8,7 @@ import Spinner from "../../components/Spinner/Spinner";
 import useToken from "../../hooks/useToken";
 
 const Login = () => {
+  const [role, setRole] = useState("user");
   const {
     signInWithGoogle,
     loginUserAccount,
@@ -22,9 +23,10 @@ const Login = () => {
   const [loginUserEmail, setLoginUserEmail] = useState("");
   const [token] = useToken(loginUserEmail);
   // const token = localStorage.getItem("freeMiumToken");
-  if (token) {
-    navigate(from, { replace: true });
-  }
+  // if (token) {
+
+  // }
+
   const [userEmail, setUserEmail] = useState("");
 
   const handleSubmit = (e) => {
@@ -44,6 +46,7 @@ const Login = () => {
         toast.success("Login with email success");
         setLoginUserEmail(user?.email);
         setAuthToken(user);
+        navigate(from, { replace: true });
       })
       .catch((err) => {
         toast.error(err.message);
@@ -59,7 +62,7 @@ const Login = () => {
         const user = result.user;
         toast.success("Login with google success");
         setLoginUserEmail(user?.email);
-        setAuthToken(user);
+        setAuthToken(user, role);
       })
       .catch((err) => {
         toast.error(err.message);

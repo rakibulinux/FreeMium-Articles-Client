@@ -3,16 +3,7 @@ import img from '../../../Assets/UnlimitedReading.svg'
 const UnlimitedAcess = () => {
     return (
         <div>
-            {/* <!--
-  This component uses @tailwindcss/line-clamp
-
-  yarn add @tailwindcss/line-clamp
-  npm install @tailwindcss/line-clamp
-
-  plugins: [require('@tailwindcss/line-clamp')]
-
-  rounded-lg shadow transition
---> */}
+          
 
 <article className="overflow-hidden  bg-[#4171f8]">   
 

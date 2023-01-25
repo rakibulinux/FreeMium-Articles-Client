@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Spinner from "../../../../components/Spinner/Spinner";
 import { APIContext } from "../../../../contexts/APIProvider";
@@ -8,21 +8,17 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 const Manubar = () => {
-<<<<<<< HEAD
   const [category, setCategory] = useState([]);
   useEffect(()=>{
     fetch('http://localhost:5000/categoryButton')
     .then(res=>res.json())
     .then(data=>setCategory(data))
   },[])
-  
-=======
   const { categoryButton, isCategoryLoading } = useContext(APIContext);
   const [swiperRef, setSwiperRef] = useState(null);
   if (isCategoryLoading) {
     return <Spinner />;
   }
->>>>>>> 2aae2d73254a6e222589cc6f2f2c46f21af00a7a
   return (
     <div style={{ width: "100%" }}>
       <ul
@@ -49,7 +45,7 @@ const Manubar = () => {
               }}
               key={category?._id}
             >
-              <Link to={category?.CategoryName} className="p-2">
+              <Link to={`/category/${category?.CategoryName}`} className="p-2">
                 {category?.CategoryName}
               </Link>
             </SwiperSlide>

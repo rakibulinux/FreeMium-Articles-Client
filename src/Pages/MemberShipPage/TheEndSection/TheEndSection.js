@@ -6,7 +6,7 @@ const TheEndSection = () => {
   return (
     <div>
       {/* end */}
-      <section className="bg-[#78e2e2]">
+      <section className="bg-[#78e2e2] overflow-hidden">
         <div className="mx-auto max-w-screen-xl px-4 pt-6 lg:flex  lg:items-center">
           <div className="mx-auto max-w-xl text-center">
             <h1 className="text-6xl font-bold text-black sm:text-5xl">
@@ -17,7 +17,7 @@ const TheEndSection = () => {
             </h1>
             <div className="mt-8 flex flex-wrap justify-center gap-4">
               <Link to="/payment">
-                <button className="bg-black text-white rounded-3xl py-3 px-2 w-9/12">
+                <button  className="block w-full rounded-full text-white bg-black px-12 py-3 text-xl font-medium  shadow hover:bg-[#4171f8] hover:border-2 hover:text-white sm:w-auto">
                   Get unlimited access
                 </button>
               </Link>
@@ -27,7 +27,7 @@ const TheEndSection = () => {
         <img
           alt="Lava"
           src={img}
-          className="h-56 w-full rounded-xl object-cover shadow-xl transition group-hover:grayscale-[50%]"
+          className=" h-56 w-full rounded-xl object-cover shadow-xl transition group-hover:grayscale-[50%]"
         />
       </section>
     </div>

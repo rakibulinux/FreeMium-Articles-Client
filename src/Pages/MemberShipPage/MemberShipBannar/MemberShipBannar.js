@@ -11,9 +11,7 @@ const MemberShipBannar = () => {
     <div className="mx-auto max-w-xl text-center">
       <h1 className="lg:text-6xl font-bold sm:text-5xl text-white">
       Fuel great thinking.
-        {/* <strong className="font-extrabold text-white sm:block">
-          Increase Conversion.
-        </strong> */}
+      
       </h1>
 
       <p className="mt-4 text-white sm:text-xl sm:leading-relaxed">
@@ -22,15 +20,14 @@ directly support the writers you read most.
       </p>
     
       <div className="mt-8 flex flex-wrap justify-center gap-4">
-        <a
+                <a
           className="block w-full rounded-full  bg-white px-12 py-3 text-xl font-medium  shadow hover:bg-[#4171f8] hover:border-2 hover:text-white sm:w-auto"
           href="/"
         >
           Get unlimited access
-        </a>
-
-        
+        </a>        
       </div>
+
     </div>
   </div>
 </section>

@@ -23,6 +23,7 @@ import OurStory from "../Pages/OurStory/OurStory";
 import PaymentSuccess from "../Pages/Payment/PaymentSuccess/PaymentSuccess";
 // import MemberShipMain from "../Pages/MemberShipPage/MemberShipMain/MemberShipMain";
 import MemberShipPage from './../Pages/CreatorPage/MemberShipPage';
+import SelectCategory from "../Pages/SelectCategoryPage/SelectCategory";
 
 const router = createBrowserRouter([
   {
@@ -122,6 +123,12 @@ const router = createBrowserRouter([
         path: "/membership",
         element: <MemberShipPage />,
       },
+      {
+        path: "/category/:CategoryName",
+        element: <SelectCategory />,
+        loader: async({params})=> 
+        await fetch(`${process.env.REACT_APP_API_URL}/category/${params.CategoryName}`)
+      }
     ],
   },
   {

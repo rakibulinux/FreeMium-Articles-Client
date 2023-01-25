@@ -8,6 +8,7 @@ const Manubar = () => {
     .then(res=>res.json())
     .then(data=>setCategory(data))
   },[])
+  
   return (
     <div style={{ width: "100%" }}>
       <ul

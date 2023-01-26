@@ -11,19 +11,21 @@ import PaymentForm from "../Pages/Payment/PaymentForm/PaymentForm";
 
 import Profile from "../Pages/Profile/Profile";
 import Register from "../Pages/Register/Register";
-import Settings from "../Pages/Settings/Settings";
+import Settings from "../Pages/UserProfileMenu/Settings/Settings";
 import WriteStories from "../Pages/WriteStories/WriteStories";
 import AdminRoute from "./AdminRoute";
 import PrivateRoute from "./PrivateRoute";
-import ArticlesDetails from "./../Pages/articlesSection/articlesDetails/ArticlesDetails";
-import List from "./../Pages/List/List";
-import Stories from "../Pages/Stories/Stories";
-import Stats from "./../Pages/Stats/Stats";
+
+import ArticlesDetails from './../Pages/articlesSection/articlesDetails/ArticlesDetails';
+
+import Stories from "../Pages/UserProfileMenu/Stories/Stories";
+import Stats from '../Pages/UserProfileMenu/Stats/Stats';
+import List from "../Pages/UserProfileMenu/Lists/List";
 import OurStory from "../Pages/OurStory/OurStory";
 import PaymentSuccess from "../Pages/Payment/PaymentSuccess/PaymentSuccess";
-// import MemberShipMain from "../Pages/MemberShipPage/MemberShipMain/MemberShipMain";
 import MemberShipPage from './../Pages/CreatorPage/MemberShipPage';
-import SelectCategorySection from './../Pages/SelectCategoryPage/SelectCategorySection/SelectCategorySection';
+import RefineRecommendations from "../Pages/UserProfileMenu/RefineRecommendations/RefineRecommendations";
+import ApplyToThePartnerProgram from "../Pages/UserProfileMenu/ApplyToThePartnerProgram/ApplyToThePartnerProgram";
 
 const router = createBrowserRouter([
   {
@@ -48,10 +50,18 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: "/profile",
+        element: (
+          <PrivateRoute>
+            <Profile />
+          </PrivateRoute>
+        ),
+      },
+      {
         path: "/settings",
         element: (
           <PrivateRoute>
-            <Settings />
+            <Settings></Settings>
           </PrivateRoute>
         ),
       },
@@ -122,15 +132,25 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: "/refineRecommendations",
+        element: (
+          <PrivateRoute>
+            <RefineRecommendations></RefineRecommendations>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/applyToThePartnerProgram",
+        element: (
+          <PrivateRoute>
+            <ApplyToThePartnerProgram></ApplyToThePartnerProgram>
+          </PrivateRoute>
+        ),
+      },
+      {
         path: "/membership",
         element: <MemberShipPage />,
       },
-      {
-        path: "/category/:CategoryName",
-        element: <SelectCategorySection />,
-        loader: async({params})=> 
-        await fetch(`${process.env.REACT_APP_API_URL}/category/${params.CategoryName}`)
-      }
     ],
   },
   {

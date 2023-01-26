@@ -19,7 +19,7 @@ const SelectCategory = () => {
             </h1>
         </div>
         <div className='mt-5'>
-             <button className="py-1 px-6 rounded-2xl font-semibold text-white bg-[#1A8917]">Flow</button>
+             <button className="py-1 px-6 rounded-2xl font-semibold text-white hover:bg-[#2a8127] bg-[#1A8917]">Flow</button>
              <button className="py-1 px-6 rounded-2xl btn-primary font-semibold ml-3 border-[1px] hover:border-[#1A8917] border-[#1A8917] bg-slate-50 text-[#1A8917] hover:bg-white">get writing</button>
              {/* <button className="btn  btn-outline rounded-2xl font-semibold text-white bg-[#1A8917]">get writing</button> */}
             </div>

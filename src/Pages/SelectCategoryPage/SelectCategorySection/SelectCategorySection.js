@@ -4,7 +4,7 @@ import RelatedTopicsTopWriters from './../RelatedTopicsAndTopWriters/RelatedTopi
 import './SelectCategorySection.css';
 const SelectCategorySection = () => {
     return (
-        <div className="grid columns-grid px-7">
+        <div className="lg:grid flex flex-col lg:flex-row columns-grid lg:px-7 px-2">
             <SelectCategory />
             <RelatedTopicsTopWriters />
         </div>

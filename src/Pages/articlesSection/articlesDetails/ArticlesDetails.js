@@ -8,59 +8,74 @@ import { AuthContext } from "../../../contexts/AuthProvider";
 import { useState } from "react";
 import { useQuery } from "react-query";
 import { setUserId } from "firebase/analytics";
+import Spinner from "../../../components/Spinner/Spinner";
+import { useEffect } from "react";
+import FollowButton from "../../FollowButton/FollowButton";
 const ArticlesDetails = () => {
-  const [showFollow, setShowFollow] = useState(true);
+  // const [showFollow, setShowFollow] = useState(true);
+  const [users, setUsers] = useState({});
   const articleData = useLoaderData();
   const { user } = useContext(AuthContext);
 
-  const { writerImg, writerName, userId } = articleData;
-  console.log(articleData);
+  const { writerImg, writerName, userId, userEmail } = articleData;
+  // console.log(articleData);
   // story writter user info
-  // const {data:storyUser=[]}=useQuery({
-  //   queryKey:['user',userId],
-  //   queryFn:async()=>{
-  //     const res = await fetch(`${process.env.REACT_APP_API_URL}/user/${userId}`)
+  // const { data: storyUser, isLoading } = useQuery({
+  //   queryKey: ["user", userId],
+  //   queryFn: async () => {
+  //     const res = await fetch(
+  //       `${process.env.REACT_APP_API_URL}/user/${userId}`
+  //     );
   //     const data = await res.json();
+  //     console.log(data);
   //     return data;
-  //   }
+  //   },
+  // });
 
-  // })
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_API_URL}/user/${userId}`)
+      .then((res) => res.json())
+      .then((data) => setUsers(data));
+  }, [userId]);
+  // console.log(users);
 
-  // console.log(storyUser)
   // add follow
-  const addFollow = (email) => {
-    const follow = email;
+  // const addFollow = (email) => {
+  //   const follow = email;
 
-    fetch(`${process.env.REACT_APP_API_URL}/follows/${userId}`, {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({ follow }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setShowFollow(false);
-      });
-  };
+  //   fetch(`${process.env.REACT_APP_API_URL}/follows/${userId}`, {
+  //     method: "PUT",
+  //     headers: {
+  //       "content-type": "application/json",
+  //     },
+  //     body: JSON.stringify({ follow }),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       console.log(data);
+  //       setShowFollow(false);
+  //     });
+  // };
 
-  //  unfollow
-  const addUnFollow = (email) => {
-    const unfollow = email;
-    fetch(`${process.env.REACT_APP_API_URL}/follows/${userId}`, {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({ unfollow }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setShowFollow(true);
-      });
-  };
+  // //  unfollow
+  // const addUnFollow = (email) => {
+  //   const unfollow = email;
+  //   fetch(`${process.env.REACT_APP_API_URL}/follows/${userId}`, {
+  //     method: "PUT",
+  //     headers: {
+  //       "content-type": "application/json",
+  //     },
+  //     body: JSON.stringify({ unfollow }),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       console.log(data);
+  //       setShowFollow(true);
+  //     });
+  // };
+  if (!users) {
+    return <Spinner />;
+  }
   return (
     <div className="border-t-2">
       <div className="container mx-auto grid lg:grid-cols-3 sm:grid-cols-1">
@@ -87,28 +102,38 @@ const ArticlesDetails = () => {
             </div>
             {/* avater end */}
             <h2 className="card-title text-sm c">{writerName}</h2>
-            <p>308K Followers</p>
+            <p>{users?.following?.length} Followers</p>
             <p className="text-sm">
               Aussie Blogger with 500M+ views — Writer for CNBC & Business
               Insider. Inspiring the world through Personal Development and
               Entrepreneurship — timdenning.com/mb Follow
             </p>
             <div className="card-actions ">
-              {showFollow ? (
+              {/* {showFollow ? (
                 <button
-                  onClick={() => addFollow(user.email)}
+                  onClick={() => addFollow(user?.email)}
                   className="btn btn-sm rounded-full bg-gray-500 border-0 text-white"
                 >
                   Follow
                 </button>
               ) : (
                 <button
-                  onClick={() => addUnFollow(user.email)}
+                  onClick={() => addUnFollow(user?.email)}
                   className="btn btn-sm rounded-full bg-gray-500 border-0 text-white"
                 >
                   Following
                 </button>
+              )} */}
+              {users && (
+                <FollowButton
+                  user={user}
+                  userId={userId}
+                  userEmail={userEmail}
+                  followingId={user?.email}
+                  unfollowingId={user?.email}
+                />
               )}
+
               <Link className="  bg-gray-500 border-0 rounded-full p-2">
                 <EnvelopeIcon className="h-4 w-4 text-white " />
               </Link>

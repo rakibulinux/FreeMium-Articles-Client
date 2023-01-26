@@ -10,7 +10,7 @@ const Stories = () => {
                     <div className='flex justify-between'>
                         <h1 className='text-4xl font-bold'>Your stories</h1>
                         <div>
-                            <button className="btn btn-success bg-green-600 rounded-full  border-none text-white">Write a story</button>
+                            <Link className="btn btn-success bg-green-600 rounded-full  border-none text-white" to="/write-stories">Write a story</Link>
                             <button className="btn btn-outline rounded-full ml-3">Import a story</button>
                        </div>
                     </div>

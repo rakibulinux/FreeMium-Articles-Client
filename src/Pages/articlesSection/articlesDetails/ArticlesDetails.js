@@ -33,10 +33,10 @@ const ArticlesDetails = () => {
   // });
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/user/${userId}`)
+    fetch(`${process.env.REACT_APP_API_URL}/user/${userEmail}`)
       .then((res) => res.json())
       .then((data) => setUsers(data));
-  }, [userId]);
+  }, [userEmail]);
   // console.log(users);
 
   // add follow

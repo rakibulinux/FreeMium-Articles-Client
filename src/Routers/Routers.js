@@ -23,7 +23,7 @@ import OurStory from "../Pages/OurStory/OurStory";
 import PaymentSuccess from "../Pages/Payment/PaymentSuccess/PaymentSuccess";
 // import MemberShipMain from "../Pages/MemberShipPage/MemberShipMain/MemberShipMain";
 import MemberShipPage from './../Pages/CreatorPage/MemberShipPage';
-import SelectCategory from "../Pages/SelectCategoryPage/SelectCategory";
+import SelectCategorySection from './../Pages/SelectCategoryPage/SelectCategorySection/SelectCategorySection';
 
 const router = createBrowserRouter([
   {
@@ -73,7 +73,9 @@ const router = createBrowserRouter([
       },
       {
         path: "/payment",
-        element: <PaymentForm></PaymentForm>,
+        element: <PrivateRoute>
+                 <PaymentForm></PaymentForm>
+                  </PrivateRoute> ,
       },
       {
         path: "/success",
@@ -125,7 +127,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/category/:CategoryName",
-        element: <SelectCategory />,
+        element: <SelectCategorySection />,
         loader: async({params})=> 
         await fetch(`${process.env.REACT_APP_API_URL}/category/${params.CategoryName}`)
       }

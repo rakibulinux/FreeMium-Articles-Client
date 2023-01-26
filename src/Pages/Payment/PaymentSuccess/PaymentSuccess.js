@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
+import PrimaryButton from "../../../components/Button/PrimaryButton";
 
 const PaymentSuccess = () => {
   const [paymentUser, setPaymentUser] = useState({});
@@ -70,7 +71,7 @@ const PaymentSuccess = () => {
               <tbody>
                 <tr>
                   <td className="text-center">Taka</td>
-                  <td className="text-center">100 Tk</td>
+                  <td className="text-center">{paymentUser.amount} Tk</td>
                 </tr>
 
                 <tr>
@@ -80,7 +81,7 @@ const PaymentSuccess = () => {
 
                 <tr className="active">
                   <td className="text-lg text-center font-bold">Total</td>
-                  <td className="text-lg text-center font-bold">100 Tk</td>
+                  <td className="text-lg text-center font-bold">{paymentUser.amount} Tk</td>
                 </tr>
               </tbody>
             </table>
@@ -89,16 +90,15 @@ const PaymentSuccess = () => {
       </div>
       <div>
         <h4 className="text-2xl text-center font-bold my-3">
-          {" "}
           Save your transaction ID for later use
         </h4>
 
         <h4 className="text-2xl text-center font-bold my-3 print:hidden">
-          {" "}
-          Back to{" "}
           <Link className="text-blue-600 underline underline-offset-4" to="/">
-            Home
-          </Link>{" "}
+          <PrimaryButton classes="px-8 py-3 font-semibold rounded">
+            Back to Homepage
+          </PrimaryButton>
+          </Link>
         </h4>
         <button
           onClick={() => window.print()}

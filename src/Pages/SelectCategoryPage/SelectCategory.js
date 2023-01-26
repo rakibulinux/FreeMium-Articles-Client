@@ -7,7 +7,7 @@ const SelectCategory = () => {
     const categoryData = useLoaderData();
     // console.log(categoryData[1]);
    
-    if(categoryData.length){
+    if( categoryData[1].length){
         return(
       <div className='px-10'>
         <div className='mb-10'>
@@ -35,7 +35,7 @@ const SelectCategory = () => {
     }else{
         return (
             <div className='my-28'>
-                <h1 className='text-4xl font-semibold text-gray-900 text-center'>Article not available</h1>
+                <h1 className='text-4xl font-semibold text-gray-900 text-center'>( {categoryData[0]?.categoryName} ) Article not available</h1>
             </div>
         );
     }

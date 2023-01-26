@@ -7,8 +7,8 @@ import { AuthContext } from "../../../contexts/AuthProvider";
 import whiteScreen from "../../../Assets/white-screen.png";
 // import BlackScreen from "../../../Assets/Black-screen-tp.png";
 import { CgProfile } from "react-icons/cg";
-import { AiFillSetting, AiOutlineLogout, AiOutlineHome } from "react-icons/ai";
-import { BsList } from "react-icons/bs";
+import { AiFillSetting, AiOutlineLogout } from "react-icons/ai";
+import { BsBookmarksFill, BsList } from "react-icons/bs";
 import { MdAmpStories } from "react-icons/md";
 import { GiNetworkBars } from "react-icons/gi";
 import { CiLogin } from "react-icons/ci";
@@ -138,54 +138,19 @@ const Navbar = () => {
         </>
       ) : (
         <>
-        <li className="justify-between bg-white text-black text-lg font-semibold text-semibold">
-                  <NavLink to="/">
-                    <AiOutlineHome className="text-lg" />
-                    Home
-                  </NavLink>
-                </li>
-                <li className="justify-between bg-white text-black text-lg font-semibold text-semibold">
-                  <NavLink to="/profile">
-                    <CgProfile className="text-lg" />
-                    Profile
-                  </NavLink>
-                </li>
-                <li className="justify-between bg-white text-black text-lg font-semibold text-semibold">
-                  <NavLink to="/list">
-                    <BsList className="text-lg" />
-                    List
-                  </NavLink>
-                </li>
-                <li className="justify-between bg-white text-black text-lg font-semibold text-semibold">
-                  <NavLink to="/stories">
-                    <MdAmpStories className="text-lg" />
-                    Stories
-                  </NavLink>
-                </li>
-                <li className="justify-between bg-white text-black text-lg font-semibold text-semibold">
-                  <NavLink to="/stats">
-                    <GiNetworkBars className="text-lg" />
-                    Stats
-                  </NavLink>
-                </li>
-                <li className="justify-between bg-white text-black text-lg font-semibold text-semibold">
-                  <NavLink to="/settings">
-                    <AiFillSetting className="text-lg" />
-                    Settings
-                  </NavLink>
-                </li>
-                <hr className="text-gray-400 shadow-2xl my-2" />
-                <li className="justify-between bg-white text-black text-lg font-semibold">
-                  <>
-                    <button
-                      onClick={handleLogOut}
-                      className="text-red-500 hover:text-red-600"
-                    >
-                      <AiOutlineLogout className="text-lg" /> Sign out
-                    </button>
-                  </>
-                </li>
-              
+          <li>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "text-sky-600 bg-none hover:bg-none" : ""
+              }
+              to="/dashboard"
+            >
+              Dashboard
+            </NavLink>
+          </li>
+          <li>
+            <button onClick={handleLogOut}>SignOut</button>
+          </li>
         </>
       )}
     </>
@@ -275,19 +240,25 @@ const Navbar = () => {
               </label>
               <ul
                 tabIndex={0}
-                className="menu menu-compact dropdown-content mt-3 p-2 shadow rounded-sm bg-base-100 box-border w-40
+                className="menu menu-compact dropdown-content mt-3 p-2 shadow rounded-sm bg-base-100 box-border w-max
                 border-[1px] border-[#e4e0e0]
                 "
               >
                 <li className="justify-between bg-white text-black text-lg font-semibold text-semibold">
+
                   <NavLink to="/profile">
+
                     <CgProfile className="text-lg" />
                     Profile
                   </NavLink>
                 </li>
                 <li className="justify-between bg-white text-black text-lg font-semibold text-semibold">
-                  <NavLink to="/list">
-                    <BsList className="text-lg" />
+
+                  <NavLink
+                    to="/list"
+                  >
+                    <BsBookmarksFill className="text-lg" />
+
                     List
                   </NavLink>
                 </li>
@@ -303,27 +274,70 @@ const Navbar = () => {
                     Stats
                   </NavLink>
                 </li>
-                <li className="justify-between bg-white text-black text-lg font-semibold text-semibold">
-                  <NavLink to="/settings">
-                    <AiFillSetting className="text-lg" />
+
+                <div className="divider"></div>
+                <li className="">
+                  <NavLink
+                    to="/settings"
+                  >
+
+
                     Settings
                   </NavLink>
                 </li>
-                <hr className="text-gray-400 shadow-2xl my-2" />
+                <li className="">
+                  <NavLink
+                    to="/refineRecommendations"
+                  >
+
+                    Refine recommendations
+                  </NavLink>
+                </li>
+                <li className="">
+                  <NavLink
+                    to="/"
+                  >
+
+                    Manage publications
+                  </NavLink>
+                </li>
+                <div className="divider"></div>
+                <li className="">
+                  <NavLink
+                    to="/">
+                    Become a member
+                  </NavLink>
+                </li>
+                <li className="">
+                  <NavLink
+                    to="/applyToThePartnerProgram">
+                    Apply to the Partner Program
+                  </NavLink>
+                </li>
+                <li className="">
+                  <NavLink
+                    to="/">
+                    Gift membership
+
+                  </NavLink>
+                </li>
+                <div className="divider"></div>
                 <li className="justify-between bg-white text-black text-lg font-semibold">
                   <>
+
                     <button
                       onClick={handleLogOut}
                       className="text-red-500 hover:text-red-600"
                     >
                       <AiOutlineLogout className="text-lg" /> Sign out
+
                     </button>
                   </>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
+                </li >
+              </ul >
+            </div >
+          </div >
+        </div >
       ) : (
         <div className="navbar justify-between items-center">
           <div className="">
@@ -369,7 +383,7 @@ const Navbar = () => {
           </div>
         </div>
       )}
-    </div>
+    </div >
   );
 };
 

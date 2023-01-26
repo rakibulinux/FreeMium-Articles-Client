@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const TopWritersCard = ({writerData}) => {
-    console.log(writerData);
+    // console.log(writerData);
     const {name,picture,} = writerData;
     return (
         <div>

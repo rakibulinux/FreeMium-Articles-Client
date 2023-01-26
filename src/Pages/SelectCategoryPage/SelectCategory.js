@@ -2,10 +2,11 @@ import React from 'react';
 import { useLoaderData } from 'react-router-dom';
 import SelectCategoryCard from './SelectCategoryCardPage/SelectCategoryCard';
 import { AiOutlineTag } from "react-icons/ai";
+import { useState } from 'react';
 const SelectCategory = () => {
     const categoryData = useLoaderData();
-    console.log(categoryData);
-
+    // console.log(categoryData[1]);
+   
     if(categoryData.length){
         return(
       <div className='px-10'>
@@ -15,7 +16,7 @@ const SelectCategory = () => {
           <AiOutlineTag className='text-[#000] cursor-pointer font-bold text-2xl' />
           </div>
             <h1 className='text-4xl text-gray-900 font-semibold text-center'>
-                Programing
+                {categoryData[0]?.categoryName ? categoryData[0]?.categoryName : "Not found"}
             </h1>
         </div>
         <div className='mt-5'>
@@ -24,9 +25,10 @@ const SelectCategory = () => {
              {/* <button className="btn  btn-outline rounded-2xl font-semibold text-white bg-[#1A8917]">get writing</button> */}
             </div>
         </div>
-       
         {
-            categoryData.map(data=><SelectCategoryCard data={data} />)
+            categoryData[1].map(data=>
+               <SelectCategoryCard data={data} key={data?._id} />
+            )
         }
       </div>
 )

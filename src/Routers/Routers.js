@@ -147,7 +147,6 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-
       {
         path: "/membership",
         element: <MemberShipPage />,

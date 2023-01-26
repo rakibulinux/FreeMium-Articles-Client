@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./WriteStories.css";
 import Editor from "react-medium-editor";
 import "medium-editor/dist/css/medium-editor.css";
@@ -15,7 +15,7 @@ const WriteStories = ({ userDetails }) => {
   const { user } = useContext(AuthContext);
   const { articlesRefetch } = useContext(APIContext);
   const { categoryButton, isLoading } = useContext(APIContext);
-  console.log(categoryButton);
+  const [users, setUsers] = useState({});
   const [title, setTitle] = useState("");
   const [image, setImage] = useState("");
   // const [category, setCategory] = useState("");
@@ -24,7 +24,12 @@ const WriteStories = ({ userDetails }) => {
 
   const navigate = useNavigate();
   const date = format(new Date(), "PP");
-
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_API_URL}/user/${user?.email}`)
+      .then((res) => res.json())
+      .then((data) => setUsers(data));
+  }, [user?.email]);
+  console.log(users?._id);
   const handleSubmitStories = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -45,7 +50,8 @@ const WriteStories = ({ userDetails }) => {
           toast.success("Image upload success");
           const body = {
             articleDetails: desc,
-            userId: user?.uid,
+            userId: users?._id,
+            userEmail: user?.email,
             writerName: user?.displayName,
             writerImg: user?.photoURL,
             articleTitle: title,
@@ -54,6 +60,7 @@ const WriteStories = ({ userDetails }) => {
             articleImg: imgData.data.url,
             category,
           };
+
           // Update in database
           fetch(`${process.env.REACT_APP_API_URL}/add-story`, {
             method: "POST",

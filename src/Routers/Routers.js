@@ -23,10 +23,9 @@ import Stats from '../Pages/UserProfileMenu/Stats/Stats';
 import List from "../Pages/UserProfileMenu/Lists/List";
 import OurStory from "../Pages/OurStory/OurStory";
 import PaymentSuccess from "../Pages/Payment/PaymentSuccess/PaymentSuccess";
-// import MemberShipMain from "../Pages/MemberShipPage/MemberShipMain/MemberShipMain";
-import ApplyToThePartnerProgram from "../Pages/UserProfileMenu/ApplyToThePartnerProgram/ApplyToThePartnerProgram";
+import MemberShipPage from './../Pages/CreatorPage/MemberShipPage';
 import RefineRecommendations from "../Pages/UserProfileMenu/RefineRecommendations/RefineRecommendations";
-import MemberShipPage from "../Pages/CreatorPage/MemberShipPage";
+import ApplyToThePartnerProgram from "../Pages/UserProfileMenu/ApplyToThePartnerProgram/ApplyToThePartnerProgram";
 
 const router = createBrowserRouter([
   {
@@ -84,7 +83,9 @@ const router = createBrowserRouter([
       },
       {
         path: "/payment",
-        element: <PaymentForm></PaymentForm>,
+        element: <PrivateRoute>
+                 <PaymentForm></PaymentForm>
+                  </PrivateRoute> ,
       },
       {
         path: "/success",
@@ -151,7 +152,6 @@ const router = createBrowserRouter([
         path: "/membership",
         element: <MemberShipPage />,
       },
-
     ],
   },
   {

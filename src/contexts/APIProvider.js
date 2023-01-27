@@ -26,11 +26,10 @@ const APIProvider = ({ children }) => {
     queryKey: ["allArticles"],
     queryFn: async () => {
       const res = await fetch(`${process.env.REACT_APP_API_URL}/allArticles`);
-      const data = res.json();
+      const data = await res.json();
       return data;
     },
   });
-  
 
   const apiInfo = {
     categoryButton,

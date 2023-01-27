@@ -15,7 +15,7 @@ const TopWritersCard = ({writerData}) => {
                 <p>I am Java programmer, blogger, working on Java, J2EE, UNIX, FIX Protocol. I share Java tips on</p>
               </div>
              <div className='flex items-center'>
-             <button className="py-1 px-6 rounded-2xl font-semibold text-white hover:bg-[#257422] bg-[#1A8917] mt-2 lg:mt-0">Flow</button>
+             <button className="py-1 px-6 rounded-2xl font-semibold text-white hover:bg-[#257422] bg-[#1A8917] mt-2 lg:mt-0">Follow</button>
              </div>
                </div>
             </div>

@@ -30,6 +30,7 @@ const APIProvider = ({ children }) => {
       return data;
     },
   });
+  
 
   const apiInfo = {
     categoryButton,

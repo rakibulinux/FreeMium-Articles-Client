@@ -32,8 +32,8 @@ const ArticlesCard = ({ data }) => {
               <img className="rounded-full w-10 h-10" src={writerImg} alt="" />
               <h3 className="ml-2 font-bold text-gray-900">{writerName}</h3>
             </div>
-            <div className="grid" style={{ gridTemplateColumns: "4fr 2fr" }}>
-              <div>
+            <div className="lg:grid flex flex-col-reverse lg:flex-row" style={{ gridTemplateColumns: "4fr 2fr" }}>
+              <div className="px-3">
                 <h1
                   className="text-2xl font-semibold text-gray-800"
                   dangerouslySetInnerHTML={{ __html: articleTitle }}
@@ -47,7 +47,7 @@ const ArticlesCard = ({ data }) => {
                 <img className="" src={articleImg} alt="" />
               </div>
             </div>
-            <div className="flex items-center">
+            <div className="flex items-center ml-3 lg:ml-0">
               <span className="block text-gray-700 font-semibold">
                 {articleSubmitDate}
               </span>

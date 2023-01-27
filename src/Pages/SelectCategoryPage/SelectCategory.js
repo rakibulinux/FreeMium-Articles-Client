@@ -48,7 +48,7 @@ const SelectCategory = () => {
                    <h1 className='text-4xl font-semibold text-gray-900  text-center'>( {categoryData[0]?.categoryName} ) Article not available</h1>
                    <div className='mt-4'>
                     {
-                        View
+                      View
                     }
                    </div>
                </div>

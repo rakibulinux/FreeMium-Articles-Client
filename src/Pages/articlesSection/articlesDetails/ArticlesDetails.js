@@ -6,8 +6,6 @@ import { EnvelopeIcon } from "@heroicons/react/24/solid";
 import { useContext } from "react";
 import { AuthContext } from "../../../contexts/AuthProvider";
 import { useState } from "react";
-import { useQuery } from "react-query";
-import { setUserId } from "firebase/analytics";
 import Spinner from "../../../components/Spinner/Spinner";
 import { useEffect } from "react";
 import FollowButton from "../../FollowButton/FollowButton";
@@ -17,62 +15,15 @@ const ArticlesDetails = () => {
   const articleData = useLoaderData();
   const { user } = useContext(AuthContext);
 
-  const { writerImg, writerName, userId, userEmail } = articleData;
-  // console.log(articleData);
-  // story writter user info
-  // const { data: storyUser, isLoading } = useQuery({
-  //   queryKey: ["user", userId],
-  //   queryFn: async () => {
-  //     const res = await fetch(
-  //       `${process.env.REACT_APP_API_URL}/user/${userId}`
-  //     );
-  //     const data = await res.json();
-  //     console.log(data);
-  //     return data;
-  //   },
-  // });
+  const { writerImg, writerName, articleTitle, articleImg, userId, userEmail } =
+    articleData;
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/user/${userEmail}`)
       .then((res) => res.json())
       .then((data) => setUsers(data));
-  }, [userEmail]);
-  // console.log(users);
+  }, [userEmail, users]);
 
-  // add follow
-  // const addFollow = (email) => {
-  //   const follow = email;
-
-  //   fetch(`${process.env.REACT_APP_API_URL}/follows/${userId}`, {
-  //     method: "PUT",
-  //     headers: {
-  //       "content-type": "application/json",
-  //     },
-  //     body: JSON.stringify({ follow }),
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       console.log(data);
-  //       setShowFollow(false);
-  //     });
-  // };
-
-  // //  unfollow
-  // const addUnFollow = (email) => {
-  //   const unfollow = email;
-  //   fetch(`${process.env.REACT_APP_API_URL}/follows/${userId}`, {
-  //     method: "PUT",
-  //     headers: {
-  //       "content-type": "application/json",
-  //     },
-  //     body: JSON.stringify({ unfollow }),
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       console.log(data);
-  //       setShowFollow(true);
-  //     });
-  // };
   if (!users) {
     return <Spinner />;
   }
@@ -109,32 +60,17 @@ const ArticlesDetails = () => {
               Entrepreneurship — timdenning.com/mb Follow
             </p>
             <div className="card-actions ">
-              {/* {showFollow ? (
-                <button
-                  onClick={() => addFollow(user?.email)}
-                  className="btn btn-sm rounded-full bg-gray-500 border-0 text-white"
-                >
-                  Follow
-                </button>
-              ) : (
-                <button
-                  onClick={() => addUnFollow(user?.email)}
-                  className="btn btn-sm rounded-full bg-gray-500 border-0 text-white"
-                >
-                  Following
-                </button>
-              )} */}
               {users && (
                 <FollowButton
                   user={user}
+                  users={users}
                   userId={userId}
                   userEmail={userEmail}
                   followingId={user?.email}
                   unfollowingId={user?.email}
                 />
               )}
-
-              <Link className="  bg-gray-500 border-0 rounded-full p-2">
+              <Link className="bg-gray-500 border-0 rounded-full p-2">
                 <EnvelopeIcon className="h-4 w-4 text-white " />
               </Link>
             </div>
@@ -145,27 +81,30 @@ const ArticlesDetails = () => {
               More form Freemium
             </h1>
             {/* dremo writter card */}
-            <div className="hero  ">
-              <div className="hero-content flex-col lg:flex-row ">
-                {/* hero avater */}
-                <div className="avatar">
-                  <div className="w-16 rounded">
-                    <img src={writerImg} alt="Tailwind-CSS-Avatar-component" />
-                  </div>
+
+            <div className="flex ">
+              <div className="">
+                <div className="flex items-center gap-2 my-3">
+                  <img
+                    src={writerImg}
+                    alt={writerName}
+                    className="w-6 h-6 rounded-full"
+                  />
+                  <span>{writerName}</span>
                 </div>
                 <div>
-                  <div className="flex">
-                    <p className="">Akshad Singi</p>
-                    <div className="avatar ml-2">
-                      <div className="w-6 rounded-full">
-                        <img src={writerImg} alt="img" />
-                      </div>
-                    </div>
-                  </div>
-                  <h1 className="text-lg font-semibold">
-                    12 Ways To Improve Your Finances in 2023.
-                  </h1>
+                  <h1
+                    className="text-xl font-bold"
+                    dangerouslySetInnerHTML={{ __html: articleTitle }}
+                  />
                 </div>
+              </div>
+              <div className="flex items-center gap-2 my-3">
+                <img
+                  src={articleImg}
+                  alt={articleTitle}
+                  className="w-24 h-20"
+                />
               </div>
             </div>
             {/* demo writter end */}

@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const DemoWritter = ({ articleData }) => {
-  console.log(articleData);
   const {
     articleDetails,
     articleImg,

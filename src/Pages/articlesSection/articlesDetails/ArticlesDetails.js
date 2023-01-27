@@ -6,8 +6,7 @@ import { EnvelopeIcon } from "@heroicons/react/24/solid";
 import { useContext } from "react";
 import { AuthContext } from "../../../contexts/AuthProvider";
 import { useState } from "react";
-import { useQuery } from "react-query";
-import { setUserId } from "firebase/analytics";
+
 const ArticlesDetails = () => {
 const[showFollow,setShowFollow]=useState(true)
   const articleData = useLoaderData();
@@ -16,22 +15,11 @@ const[showFollow,setShowFollow]=useState(true)
   
   const {writerImg,writerName,userId} = articleData;
   console.log(articleData)
-  // story writter user info
-  // const {data:storyUser=[]}=useQuery({  
-  //   queryKey:['user',userId],
-  //   queryFn:async()=>{
-  //     const res = await fetch(`${process.env.REACT_APP_API_URL}/user/${userId}`)
-  //     const data = await res.json();
-  //     return data;
-  //   }
-    
-  // })
-
-// console.log(storyUser)
+  
   // add follow 
   const addFollow =email=>{
     const follow = email;
-    
+    console.log(follow) 
      fetch(`${process.env.REACT_APP_API_URL}/follows/${userId}`,{
        method:'PUT',
        headers:{
@@ -50,7 +38,8 @@ const[showFollow,setShowFollow]=useState(true)
   
   //  unfollow
   const addUnFollow =email=>{
-    const unfollow = email;    
+    const unfollow = email; 
+      
      fetch(`${process.env.REACT_APP_API_URL}/follows/${userId}`,{
        method:'PUT',
        headers:{

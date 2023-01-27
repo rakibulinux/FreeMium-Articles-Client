@@ -86,7 +86,7 @@ const Login = () => {
   if (loading) {
     return <Spinner />;
   }
-  if (user?.uid) {
+  if (user?.uid && token) {
     navigate("/");
   }
   return (

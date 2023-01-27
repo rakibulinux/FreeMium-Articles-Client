@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import Spinner from "../../../../components/Spinner/Spinner";
 import { APIContext } from "../../../../contexts/APIProvider";
@@ -8,14 +8,8 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 const Manubar = () => {
-  const [category, setCategory] = useState([]);
-  useEffect(()=>{
-    fetch('http://localhost:5000/categoryButton')
-    .then(res=>res.json())
-    .then(data=>setCategory(data))
-  },[])
   const { categoryButton, isCategoryLoading } = useContext(APIContext);
-  const [swiperRef, setSwiperRef] = useState(null);
+  // const [swiperRef, setSwiperRef] = useState(null);
   if (isCategoryLoading) {
     return <Spinner />;
   }
@@ -26,12 +20,12 @@ const Manubar = () => {
         style={{ width: "100%", alignItems: "center" }}
       >
         <Swiper
-          onSwiper={setSwiperRef}
+          // onSwiper={setSwiperRef}
           slidesPerView={4}
           centeredSlides={true}
           spaceBetween={30}
           // pagination={{
-          //   type: "fraction",
+          //   type: "function",
           // }}
           // navigation={true}
           className="flex"

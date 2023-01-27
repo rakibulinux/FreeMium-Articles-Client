@@ -60,6 +60,7 @@ const ArticlesDetails = () => {
               Entrepreneurship — timdenning.com/mb Follow
             </p>
             <div className="card-actions ">
+
               {users && (
                 <FollowButton
                   user={user}
@@ -70,6 +71,7 @@ const ArticlesDetails = () => {
                   unfollowingId={user?.email}
                 />
               )}
+
               <Link className="bg-gray-500 border-0 rounded-full p-2">
                 <EnvelopeIcon className="h-4 w-4 text-white " />
               </Link>

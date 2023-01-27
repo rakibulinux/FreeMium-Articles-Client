@@ -17,7 +17,7 @@ const Manubar = () => {
     <div className="hidden md:block" style={{ width: "100%" }}>
       <ul
         className="menu menu-vertical lg:menu-horizontal bg-base-100 border my-8 w-full items-center"
-        // style={{ width: "100%", alignItems: "center" }}
+        style={{ width: "100%", alignItems: "center" }}
       >
         <Swiper
           // onSwiper={setSwiperRef}

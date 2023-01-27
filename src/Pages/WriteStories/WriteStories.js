@@ -29,14 +29,14 @@ const WriteStories = ({ userDetails }) => {
       .then((res) => res.json())
       .then((data) => setUsers(data));
   }, [user?.email]);
-  console.log(users?._id);
+
   const handleSubmitStories = (e) => {
     e.preventDefault();
     const form = e.target;
     const image = form.image.files[0];
     const category = form.category.value;
     const number = form.number.value;
-    console.log(category);
+
     const formData = new FormData();
     formData.append("image", image);
     const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
@@ -173,7 +173,7 @@ const WriteStories = ({ userDetails }) => {
         >
           <div className="flex flex-col items-center justify-center pt-5 pb-6">
             {image ? (
-              <img src={image} alt="" />
+              <p>Image Uploaded {image}</p>
             ) : (
               <>
                 <svg

@@ -11,7 +11,6 @@ const Stats = () => {
                     <FaTwitter className='text-info'/>
            
                     <h3 className=""><span className='link'>Connect with Twitter</span> to let your followers find you on FreeMium.</h3>
-              
                 </div>
                 <div className="flex-none">
                     <button className="btn btn-sm">X</button>

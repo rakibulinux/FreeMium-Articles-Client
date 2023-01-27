@@ -26,8 +26,11 @@ import PaymentSuccess from "../Pages/Payment/PaymentSuccess/PaymentSuccess";
 import MemberShipPage from './../Pages/CreatorPage/MemberShipPage';
 import RefineRecommendations from "../Pages/UserProfileMenu/RefineRecommendations/RefineRecommendations";
 import ApplyToThePartnerProgram from "../Pages/UserProfileMenu/ApplyToThePartnerProgram/ApplyToThePartnerProgram";
-import SelectCategory from './../Pages/SelectCategoryPage/SelectCategory';
+
 import SelectCategorySection from './../Pages/SelectCategoryPage/SelectCategorySection/SelectCategorySection';
+import GiftMembership from "../Pages/UserProfileMenu/GiftMembership/GiftMembership";
+
+
 
 const router = createBrowserRouter([
   {
@@ -154,6 +157,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <ApplyToThePartnerProgram></ApplyToThePartnerProgram>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/giftMembership",
+        element: (
+          <PrivateRoute>
+        <GiftMembership></GiftMembership>
           </PrivateRoute>
         ),
       },

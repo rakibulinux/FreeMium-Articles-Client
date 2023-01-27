@@ -77,38 +77,38 @@ const Navbar = () => {
   const responsiveNavItemNotUser = (
     <>
       <li className="justify-between bg-white text-black text-normal font-semibold text-semibold py-1">
-      <NavLink to="/our-story" className="text-gray-900 border-animate">
+        <NavLink to="/our-story" className="text-gray-900 border-animate">
           Our story
         </NavLink>
-                </li>         
-        <li className="justify-between bg-white text-black text-normal font-semibold text-semibold py-1">
-         <NavLink className="text-gray-900 border-animate" to="/membership">
+      </li>
+      <li className="justify-between bg-white text-black text-normal font-semibold text-semibold py-1">
+        <NavLink className="text-gray-900 border-animate" to="/membership">
           Membership
         </NavLink>
-</li>
-                <li className="justify-between bg-white text-black text-normal font-semibold text-semibold py-1">
-                <NavLink
+      </li>
+      <li className="justify-between bg-white text-black text-normal font-semibold text-semibold py-1">
+        <NavLink
           className="flex items-center gap-2 text-gray-900 hover:text-black"
           to="/write-stories"
         >
-         {writeIcon} Write
+          {writeIcon} Write
         </NavLink>
-                </li>
-              
-                <hr className="text-gray-400 shadow-2xl my-2" />
-                <li className="justify-between bg-white text-black text-normal font-semibold py-1">
-                  <>
-                    <button
-                      onClick={handleLogOut}
-                      className="text-gray-900 hover:text-gray-600 flex items-center"
-                    >
-                      <CiLogin className="text-xl font-semibold mr-3" />  
-                      <NavLink className="text-gray-900 border-animate" to="/login">
-          Sign In
-        </NavLink>
-                    </button>
-                  </>
-                </li>
+      </li>
+
+      <hr className="text-gray-400 shadow-2xl my-2" />
+      <li className="justify-between bg-white text-black text-normal font-semibold py-1">
+        <>
+          <button
+            onClick={handleLogOut}
+            className="text-gray-900 hover:text-gray-600 flex items-center"
+          >
+            <CiLogin className="text-xl font-semibold mr-3" />
+            <NavLink className="text-gray-900 border-animate" to="/login">
+              Sign In
+            </NavLink>
+          </button>
+        </>
+      </li>
     </>
   );
   const navItems = (
@@ -155,13 +155,13 @@ const Navbar = () => {
       )}
     </>
   );
- 
+
   return (
     <div className="container mx-auto print:hidden">
       {user?.uid ? (
         <div className="navbar">
           <div className="navbar-start">
-            
+
             <div className="flex gap-2">
               <NavLink to="/" className="text-2xl font-medium">
                 <img className="w-56" src={whiteScreen} alt="" />
@@ -198,14 +198,14 @@ const Navbar = () => {
             </div>
           </div>
           <div className="navbar-end">
-           <div className="hidden lg:block">
-           <NavLink
-              className="flex gap-2 text-gray-900 hover:text-black"
-              to="/write-stories"
-            >
-              {writeIcon} Write
-            </NavLink>
-           </div>
+            <div className="hidden lg:block">
+              <NavLink
+                className="flex gap-2 text-gray-900 hover:text-black"
+                to="/write-stories"
+              >
+                {writeIcon} Write
+              </NavLink>
+            </div>
             <button className="btn btn-ghost btn-circle">
               <div className="indicator">
                 {/* notification svg icon */}
@@ -304,7 +304,7 @@ const Navbar = () => {
                 <div className="divider"></div>
                 <li className="">
                   <NavLink
-                    to="/">
+                    to="/payment">
                     Become a member
                   </NavLink>
                 </li>
@@ -316,7 +316,7 @@ const Navbar = () => {
                 </li>
                 <li className="">
                   <NavLink
-                    to="/">
+                    to="/giftMembership">
                     Gift membership
 
                   </NavLink>
@@ -330,8 +330,9 @@ const Navbar = () => {
                       className="text-red-500 hover:text-red-600"
                     >
                       <AiOutlineLogout className="text-lg" /> Sign out
-
+                      
                     </button>
+                    <p className="text-red-500 hover:text-red-600">{user?.email}</p>
                   </>
                 </li >
               </ul >

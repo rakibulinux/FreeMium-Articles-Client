@@ -1,14 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AuthContext } from '../../../contexts/AuthProvider';
 import RelatedTopics from './RelatedTopics/RelatedTopics';
 import TopWriters from './TopWriters/TopWriters';
 import TotalFollowerAndTotalArticle from './TotalFollowerAndTotalArticle/TotalFollowerAndTotalArticle';
 
 const RelatedTopicsTopWriters = () => {
+    const {user} = useContext(AuthContext);
     return (
         <div>
             <TotalFollowerAndTotalArticle />
             <RelatedTopics />
-            <TopWriters />
+{
+           user?.uid && <TopWriters />
+}
+
         </div>
     );
 };

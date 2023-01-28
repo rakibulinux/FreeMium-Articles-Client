@@ -6,7 +6,7 @@ import TopMember from "../topMember/TopMember";
 const JoinNetowork = () => {
   const [userData, setUserData] = useState([]);
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/user'`)
+    fetch(`${process.env.REACT_APP_API_URL}/user`)
       .then((res) => res.json())
       .then((data) => setUserData(data));
   }, [userData]);

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useLoaderData } from "react-router-dom";
-import ArticleDetailsCard from "./articleDetailsCard/ArticleDetailsCard";
+import ArticleDetailsCard from "./ArticleDetailsCard/ArticleDetailsCard";
 
 import { EnvelopeIcon } from "@heroicons/react/24/solid";
 import { useContext } from "react";

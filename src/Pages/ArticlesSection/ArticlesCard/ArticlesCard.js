@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { AuthContext } from "./../../../contexts/AuthProvider";
+import { AuthContext } from "../../../contexts/AuthProvider";
 import Spinner from "../../../components/Spinner/Spinner";
 
 const ArticlesCard = ({ data }) => {
@@ -32,7 +32,10 @@ const ArticlesCard = ({ data }) => {
               <img className="rounded-full w-10 h-10" src={writerImg} alt="" />
               <h3 className="ml-2 font-bold text-gray-900">{writerName}</h3>
             </div>
-            <div className="lg:grid flex flex-col-reverse lg:flex-row" style={{ gridTemplateColumns: "4fr 2fr" }}>
+            <div
+              className="lg:grid flex flex-col-reverse lg:flex-row"
+              style={{ gridTemplateColumns: "4fr 2fr" }}
+            >
               <div className="px-3">
                 <h1
                   className="text-2xl font-semibold text-gray-800"

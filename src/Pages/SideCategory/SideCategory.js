@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import Spinner from "../../components/Spinner/Spinner";
 import { APIContext } from "../../contexts/APIProvider";
 import { AuthContext } from "../../contexts/AuthProvider";
-import SideCategoryButton from "./sideCategoryButton/SideCategoryButton";
+import SideCategoryButton from "./SideCategoryButton/SideCategoryButton";
 import StaffPicks from "./StaffPicks";
 import WhoToFollow from "./WhoToFollow";
 

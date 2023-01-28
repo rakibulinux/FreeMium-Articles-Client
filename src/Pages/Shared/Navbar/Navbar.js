@@ -7,16 +7,21 @@ import { AuthContext } from "../../../contexts/AuthProvider";
 import whiteScreen from "../../../Assets/white-screen.png";
 // import BlackScreen from "../../../Assets/Black-screen-tp.png";
 import { CgProfile } from "react-icons/cg";
-import { AiFillSetting, AiOutlineLogout } from "react-icons/ai";
-import { BsBookmarksFill, BsList } from "react-icons/bs";
+import { AiOutlineDashboard, AiOutlineLogout } from "react-icons/ai";
+import { BsBookmarksFill } from "react-icons/bs";
 import { MdAmpStories } from "react-icons/md";
 import { GiNetworkBars } from "react-icons/gi";
 import { CiLogin } from "react-icons/ci";
 import "./Navebar.css";
 import Search from "../Search/Search";
+import { APIContext } from "../../../contexts/APIProvider";
 //
 const Navbar = () => {
   const { user, logoutUserAccount } = useContext(AuthContext);
+  const { isDarkMode, setIsDarkMode } = useContext(APIContext);
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+  };
   const handleLogOut = () => {
     logoutUserAccount()
       .then(() => {
@@ -26,6 +31,40 @@ const Navbar = () => {
         toast.error(err.message);
       });
   };
+
+  const lightIcon = (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={1.5}
+      stroke="currentColor"
+      className="w-6 h-6"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"
+      />
+    </svg>
+  );
+  const darkIcon = (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={1.5}
+      stroke="currentColor"
+      className="w-6 h-6"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"
+      />
+    </svg>
+  );
+
   const writeIcon = (
     // writeIcon
     <svg
@@ -160,45 +199,18 @@ const Navbar = () => {
       {user?.uid ? (
         <div className="navbar">
           <div className="navbar-start">
-            <div className="flex gap-2">
+            <div className="flex gap-2 items-center">
               <NavLink to="/" className="text-2xl font-medium">
                 <img className="w-56" src={whiteScreen} alt="" />
               </NavLink>
-
               <Search />
-
-              {/* <form className="hidden md:block">
-                <div className="relative mt-4 text-gray-600 focus-within:text-gray-400">
-                  <span className="absolute inset-y-0 left-0 flex items-center pl-2">
-                    <button
-                      type="submit"
-                      className="p-1 focus:outline-none focus:shadow-outline"
-                    >
-                      <svg
-                        fill="none"
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        viewBox="0 0 24 24"
-                        className="w-6 h-6"
-                      >
-                        <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                      </svg>
-                    </button>
-                  </span>
-                  <input
-                    type="search"
-                    name="q"
-                    className="py-2 text-sm text-gray-900 border rounded-3xl pl-10 focus:outline-none focus:bg-white focus:text-gray-900"
-                    placeholder="Search Freemium"
-                    autoComplete="off"
-                  />
-                </div>
-              </form> */}
             </div>
           </div>
-          <div className="navbar-end">
+          <div className="navbar-end gap-2 items-center">
+            <button onClick={toggleDarkMode} className="">
+              {isDarkMode ? lightIcon : darkIcon}
+            </button>
+
             <div className="hidden lg:block">
               <NavLink
                 className="flex gap-2 text-gray-900 hover:text-black"
@@ -207,6 +219,8 @@ const Navbar = () => {
                 {writeIcon} Write
               </NavLink>
             </div>
+
+            {/* notification Section */}
             <button className="btn btn-ghost btn-circle">
               <div className="indicator">
                 {/* notification svg icon */}
@@ -245,6 +259,16 @@ const Navbar = () => {
                 border-[1px] border-[#e4e0e0]
                 "
               >
+                <li>
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive ? "text-sky-600 bg-none hover:bg-none" : ""
+                    }
+                    to="/dashboard"
+                  >
+                    <AiOutlineDashboard /> Dashboard
+                  </NavLink>
+                </li>
                 <li className="justify-between bg-white text-black text-lg font-semibold text-semibold">
                   <NavLink to="/profile">
                     <CgProfile className="text-lg" />
@@ -341,13 +365,16 @@ const Navbar = () => {
               </ul>
             </div>
             <NavLink to="/" className="text-2xl font-medium">
-              <img className="w-44" src={whiteScreen} alt="" />
+              <img className="w-32 md:w-44" src={whiteScreen} alt="" />
             </NavLink>
           </div>
           <div className="flex items-center gap-7">
             <div className="hidden lg:flex">
               <ul className="flex items-center gap-7">{navItemNotUser}</ul>
             </div>
+            <button onClick={toggleDarkMode} className="">
+              {isDarkMode ? lightIcon : darkIcon}
+            </button>
             <NavLink
               to="/login"
               className="bg-black py-2 px-3 text-gray-100 rounded-3xl"

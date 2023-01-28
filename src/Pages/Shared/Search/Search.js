@@ -15,10 +15,6 @@ function Search() {
     const data = await res.json();
     setSearchResults(data);
   };
-  if (!searchResults) {
-    return <Spinner />;
-  }
-  console.log(searchResults);
   return (
     <>
       <form onSubmit={handleSubmit} className="hidden md:block">

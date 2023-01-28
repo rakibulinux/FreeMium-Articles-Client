@@ -5,7 +5,7 @@ export const APIContext = createContext();
 
 const APIProvider = ({ children }) => {
   const [searchResults, setSearchResults] = useState([]);
-
+  const [isDarkMode, setIsDarkMode] = useState(false);
   const {
     data: categoryButton,
     isLoading: isCategoryLoading,
@@ -33,7 +33,9 @@ const APIProvider = ({ children }) => {
       return data;
     },
   });
-
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+  };
   const apiInfo = {
     categoryButton,
     isCategoryLoading,
@@ -43,6 +45,9 @@ const APIProvider = ({ children }) => {
     articlesRefetch,
     searchResults,
     setSearchResults,
+    isDarkMode,
+    setIsDarkMode,
+    toggleDarkMode,
   };
   return <APIContext.Provider value={apiInfo}>{children}</APIContext.Provider>;
 };

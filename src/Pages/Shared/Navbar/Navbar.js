@@ -13,6 +13,7 @@ import { MdAmpStories } from "react-icons/md";
 import { GiNetworkBars } from "react-icons/gi";
 import { CiLogin } from "react-icons/ci";
 import "./Navebar.css";
+import Search from "../Search/Search";
 //
 const Navbar = () => {
   const { user, logoutUserAccount } = useContext(AuthContext);
@@ -97,17 +98,15 @@ const Navbar = () => {
 
       <hr className="text-gray-400 shadow-2xl my-2" />
       <li className="justify-between bg-white text-black text-normal font-semibold py-1">
-        <>
-          <button
-            onClick={handleLogOut}
-            className="text-gray-900 hover:text-gray-600 flex items-center"
-          >
-            <CiLogin className="text-xl font-semibold mr-3" />
-            <NavLink className="text-gray-900 border-animate" to="/login">
-              Sign In
-            </NavLink>
-          </button>
-        </>
+        <button
+          // onClick={handleLogOut}
+          className="text-gray-900 hover:text-gray-600 flex items-center"
+        >
+          <CiLogin className="text-xl font-semibold mr-3" />
+          <NavLink className="text-gray-900 border-animate" to="/login">
+            Sign In
+          </NavLink>
+        </button>
       </li>
     </>
   );
@@ -161,12 +160,14 @@ const Navbar = () => {
       {user?.uid ? (
         <div className="navbar">
           <div className="navbar-start">
-
             <div className="flex gap-2">
               <NavLink to="/" className="text-2xl font-medium">
                 <img className="w-56" src={whiteScreen} alt="" />
               </NavLink>
-              <form className="hidden md:block">
+
+              <Search />
+
+              {/* <form className="hidden md:block">
                 <div className="relative mt-4 text-gray-600 focus-within:text-gray-400">
                   <span className="absolute inset-y-0 left-0 flex items-center pl-2">
                     <button
@@ -194,7 +195,7 @@ const Navbar = () => {
                     autoComplete="off"
                   />
                 </div>
-              </form>
+              </form> */}
             </div>
           </div>
           <div className="navbar-end">
@@ -245,20 +246,14 @@ const Navbar = () => {
                 "
               >
                 <li className="justify-between bg-white text-black text-lg font-semibold text-semibold">
-
                   <NavLink to="/profile">
-
                     <CgProfile className="text-lg" />
                     Profile
                   </NavLink>
                 </li>
                 <li className="justify-between bg-white text-black text-lg font-semibold text-semibold">
-
-                  <NavLink
-                    to="/list"
-                  >
+                  <NavLink to="/list">
                     <BsBookmarksFill className="text-lg" />
-
                     List
                   </NavLink>
                 </li>
@@ -277,68 +272,46 @@ const Navbar = () => {
 
                 <div className="divider"></div>
                 <li className="">
-                  <NavLink
-                    to="/settings"
-                  >
-
-
-                    Settings
-                  </NavLink>
+                  <NavLink to="/settings">Settings</NavLink>
                 </li>
                 <li className="">
-                  <NavLink
-                    to="/refineRecommendations"
-                  >
-
+                  <NavLink to="/refineRecommendations">
                     Refine recommendations
                   </NavLink>
                 </li>
                 <li className="">
-                  <NavLink
-                    to="/"
-                  >
-
-                    Manage publications
-                  </NavLink>
+                  <NavLink to="/">Manage publications</NavLink>
                 </li>
                 <div className="divider"></div>
                 <li className="">
-                  <NavLink
-                    to="/payment">
-                    Become a member
-                  </NavLink>
+                  <NavLink to="/payment">Become a member</NavLink>
                 </li>
                 <li className="">
-                  <NavLink
-                    to="/applyToThePartnerProgram">
+                  <NavLink to="/applyToThePartnerProgram">
                     Apply to the Partner Program
                   </NavLink>
                 </li>
                 <li className="">
-                  <NavLink
-                    to="/giftMembership">
-                    Gift membership
-
-                  </NavLink>
+                  <NavLink to="/giftMembership">Gift membership</NavLink>
                 </li>
                 <div className="divider"></div>
                 <li className="justify-between bg-white text-black text-lg font-semibold">
                   <>
-
                     <button
                       onClick={handleLogOut}
                       className="text-red-500 hover:text-red-600"
                     >
                       <AiOutlineLogout className="text-lg" /> Sign out
-                      
                     </button>
-                    <p className="text-red-500 hover:text-red-600">{user?.email}</p>
+                    <p className="text-red-500 hover:text-red-600">
+                      {user?.email}
+                    </p>
                   </>
-                </li >
-              </ul >
-            </div >
-          </div >
-        </div >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
       ) : (
         <div className="navbar justify-between items-center">
           <div className="">
@@ -384,7 +357,7 @@ const Navbar = () => {
           </div>
         </div>
       )}
-    </div >
+    </div>
   );
 };
 

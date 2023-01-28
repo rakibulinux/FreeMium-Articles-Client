@@ -29,6 +29,7 @@ import ApplyToThePartnerProgram from "../Pages/UserProfileMenu/ApplyToThePartner
 
 import SelectCategorySection from "./../Pages/SelectCategoryPage/SelectCategorySection/SelectCategorySection";
 import GiftMembership from "../Pages/UserProfileMenu/GiftMembership/GiftMembership";
+import Search from "../Pages/Shared/Search/Search";
 
 const router = createBrowserRouter([
   {
@@ -103,6 +104,10 @@ const router = createBrowserRouter([
       {
         path: "/our-story",
         element: <OurStory></OurStory>,
+      },
+      {
+        path: "/search",
+        element: <Search></Search>,
       },
       {
         path: "/view-story/:id",

@@ -6,8 +6,8 @@ import Manubar from "../AfterLoginHadBanar/Manubar/Manubar";
 import HomeHadBanar from "../HomeHadBanar";
 import { AuthContext } from "./../../../contexts/AuthProvider";
 import "./Home.css";
-import SideCategory from './../../sideCategory/SideCategory';
-import Articles from './../../articlesSection/Articles';
+import SideCategory from './../../SideCategory/SideCategory';
+import Articles from './../../ArticlesSection/Articles';
 const Home = () => {
   const { user } = useContext(AuthContext);
   return (
@@ -48,11 +48,13 @@ const Home = () => {
             </div>
           </div> */}
         </div>
-      ) : (
+      ) 
+      : 
+      (
         // before log in user UI
         <>
           <HomeHadBanar />
-          <div className="lg:grid grid-rows-1 md:grid-cols-3 gap-4 mt-3 mt-0">
+          <div className="lg:grid grid-rows-1 md:grid-cols-3 gap-4 mt-3 lg:mt-0">
             <section className="col-span-2 sm:order-last md:order-first">
               <Articles />
             </section>

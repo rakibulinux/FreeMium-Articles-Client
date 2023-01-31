@@ -11,11 +11,13 @@ import { useEffect } from "react";
 import FollowButton from "../../FollowButton/FollowButton";
 import GetUnlimitedAccessButton from "../../../components/GetUnlimitedAccessButton/GetUnlimitedAccessButton";
 import SubscribButton from './../SubscribButton/SubscribButton';
+import { APIContext } from "../../../contexts/APIProvider";
 const ArticlesDetails = () => {
   // const [showFollow, setShowFollow] = useState(true);
   const [users, setUsers] = useState({});
   const articleData = useLoaderData();
   const { user } = useContext(AuthContext);
+  const { isDarkMode } = useContext(APIContext);
   
   const { writerImg, writerName, articleTitle, articleImg, userId, userEmail } =
     articleData;
@@ -52,8 +54,8 @@ const ArticlesDetails = () => {
               </div>
             </div>
             {/* avater end */}
-            <h2 className="lg:card-title text-sm text-gray-900 font-bold">{writerName}</h2>
-            <p className="text-font-semibold text-gray-900">{users?.following?.length} Followers</p>
+            <h2 className={isDarkMode ?"lg:card-title text-sm text-gray-300 font-bold":"lg:card-title text-sm text-gray-900 font-bold"}>{writerName}</h2>
+            <p className={isDarkMode ?"text-font-semibold text-gray-200":"text-font-semibold text-gray-900"}>{users?.following?.length} Followers</p>
             <p className="text-sm">
               Aussie Blogger with 500M+ views — Writer for CNBC & Business
               Insider. Inspiring the world through Personal Development and
@@ -88,7 +90,7 @@ const ArticlesDetails = () => {
           </div>
           {/* more form section */}
           <div className="">
-            <h1 className="text-xl font-semibold text-black">
+            <h1 className={isDarkMode ?"text-xl font-semibold text-gray-300":"text-xl font-semibold text-black"}>
               More form Freemium
             </h1>
             {/* dremo writter card */}

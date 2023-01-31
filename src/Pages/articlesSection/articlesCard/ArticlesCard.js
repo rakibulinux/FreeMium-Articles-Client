@@ -2,9 +2,11 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthProvider";
 import Spinner from "../../../components/Spinner/Spinner";
+import { APIContext } from './../../../contexts/APIProvider';
 
 const ArticlesCard = ({ data }) => {
   const { loading } = useContext(AuthContext);
+  const { isDarkMode } = useContext(APIContext);
   const {
     articleDetails,
     articleRead,

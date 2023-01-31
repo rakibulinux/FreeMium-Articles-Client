@@ -6,8 +6,10 @@ import {
   ShareIcon,
 } from "@heroicons/react/24/solid";
 import React from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import DemoWritter from "../../../Home/DemoWritter";
+import { APIContext } from './../../../../contexts/APIProvider';
 
 const ArticleDetailsCard = ({ articleData }) => {
   const {
@@ -18,6 +20,7 @@ const ArticleDetailsCard = ({ articleData }) => {
     writerImg,
     writerName,
   } = articleData;
+  const {isDarkMode} = useContext(APIContext);
   return (
     <div>
       {/* card */}
@@ -32,24 +35,24 @@ const ArticleDetailsCard = ({ articleData }) => {
             />
 
             <div className="ml-3">
-              <h3 className="text-lg font-medium text-black">{writerName}</h3>
+              <h3 className={isDarkMode ?"text-lg font-medium text-white":"text-lg font-medium text-black"}>{writerName}</h3>
 
               <div className="flow-root">
                 <ul className="-m-1 flex flex-wrap">
                   <li className="p-1 leading-none">
-                    <span className="text-xs font-medium text-gray-600">
+                    <span className={isDarkMode ?"text-xs font-medium text-gray-300":"text-xs font-medium text-gray-600"}>
                       {articleSubmitDate}
                     </span>
                   </li>
 
                   <li className="p-1 leading-none">
-                    <span className="text-xs font-medium text-gray-600">
+                    <span className={isDarkMode ?"text-xs font-medium text-gray-300":"text-xs font-medium text-gray-600"}>
                       {articleRead} min read
                     </span>
                   </li>
 
                   <li className="p-1 leading-none">
-                    <span className="text-xs font-medium text-gray-600">
+                    <span className={isDarkMode ?"text-xs font-medium text-gray-300":"text-xs font-medium text-gray-600"}>
                       Member-only
                     </span>
                   </li>
@@ -65,7 +68,7 @@ const ArticleDetailsCard = ({ articleData }) => {
                 href="/"
                 rel="noreferrer"
                 target="_blank"
-                className="text-gray-500 transition hover:text-black"
+                className={isDarkMode ?"text-gray-200 transition hover:text-gray-300":"text-gray-500 transition hover:text-black"}
               >
                 <span className="sr-only">Facebook</span>
 
@@ -89,7 +92,7 @@ const ArticleDetailsCard = ({ articleData }) => {
                 href="/"
                 rel="noreferrer"
                 target="_blank"
-                className="text-gray-500 transition hover:text-black"
+                className={isDarkMode ?"text-gray-200 transition hover:text-gray-300":"text-gray-500 transition hover:text-black"}
               >
                 <span className="sr-only">Instagram</span>
 
@@ -113,7 +116,7 @@ const ArticleDetailsCard = ({ articleData }) => {
                 href="/"
                 rel="noreferrer"
                 target="_blank"
-                className="text-gray-500 transition hover:text-black"
+                className={isDarkMode ?"text-gray-200 transition hover:text-gray-300":"text-gray-500 transition hover:text-black"}
               >
                 <span className="sr-only">Twitter</span>
 
@@ -129,7 +132,7 @@ const ArticleDetailsCard = ({ articleData }) => {
             </li>
 
             <li>
-              <a href="/" className="text-gray-500 transition hover:text-black">
+              <a href="/" className={isDarkMode ?"text-gray-200 transition hover:text-gray-300":"text-gray-500 transition hover:text-black"}>
                 <LinkIcon className="h-6 w-6  text-gray " />
               </a>
             </li>
@@ -139,7 +142,7 @@ const ArticleDetailsCard = ({ articleData }) => {
                 href="/"
                 rel="noreferrer"
                 target="_blank"
-                className="text-gray-500 transition hover:text-black text-xl"
+                className={isDarkMode ?"text-gray-200 transition hover:text-gray-300":"text-gray-500 transition hover:text-black"}
               >
                 ...
               </a>
@@ -151,7 +154,7 @@ const ArticleDetailsCard = ({ articleData }) => {
 
         <div className="mt-4 space-y-2">
           <h1
-            className="text-3xl font-bold  text-black"
+            className={isDarkMode ?"text-3xl font-bold  text-white":"text-3xl font-bold  text-black"}
             dangerouslySetInnerHTML={{ __html: articleTitle }}
           />
           <div dangerouslySetInnerHTML={{ __html: articleDetails }} />
@@ -161,13 +164,13 @@ const ArticleDetailsCard = ({ articleData }) => {
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 mt-5">
             <div className="">
               {/* <p className="text-xs text-left text-gray-500"> */}
-              <button className="text-gray-500 hover:text-black ">
+              <button className={isDarkMode ?"text-gray-300 hover:text-gray-200":"text-gray-500 hover:text-black "}>
                 <Link to="/" className=" ">
                   <LanguageIcon className="h-6 w-6  text-gray " />
                 </Link>
               </button>
               {/* </p> */}
-              <button className="text-gray-500 hover:text-black ml-6">
+              <button className={isDarkMode ?"text-gray-300 hover:text-black ml-6":"text-gray-500 hover:text-black ml-6"}>
                 <Link to="/" className=" ">
                   <HomeIcon className="h-6 w-6  text-gray " />
                 </Link>
@@ -179,7 +182,7 @@ const ArticleDetailsCard = ({ articleData }) => {
                 <li>
                   <a
                     href="/"
-                    className="text-gray-500 transition hover:opacity-75"
+                    className={isDarkMode ?"text-gray-300 transition hover:opacity-75":"text-gray-500 transition hover:opacity-75"}
                   >
                     <ShareIcon className="h-6 w-6  text-gray " />
                   </a>
@@ -188,7 +191,7 @@ const ArticleDetailsCard = ({ articleData }) => {
                 <li>
                   <a
                     href="/"
-                    className="text-gray-500 transition hover:opacity-75"
+                    className={isDarkMode ?"text-gray-300 transition hover:opacity-75":"text-gray-500 transition hover:opacity-75"}
                   >
                     <LinkIcon className="h-6 w-6  text-gray " />
                   </a>
@@ -197,7 +200,7 @@ const ArticleDetailsCard = ({ articleData }) => {
                 <li>
                   <a
                     href="/"
-                    className="text-gray-500 transition hover:opacity-75"
+                    className={isDarkMode ?"text-gray-300 transition hover:opacity-75":"text-gray-500 transition hover:opacity-75"}
                   >
                     <MoonIcon className="h-6 w-6  text-gray " />
                   </a>

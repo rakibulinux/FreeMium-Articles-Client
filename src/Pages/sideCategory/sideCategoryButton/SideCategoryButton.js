@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const SideCategoryButton = ({ category }) => {
-  const { CategoryName, _id } = category;
+  const { CategoryName } = category;
   return (
     <div className="text-center">
       <Link to={`/category/${CategoryName}`}>

@@ -3,7 +3,7 @@ import GrowAudienceText from './GrowAudienceText/GrowAudienceText';
 
 const GrowAudience = () => {
     return (
-        <div className='bg-[#FFFFFF] my-20'>
+        <div className='bg-[#FFFFFF] mt-0'>
             <GrowAudienceText />
         </div>
     );

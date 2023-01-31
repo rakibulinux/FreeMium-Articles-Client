@@ -8,8 +8,8 @@ const Stats = () => {
         <div className='container mx-auto'>
             <div className="alert ">
                 <div>
-                    <FaTwitter className='text-info'/>
-           
+                    <FaTwitter className='text-info' />
+
                     <h3 className=""><span className='link'>Connect with Twitter</span> to let your followers find you on FreeMium.</h3>
                 </div>
                 <div className="flex-none">
@@ -22,7 +22,7 @@ const Stats = () => {
             </div>
             <div className='flex justify-between mt-5'>
                 <h1 className=''>Click story below to view detailed stats</h1>
-                <a className='link'>Learn more about using stats</a>
+                <Link className='link'>Learn more about using stats</Link>
             </div>
         </div>
     );

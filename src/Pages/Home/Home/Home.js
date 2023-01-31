@@ -6,7 +6,8 @@ import AfterLoginHadBanar from "../AfterLoginHadBanar/AfterLoginHadBanar";
 import Manubar from "../AfterLoginHadBanar/Manubar/Manubar";
 import HomeHadBanar from "../HomeHadBanar";
 import { AuthContext } from "./../../../contexts/AuthProvider";
-import Articles from './../../articlesSection/Articles';
+import Articles from './../../ArticlesSection/Articles';
+
 import "./Home.css";
 const Home = () => {
   const { user } = useContext(AuthContext);
@@ -18,6 +19,7 @@ const Home = () => {
             <section className="col-span-2 sm:order-last md:order-first">
               <AfterLoginHadBanar />
               <Manubar />
+             {/* <Articles></Articles> */}
              <Articles></Articles>
             </section>
             <aside className="mt-8">
@@ -51,18 +53,18 @@ const Home = () => {
         // before log in user UI
         <>
           <HomeHadBanar />
-          <div className="grid sm:grid-rows-1 md:grid-cols-3 gap-4">
+          <div className="lg:grid grid-rows-1 md:grid-cols-3 gap-4 mt-3 ">
             <section className="col-span-2 sm:order-last md:order-first">
               <Articles />
             </section>
-            <aside className="">
+            <div className="text-center w-full">
               <Link to="/payment">
                 <button className="bg-black text-white rounded-3xl py-3 px-2 w-9/12">
                   Get unlimited access
                 </button>
               </Link>
               <SideCategory />
-            </aside>
+            </div>
           </div>
         </>
       )}

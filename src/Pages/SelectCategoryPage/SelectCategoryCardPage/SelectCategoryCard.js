@@ -1,10 +1,8 @@
-import React, { useContext } from 'react';
-import { AuthContext } from './../../../contexts/AuthProvider';
-import { Link } from 'react-router-dom';
-import Spinner from './../../../components/Spinner/Spinner';
+import React from "react";
+import { Link } from "react-router-dom";
 
-const SelectCategoryCard = ({data}) => {
-    const { loading } = useContext(AuthContext);
+const SelectCategoryCard = ({ data }) => {
+  // const { loading } = useContext(AuthContext);
   const {
     articleDetails,
     articleRead,
@@ -19,47 +17,50 @@ const SelectCategoryCard = ({data}) => {
     articleDetails?.length > 170
       ? articleDetails?.slice(0, 170) + "..."
       : articleDetails;
-//   if (loading) {
-//     return <Spinner />;
-//   }
-    return (
-        <>
-        <Link to={`/view-story/${_id}`}>
-          <div className="my-7 w-full mx-auto bg-white rounded-xl shadow-md">
-            <div className="card-body md:flex">
-              <div className="flex items-center">
-                {/* blog auther img */}
-                <img className="rounded-full w-10 h-10" src={writerImg} alt="" />
-                <h3 className="ml-2 font-bold text-gray-900">{writerName}</h3>
-              </div>
-              <div className="lg:grid flex flex-col-reverse lg:flex-row" style={{ gridTemplateColumns: "4fr 2fr" }}>
-                <div>
-                  <h1
-                    className="text-2xl font-semibold text-gray-800"
-                    dangerouslySetInnerHTML={{ __html: articleTitle }}
-                  />
-                  {/* {articleTitle}
+  //   if (loading) {
+  //     return <Spinner />;
+  //   }
+  return (
+    <>
+      <Link to={`/view-story/${_id}`}>
+        <div className="my-7 w-full mx-auto bg-white rounded-xl shadow-md">
+          <div className="card-body md:flex">
+            <div className="flex items-center">
+              {/* blog auther img */}
+              <img className="rounded-full w-10 h-10" src={writerImg} alt="" />
+              <h3 className="ml-2 font-bold text-gray-900">{writerName}</h3>
+            </div>
+            <div
+              className="lg:grid flex flex-col-reverse lg:flex-row"
+              style={{ gridTemplateColumns: "4fr 2fr" }}
+            >
+              <div>
+                <h1
+                  className="text-2xl font-semibold text-gray-800"
+                  dangerouslySetInnerHTML={{ __html: articleTitle }}
+                />
+                {/* {articleTitle}
                   </h1> */}
-                  <div dangerouslySetInnerHTML={{ __html: descriptionSlice }} />
-                </div>
-                {/* blog right img */}
-                <div className="flex justify-center items-center p-2 ">
-                  <img className="" src={articleImg} alt="" />
-                </div>
+                <div dangerouslySetInnerHTML={{ __html: descriptionSlice }} />
               </div>
-              <div className="flex items-center">
-                <span className="block text-gray-700 font-semibold">
-                  {articleSubmitDate}
-                </span>
-                <span className="block ml-3 text-red-500 font-semibold">
-                  {articleRead}-read
-                </span>
+              {/* blog right img */}
+              <div className="flex justify-center items-center p-2 ">
+                <img className="" src={articleImg} alt="" />
               </div>
             </div>
+            <div className="flex items-center">
+              <span className="block text-gray-700 font-semibold">
+                {articleSubmitDate}
+              </span>
+              <span className="block ml-3 text-red-500 font-semibold">
+                {articleRead}-read
+              </span>
+            </div>
           </div>
-        </Link>
-      </>
-    );
+        </div>
+      </Link>
+    </>
+  );
 };
 
 export default SelectCategoryCard;

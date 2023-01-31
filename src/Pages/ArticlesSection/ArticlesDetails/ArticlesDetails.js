@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useLoaderData } from "react-router-dom";
-import ArticleDetailsCard from "./articleDetailsCard/ArticleDetailsCard";
+import ArticleDetailsCard from "./ArticleDetailsCard/ArticleDetailsCard";
 
 
 import { useContext } from "react";
@@ -29,7 +29,7 @@ const ArticlesDetails = () => {
     return <Spinner />;
   }
   return (
-    <div className="border-t-2">
+    <div className="border-t-2 w-11/12 mx-auto">
       <div className="container mx-auto grid lg:grid-cols-3 sm:grid-cols-1">
         {/* left side content */}
         <div className=" border-r-2 col-span-2  ">

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
-function FollowButton({ user, users, userId, followingId, unfollowingId }) {
+function FollowButton({ user, userId, followingId, userEmail, unfollowingId }) {
   const [isFollowing, setIsFollowing] = useState(false);
 
   useEffect(() => {
@@ -10,7 +10,7 @@ function FollowButton({ user, users, userId, followingId, unfollowingId }) {
         `${process.env.REACT_APP_API_URL}/users/${userId}/following/${user?.email}`
       )
       .then((res) => {
-        setIsFollowing(res?.data?.isFollowing);
+        setIsFollowing(res.data.isFollowing);
       });
   }, [userId, user?.email]);
 
@@ -37,6 +37,10 @@ function FollowButton({ user, users, userId, followingId, unfollowingId }) {
         toast.success(`${followingId} Successfully unfollowed user`);
       });
   };
+
+  // if (!userId) {
+  //   return <Spinner />;
+  // }
 
   return (
     <div>

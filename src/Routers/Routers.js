@@ -15,9 +15,6 @@ import Settings from "../Pages/UserProfileMenu/Settings/Settings";
 import WriteStories from "../Pages/WriteStories/WriteStories";
 import AdminRoute from "./AdminRoute";
 import PrivateRoute from "./PrivateRoute";
-
-import ArticlesDetails from './../Pages/articlesSection/articlesDetails/ArticlesDetails';
-
 import Stories from "../Pages/UserProfileMenu/Stories/Stories";
 import Stats from '../Pages/UserProfileMenu/Stats/Stats';
 import List from "../Pages/UserProfileMenu/Lists/List";
@@ -26,8 +23,9 @@ import PaymentSuccess from "../Pages/Payment/PaymentSuccess/PaymentSuccess";
 import MemberShipPage from './../Pages/CreatorPage/MemberShipPage';
 import RefineRecommendations from "../Pages/UserProfileMenu/RefineRecommendations/RefineRecommendations";
 import ApplyToThePartnerProgram from "../Pages/UserProfileMenu/ApplyToThePartnerProgram/ApplyToThePartnerProgram";
-import SelectCategory from './../Pages/SelectCategoryPage/SelectCategory';
+
 import SelectCategorySection from './../Pages/SelectCategoryPage/SelectCategorySection/SelectCategorySection';
+import ArticlesDetails from "../Pages/articlesSection/articlesDetails/ArticlesDetails";
 
 const router = createBrowserRouter([
   {
@@ -103,7 +101,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/view-story/:id",
-        element: <ArticlesDetails />,
+        element: <ArticlesDetails></ArticlesDetails>,
         loader: async ({ params }) =>
           await fetch(
             `${process.env.REACT_APP_API_URL}/view-story/${params.id}`

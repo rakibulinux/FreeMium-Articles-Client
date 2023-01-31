@@ -1,11 +1,12 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import Articles from "../../articlesSection/Articles";
+
 import SideCategory from "../../sideCategory/SideCategory";
 import AfterLoginHadBanar from "../AfterLoginHadBanar/AfterLoginHadBanar";
 import Manubar from "../AfterLoginHadBanar/Manubar/Manubar";
 import HomeHadBanar from "../HomeHadBanar";
 import { AuthContext } from "./../../../contexts/AuthProvider";
+import Articles from './../../articlesSection/Articles';
 import "./Home.css";
 const Home = () => {
   const { user } = useContext(AuthContext);
@@ -17,7 +18,7 @@ const Home = () => {
             <section className="col-span-2 sm:order-last md:order-first">
               <AfterLoginHadBanar />
               <Manubar />
-              <Articles />
+             <Articles></Articles>
             </section>
             <aside className="mt-8">
               <Link to="/payment">

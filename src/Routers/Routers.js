@@ -16,21 +16,20 @@ import WriteStories from "../Pages/WriteStories/WriteStories";
 import AdminRoute from "./AdminRoute";
 import PrivateRoute from "./PrivateRoute";
 
-import ArticlesDetails from './../Pages/articlesSection/articlesDetails/ArticlesDetails';
+import ArticlesDetails from "./../Pages/ArticlesSection/ArticlesDetails/ArticlesDetails";
 
 import Stories from "../Pages/UserProfileMenu/Stories/Stories";
-import Stats from '../Pages/UserProfileMenu/Stats/Stats';
+import Stats from "../Pages/UserProfileMenu/Stats/Stats";
 import List from "../Pages/UserProfileMenu/Lists/List";
 import OurStory from "../Pages/OurStory/OurStory";
 import PaymentSuccess from "../Pages/Payment/PaymentSuccess/PaymentSuccess";
-import MemberShipPage from './../Pages/CreatorPage/MemberShipPage';
+import MemberShipPage from "./../Pages/CreatorPage/MemberShipPage";
 import RefineRecommendations from "../Pages/UserProfileMenu/RefineRecommendations/RefineRecommendations";
 import ApplyToThePartnerProgram from "../Pages/UserProfileMenu/ApplyToThePartnerProgram/ApplyToThePartnerProgram";
 
-import SelectCategorySection from './../Pages/SelectCategoryPage/SelectCategorySection/SelectCategorySection';
+import SelectCategorySection from "./../Pages/SelectCategoryPage/SelectCategorySection/SelectCategorySection";
 import GiftMembership from "../Pages/UserProfileMenu/GiftMembership/GiftMembership";
-
-
+import Search from "../Pages/Shared/Search/Search";
 
 const router = createBrowserRouter([
   {
@@ -88,9 +87,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/payment",
-        element: <PrivateRoute>
-                 <PaymentForm></PaymentForm>
-                  </PrivateRoute> ,
+        element: (
+          <PrivateRoute>
+            <PaymentForm></PaymentForm>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/success",
@@ -103,6 +104,10 @@ const router = createBrowserRouter([
       {
         path: "/our-story",
         element: <OurStory></OurStory>,
+      },
+      {
+        path: "/search",
+        element: <Search></Search>,
       },
       {
         path: "/view-story/:id",
@@ -132,9 +137,9 @@ const router = createBrowserRouter([
         path: "/category/:categoryName",
         element: <SelectCategorySection />,
         loader: async ({ params }) =>
-        await fetch(
-          `${process.env.REACT_APP_API_URL}/category/${params.categoryName}`
-        ),
+          await fetch(
+            `${process.env.REACT_APP_API_URL}/category/${params.categoryName}`
+          ),
       },
       {
         path: "/stats",
@@ -164,7 +169,7 @@ const router = createBrowserRouter([
         path: "/giftMembership",
         element: (
           <PrivateRoute>
-        <GiftMembership></GiftMembership>
+            <GiftMembership></GiftMembership>
           </PrivateRoute>
         ),
       },

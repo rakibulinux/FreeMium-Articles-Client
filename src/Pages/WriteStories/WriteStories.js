@@ -57,7 +57,7 @@ const WriteStories = ({ userDetails }) => {
             articleTitle: title,
             articleSubmitDate: date,
             articleRead: number,
-            articleImg: imgData.data.url,
+            articleImg: imgData?.data?.url,
             category,
           };
 

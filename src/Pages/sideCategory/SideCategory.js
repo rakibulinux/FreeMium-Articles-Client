@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import Spinner from "../../components/Spinner/Spinner";
 import { APIContext } from "../../contexts/APIProvider";
 import { AuthContext } from "../../contexts/AuthProvider";
-import SideCategoryButton from "./sideCategoryButton/SideCategoryButton";
+import SideCategoryButton from "./SideCategoryButton/SideCategoryButton";
 import StaffPicks from "./StaffPicks";
 import WhoToFollow from "./WhoToFollow";
 
@@ -16,7 +16,6 @@ const SideCategory = () => {
   return (
     <div className="lg:sticky lg:top-0">
       {user && <StaffPicks></StaffPicks>}
-
       <div className={user?.uid ? "hidden" : "mt-5"}>
         <p className="text-base font-semibold text-gray-800 my-3 lg:ml-0">
           DISCOVER MORE OF WHAT MATTERS TO YOU

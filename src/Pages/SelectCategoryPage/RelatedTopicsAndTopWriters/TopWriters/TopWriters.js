@@ -1,7 +1,7 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
-import TopWritersCard from './TopWritersCard/TopWritersCard';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { useState, useEffect } from "react";
+import TopWritersCard from "./TopWritersCard/TopWritersCard";
+import { Link } from "react-router-dom";
 
 const TopWriters = () => {
     const [user, setUser] = useState([]);

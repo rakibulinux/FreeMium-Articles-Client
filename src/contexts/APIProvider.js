@@ -1,8 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { createContext } from "react";
+import React, { createContext, useState } from "react";
 
 export const APIContext = createContext();
+
 const APIProvider = ({ children }) => {
+  const [searchResults, setSearchResults] = useState([]);
+  const [isDarkMode, setIsDarkMode] = useState(false);
   const {
     data: categoryButton,
     isLoading: isCategoryLoading,
@@ -23,14 +26,16 @@ const APIProvider = ({ children }) => {
     isLoading: articlesLoading,
     refetch: articlesRefetch,
   } = useQuery({
-    queryKey: ["allArticles"],
+    queryKey: ["allArticles", searchResults],
     queryFn: async () => {
       const res = await fetch(`${process.env.REACT_APP_API_URL}/allArticles`);
-      const data = res.json();
+      const data = await res.json();
       return data;
     },
   });
-
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+  };
   const apiInfo = {
     categoryButton,
     isCategoryLoading,
@@ -38,6 +43,11 @@ const APIProvider = ({ children }) => {
     articles,
     articlesLoading,
     articlesRefetch,
+    searchResults,
+    setSearchResults,
+    isDarkMode,
+    setIsDarkMode,
+    toggleDarkMode,
   };
   return <APIContext.Provider value={apiInfo}>{children}</APIContext.Provider>;
 };

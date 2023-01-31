@@ -16,6 +16,7 @@ import "./Navebar.css";
 //
 const Navbar = () => {
   const { user, logoutUserAccount } = useContext(AuthContext);
+  // console.log(user);
   const handleLogOut = () => {
     logoutUserAccount()
       .then(() => {
@@ -328,11 +329,12 @@ const Navbar = () => {
                     <button
                       onClick={handleLogOut}
                       className="text-red-500 hover:text-red-600"
+                      title={`${user?.displayName} you want to sign out`}
                     >
                       <AiOutlineLogout className="text-lg" /> Sign out
                       
                     </button>
-                    <p className="text-red-500 hover:text-red-600">{user?.email}</p>
+                    {/* <p className="text-red-500 hover:text-red-600">{user?.email}</p> */}
                   </>
                 </li >
               </ul >

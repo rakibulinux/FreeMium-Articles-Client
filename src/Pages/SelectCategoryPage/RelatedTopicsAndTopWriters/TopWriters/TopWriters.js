@@ -16,7 +16,7 @@ const TopWriters = () => {
             {
                 user.map(userData=> <TopWritersCard writerData={userData} key={userData?._id} />)
             }
-            <Link to={''} className='mt-5 block ml-3 lg:ml-5'>
+            <Link to={''} className='mt-7 lg:mt-5 block text-center lg:text-left lg:ml-5'>
 <span className='text-[#1A8917] font-semibold'>See-more</span>
             </Link>
         </div>

@@ -1,4 +1,5 @@
 import React from 'react';
+import GetUnlimitedAccessButton from './../../../components/GetUnlimitedAccessButton/GetUnlimitedAccessButton';
 
 const SliderPage = () => {
     return (
@@ -6,6 +7,7 @@ const SliderPage = () => {
             <div className='text-center py-20'>
                 <h1 className='text-5xl lg:text-8xl font-semibold text-white'>Fuel great thinking.</h1>
                 <p className='text-lg font-semibold text-gray-200 my-5'>Become a Medium member to enjoy unlimited access and <br /> directly support the writers you read most.</p>
+                {/* <GetUnlimitedAccessButton text={"Get unlimited access"} /> */}
                 <button className="btn bg-white hover:bg-[#4479FF] hover:text-white text-xl text-gray-900 border-0 hover:border-2 hover:border-slate-200 w-72 btn-accent">get unlimited access</button>
             </div>
                 <hr className='text-white' />

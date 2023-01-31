@@ -9,6 +9,7 @@ import { useState } from "react";
 import Spinner from "../../../components/Spinner/Spinner";
 import { useEffect } from "react";
 import FollowButton from "../../FollowButton/FollowButton";
+import GetUnlimitedAccessButton from "../../../components/GetUnlimitedAccessButton/GetUnlimitedAccessButton";
 const ArticlesDetails = () => {
   // const [showFollow, setShowFollow] = useState(true);
   const [users, setUsers] = useState({});
@@ -28,38 +29,36 @@ const ArticlesDetails = () => {
     return <Spinner />;
   }
   return (
-    <div className="border-t-2 w-11/12 mx-auto">
-      <div className="container mx-auto grid lg:grid-cols-3 sm:grid-cols-1">
+    <div className="border-t-[1px] w-11/12 mx-auto">
+      <div className="container mx-auto lg:grid lg:grid-cols-3 grid-cols-1">
         {/* left side content */}
-        <div className=" border-r-2 col-span-2  ">
+        <div className="border-r-0 lg:border-r-[1px] col-span-2  ">
           <div className="mr-10 my-10">
             <ArticleDetailsCard articleData={articleData} />
           </div>
         </div>
         {/* right side content*/}
-        <div className="mx-auto my-10 px-10 ">
+        <div className="lg:mx-auto my-10 lg:px-10 text-center lg:text-start">
           <Link to="/payment">
-            <button className="bg-black text-white rounded-3xl py-3 px-2 w-9/12">
-              Get unlimited access
-            </button>
+            <GetUnlimitedAccessButton text={"Get unlimited access"} />
           </Link>
           {/* wirtter info card */}
-          <div className="card-body px-0">
+          <div className="card-body justify-center lg:justify-start px-0">
             {/* avater start */}
-            <div className="avatar">
+            <div className="avatar justify-center lg:justify-start">
               <div className="w-24 rounded-full">
                 <img src={writerImg} alt="img" />
               </div>
             </div>
             {/* avater end */}
-            <h2 className="card-title text-sm c">{writerName}</h2>
-            <p>{users?.following?.length} Followers</p>
+            <h2 className="lg:card-title text-sm text-gray-900 font-bold">{writerName}</h2>
+            <p className="text-font-semibold text-gray-900">{users?.following?.length} Followers</p>
             <p className="text-sm">
               Aussie Blogger with 500M+ views — Writer for CNBC & Business
               Insider. Inspiring the world through Personal Development and
               Entrepreneurship — timdenning.com/mb Follow
             </p>
-            <div className="card-actions ">
+            <div className="card-actions justify-center lg:justify-start">
               {users && (
                 <FollowButton
                   user={user}
@@ -76,15 +75,15 @@ const ArticlesDetails = () => {
             </div>
           </div>
           {/* more form section */}
-          <div>
+          <div className="">
             <h1 className="text-xl font-semibold text-black">
               More form Freemium
             </h1>
             {/* dremo writter card */}
 
-            <div className="flex ">
-              <div className="">
-                <div className="flex items-center gap-2 my-3">
+            <div className="flex flex-col lg:flex-row">
+              <div>
+                <div className="flex justify-center items-center gap-2 my-3">
                   <img
                     src={writerImg}
                     alt={writerName}

@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import GetUnlimitedAccessButton from "../../../components/GetUnlimitedAccessButton/GetUnlimitedAccessButton";
 import Articles from "../../articlesSection/Articles";
 import SideCategory from "../../sideCategory/SideCategory";
 import AfterLoginHadBanar from "../AfterLoginHadBanar/AfterLoginHadBanar";
@@ -21,9 +22,10 @@ const Home = () => {
             </section>
             <aside className="mt-8">
               <Link to="/payment">
-                <button className="bg-black text-white rounded-3xl py-3 px-2 w-9/12">
+                <GetUnlimitedAccessButton text={"Get unlimited access"} />
+                {/* <button className="bg-black text-white rounded-3xl py-3 px-2 w-9/12">
                   Get unlimited access
-                </button>
+                </button> */}
               </Link>
               {/* <p>category</p> */}
 
@@ -56,9 +58,10 @@ const Home = () => {
             </section>
             <div className="text-center w-full">
               <Link to="/payment">
-                <button className="bg-black text-white rounded-3xl py-3 px-2 w-9/12">
+                <GetUnlimitedAccessButton text={"Get unlimited access"} />
+                {/* <button className="bg-black text-white rounded-3xl py-3 px-2 w-9/12">
                   Get unlimited access
-                </button>
+                </button> */}
               </Link>
               <SideCategory />
             </div>

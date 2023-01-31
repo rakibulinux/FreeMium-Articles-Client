@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import StaffPicks from '../../sideCategory/StaffPicks';
+import GetUnlimitedAccessButton from './../../../components/GetUnlimitedAccessButton/GetUnlimitedAccessButton';
 
 const Stories = () => {
     return (
@@ -23,9 +24,10 @@ const Stories = () => {
                 </div>
                 <div className="divider divider-horizontal"></div>
                 <aside className="basis-1/4 px-8 hidden md:block lg:block">
-                    <button className="bg-black text-white rounded-3xl py-3 w-10/12">
+                <GetUnlimitedAccessButton text={"Get unlimited access"} />
+                    {/* <button className="bg-black text-white rounded-3xl py-3 w-10/12">
                         Get unlimited access
-                    </button>
+                    </button> */}
                     <StaffPicks></StaffPicks>
 
                 </aside>

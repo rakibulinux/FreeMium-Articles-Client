@@ -18,7 +18,7 @@ const SideCategory = () => {
       {user && <StaffPicks></StaffPicks>}
 
       <div className={user?.uid ? "hidden" : "mt-5"}>
-        <p className="text-base font-semibold text-gray-800 my-3">
+        <p className="text-base font-semibold text-gray-800 my-3 lg:ml-0">
           DISCOVER MORE OF WHAT MATTERS TO YOU
         </p>
         <div className="lg:flex flex-wrap lg:gap-3 gap-2 grid grid-cols-2 mt-4 lg:mt-0">

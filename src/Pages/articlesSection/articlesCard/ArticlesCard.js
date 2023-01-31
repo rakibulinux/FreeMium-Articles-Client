@@ -47,7 +47,7 @@ const ArticlesCard = ({ data }) => {
                 <img className="" src={articleImg} alt="" />
               </div>
             </div>
-            <div className="flex items-center ml-3 lg:ml-0">
+            <div className="flex items-center ml-3 lg:ml-2">
               <span className="block text-gray-700 font-semibold">
                 {articleSubmitDate}
               </span>

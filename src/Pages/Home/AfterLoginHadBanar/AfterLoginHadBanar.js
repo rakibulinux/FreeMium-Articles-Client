@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import memberShip from "../../../Assets/membershipBg.jpeg";
+import { APIContext } from "../../../contexts/APIProvider";
 const AfterLoginHadBanar = () => {
   const [visible, setVisible] = useState(true);
-
+  const {isDarkMode} = useContext(APIContext);
   const hideMembershipBanner = () => {
     setVisible((prev) => !prev);
   };
@@ -16,14 +17,14 @@ const AfterLoginHadBanar = () => {
           style={{ backgroundImage: `url(${memberShip})` }}
         >
           <div className="flex justify-between items-center">
-            <p>
+            <p className={isDarkMode ? "text-gray-900":"text-gray-900"}>
               Get unlimited access to all of FreeMium for less than $1/week.
             </p>
-            <button onClick={hideMembershipBanner} className="pr-6">
+            <button onClick={hideMembershipBanner} className={isDarkMode ? "text-gray-900 pr-6":"text-gray-900 pr-6"}>
               X
             </button>
           </div>
-          <Link to="/payment" className="underline">
+          <Link to="/payment" className={isDarkMode ?"text-gray-900 underline":"underline text-gray-900"}>
             Become a member
           </Link>
         </div>

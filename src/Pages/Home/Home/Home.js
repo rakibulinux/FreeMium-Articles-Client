@@ -1,12 +1,13 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import Articles from "../../ArticlesSection/Articles";
-import SideCategory from "../../SideCategory/SideCategory";
+import GetUnlimitedAccessButton from "../../../components/GetUnlimitedAccessButton/GetUnlimitedAccessButton";
 import AfterLoginHadBanar from "../AfterLoginHadBanar/AfterLoginHadBanar";
 import Manubar from "../AfterLoginHadBanar/Manubar/Manubar";
 import HomeHadBanar from "../HomeHadBanar";
 import { AuthContext } from "./../../../contexts/AuthProvider";
 import "./Home.css";
+import SideCategory from './../../SideCategory/SideCategory';
+import Articles from './../../ArticlesSection/Articles';
 const Home = () => {
   const { user } = useContext(AuthContext);
   return (
@@ -21,9 +22,10 @@ const Home = () => {
             </section>
             <aside className="mt-8">
               <Link to="/payment">
-                <button className="bg-black text-white rounded-3xl py-3 px-2 w-9/12">
+                <GetUnlimitedAccessButton text={"Get unlimited access"} />
+                {/* <button className="bg-black text-white rounded-3xl py-3 px-2 w-9/12">
                   Get unlimited access
-                </button>
+                </button> */}
               </Link>
               {/* <p>category</p> */}
 
@@ -46,19 +48,22 @@ const Home = () => {
             </div>
           </div> */}
         </div>
-      ) : (
+      ) 
+      : 
+      (
         // before log in user UI
         <>
           <HomeHadBanar />
-          <div className="lg:grid grid-rows-1 md:grid-cols-3 gap-4 mt-3 mt-0">
+          <div className="lg:grid grid-rows-1 md:grid-cols-3 gap-4 mt-3 lg:mt-0">
             <section className="col-span-2 sm:order-last md:order-first">
               <Articles />
             </section>
             <div className="text-center w-full">
               <Link to="/payment">
-                <button className="bg-black text-white rounded-3xl py-3 px-2 w-9/12">
+                <GetUnlimitedAccessButton text={"Get unlimited access"} />
+                {/* <button className="bg-black text-white rounded-3xl py-3 px-2 w-9/12">
                   Get unlimited access
-                </button>
+                </button> */}
               </Link>
               <SideCategory />
             </div>

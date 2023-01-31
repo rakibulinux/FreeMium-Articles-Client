@@ -10,6 +10,7 @@ import "swiper/css/scrollbar";
 const Manubar = () => {
   const { categoryButton, isCategoryLoading } = useContext(APIContext);
   // const [swiperRef, setSwiperRef] = useState(null);
+  const {isDarkMode} = useContext(APIContext);
   if (isCategoryLoading) {
     return <Spinner />;
   }
@@ -39,7 +40,7 @@ const Manubar = () => {
               }}
               key={category?._id}
             >
-              <Link to={`/category/${category?.CategoryName}`} className="p-2">
+              <Link to={`/category/${category?.CategoryName}`} className={isDarkMode ?"text-gray-900 p-2":"p-2"}>
                 {category?.CategoryName}
               </Link>
             </SwiperSlide>

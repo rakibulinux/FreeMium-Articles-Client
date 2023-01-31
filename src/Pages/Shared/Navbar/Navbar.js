@@ -88,19 +88,19 @@ const Navbar = () => {
   const navItemNotUser = (
     <>
       <li>
-        <NavLink to="/our-story" className="text-gray-900 border-animate">
+        <NavLink to="/our-story" className={isDarkMode ?"text-gray-100 border-animate":"text-gray-900 border-animate"}>
           Our story
         </NavLink>
       </li>
 
       <li>
-        <NavLink className="text-gray-900 border-animate" to="/membership">
+        <NavLink to={'/membership'} className={isDarkMode ?"text-gray-100 border-animate":"text-gray-900 border-animate"}>
           Membership
         </NavLink>
       </li>
       <li className="gap-2 lg:block">
         <NavLink
-          className="flex gap-2 text-gray-900 hover:text-black"
+          className={isDarkMode ?"flex gap-2 text-gray-100 hover:text-gray-200":"flex gap-2 text-gray-900 hover:text-black"}
           to="/write-stories"
         >
           {writeIcon} Write
@@ -108,7 +108,7 @@ const Navbar = () => {
       </li>
 
       <li>
-        <NavLink className="text-gray-900 border-animate" to="/login">
+        <NavLink className={isDarkMode ?"text-gray-100 border-animate":"text-gray-900 border-animate"} to="/login">
           Sign In
         </NavLink>
       </li>
@@ -128,13 +128,21 @@ const Navbar = () => {
       </li>
       <li className="justify-between bg-white text-black text-normal font-semibold text-semibold py-1">
         <NavLink
-          className="flex items-center gap-2 text-gray-900 hover:text-black"
+          className={isDarkMode ?"flex items-center gap-2 text-gray-200 hover:text-white":"flex items-center gap-2 text-gray-900 hover:text-gray-400"} 
           to="/write-stories"
         >
           {writeIcon} Write
         </NavLink>
       </li>
-
+      <li className="justify-between bg-white text-black text-normal font-semibold text-semibold py-1">
+      <button onClick={toggleDarkMode} className=''>
+              {isDarkMode ? <div className="flex items-center">
+                {lightIcon} <span className="ml-2">Light</span>
+              </div> : <div className="flex items-center">
+                {darkIcon} <span className="ml-2">Dark</span>
+                </div>}
+      </button>
+      </li>
       <hr className="text-gray-400 shadow-2xl my-2" />
       <li className="justify-between bg-white text-black text-normal font-semibold py-1">
         <button
@@ -207,13 +215,9 @@ const Navbar = () => {
             </div>
           </div>
           <div className="navbar-end gap-2 items-center">
-            <button onClick={toggleDarkMode} className="">
-              {isDarkMode ? lightIcon : darkIcon}
-            </button>
-
-            <div className="hidden lg:block">
+            <div className="block">
               <NavLink
-                className="flex gap-2 text-gray-900 hover:text-black"
+                className={isDarkMode ?"flex gap-2 text-gray-200 hover:text-gray-300":"flex gap-2 text-gray-900 hover:text-gray-800"}
                 to="/write-stories"
               >
                 {writeIcon} Write
@@ -261,6 +265,7 @@ const Navbar = () => {
               >
                 <li>
                   <NavLink
+                  
                     className={({ isActive }) =>
                       isActive ? "text-sky-600 bg-none hover:bg-none" : ""
                     }
@@ -295,28 +300,38 @@ const Navbar = () => {
                 </li>
 
                 <div className="divider"></div>
-                <li className="">
+                <li className="justify-between bg-white text-black text-lg font-semibold text-semibold">
                   <NavLink to="/settings">Settings</NavLink>
                 </li>
-                <li className="">
+                <li className="justify-between bg-white text-black text-lg font-semibold text-semibold">
                   <NavLink to="/refineRecommendations">
                     Refine recommendations
                   </NavLink>
                 </li>
-                <li className="">
+                <li className="justify-between bg-white text-black text-lg font-semibold text-semibold">
                   <NavLink to="/">Manage publications</NavLink>
                 </li>
                 <div className="divider"></div>
-                <li className="">
+                <li className="justify-between bg-white text-black text-lg font-semibold text-semibold">
                   <NavLink to="/payment">Become a member</NavLink>
                 </li>
-                <li className="">
+                <li className="justify-between bg-white text-black text-lg font-semibold text-semibold">
                   <NavLink to="/applyToThePartnerProgram">
                     Apply to the Partner Program
                   </NavLink>
                 </li>
-                <li className="">
+                <li className="justify-between bg-white text-black text-lg font-semibold text-semibold">
                   <NavLink to="/giftMembership">Gift membership</NavLink>
+                </li>
+                <div className="divider"></div>
+                <li className="justify-between bg-white text-black text-lg font-semibold">
+                      <button onClick={toggleDarkMode} className=''>
+                    {isDarkMode ? <div className="flex items-center">
+                      {lightIcon} <span className="ml-2">Light-theme</span>
+                    </div> : <div className="flex items-center">
+                      {darkIcon} <span className="ml-2">Dark-theme</span>
+                      </div>}
+                      </button>
                 </li>
                 <div className="divider"></div>
                 <li className="justify-between bg-white text-black text-lg font-semibold">
@@ -324,12 +339,11 @@ const Navbar = () => {
                     <button
                       onClick={handleLogOut}
                       className="text-red-500 hover:text-red-600"
+                      title={`${user?.displayName} you want to sign out`}
                     >
                       <AiOutlineLogout className="text-lg" /> Sign out
                     </button>
-                    <p className="text-red-500 hover:text-red-600">
-                      {user?.email}
-                    </p>
+                    {/* <p className="text-red-500 hover:text-red-600">{user?.email}</p> */}
                   </>
                 </li>
               </ul>

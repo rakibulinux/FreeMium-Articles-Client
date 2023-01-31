@@ -4,8 +4,11 @@ import SelectCategoryCard from "./SelectCategoryCardPage/SelectCategoryCard";
 import { AiOutlineTag } from "react-icons/ai";
 import { useLottie } from "lottie-react";
 import journalist from "../../Lottie/notFound.json";
+import { useContext } from "react";
+import { APIContext } from './../../contexts/APIProvider';
 const SelectCategory = () => {
   const categoryData = useLoaderData();
+  const {isDarkMode} = useContext(APIContext);
   // console.log(categoryData[1]);
   // Lottie functions
   const options = {
@@ -21,7 +24,7 @@ const SelectCategory = () => {
             <div className="bg-[#ddd] p-1 text-center flex items-center justify-center rounded-full mr-2">
               <AiOutlineTag className="text-[#000] cursor-pointer font-bold text-2xl" />
             </div>
-            <h1 className="text-4xl text-gray-900 font-semibold text-center">
+            <h1 className={isDarkMode ?"text-4xl text-gray-100 font-semibold text-center":"text-4xl text-gray-900 font-semibold text-center"}>
               {categoryData[0]?.categoryName
                 ? categoryData[0]?.categoryName
                 : "Not found"}
@@ -48,7 +51,7 @@ const SelectCategory = () => {
     return (
       <div className="my-28 flex justify-center">
         <div>
-          <h1 className="text-4xl font-semibold text-gray-900  text-center">
+          <h1 className={isDarkMode ?"text-4xl font-semibold text-gray-100  text-center":"text-4xl font-semibold text-gray-900  text-center"}>
             ( {categoryData[0]?.categoryName} ) Article not available
           </h1>
           <div className="mt-4">{View}</div>

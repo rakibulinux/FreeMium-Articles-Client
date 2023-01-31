@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
-import Spinner from "../../components/Spinner/Spinner";
-function FollowButton({ user, userId, followingId, unfollowingId }) {
+function FollowButton({ user, userId, followingId, userEmail, unfollowingId }) {
   const [isFollowing, setIsFollowing] = useState(false);
-  console.log(userId, followingId, unfollowingId);
 
   useEffect(() => {
     axios

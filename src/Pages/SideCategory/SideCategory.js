@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import Spinner from "../../components/Spinner/Spinner";
 import { APIContext } from "../../contexts/APIProvider";
 import { AuthContext } from "../../contexts/AuthProvider";
-import SideCategoryButton from "./sideCategoryButton/SideCategoryButton";
+import SideCategoryButton from "./SideCategoryButton/SideCategoryButton";
 import StaffPicks from "./StaffPicks";
 import WhoToFollow from "./WhoToFollow";
 
@@ -14,14 +14,14 @@ const SideCategory = () => {
     return <Spinner />;
   }
   return (
-    <div className="sticky top-0">
+    <div className="lg:sticky lg:top-0">
       {user && <StaffPicks></StaffPicks>}
 
       <div className={user?.uid ? "hidden" : "mt-5"}>
         <p className="text-base font-semibold text-gray-800 my-3">
           DISCOVER MORE OF WHAT MATTERS TO YOU
         </p>
-        <div className="flex flex-wrap gap-3">
+        <div className="lg:flex flex-wrap lg:gap-3 gap-2 grid grid-cols-2 mt-4 lg:mt-0">
           {categoryButton.map((category) => (
             <SideCategoryButton
               key={category?._id}

@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import ArticleDetailsCard from "./ArticleDetailsCard/ArticleDetailsCard";
 
-import { EnvelopeIcon } from "@heroicons/react/24/solid";
+
 import { useContext } from "react";
 import { AuthContext } from "../../../contexts/AuthProvider";
 import { useState } from "react";
@@ -10,12 +10,13 @@ import Spinner from "../../../components/Spinner/Spinner";
 import { useEffect } from "react";
 import FollowButton from "../../FollowButton/FollowButton";
 import GetUnlimitedAccessButton from "../../../components/GetUnlimitedAccessButton/GetUnlimitedAccessButton";
+import SubscribButton from './../SubscribButton/SubscribButton';
 const ArticlesDetails = () => {
   // const [showFollow, setShowFollow] = useState(true);
   const [users, setUsers] = useState({});
   const articleData = useLoaderData();
   const { user } = useContext(AuthContext);
-
+  
   const { writerImg, writerName, articleTitle, articleImg, userId, userEmail } =
     articleData;
 
@@ -69,9 +70,20 @@ const ArticlesDetails = () => {
                   unfollowingId={user?.email}
                 />
               )}
-              <Link className="bg-gray-500 border-0 rounded-full p-2">
+
+              {/* <Link className="bg-gray-500 border-0 rounded-full p-2">
                 <EnvelopeIcon className="h-4 w-4 text-white " />
-              </Link>
+              </Link> */}
+              <SubscribButton
+              user={user}
+              // users={users}
+              userId={userId}
+              userEmail={userEmail}
+              subscribId={user?.email}
+              unsubscribId={user?.email}
+              writerName={writerName}
+              >
+              </SubscribButton>
             </div>
           </div>
           {/* more form section */}

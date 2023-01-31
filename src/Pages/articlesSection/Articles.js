@@ -2,7 +2,7 @@ import React from "react";
 import { useContext } from "react";
 import Spinner from "../../components/Spinner/Spinner";
 import { APIContext } from "../../contexts/APIProvider";
-import ArticlesCard from './articlesCard/ArticlesCard';
+import ArticlesCard from './ArticlesCard/ArticlesCard';
 
 const Articles = () => {
   const { articles, articlesLoading, searchResults } = useContext(APIContext);

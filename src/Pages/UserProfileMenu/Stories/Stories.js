@@ -1,8 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import StaffPicks from '../../sideCategory/StaffPicks';
+import Tabs from '../Tabs/Tabs';
 
 const Stories = () => {
+       const tabsData = [
+        { id: 1, label: 'Drafts', content: <div>Drafts</div> },
+        { id: 2, label: ' Published', content: <div>Published</div> },
+        { id: 3, label: ' Responses', content: <div>Responses</div> },
+        
+    ];
     return (
         <div className='container mx-auto'>
             <div className='flex row'>
@@ -14,12 +21,11 @@ const Stories = () => {
                             <button className="btn btn-outline rounded-full ml-3">Import a story</button>
                        </div>
                     </div>
-                    <div className="tabs mt-10">
-                        <Link className="tab tab-bordered tab-active">Drafts</Link>
-                        <Link className="tab tab-bordered ">Published</Link>
-                        <Link className="tab tab-bordered ">Responses</Link>
-
-                    </div>
+            
+                    {/* tabs */}
+                    <Tabs tabsData={tabsData} />
+                    
+{/* tabs */}
                 </div>
                 <div className="divider divider-horizontal"></div>
                 <aside className="basis-1/4 px-8 hidden md:block lg:block">

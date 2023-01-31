@@ -172,7 +172,15 @@ const ArticleDetailsCard = ({ articleData }) => {
                   <HomeIcon className="h-6 w-6  text-gray " />
                 </Link>
               </button>
+
+
+
+              {/* Modal for comment */}
+              {/* The button to open modal */}
+              <label htmlFor="comment-modal" className="btn btn-sm ml-5">Comment</label>
             </div>
+
+
 
             <nav aria-label="Footer Navigation - Support">
               <ul className="flex flex-wrap justify-start gap-4 text-xs lg:justify-end">
@@ -205,6 +213,23 @@ const ArticleDetailsCard = ({ articleData }) => {
               </ul>
             </nav>
           </div>
+
+
+
+
+          {/* Modal body for comment */}
+          {/* Put this part before </body> tag */}
+          <input type="checkbox" id="comment-modal" className="modal-toggle" />
+          <div className="modal flex justify-end ">
+            <div className="modal-box h-full w-full md:w-6/12 lg:w-4/12">
+              <label htmlFor="comment-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+              <h3 className="text-lg font-bold">Congratulations random Internet user!</h3>
+              <p className="py-4">You've been selected for a chance to get one year of subscription to use Wikipedia for free!</p>
+            </div>
+          </div>
+
+
+
           <div className="pt-8 mt-8 border-t border-gray-500"></div>
           {/*  more store*/}
           <div className="bg-gray-100">

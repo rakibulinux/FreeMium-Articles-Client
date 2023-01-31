@@ -16,9 +16,6 @@ import WriteStories from "../Pages/WriteStories/WriteStories";
 import AdminRoute from "./AdminRoute";
 import PrivateRoute from "./PrivateRoute";
 
-import ArticlesDetails from "./../Pages/ArticlesSection/ArticlesDetails/ArticlesDetails";
-
-import Stories from "../Pages/UserProfileMenu/Stories/Stories";
 import Stats from "../Pages/UserProfileMenu/Stats/Stats";
 import List from "../Pages/UserProfileMenu/Lists/List";
 import OurStory from "../Pages/OurStory/OurStory";
@@ -30,6 +27,8 @@ import ApplyToThePartnerProgram from "../Pages/UserProfileMenu/ApplyToThePartner
 import SelectCategorySection from "./../Pages/SelectCategoryPage/SelectCategorySection/SelectCategorySection";
 import GiftMembership from "../Pages/UserProfileMenu/GiftMembership/GiftMembership";
 import Search from "../Pages/Shared/Search/Search";
+import Stories from "../Pages/UserProfileMenu/Stories/Stories";
+import ArticlesDetails from './../Pages/ArticlesSection/ArticlesDetails/ArticlesDetails';
 
 const router = createBrowserRouter([
   {

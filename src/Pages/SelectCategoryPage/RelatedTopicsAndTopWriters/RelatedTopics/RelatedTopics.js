@@ -3,7 +3,9 @@ import { useContext } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { AuthContext } from "../../../../contexts/AuthProvider";
-import SideCategoryButton from "./../../../SideCategory/SideCategoryButton/SideCategoryButton";
+import SideCategoryButton from './../../../sideCategory/sideCategoryButton/SideCategoryButton';
+
+
 
 const RelatedTopics = () => {
   const [category, setCategory] = useState([]);

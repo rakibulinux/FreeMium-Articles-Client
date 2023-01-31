@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import StaffPicks from "../../SideCategory/StaffPicks";
+import StaffPicks from "../../sideCategory/StaffPicks";
+
 
 const Stories = () => {
   return (
@@ -32,7 +33,7 @@ const Stories = () => {
           <button className="bg-black text-white rounded-3xl py-3 w-10/12">
             Get unlimited access
           </button>
-          <StaffPicks></StaffPicks>
+          <StaffPicks />
         </aside>
       </div>
     </div>

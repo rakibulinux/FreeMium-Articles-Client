@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import WhoToFollow from "../../SideCategory/WhoToFollow";
+import WhoToFollow from './../../sideCategory/WhoToFollow';
 
 const RefineRecommendations = () => {
   return (

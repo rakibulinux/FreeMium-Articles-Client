@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import GetUnlimitedAccessButton from "../../../components/GetUnlimitedAccessButton/GetUnlimitedAccessButton";
-import Articles from "../../articlesSection/Articles";
-import SideCategory from "../../sideCategory/SideCategory";
 import AfterLoginHadBanar from "../AfterLoginHadBanar/AfterLoginHadBanar";
 import Manubar from "../AfterLoginHadBanar/Manubar/Manubar";
 import HomeHadBanar from "../HomeHadBanar";
 import { AuthContext } from "./../../../contexts/AuthProvider";
 import "./Home.css";
+import SideCategory from './../../sideCategory/SideCategory';
+import Articles from './../../articlesSection/Articles';
 const Home = () => {
   const { user } = useContext(AuthContext);
   return (

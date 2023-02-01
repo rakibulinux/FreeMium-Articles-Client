@@ -8,9 +8,9 @@ import {
 import React from "react";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { APIContext } from "../../../../contexts/APIProvider";
 import DemoWritter from "../../../Home/DemoWritter";
 import Comments from "../../ShowMoreArtical/Comments";
-import { APIContext } from "../../../../contexts/APIProvider";
 
 const ArticleDetailsCard = ({ articleData }) => {
   const {

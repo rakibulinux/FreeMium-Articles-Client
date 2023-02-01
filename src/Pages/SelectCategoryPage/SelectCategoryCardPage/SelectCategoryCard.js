@@ -1,5 +1,7 @@
 import React from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { APIContext } from './../../../contexts/APIProvider';
 
 const SelectCategoryCard = ({ data }) => {
   // const { loading } = useContext(AuthContext);
@@ -20,15 +22,16 @@ const SelectCategoryCard = ({ data }) => {
   //   if (loading) {
   //     return <Spinner />;
   //   }
+  const {isDarkMode} = useContext(APIContext);
   return (
     <>
       <Link to={`/view-story/${_id}`}>
-        <div className="my-7 w-full mx-auto bg-white rounded-xl shadow-md">
+        <div className={isDarkMode ?"my-7 w-full mx-auto bg-gray-900 rounded-xl shadow-lg":"my-7 w-full mx-auto bg-white rounded-xl shadow-md"}>
           <div className="card-body md:flex">
             <div className="flex items-center">
               {/* blog auther img */}
               <img className="rounded-full w-10 h-10" src={writerImg} alt="" />
-              <h3 className="ml-2 font-bold text-gray-900">{writerName}</h3>
+              <h3  className={isDarkMode ? "ml-2 font-bold text-gray-100":"ml-2 font-bold text-gray-900"}>{writerName}</h3>
             </div>
             <div
               className="lg:grid flex flex-col-reverse lg:flex-row"
@@ -36,12 +39,12 @@ const SelectCategoryCard = ({ data }) => {
             >
               <div>
                 <h1
-                  className="text-2xl font-semibold text-gray-800"
+                  className={isDarkMode ?"text-2xl font-semibold text-gray-100":"text-2xl font-semibold text-gray-800"}
                   dangerouslySetInnerHTML={{ __html: articleTitle }}
                 />
                 {/* {articleTitle}
                   </h1> */}
-                <div dangerouslySetInnerHTML={{ __html: descriptionSlice }} />
+                <p className={isDarkMode ?"text-gray-100":"text-gray-900"} dangerouslySetInnerHTML={{ __html: descriptionSlice }} />
               </div>
               {/* blog right img */}
               <div className="flex justify-center items-center p-2 ">
@@ -49,7 +52,7 @@ const SelectCategoryCard = ({ data }) => {
               </div>
             </div>
             <div className="flex items-center">
-              <span className="block text-gray-700 font-semibold">
+              <span className={isDarkMode ?"block text-gray-100 font-semibold":"block text-gray-700 font-semibold"}>
                 {articleSubmitDate}
               </span>
               <span className="block ml-3 text-red-500 font-semibold">

@@ -24,7 +24,7 @@ const ArticleDetailsCard = ({ articleData }) => {
   return (
     <div>
       {/* card */}
-      <article className="  p-4">
+      <article className="p-4">
         <div className="blogHadedr lg:flex md:flex-row sm:flex-row  justify-between">
           {/*card left side writter info */}
           <div className="flex items-center mb-3 ">
@@ -210,9 +210,9 @@ const ArticleDetailsCard = ({ articleData }) => {
           </div>
           <div className="pt-8 mt-8 border-t border-gray-500"></div>
           {/*  more store*/}
-          <div className="bg-gray-100">
+          <div className={isDarkMode ?"bg-gray-900":"bg-gray-100"}>
             <div className="py-4 px-2">
-              <h1 className="text-xl font-bold text-gray-900">
+              <h1 className={isDarkMode ?"text-xl font-bold text-gray-100":"text-xl font-bold text-gray-900"}>
                 More from {writerName}
               </h1>
               <p>

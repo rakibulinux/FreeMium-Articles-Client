@@ -1,7 +1,7 @@
 import React from "react";
 
 import { useState, useEffect } from "react";
-import TopMember from "../topMember/TopMember";
+import TopMember from "../TopMember/TopMember";
 
 const JoinNetowork = () => {
   const [userData, setUserData] = useState([]);

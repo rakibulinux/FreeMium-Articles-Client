@@ -7,7 +7,6 @@ import AfterLoginHadBanar from "../AfterLoginHadBanar/AfterLoginHadBanar";
 import Manubar from "../AfterLoginHadBanar/Manubar/Manubar";
 import HomeHadBanar from "../HomeHadBanar";
 import { AuthContext } from "./../../../contexts/AuthProvider";
-import Articles from './../../ArticlesSection/Articles';
 
 import "./Home.css";
 

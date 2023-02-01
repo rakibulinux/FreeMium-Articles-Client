@@ -12,6 +12,7 @@ import Comments from "../../ShowMoreArtical/Comments";
 
 const ArticleDetailsCard = ({ articleData }) => {
   const {
+    _id,
     articleDetails,
     articleRead,
     articleSubmitDate,
@@ -19,6 +20,7 @@ const ArticleDetailsCard = ({ articleData }) => {
     writerImg,
     writerName,
   } = articleData;
+  // console.log(_id);
   return (
     <div>
       {/* card */}
@@ -223,8 +225,8 @@ const ArticleDetailsCard = ({ articleData }) => {
           <input type="checkbox" id="comment-modal" className="modal-toggle" />
           <div className="modal flex justify-end ">
             <div className="modal-box h-full w-full md:w-6/12 lg:w-4/12">
-              <label htmlFor="comment-modal" className="btn btn-sm btn-circle btn-outline border-none absolute right-2 top-2">✕</label>
-             <Comments></Comments>
+              <label htmlFor="comment-modal" className="btn btn-sm btn-circle bg-white hover:bg-white hover:text-black border-none absolute right-2 top-2">✕</label>
+             <Comments id={_id}></Comments>
             </div>
           </div>
 

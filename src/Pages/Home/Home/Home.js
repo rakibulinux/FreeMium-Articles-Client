@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 
-import SideCategory from "../../sideCategory/SideCategory";
+import SideCategory from "../../SideCategory/SideCategory";
 import AfterLoginHadBanar from "../AfterLoginHadBanar/AfterLoginHadBanar";
 import Manubar from "../AfterLoginHadBanar/Manubar/Manubar";
 import HomeHadBanar from "../HomeHadBanar";

@@ -9,7 +9,7 @@ import FollowButton from "../../FollowButton/FollowButton";
 import GetUnlimitedAccessButton from "../../../components/GetUnlimitedAccessButton/GetUnlimitedAccessButton";
 import SubscribButton from "../SubscribButton/SubscribButton";
 import { APIContext } from "../../../contexts/APIProvider";
-import ArticleDetailsCard from "./ArticleDetailsCard/ArticleDetailsCard";
+import ArticleDetailsCard from "../../ArticlesSection/ArticlesDetails/ArticleDetailsCard/ArticleDetailsCard";
 
 const ArticlesDetails = () => {
   // const [showFollow, setShowFollow] = useState(true);

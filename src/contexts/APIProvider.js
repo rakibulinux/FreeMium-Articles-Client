@@ -7,6 +7,7 @@ const APIProvider = ({ children }) => {
   const [searchResults, setSearchResults] = useState([]);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const {
+    // 
     data: categoryButton,
     isLoading: isCategoryLoading,
     refetch: reFetchCategory,

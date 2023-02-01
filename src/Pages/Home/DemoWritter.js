@@ -1,5 +1,7 @@
 import React from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { APIContext } from './../../contexts/APIProvider';
 
 const DemoWritter = ({ articleData }) => {
   const {
@@ -11,20 +13,21 @@ const DemoWritter = ({ articleData }) => {
     writerName,
     _id,
   } = articleData;
+  const {isDarkMode}= useContext(APIContext);
   return (
-    <div>
+    <div className="mt-7">
       <Link
         to={`/view-story/${_id}`}
-        className="relative block overflow-hidden rounded-lg border border-gray-100 p-8"
+        className={isDarkMode ?"relative block overflow-hidden rounded-lg shadow-lg p-8":"relative block overflow-hidden shadow-md rounded-lg p-8"}
       >
         <div className="justify-between sm:flex">
           <div>
             <h3
-              className="text-xl font-bold text-gray-900"
+              className={isDarkMode ?"text-xl font-bold text-gray-100":"text-xl font-bold text-gray-900"}
               dangerouslySetInnerHTML={{ __html: articleTitle }}
             />
 
-            <p className="mt-1 text-xs font-medium text-gray-600">
+            <p className={isDarkMode ?"mt-1 text-xs font-medium text-gray-100":"mt-1 text-xs font-medium text-gray-600"}>
               By {writerName}
             </p>
           </div>
@@ -40,7 +43,7 @@ const DemoWritter = ({ articleData }) => {
 
         <div className="mt-4 sm:pr-8 inline">
           <p
-            className="text-sm text-gray-500"
+            className={isDarkMode ?"text-sm text-gray-100":"text-sm text-gray-500"}
             dangerouslySetInnerHTML={{ __html: articleDetails.slice(0, 190) }}
           />
           ...
@@ -48,11 +51,11 @@ const DemoWritter = ({ articleData }) => {
 
         <dl className="mt-6 flex">
           <div className="flex flex-col-reverse">
-            <dd className="text-xs text-gray-700">{articleSubmitDate}</dd>
+            <dd className={isDarkMode ?"text-xs text-gray-100":"text-xs text-gray-700"}>{articleSubmitDate}</dd>
           </div>
 
           <div className="ml-3 flex flex-col-reverse sm:ml-6">
-            <dd className="text-xs text-gray-700">{articleRead} minute</dd>
+            <dd className={isDarkMode ? "text-xs text-gray-100":"text-xs text-gray-700"}>{articleRead} minute</dd>
           </div>
         </dl>
       </Link>

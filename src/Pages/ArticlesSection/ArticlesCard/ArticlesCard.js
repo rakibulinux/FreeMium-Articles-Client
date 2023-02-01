@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthProvider";
 import Spinner from "../../../components/Spinner/Spinner";
-import { APIContext } from '../../../contexts/APIProvider';
+import { APIContext } from "../../../contexts/APIProvider";
 
 const ArticlesCard = ({ data }) => {
   const { loading } = useContext(AuthContext);
@@ -27,12 +27,12 @@ const ArticlesCard = ({ data }) => {
   return (
     <>
       <Link to={`/view-story/${_id}`}>
-        <div className={isDarkMode ?"my-7 w-full mx-auto bg-gray-900 rounded-xl shadow-lg":"my-7 w-full mx-auto bg-white rounded-xl shadow-md"}>
+        <div className="my-7 w-full mx-auto bg-white rounded-xl shadow-md">
           <div className="card-body md:flex">
             <div className="flex items-center">
               {/* blog auther img */}
               <img className="rounded-full w-10 h-10" src={writerImg} alt="" />
-              <h3 className={isDarkMode ? "ml-2 font-bold text-gray-100":"ml-2 font-bold text-gray-900"}>{writerName}</h3>
+              <h3 className="ml-2 font-bold text-gray-900">{writerName}</h3>
             </div>
             <div
               className="lg:grid flex flex-col-reverse lg:flex-row"
@@ -40,12 +40,12 @@ const ArticlesCard = ({ data }) => {
             >
               <div className="px-3">
                 <h1
-                  className={isDarkMode ?"text-2xl font-semibold text-gray-100":"text-2xl font-semibold text-gray-800"}
+                  className="text-2xl font-semibold text-gray-800"
                   dangerouslySetInnerHTML={{ __html: articleTitle }}
                 />
                 {/* {articleTitle}
                 </h1> */}
-                <p className={isDarkMode ?"text-gray-100":"text-gray-900"}dangerouslySetInnerHTML={{ __html: descriptionSlice }} />
+                <div dangerouslySetInnerHTML={{ __html: descriptionSlice }} />
               </div>
               {/* blog right img */}
               <div className="flex justify-center items-center p-2 ">
@@ -53,7 +53,7 @@ const ArticlesCard = ({ data }) => {
               </div>
             </div>
             <div className="flex items-center ml-3 lg:ml-2">
-              <span className={isDarkMode ?"block text-gray-100 font-semibold":"block text-gray-700 font-semibold"}>
+              <span className="block text-gray-700 font-semibold">
                 {articleSubmitDate}
               </span>
               <span className="block ml-3 text-red-500 font-semibold">

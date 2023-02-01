@@ -1,8 +1,5 @@
 import React from "react";
 import { Link, useLoaderData } from "react-router-dom";
-import ArticleDetailsCard from "./ArticleDetailsCard/ArticleDetailsCard";
-
-
 import { useContext } from "react";
 import { AuthContext } from "../../../contexts/AuthProvider";
 import { useState } from "react";
@@ -10,15 +7,17 @@ import Spinner from "../../../components/Spinner/Spinner";
 import { useEffect } from "react";
 import FollowButton from "../../FollowButton/FollowButton";
 import GetUnlimitedAccessButton from "../../../components/GetUnlimitedAccessButton/GetUnlimitedAccessButton";
-import SubscribButton from './../SubscribButton/SubscribButton';
+import SubscribButton from "../SubscribButton/SubscribButton";
 import { APIContext } from "../../../contexts/APIProvider";
+import ArticleDetailsCard from "./ArticleDetailsCard/ArticleDetailsCard";
+
 const ArticlesDetails = () => {
   // const [showFollow, setShowFollow] = useState(true);
   const [users, setUsers] = useState({});
   const articleData = useLoaderData();
   const { user } = useContext(AuthContext);
   const { isDarkMode } = useContext(APIContext);
-  
+
   const { writerImg, writerName, articleTitle, articleImg, userId, userEmail } =
     articleData;
 
@@ -54,8 +53,24 @@ const ArticlesDetails = () => {
               </div>
             </div>
             {/* avater end */}
-            <h2 className={isDarkMode ?"lg:card-title text-sm text-gray-300 font-bold":"lg:card-title text-sm text-gray-900 font-bold"}>{writerName}</h2>
-            <p className={isDarkMode ?"text-font-semibold text-gray-200":"text-font-semibold text-gray-900"}>{users?.following?.length} Followers</p>
+            <h2
+              className={
+                isDarkMode
+                  ? "lg:card-title text-sm text-gray-300 font-bold"
+                  : "lg:card-title text-sm text-gray-900 font-bold"
+              }
+            >
+              {writerName}
+            </h2>
+            <p
+              className={
+                isDarkMode
+                  ? "text-font-semibold text-gray-200"
+                  : "text-font-semibold text-gray-900"
+              }
+            >
+              {users?.following?.length} Followers
+            </p>
             <p className="text-sm">
               Aussie Blogger with 500M+ views — Writer for CNBC & Business
               Insider. Inspiring the world through Personal Development and
@@ -77,20 +92,25 @@ const ArticlesDetails = () => {
                 <EnvelopeIcon className="h-4 w-4 text-white " />
               </Link> */}
               <SubscribButton
-              user={user}
-              // users={users}
-              userId={userId}
-              userEmail={userEmail}
-              subscribId={user?.email}
-              unsubscribId={user?.email}
-              writerName={writerName}
-              >
-              </SubscribButton>
+                user={user}
+                // users={users}
+                userId={userId}
+                userEmail={userEmail}
+                subscribId={user?.email}
+                unsubscribId={user?.email}
+                writerName={writerName}
+              ></SubscribButton>
             </div>
           </div>
           {/* more form section */}
           <div className="">
-            <h1 className={isDarkMode ?"text-xl font-semibold text-gray-300":"text-xl font-semibold text-black"}>
+            <h1
+              className={
+                isDarkMode
+                  ? "text-xl font-semibold text-gray-300"
+                  : "text-xl font-semibold text-black"
+              }
+            >
               More form Freemium
             </h1>
             {/* dremo writter card */}

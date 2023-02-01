@@ -9,7 +9,7 @@ function App() {
 
   return (
     <div
-      className={`bg-${isDarkMode ? "gray-900" : "gray-100"} text-${
+      className={`bg-${isDarkMode ? "black-900" : "gray-100"} text-${
         isDarkMode ? "white" : "black"
       }`}
     >

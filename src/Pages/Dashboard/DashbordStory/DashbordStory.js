@@ -13,7 +13,7 @@ const DashbordStory = () => {
             return data
         }
     })
-    // console.log(allArticles);
+    console.log(allArticles);
     return (
         <div>
             <h2 className='text-4xl text-center font-bold m-5'> All Articles</h2>

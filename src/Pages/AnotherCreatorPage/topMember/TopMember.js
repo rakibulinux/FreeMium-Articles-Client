@@ -1,7 +1,7 @@
 import React from "react";
 
 const TopMember = ({ data }) => {
-  // console.log(data)
+  
   const { name, picture } = data;
   return (
     <div className="card h-20 w-full border-[1.5px] border-b-[#FFFFFF] border-l-0 border-r-0 rounded-none my-5 border-t-0">

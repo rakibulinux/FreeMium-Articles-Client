@@ -59,22 +59,22 @@ const PaymentForm = () => {
     
     </div>
       <div className='grid lg:grid-cols-2 grid-cols-1 gap-9 mx-2 my-5'>
-      <div className="card bg-base-100 shadow-xl">
+      <div className={isDarkMode ?"card  bg-gray-900 shadow-xl":"card  bg-base-100 shadow-xl"}>
   <div className="card-body">
-    <h2 className={isDarkMode ?"text-gray-900 card-title":"text-gray-900 card-title"}>Weekly</h2>
-    <p className={isDarkMode ?"text-gray-900":"text-gray-900"}>100 Tk/week</p>
+    <h2 className={isDarkMode ?"text-gray-100 card-title":"text-gray-900 card-title"}>Weekly</h2>
+    <p className={isDarkMode ?"text-gray-100":"text-gray-900"}>100 Tk/week</p>
     <div className="card-actions">
-      <button className={isDarkMode ?"btn btn-outline btn-success text-gray-900":"btn btn-outline btn-success text-gray-900"} onClick={()=>{setPriceTk(100)}}>100 Tk </button>
+      <button className={isDarkMode ?"btn btn-outline btn-success text-gray-100":"btn btn-outline btn-success text-gray-900"} onClick={()=>{setPriceTk(100)}}>100 Tk </button>
     </div>
   </div>
 </div>
 
-<div className="card  bg-base-100 shadow-xl">
+<div className={isDarkMode ?"card  bg-gray-900 shadow-xl":"card  bg-base-100 shadow-xl"}>
   <div className="card-body">
-    <h2 className={isDarkMode ?"text-gray-900 card-title":"text-gray-900 card-title"}>Monthly</h2>
-    <p className={isDarkMode ?"text-gray-900":"text-gray-900"}>400 Tk/Month</p>
-    <div className={isDarkMode ?"text-gray-900 card-title":"text-gray-900 card-title"}>
-      <button className={isDarkMode ?"btn btn-outline btn-success text-gray-900":"btn btn-outline btn-success text-gray-900"} onClick={()=>{setPriceTk(400)}}>400 Tk</button>
+    <h2 className={isDarkMode ?"text-gray-100 card-title":"text-gray-900 card-title"}>Monthly</h2>
+    <p className={isDarkMode ?"text-gray-100":"text-gray-900"}>400 Tk/Month</p>
+    <div className={isDarkMode ?"text-gray-100 card-title":"text-gray-900 card-title"}>
+      <button className={isDarkMode ?"btn btn-outline btn-success text-gray-100":"btn btn-outline btn-success text-gray-900"} onClick={()=>{setPriceTk(400)}}>400 Tk</button>
     </div>
   </div>
 </div>
@@ -83,13 +83,13 @@ const PaymentForm = () => {
      
         
      
-    <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl mb-10 bg-base-100">
+    <div className={isDarkMode ?"card flex-shrink-0 w-full max-w-sm shadow-2xl mb-10 bg-gray-900-100":"card flex-shrink-0 w-full max-w-sm shadow-2xl mb-10 bg-base-100"}>
       <form 
       onSubmit={handlePayment}
       className="card-body">
         <div className="form-control">
           <label className="label">
-            <span className="label-text">Email</span>
+            <span className={isDarkMode ?"label-text text-gray-100":"label-text"}>Email</span>
           </label>
           <input defaultValue={user?.email} 
           name="email"
@@ -97,7 +97,7 @@ const PaymentForm = () => {
         </div>
         <div className="form-control">
           <label className="label">
-            <span className="label-text">Name</span>
+            <span className={isDarkMode ?"label-text text-gray-100":"label-text"}>Name</span>
           </label>
           <input defaultValue={user?.displayName}
           name="name" required
@@ -105,7 +105,7 @@ const PaymentForm = () => {
         </div>
         <div className="form-control">
           <label className="label">
-            <span className="label-text text-gray-900">Phone Number</span>
+            <span className={isDarkMode ?"label-text text-gray-100":"label-text text-gray-900"}>Phone Number</span>
           </label>
           <input 
           name="phone" required
@@ -114,7 +114,7 @@ const PaymentForm = () => {
         </div>
         <div className="form-control">
           <label className="label">
-            <span className="label-text">Price</span>
+            <span className={isDarkMode ?"label-text text-gray-100":"label-text"}>Price</span>
           </label>
           <input 
           name="price"

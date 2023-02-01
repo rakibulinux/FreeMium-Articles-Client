@@ -4,11 +4,11 @@ import { AuthContext } from "../../../../contexts/AuthProvider";
 
 const WelcomeDashboard = () => {
   const { loading } = useContext(AuthContext);
-
+//   test comment
   if (loading) {
     return <Spinner />;
   }
-
+// test comment
   return (
     <div className="flex justify-center items-center">
       <h1 className="text-center text-3xl font-medium text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-sky-600 sm:mr-3 md:mb-0">

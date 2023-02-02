@@ -33,7 +33,7 @@ const DashboardLayout = () => {
             {/* {isAdmin && ( */}
               <>
               <li><Link to="/dashboard"><FaLaptop/> Dashboard</Link></li>
-                <li><Link to='/dashboard/category'> <FaFolder />Category</Link></li>
+                <li><Link to='/dashboard/category'> <FaFolder />Categories</Link></li>
       <li><Link to='/dashboard/storys'> <FaFile />Storys</Link></li>
       <li><Link to='/dashboard/editors'> <FaPencilRuler />Editors</Link></li>
       

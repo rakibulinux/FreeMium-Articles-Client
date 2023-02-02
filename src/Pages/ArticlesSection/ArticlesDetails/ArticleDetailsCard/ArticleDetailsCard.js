@@ -6,6 +6,7 @@ import {
 } from "@heroicons/react/24/solid";
 import React from "react";
 import { useContext } from "react";
+import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { APIContext } from "../../../../contexts/APIProvider";
 import DemoWritter from "../../../Home/DemoWritter";
@@ -20,6 +21,7 @@ const ArticleDetailsCard = ({ articleData }) => {
     articleTitle,
     writerImg,
     writerName,
+   
   } = articleData;
   const { isDarkMode, setIsDarkMode } = useContext(APIContext);
   const toggleDarkMode = () => {
@@ -60,6 +62,24 @@ const ArticleDetailsCard = ({ articleData }) => {
     </svg>
   );
 
+  
+  
+
+   // reported handler
+   const reportedHandler=id=>{
+        
+    fetch(`${process.env.REACT_APP_API_URL}/story/reportedStory/${id}`,{
+method:'PUT'
+})
+.then(res=>res.json())
+.then(data=>{
+console.log(data)
+if(data.acknowledged===true){
+    toast.success('Add Report  successfully')
+   
+  }    
+})  
+  }
   return (
     <div>
       {/* card */}
@@ -222,7 +242,7 @@ const ArticleDetailsCard = ({ articleData }) => {
             </li>
 
             <li>
-              <a
+              {/* <a
                 href="/"
                 rel="noreferrer"
                 target="_blank"
@@ -231,9 +251,22 @@ const ArticleDetailsCard = ({ articleData }) => {
                     ? "text-gray-200 transition hover:text-gray-300"
                     : "text-gray-500 transition hover:text-black"
                 }
-              >
-                ...
-              </a>
+              > */}
+                {/* 3 dot */}
+                <div className="dropdown dropdown-end">
+      <button className="btn btn-square btn-ghost">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-5 h-5 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"></path></svg>
+    </button>
+      <ul tabIndex={0} className="mt-2 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
+        <li>
+          <a href="/">Mute this author</a>
+        </li>
+        <li><a href="/">Mute this publication</a></li>
+        <li><button onClick={()=>reportedHandler(_id)}>Report</button></li>
+      </ul>
+    </div>
+  
+              {/* </a> */}
             </li>
           </ul>
 

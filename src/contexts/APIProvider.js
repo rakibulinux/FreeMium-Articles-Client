@@ -37,6 +37,16 @@ const APIProvider = ({ children }) => {
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
   };
+  //get reported item 
+  const {data:reportedItems=[],isLoading:reportLoading,refetch:reportRefetch}=useQuery({  
+    queryKey:['reportedItem'],
+    queryFn:async()=>{
+        const res = await fetch(`${process.env.REACT_APP_API_URL}/reportedItem`)
+        const data = await res.json();
+        return data;
+      }
+      
+    })
   const apiInfo = {
     categoryButton,
     isCategoryLoading,
@@ -49,6 +59,9 @@ const APIProvider = ({ children }) => {
     isDarkMode,
     setIsDarkMode,
     toggleDarkMode,
+    reportedItems,
+    reportLoading,
+    reportRefetch
   };
   return <APIContext.Provider value={apiInfo}>{children}</APIContext.Provider>;
 };

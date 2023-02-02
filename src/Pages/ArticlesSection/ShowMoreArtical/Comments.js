@@ -1,15 +1,29 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { useForm } from "react-hook-form";
 import { AuthContext } from '../../../contexts/AuthProvider';
+import { format, distanceInWordsToNow, currentTime } from "date-fns";
 
-const Comments = () => {
-
-    const { user } = useContext(AuthContext);
-    // console.log(user);
+const Comments = ({ id }) => {
 
     const { register, handleSubmit } = useForm();
+    const { user } = useContext(AuthContext);
+    const date = format(new Date(), "PP");
+    // const formattedTime = format(currentTime, 'HH:mm:ss');
+    // const postTime = new Date('2022-12-01T08:30:00.000Z');
+    // const timeSincePost = distanceInWordsToNow(postTime, { includeSeconds: true });
+    // console.log(user);
+
+
     const handleComment = data => {
-        console.log(data);
+        // console.log(data);
+        const comment = {
+            articleId: id,
+            userName: user?.displayName,
+            profileImage: user?.photoURL,
+            comment: data.comment,
+            commentDate: date
+        }
+        console.log(comment);
     }
 
     return (
@@ -24,7 +38,7 @@ const Comments = () => {
                 <textarea className="textarea textarea-bordered textarea-sm w-full " {...register("comment")} placeholder="What are your thoughts" />
                 {/* <p>{data}</p> */}
                 <div className='flex justify-end'>
-                    <input className="btn btn-success btn-sm rounded-full text-white" type="submit" />
+                    <input className="btn bg-[#0F730C] hover:bg-[#0F730C] btn-sm rounded-full text-white" type="submit" />
                 </div>
             </form>
 

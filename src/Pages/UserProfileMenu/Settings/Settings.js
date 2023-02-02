@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Tabs from "../Tabs/Tabs";
 import Account from "./Account";
 import MembershipAndPayment from "./MembershipAndPayment";
+import Notifications from "./Notifications";
 import SecurityAndApps from "./SecurityAndApps";
 
 const Settings = () => {
@@ -10,7 +11,7 @@ const Settings = () => {
    const tabsData = [
         { id: 1, label: 'Account', content: <div><Account/></div> },
         { id: 2, label: ' Publishing', content: <div>Publishing</div> },
-        { id: 3, label: ' Notifications', content: <div>Notifications</div> },
+        { id: 3, label: ' Notifications', content: <div><Notifications></Notifications></div> },
         { id: 4, label: ' Membership and payment', content: <div><MembershipAndPayment></MembershipAndPayment></div> },
         { id: 5, label: ' Security and apps', content: <div><SecurityAndApps></SecurityAndApps></div> },
         

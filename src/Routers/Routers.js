@@ -33,6 +33,7 @@ import DashbordStory from "../Pages/Dashboard/DashbordStory/DashbordStory";
 import DashbordEditors from "../Pages/Dashboard/DashbordEditors/DashbordEditors";
 import DasReCharts from "../Pages/Dashboard/DasReCharts/DasReCharts";
 import DasReportedStory from "../Pages/Dashboard/DasReportedStory/DasReportedStory";
+import DasAddCategory from "../Pages/Dashboard/DasAddCategory/DasAddCategory";
 
 const router = createBrowserRouter([
   {
@@ -200,45 +201,29 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/dashboard/category",
-        element: (
-          <AdminRoute>
-            <DashbordCategory></DashbordCategory>
-          </AdminRoute>
-        ),
-      },
-      {
-        path: "/dashboard/storys",
-        element: (
-          <AdminRoute>
-            <DashbordStory></DashbordStory>
-          </AdminRoute>
-        ),
-      },
-      {
-        path: "/dashboard/editors",
-        element: (
-          <AdminRoute>
-            <DashbordEditors></DashbordEditors>
-          </AdminRoute>
-        ),
-      },
-      {
-        path: "/dashboard/charts",
-        element: (
-          <AdminRoute>
-            <DasReCharts></DasReCharts>
-          </AdminRoute>
-        ),
-      },
-      {
-        path: "/dashboard/reportedStory",
-        element: (
-          <AdminRoute>
-            <DasReportedStory></DasReportedStory>
-          </AdminRoute>
-        ),
-      },
+        path:'/dashboard/category',
+        element:<AdminRoute><DashbordCategory></DashbordCategory></AdminRoute>,
+       },
+       {
+        path:'/dashboard/storys',
+        element:<AdminRoute><DashbordStory></DashbordStory></AdminRoute>,
+       },
+       {
+        path:'/dashboard/editors',
+        element:<AdminRoute><DashbordEditors></DashbordEditors></AdminRoute>,
+       },
+       {
+        path:'/dashboard/charts',
+        element:<AdminRoute><DasReCharts></DasReCharts></AdminRoute>,
+       },
+       {
+        path:'/dashboard/reportedStory',
+        element:<AdminRoute><DasReportedStory></DasReportedStory></AdminRoute>,
+       },
+       {
+        path:'/dashboard/addCategory',
+        element:<AdminRoute><DasAddCategory></DasAddCategory></AdminRoute>,
+       }
     ],
   },
 ]);

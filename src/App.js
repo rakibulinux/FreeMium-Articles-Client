@@ -9,9 +9,9 @@ function App() {
 
   return (
     <div
-      className={`bg-${isDarkMode ? "black-900" : "gray-100"} text-${
-        isDarkMode ? "white" : "black"
-      }`}
+      className={
+        isDarkMode ? "bg-black-350 text-white" : "bg-base-100 text-black-350"
+      }
     >
       <RouterProvider router={router} />
     </div>

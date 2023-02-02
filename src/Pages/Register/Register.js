@@ -4,10 +4,13 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import PrimaryButton from "../../components/Button/PrimaryButton";
 import { AuthContext } from "../../contexts/AuthProvider";
 import { setAuthToken } from "../../APIs/Auth";
+import { APIContext } from "../../contexts/APIProvider";
 const Register = () => {
   const [role, setRole] = useState("user");
   const { createUserAccount, updateUserProfile, signInWithGoogle, setLoading } =
     useContext(AuthContext);
+  const { isDarkMode } = useContext(APIContext);
+
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
@@ -74,7 +77,13 @@ const Register = () => {
 
   return (
     <div className="flex justify-center items-center pt-8 my-10">
-      <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900">
+      <div
+        className={
+          isDarkMode
+            ? "flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-black-250 text-white"
+            : "flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900"
+        }
+      >
         <div className="mb-8 text-center">
           <h1 className="my-3 text-4xl font-bold">Signup</h1>
           <p className="text-sm text-gray-400">Create a new account</p>
@@ -146,7 +155,11 @@ const Register = () => {
             <div>
               <PrimaryButton
                 type="submit"
-                classes="w-full px-8 py-3 font-semibold rounded-md bg-gray-900 hover:bg-gray-700 hover:text-white text-gray-100"
+                classes={
+                  isDarkMode
+                    ? "w-full px-8 py-3 font-semibold rounded-md bg-black-350 hover:bg-gray-700 hover:text-white text-gray-100"
+                    : "w-full px-8 py-3 font-semibold rounded-md bg-gray-900 hover:bg-gray-700 hover:text-white text-gray-100"
+                }
               >
                 Register
               </PrimaryButton>

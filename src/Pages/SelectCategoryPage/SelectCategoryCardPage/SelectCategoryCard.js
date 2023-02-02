@@ -1,7 +1,7 @@
 import React from "react";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { APIContext } from './../../../contexts/APIProvider';
+import { APIContext } from "./../../../contexts/APIProvider";
 
 const SelectCategoryCard = ({ data }) => {
   // const { loading } = useContext(AuthContext);
@@ -15,23 +15,40 @@ const SelectCategoryCard = ({ data }) => {
     articleImg,
     _id,
   } = data;
+
+  const title = articleTitle.replace(/<[^>]+>/g, "").slice(0, 60) + "...";
+  const description = articleDetails.replace(/<[^>]+>/g, "");
   const descriptionSlice =
-    articleDetails?.length > 170
-      ? articleDetails?.slice(0, 170) + "..."
-      : articleDetails;
+    description?.length > 170
+      ? description?.slice(0, 170) + "..."
+      : description;
   //   if (loading) {
   //     return <Spinner />;
   //   }
-  const {isDarkMode} = useContext(APIContext);
+  const { isDarkMode } = useContext(APIContext);
   return (
     <>
       <Link to={`/view-story/${_id}`}>
-        <div className={isDarkMode ?"my-7 w-full mx-auto bg-gray-900 rounded-xl shadow-lg":"my-7 w-full mx-auto bg-white rounded-xl shadow-md"}>
+        <div
+          className={
+            isDarkMode
+              ? "my-7 w-full mx-auto bg-black-250 rounded-xl shadow-lg"
+              : "my-7 w-full mx-auto bg-white rounded-xl shadow-md"
+          }
+        >
           <div className="card-body md:flex">
             <div className="flex items-center">
               {/* blog auther img */}
               <img className="rounded-full w-10 h-10" src={writerImg} alt="" />
-              <h3  className={isDarkMode ? "ml-2 font-bold text-gray-100":"ml-2 font-bold text-gray-900"}>{writerName}</h3>
+              <h3
+                className={
+                  isDarkMode
+                    ? "ml-2 font-bold text-gray-100"
+                    : "ml-2 font-bold text-gray-900"
+                }
+              >
+                {writerName}
+              </h3>
             </div>
             <div
               className="lg:grid flex flex-col-reverse lg:flex-row"
@@ -39,20 +56,31 @@ const SelectCategoryCard = ({ data }) => {
             >
               <div>
                 <h1
-                  className={isDarkMode ?"text-2xl font-semibold text-gray-100":"text-2xl font-semibold text-gray-800"}
-                  dangerouslySetInnerHTML={{ __html: articleTitle }}
+                  className={
+                    isDarkMode
+                      ? "text-2xl font-semibold text-gray-100"
+                      : "text-2xl font-semibold text-gray-800"
+                  }
+                  dangerouslySetInnerHTML={{ __html: title }}
                 />
-                {/* {articleTitle}
-                  </h1> */}
-                <p className={isDarkMode ?"text-gray-100":"text-gray-900"} dangerouslySetInnerHTML={{ __html: descriptionSlice }} />
+                <p
+                  className={isDarkMode ? "text-gray-100" : "text-gray-900"}
+                  dangerouslySetInnerHTML={{ __html: descriptionSlice }}
+                />
               </div>
               {/* blog right img */}
               <div className="flex justify-center items-center p-2 ">
-                <img className="" src={articleImg} alt="" />
+                <img className="w-56 h-32" src={articleImg} alt="" />
               </div>
             </div>
             <div className="flex items-center">
-              <span className={isDarkMode ?"block text-gray-100 font-semibold":"block text-gray-700 font-semibold"}>
+              <span
+                className={
+                  isDarkMode
+                    ? "block text-gray-100 font-semibold"
+                    : "block text-gray-700 font-semibold"
+                }
+              >
                 {articleSubmitDate}
               </span>
               <span className="block ml-3 text-red-500 font-semibold">

@@ -88,19 +88,37 @@ const Navbar = () => {
   const navItemNotUser = (
     <>
       <li>
-        <NavLink to="/our-story" className={isDarkMode ?"text-gray-100 border-animate":"text-gray-900 border-animate"}>
+        <NavLink
+          to="/our-story"
+          className={
+            isDarkMode
+              ? "text-white border-animate"
+              : "text-gray-900 border-animate"
+          }
+        >
           Our story
         </NavLink>
       </li>
 
       <li>
-        <NavLink to={'/membership'} className={isDarkMode ?"text-gray-100 border-animate":"text-gray-900 border-animate"}>
+        <NavLink
+          className={
+            isDarkMode
+              ? "text-white border-animate"
+              : "text-gray-900 border-animate"
+          }
+          to="/membership"
+        >
           Membership
         </NavLink>
       </li>
       <li className="gap-2 lg:block">
         <NavLink
-          className={isDarkMode ?"flex gap-2 text-gray-100 hover:text-gray-200":"flex gap-2 text-gray-900 hover:text-black"}
+          className={
+            isDarkMode
+              ? "flex items-center gap-2 text-white hover:text-black"
+              : "flex items-center gap-2 text-gray-900 hover:text-black"
+          }
           to="/write-stories"
         >
           {writeIcon} Write
@@ -108,7 +126,14 @@ const Navbar = () => {
       </li>
 
       <li>
-        <NavLink className={isDarkMode ?"text-gray-100 border-animate":"text-gray-900 border-animate"} to="/login">
+        <NavLink
+          className={
+            isDarkMode
+              ? "text-white border-animate"
+              : "text-gray-900 border-animate"
+          }
+          to="/login"
+        >
           Sign In
         </NavLink>
       </li>
@@ -117,32 +142,42 @@ const Navbar = () => {
   const responsiveNavItemNotUser = (
     <>
       <li className="justify-between bg-white text-black text-normal font-semibold text-semibold py-1">
-        <NavLink to="/our-story" className="text-gray-900 border-animate">
+        <NavLink
+          to="/our-story"
+          className={
+            isDarkMode
+              ? "text-white border-animate"
+              : "text-gray-900 border-animate"
+          }
+        >
           Our story
         </NavLink>
       </li>
       <li className="justify-between bg-white text-black text-normal font-semibold text-semibold py-1">
-        <NavLink className="text-gray-900 border-animate" to="/membership">
+        <NavLink
+          className={
+            isDarkMode
+              ? "text-white border-animate"
+              : "text-gray-900 border-animate"
+          }
+          to="/membership"
+        >
           Membership
         </NavLink>
       </li>
       <li className="justify-between bg-white text-black text-normal font-semibold text-semibold py-1">
         <NavLink
-          className={isDarkMode ?"flex items-center gap-2 text-gray-200 hover:text-white":"flex items-center gap-2 text-gray-900 hover:text-gray-400"} 
+          className={
+            isDarkMode
+              ? "flex items-center gap-2 text-white hover:text-black"
+              : "flex items-center gap-2 text-gray-900 hover:text-black"
+          }
           to="/write-stories"
         >
           {writeIcon} Write
         </NavLink>
       </li>
-      <li className="justify-between bg-white text-black text-normal font-semibold text-semibold py-1">
-      <button onClick={toggleDarkMode} className=''>
-              {isDarkMode ? <div className="flex items-center">
-                {lightIcon} <span className="ml-2">Light</span>
-              </div> : <div className="flex items-center">
-                {darkIcon} <span className="ml-2">Dark</span>
-                </div>}
-      </button>
-      </li>
+
       <hr className="text-gray-400 shadow-2xl my-2" />
       <li className="justify-between bg-white text-black text-normal font-semibold py-1">
         <button
@@ -150,65 +185,34 @@ const Navbar = () => {
           className="text-gray-900 hover:text-gray-600 flex items-center"
         >
           <CiLogin className="text-xl font-semibold mr-3" />
-          <NavLink className="text-gray-900 border-animate" to="/login">
+          <NavLink
+            className={
+              isDarkMode
+                ? "text-white border-animate"
+                : "text-gray-900 border-animate"
+            }
+            to="/login"
+          >
             Sign In
           </NavLink>
         </button>
       </li>
     </>
   );
-  const navItems = (
-    <>
-      {!user?.uid ? (
-        <>
-          <li>
-            <NavLink
-              className={({ isActive }) => (isActive ? "text-sky-600" : "")}
-              to="/login"
-            >
-              <PrimaryButton classes="rounded-full px-2 py-1">
-                Login
-              </PrimaryButton>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              className={({ isActive }) => (isActive ? "text-sky-600" : "")}
-              to="/register"
-            >
-              <PrimaryButton classes="rounded-full px-2 py-1">
-                Register
-              </PrimaryButton>
-            </NavLink>
-          </li>
-        </>
-      ) : (
-        <>
-          <li>
-            <NavLink
-              className={({ isActive }) =>
-                isActive ? "text-sky-600 bg-none hover:bg-none" : ""
-              }
-              to="/dashboard"
-            >
-              Dashboard
-            </NavLink>
-          </li>
-          <li>
-            <button onClick={handleLogOut}>SignOut</button>
-          </li>
-        </>
-      )}
-    </>
-  );
-
   return (
     <div className="container mx-auto print:hidden">
       {user?.uid ? (
         <div className="navbar">
           <div className="navbar-start">
             <div className="flex gap-2 items-center">
-              <NavLink to="/" className="text-2xl font-medium">
+              <NavLink
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-sky-600 font-semibold bg-none active:bg-none hover:bg-none"
+                    : ""
+                }
+                to="/"
+              >
                 <img className="w-56" src={whiteScreen} alt="" />
               </NavLink>
               <Search />
@@ -217,7 +221,11 @@ const Navbar = () => {
           <div className="navbar-end gap-2 items-center">
             <div className="block">
               <NavLink
-                className={isDarkMode ?"flex gap-2 text-gray-200 hover:text-gray-300":"flex gap-2 text-gray-900 hover:text-gray-800"}
+                className={
+                  isDarkMode
+                    ? "flex items-center gap-2 text-white hover:text-black"
+                    : "flex items-center gap-2 text-gray-900 hover:text-black"
+                }
                 to="/write-stories"
               >
                 {writeIcon} Write
@@ -259,82 +267,245 @@ const Navbar = () => {
               </label>
               <ul
                 tabIndex={0}
-                className="menu menu-compact dropdown-content mt-3 p-2 shadow rounded-sm bg-base-100 box-border w-max
-                border-[1px] border-[#e4e0e0]
-                "
+                className={
+                  isDarkMode
+                    ? "menu menu-compact dropdown-content mt-3 p-2 shadow rounded-sm bg-black-250 box-border w-max border-2 border-black-350 text-white"
+                    : "menu menu-compact dropdown-content mt-3 p-2 shadow rounded-sm bg-base-100 box-border w-max border-2 border-gray-50 text-black-250"
+                }
               >
-                <li>
+                <li
+                  className={
+                    isDarkMode
+                      ? "justify-between bg-black-250 text-white text-lg font-semibold text-semibold"
+                      : "justify-between bg-white text-black text-lg font-semibold text-semibold"
+                  }
+                >
                   <NavLink
-                  
                     className={({ isActive }) =>
-                      isActive ? "text-sky-600 bg-none hover:bg-none" : ""
+                      isActive
+                        ? "text-sky-600 font-semibold bg-none active:bg-none hover:bg-none"
+                        : ""
                     }
                     to="/dashboard"
                   >
                     <AiOutlineDashboard /> Dashboard
                   </NavLink>
                 </li>
-                <li className="justify-between bg-white text-black text-lg font-semibold text-semibold">
-                  <NavLink to="/profile">
+                <li
+                  className={
+                    isDarkMode
+                      ? "justify-between bg-black-250 text-white text-lg font-semibold text-semibold"
+                      : "justify-between bg-white text-black text-lg font-semibold text-semibold"
+                  }
+                >
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive
+                        ? "text-sky-600 font-semibold bg-none active:bg-none hover:bg-none"
+                        : ""
+                    }
+                    to="/profile"
+                  >
                     <CgProfile className="text-lg" />
                     Profile
                   </NavLink>
                 </li>
-                <li className="justify-between bg-white text-black text-lg font-semibold text-semibold">
-                  <NavLink to="/list">
+                <li
+                  className={
+                    isDarkMode
+                      ? "justify-between bg-black-250 text-white text-lg font-semibold text-semibold"
+                      : "justify-between bg-white text-black text-lg font-semibold text-semibold"
+                  }
+                >
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive
+                        ? "text-sky-600 font-semibold bg-none active:bg-none hover:bg-none"
+                        : ""
+                    }
+                    to="/list"
+                  >
                     <BsBookmarksFill className="text-lg" />
                     List
                   </NavLink>
                 </li>
-                <li className="justify-between bg-white text-black text-lg font-semibold text-semibold">
-                  <NavLink to="/stories">
+                <li
+                  className={
+                    isDarkMode
+                      ? "justify-between bg-black-250 text-white text-lg font-semibold text-semibold"
+                      : "justify-between bg-white text-black text-lg font-semibold text-semibold"
+                  }
+                >
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive
+                        ? "text-sky-600 font-semibold bg-none active:bg-none hover:bg-none"
+                        : ""
+                    }
+                    to="/stories"
+                  >
                     <MdAmpStories className="text-lg" />
                     Stories
                   </NavLink>
                 </li>
-                <li className="justify-between bg-white text-black text-lg font-semibold text-semibold">
-                  <NavLink to="/stats">
+                <li
+                  className={
+                    isDarkMode
+                      ? "justify-between bg-black-250 text-white text-lg font-semibold text-semibold"
+                      : "justify-between bg-white text-black text-lg font-semibold text-semibold"
+                  }
+                >
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive
+                        ? "text-sky-600 font-semibold bg-none active:bg-none hover:bg-none"
+                        : ""
+                    }
+                    to="/stats"
+                  >
                     <GiNetworkBars className="text-lg" />
                     Stats
                   </NavLink>
                 </li>
 
                 <div className="divider"></div>
-                <li className="justify-between bg-white text-black text-lg font-semibold text-semibold">
-                  <NavLink to="/settings">Settings</NavLink>
+                <li
+                  className={
+                    isDarkMode
+                      ? "justify-between bg-black-250 text-white text-lg font-semibold text-semibold"
+                      : "justify-between bg-white text-black text-lg font-semibold text-semibold"
+                  }
+                >
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive
+                        ? "text-sky-600 font-semibold bg-none active:bg-none hover:bg-none"
+                        : ""
+                    }
+                    to="/settings"
+                  >
+                    Settings
+                  </NavLink>
                 </li>
-                <li className="justify-between bg-white text-black text-lg font-semibold text-semibold">
-                  <NavLink to="/refineRecommendations">
+                <li
+                  className={
+                    isDarkMode
+                      ? "justify-between bg-black-250 text-white text-lg font-semibold text-semibold"
+                      : "justify-between bg-white text-black text-lg font-semibold text-semibold"
+                  }
+                >
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive
+                        ? "text-sky-600 font-semibold bg-none active:bg-none hover:bg-none"
+                        : ""
+                    }
+                    to="/refineRecommendations"
+                  >
                     Refine recommendations
                   </NavLink>
                 </li>
-                <li className="justify-between bg-white text-black text-lg font-semibold text-semibold">
-                  <NavLink to="/">Manage publications</NavLink>
+                <li
+                  className={
+                    isDarkMode
+                      ? "justify-between bg-black-250 text-white text-lg font-semibold text-semibold"
+                      : "justify-between bg-white text-black text-lg font-semibold text-semibold"
+                  }
+                >
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive
+                        ? "text-sky-600 font-semibold bg-none active:bg-none hover:bg-none"
+                        : ""
+                    }
+                    to="/"
+                  >
+                    Manage publications
+                  </NavLink>
                 </li>
                 <div className="divider"></div>
-                <li className="justify-between bg-white text-black text-lg font-semibold text-semibold">
-                  <NavLink to="/payment">Become a member</NavLink>
+                <li
+                  className={
+                    isDarkMode
+                      ? "justify-between bg-black-250 text-white text-lg font-semibold text-semibold"
+                      : "justify-between bg-white text-black text-lg font-semibold text-semibold"
+                  }
+                >
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive
+                        ? "text-sky-600 font-semibold bg-none active:bg-none hover:bg-none"
+                        : ""
+                    }
+                    to="/payment"
+                  >
+                    Become a member
+                  </NavLink>
                 </li>
-                <li className="justify-between bg-white text-black text-lg font-semibold text-semibold">
-                  <NavLink to="/applyToThePartnerProgram">
+                <li
+                  className={
+                    isDarkMode
+                      ? "justify-between bg-black-250 text-white text-lg font-semibold text-semibold"
+                      : "justify-between bg-white text-black text-lg font-semibold text-semibold"
+                  }
+                >
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive
+                        ? "text-sky-600 font-semibold bg-none active:bg-none hover:bg-none"
+                        : ""
+                    }
+                    to="/applyToThePartnerProgram"
+                  >
                     Apply to the Partner Program
                   </NavLink>
                 </li>
-                <li className="justify-between bg-white text-black text-lg font-semibold text-semibold">
-                  <NavLink to="/giftMembership">Gift membership</NavLink>
+                <li
+                  className={
+                    isDarkMode
+                      ? "justify-between bg-black-250 text-white text-lg font-semibold text-semibold"
+                      : "justify-between bg-white text-black text-lg font-semibold text-semibold"
+                  }
+                >
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive
+                        ? "text-sky-600 font-semibold bg-none active:bg-none hover:bg-none"
+                        : ""
+                    }
+                    to="/giftMembership"
+                  >
+                    Gift membership
+                  </NavLink>
                 </li>
                 <div className="divider"></div>
-                <li className="justify-between bg-white text-black text-lg font-semibold">
-                      <button onClick={toggleDarkMode} className=''>
-                    {isDarkMode ? <div className="flex items-center">
-                      {lightIcon} <span className="ml-2">Light-theme</span>
-                    </div> : <div className="flex items-center">
-                      {darkIcon} <span className="ml-2">Dark-theme</span>
-                      </div>}
-                      </button>
+                <li
+                  className={
+                    isDarkMode
+                      ? "justify-between bg-black-250 text-white text-lg font-semibold text-semibold"
+                      : "justify-between bg-white text-black text-lg font-semibold text-semibold"
+                  }
+                >
+                  <button onClick={toggleDarkMode} className="">
+                    {isDarkMode ? (
+                      <div className="flex items-center">
+                        {lightIcon} <span className="ml-2">Light-theme</span>
+                      </div>
+                    ) : (
+                      <div className="flex items-center">
+                        {darkIcon} <span className="ml-2">Dark-theme</span>
+                      </div>
+                    )}
+                  </button>
                 </li>
                 <div className="divider"></div>
-                <li className="justify-between bg-white text-black text-lg font-semibold">
+                <li
+                  className={
+                    isDarkMode
+                      ? "justify-between bg-black-250 text-black text-lg font-semibold"
+                      : "justify-between bg-white text-black text-lg font-semibold"
+                  }
+                >
                   <>
                     <button
                       onClick={handleLogOut}
@@ -378,7 +549,14 @@ const Navbar = () => {
                 {responsiveNavItemNotUser}
               </ul>
             </div>
-            <NavLink to="/" className="text-2xl font-medium">
+            <NavLink
+              className={({ isActive }) =>
+                isActive
+                  ? "text-sky-600 font-semibold bg-none active:bg-none hover:bg-none"
+                  : ""
+              }
+              to="/"
+            >
               <img className="w-32 md:w-44" src={whiteScreen} alt="" />
             </NavLink>
           </div>
@@ -390,8 +568,12 @@ const Navbar = () => {
               {isDarkMode ? lightIcon : darkIcon}
             </button>
             <NavLink
+              className={
+                isDarkMode
+                  ? "bg-black-250 py-2 px-3 text-gray-100 rounded-3xl"
+                  : "bg-black-350 py-2 px-3 text-gray-100 rounded-3xl"
+              }
               to="/login"
-              className="bg-black py-2 px-3 text-gray-100 rounded-3xl"
             >
               Get started
             </NavLink>

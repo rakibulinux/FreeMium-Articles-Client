@@ -1,22 +1,19 @@
 import React, { useEffect, useState } from "react";
+import { useContext } from "react";
+import { APIContext } from "../../../../../contexts/APIProvider";
 
 const WriterAvatarImg = () => {
-  const [userData, setUserData] = useState([]);
-  console.log(userData);
-  useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/user`)
-      .then((res) => res.json())
-      .then((data) => setUserData(data));
-  }, [userData]);
+  const { users } = useContext(APIContext);
   return (
     <div className="mt-4">
-      <div className="avatar-group -space-x-6">
-        {userData.map((data) => (
-          <div className="avatar">
-            <div className="w-10">
-              <img src={data?.picture} alt="people" />
-            </div>
-          </div>
+      <div className="avatar-group -space-x-3">
+        {users.map((data) => (
+          <img
+            className="w-10 h-10 rounded-full"
+            key={data?._id}
+            src={data?.picture}
+            alt="people"
+          />
         ))}
       </div>
     </div>

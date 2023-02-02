@@ -1,13 +1,27 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 
 export const APIContext = createContext();
 
 const APIProvider = ({ children }) => {
   const [searchResults, setSearchResults] = useState([]);
+  const [users, setUsers] = useState([]);
+  const [allUsers, setAllUsers] = useState([]);
+  const [threeUsers, setThreeUsers] = useState([]);
   const [isDarkMode, setIsDarkMode] = useState(false);
+
+  useEffect(() => {
+    const storedValue = localStorage.getItem("isDarkMode");
+    if (storedValue) {
+      setIsDarkMode(JSON.parse(storedValue));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("isDarkMode", JSON.stringify(isDarkMode));
+  }, [isDarkMode]);
+
   const {
-    
     data: categoryButton,
     isLoading: isCategoryLoading,
     refetch: reFetchCategory,
@@ -37,6 +51,25 @@ const APIProvider = ({ children }) => {
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
   };
+
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_API_URL}/user`)
+      .then((res) => res.json())
+      .then((data) => setUsers(data));
+  }, []);
+
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_API_URL}/all-users`)
+      .then((res) => res.json())
+      .then((data) => setAllUsers(data));
+  }, []);
+
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_API_URL}/three-users`)
+      .then((res) => res.json())
+      .then((data) => setThreeUsers(data));
+  }, []);
+
   const apiInfo = {
     categoryButton,
     isCategoryLoading,
@@ -49,6 +82,9 @@ const APIProvider = ({ children }) => {
     isDarkMode,
     setIsDarkMode,
     toggleDarkMode,
+    users,
+    allUsers,
+    threeUsers,
   };
   return <APIContext.Provider value={apiInfo}>{children}</APIContext.Provider>;
 };

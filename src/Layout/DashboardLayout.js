@@ -5,9 +5,11 @@ import { AuthContext } from "../contexts/AuthProvider";
 import useAdmin from "../hooks/useAdmin";
 import Navbar from "../Pages/Shared/Navbar/Navbar";
 import { FaFolder,FaFile,FaPencilRuler,FaRegChartBar,FaLaptop,FaExclamationCircle} from 'react-icons/fa';
+import '../Pages/Dashboard/DashbordEditors/DashbordEditorsTable/DashordEditorsTable.css';
 const DashboardLayout = () => {
   const { user, loading } = useContext(AuthContext);
   const [isAdmin] = useAdmin(user?.email);
+
   if (loading) {
     return <Spinner />;
   }
@@ -21,7 +23,7 @@ const DashboardLayout = () => {
           type="checkbox"
           className="drawer-toggle"
         />
-        <div className="drawer-content p-4">
+        <div className="drawer-content p-4 hideScrollbar">
           <Outlet />
         </div>
         <div className="drawer-side ">

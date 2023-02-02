@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import Spinner from "../../../components/Spinner/Spinner";
 import { APIContext } from "../../../contexts/APIProvider";
 
-function Search() {
+function Search({searchPlaceholder, propsStyle}) {
   const [query, setQuery] = useState("");
   const { searchResults, setSearchResults } = useContext(APIContext);
 
@@ -18,7 +18,7 @@ function Search() {
   return (
     <>
       <form onSubmit={handleSubmit} className="hidden md:block">
-        <div className="relative mt-4 text-gray-600 focus-within:text-gray-400">
+        <div className={`relative ${propsStyle} text-gray-600 focus-within:text-gray-400`}>
           <span className="absolute inset-y-0 left-0 flex items-center pl-2">
             <button
               type="submit"
@@ -43,7 +43,7 @@ function Search() {
             onChange={(e) => setQuery(e.target.value)}
             name="q"
             className="py-2 text-sm text-gray-900 border rounded-3xl pl-10 focus:outline-none focus:bg-white focus:text-gray-900"
-            placeholder="Search Freemium"
+            placeholder={searchPlaceholder}
             autoComplete="off"
           />
         </div>

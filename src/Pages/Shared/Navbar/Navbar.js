@@ -215,7 +215,7 @@ const Navbar = () => {
               >
                 <img className="w-56" src={whiteScreen} alt="" />
               </NavLink>
-              <Search />
+              <Search searchPlaceholder={'Search article'} propsStyle={"4px"} />
             </div>
           </div>
           <div className="navbar-end gap-2 items-center">

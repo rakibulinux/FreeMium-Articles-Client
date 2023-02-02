@@ -14,6 +14,7 @@
     "axios": "^1.2.2",
     "daisyui": "^2.46.1",
     "date-fns": "^2.29.3",
+    "dompurify": "^2.4.3",
     "firebase": "^9.15.0",
     "lottie-react": "^2.3.1",
     "medium-editor": "^5.23.3",

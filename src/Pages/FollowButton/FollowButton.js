@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
-function FollowButton({ user, userId, followingId, userEmail, unfollowingId }) {
+import { APIContext } from "../../contexts/APIProvider";
+function FollowButton({ user, userId, followingId, classes }) {
   const [isFollowing, setIsFollowing] = useState(false);
-
+  const { isDarkMode } = useContext(APIContext);
   useEffect(() => {
     axios
       .get(
@@ -47,14 +48,22 @@ function FollowButton({ user, userId, followingId, userEmail, unfollowingId }) {
       {isFollowing ? (
         <button
           onClick={handleUnfollow}
-          className="btn btn-sm rounded-full bg-gray-500 border-0 text-white"
+          className={
+            isDarkMode
+              ? `btn btn-sm bg-gray-100 hover:bg-gray-200 hover:text-gray-800 text-gray-900 rounded-full btn-outline ${classes}`
+              : `btn btn-sm rounded-full bg-gray-500 border-0 text-white btn-outline ${classes}`
+          }
         >
           Unfollow
         </button>
       ) : (
         <button
           onClick={handleFollow}
-          className="btn btn-sm rounded-full bg-gray-500 border-0 text-white"
+          className={
+            isDarkMode
+              ? `btn btn-sm bg-gray-100 hover:bg-gray-300 hover:text-gray-800 text-gray-900 rounded-full btn-outline ${classes}`
+              : `btn btn-sm rounded-full bg-gray-500 border-0 text-white btn-outline ${classes}`
+          }
         >
           Follow
         </button>

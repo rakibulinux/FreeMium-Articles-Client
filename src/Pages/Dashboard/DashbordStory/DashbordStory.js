@@ -13,21 +13,21 @@ const DashbordStory = () => {
             return data
         }
     })
-    console.log(allArticles);
+    // console.log(allArticles);
     return (
-        <div>
+        <div className=' '>
             <h2 className='text-4xl text-center font-bold m-5'> All Articles</h2>
-            <div className="overflow-x-auto w-auto ">
-  <table className="table w-full ">
+            <div className="overflow-visible w-full   ">
+  <table className="table  ">
     
-    <thead className='dark:bg-slate-800'>
+    <thead className='dark:bg-slate-800 '>
       <tr>
         <th></th>
         <th className='text-xl'>Image</th>
         <th className='text-xl'>Story Title</th>
-        <th className='text-xl'>Category</th>
-        <th className='text-xl'>Status</th>
-        <th className='text-xl'>Date</th>
+        <th className='text-xl hidden lg:table-cell'>Category</th>
+        <th className='text-xl hidden lg:table-cell p-0 '>Status</th>
+        <th className='text-xl hidden lg:table-cell '>Date</th>
         <th className='text-xl'>Actions</th>
         
       </tr>
@@ -44,14 +44,14 @@ const DashbordStory = () => {
 </div></td>
         <td dangerouslySetInnerHTML={{ __html: articles.articleTitle.slice(0,50) }}
             />
-        <td>{articles.category}</td>
-        <td><label className="swap">
+        <td className='hidden lg:table-cell'>{articles.category}</td>
+        <td className='hidden lg:table-cell'><label className="swap">
   <input type="checkbox" />
-  <div className="swap-on ">< FaTimes className='text-xl'/></div>
+  <div className="swap-on ">< FaTimes /></div>
   <div className="swap-off"><FaCheck/></div>
 </label></td>
-<td>{articles.articleSubmitDate}</td>
-<td>
+<td className='hidden lg:table-cell'>{articles.articleSubmitDate}</td>
+<td >
 <div className="dropdown dropdown-end">
   <label tabIndex={0} className="btn btn-sm m-1">Actions</label>
   <ul tabIndex={0} className="dropdown-content menu p-1 shadow bg-base-100 rounded-box w-auto">

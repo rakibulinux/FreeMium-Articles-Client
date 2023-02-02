@@ -36,7 +36,7 @@ const DashboardLayout = () => {
       <li><Link to='/dashboard/editors'> <FaPencilRuler />Editors</Link></li>
       
       <li><Link to='/dashboard/charts'><FaRegChartBar />Charts</Link></li>
-      <li><Link to='/dashboard/addCategory'> <FaFolder /> Add Category</Link></li>
+      
       <li><Link to='/dashboard/reportedStory'><FaExclamationCircle />Reported story</Link></li>
               </>
             {/* )} */}

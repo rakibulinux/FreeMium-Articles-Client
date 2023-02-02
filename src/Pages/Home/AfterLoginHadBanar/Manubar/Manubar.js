@@ -10,14 +10,18 @@ import "swiper/css/scrollbar";
 const Manubar = () => {
   const { categoryButton, isCategoryLoading } = useContext(APIContext);
   // const [swiperRef, setSwiperRef] = useState(null);
-  const {isDarkMode} = useContext(APIContext);
+  const { isDarkMode } = useContext(APIContext);
   if (isCategoryLoading) {
     return <Spinner />;
   }
   return (
     <div className="hidden md:block" style={{ width: "100%" }}>
       <ul
-        className={isDarkMode ?"menu menu-vertical lg:menu-horizontal bg-gray-900 border my-8 w-full items-center rounded-md":"menu menu-vertical lg:menu-horizontal bg-base-100 border my-8 w-full items-center rounded-md"}
+        className={
+          isDarkMode
+            ? "menu menu-vertical lg:menu-horizontal bg-black-250 border my-8 w-full items-center rounded-md"
+            : "menu menu-vertical lg:menu-horizontal bg-base-100 border my-8 w-full items-center rounded-md"
+        }
         style={{ width: "100%", alignItems: "center" }}
       >
         <Swiper
@@ -40,7 +44,15 @@ const Manubar = () => {
               }}
               key={category?._id}
             >
-              <Link to={`/category/${category?.CategoryName}`} className={isDarkMode ?"text-gray-100 p-2":"p-2 text-gray-900"}>
+              <Link
+                to={`/category/${category?.CategoryName.replace(
+                  /'/gi,
+                  ""
+                ).split("-")}`}
+                className={
+                  isDarkMode ? "text-gray-100 p-2" : "p-2 text-gray-900"
+                }
+              >
                 {category?.CategoryName}
               </Link>
             </SwiperSlide>

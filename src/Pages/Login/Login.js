@@ -6,8 +6,10 @@ import { AuthContext } from "../../contexts/AuthProvider";
 import { setAuthToken } from "../../APIs/Auth";
 import Spinner from "../../components/Spinner/Spinner";
 import useToken from "../../hooks/useToken";
+import { APIContext } from "../../contexts/APIProvider";
 
 const Login = () => {
+  const { isDarkMode } = useContext(APIContext);
   const [role, setRole] = useState("user");
   const {
     signInWithGoogle,
@@ -17,8 +19,11 @@ const Login = () => {
     setLoading,
     user,
   } = useContext(AuthContext);
+
   const navigate = useNavigate();
+
   const location = useLocation();
+
   const from = location.state?.from?.pathname || "/";
   const [loginUserEmail, setLoginUserEmail] = useState("");
   const [token] = useToken(loginUserEmail);
@@ -91,7 +96,13 @@ const Login = () => {
   }
   return (
     <div className="flex justify-center items-center pt-8 my-10">
-      <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900">
+      <div
+        className={
+          isDarkMode
+            ? "flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-black-250 text-white"
+            : "flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900"
+        }
+      >
         <div className="mb-8 text-center">
           <h1 className="my-3 text-4xl font-bold">Sign in</h1>
           <p className="text-sm text-gray-400">
@@ -142,7 +153,11 @@ const Login = () => {
           <div>
             <PrimaryButton
               type="submit"
-              classes="w-full px-8 py-3 font-semibold rounded-md bg-gray-900 hover:bg-gray-700 hover:text-white text-gray-100"
+              classes={
+                isDarkMode
+                  ? "w-full px-8 py-3 font-semibold rounded-md bg-black-350 hover:bg-gray-700 hover:text-white text-gray-100"
+                  : "w-full px-8 py-3 font-semibold rounded-md bg-gray-900 hover:bg-gray-700 hover:text-white text-gray-100"
+              }
             >
               Login
             </PrimaryButton>

@@ -21,6 +21,8 @@ const ArticlesDetails = () => {
   const { writerImg, writerName, articleTitle, articleImg, userId, userEmail } =
     articleData;
 
+  const title = articleTitle.replace(/<[^>]+>/g, "");
+
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/user/${userEmail}`)
       .then((res) => res.json())
@@ -76,7 +78,7 @@ const ArticlesDetails = () => {
               Insider. Inspiring the world through Personal Development and
               Entrepreneurship — timdenning.com/mb Follow
             </p>
-            <div className="card-actions justify-center lg:justify-start">
+            <div className="card-actions justify-center lg:justify-start items-center">
               {users && (
                 <FollowButton
                   user={user}
@@ -128,16 +130,12 @@ const ArticlesDetails = () => {
                 <div>
                   <h1
                     className="text-xl font-bold"
-                    dangerouslySetInnerHTML={{ __html: articleTitle }}
+                    dangerouslySetInnerHTML={{ __html: title }}
                   />
                 </div>
               </div>
               <div className="flex items-center gap-2 my-3">
-                <img
-                  src={articleImg}
-                  alt={articleTitle}
-                  className="w-24 h-20"
-                />
+                <img src={articleImg} alt={title} className="w-24 h-20" />
               </div>
             </div>
             {/* demo writter end */}

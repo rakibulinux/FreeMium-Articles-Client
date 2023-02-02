@@ -17,52 +17,59 @@ const ArticlesCard = ({ data }) => {
     articleImg,
     _id,
   } = data;
+  const title = articleTitle.replace(/<[^>]+>/g, "").slice(0, 60) + "...";
+
+  const description = articleDetails.replace(/<[^>]+>/g, "");
+
   const descriptionSlice =
-    articleDetails?.length > 170
-      ? articleDetails?.slice(0, 170) + "..."
-      : articleDetails;
+    description?.length > 170
+      ? description?.slice(0, 170) + "..."
+      : description;
+
   if (loading) {
     return <Spinner />;
   }
   return (
     <>
-      <Link to={`/view-story/${_id}`}>
-        <div className="my-7 w-full mx-auto bg-white rounded-xl shadow-md">
-          <div className="card-body md:flex">
-            <div className="flex items-center">
-              {/* blog auther img */}
-              <img className="rounded-full w-10 h-10" src={writerImg} alt="" />
-              <h3 className="ml-2 font-bold text-gray-900">{writerName}</h3>
-            </div>
+      <div
+        className={
+          isDarkMode
+            ? "my-7 w-full mx-auto bg-black-250 rounded-xl shadow-md text-white"
+            : "my-7 w-full mx-auto bg-base-100 rounded-xl shadow-md text-gray-800"
+        }
+      >
+        <div className="card-body md:flex">
+          <div className="flex items-center">
+            {/* blog auther img */}
+            <img className="rounded-full w-10 h-10" src={writerImg} alt="" />
+            <h3 className="ml-2 font-bold">{writerName}</h3>
+          </div>
+          <Link to={`/view-story/${_id}`}>
             <div
               className="lg:grid flex flex-col-reverse lg:flex-row"
               style={{ gridTemplateColumns: "4fr 2fr" }}
             >
               <div className="px-3">
                 <h1
-                  className="text-2xl font-semibold text-gray-800"
-                  dangerouslySetInnerHTML={{ __html: articleTitle }}
+                  className="text-2xl font-semibold"
+                  dangerouslySetInnerHTML={{ __html: title }}
                 />
-                {/* {articleTitle}
-                </h1> */}
                 <div dangerouslySetInnerHTML={{ __html: descriptionSlice }} />
               </div>
               {/* blog right img */}
               <div className="flex justify-center items-center p-2 ">
-                <img className="" src={articleImg} alt="" />
+                <img className="w-56 h-32" src={articleImg} alt="" />
               </div>
             </div>
-            <div className="flex items-center ml-3 lg:ml-2">
-              <span className="block text-gray-700 font-semibold">
-                {articleSubmitDate}
-              </span>
-              <span className="block ml-3 text-red-500 font-semibold">
-                {articleRead}-read
-              </span>
-            </div>
+          </Link>
+          <div className="flex items-center ml-3 lg:ml-2">
+            <span className="block font-semibold">{articleSubmitDate}</span>
+            <span className="block ml-3 text-red-500 font-semibold">
+              {articleRead}-read
+            </span>
           </div>
         </div>
-      </Link>
+      </div>
     </>
   );
 };

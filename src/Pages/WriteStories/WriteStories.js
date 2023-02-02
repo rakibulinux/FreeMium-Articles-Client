@@ -11,9 +11,9 @@ import { APIContext } from "../../contexts/APIProvider";
 import Spinner from "../../components/Spinner/Spinner";
 import Creator from "../AnotherCreatorPage/Creator";
 
-const WriteStories = ({ userDetails }) => {
+const WriteStories = () => {
   const { user } = useContext(AuthContext);
-  const { articlesRefetch } = useContext(APIContext);
+  const { articlesRefetch, isDarkMode } = useContext(APIContext);
   const { categoryButton, isLoading } = useContext(APIContext);
   const [users, setUsers] = useState({});
   const [title, setTitle] = useState("");
@@ -84,7 +84,14 @@ const WriteStories = ({ userDetails }) => {
     return <Spinner />;
   }
   return user?.uid ? (
-    <form onSubmit={handleSubmitStories} className=" w-10/12 mx-auto">
+    <form
+      onSubmit={handleSubmitStories}
+      className={
+        isDarkMode
+          ? "w-10/12 mx-auto p-6 my-6 rounded-md sm:p-10 bg-black-250 text-white"
+          : "w-10/12 mx-auto p-6 my-6 rounded-md sm:p-10 bg-gray-100 text-gray-900"
+      }
+    >
       <div className="flex">
         <button
           className="bg-green-600 text-white py-2 px-3 rounded-3xl ml-auto"
@@ -149,17 +156,34 @@ const WriteStories = ({ userDetails }) => {
 
       <div className="form-control w-full">
         <label className="label">
-          <span className="label-text">Read Time</span>
+          <span
+            className={
+              isDarkMode ? "label-text  text-white" : "label-text text-gray-900"
+            }
+          >
+            Read Time
+          </span>
         </label>
         <input
           type="number"
           name="number"
           placeholder="Read Time"
-          className="input input-bordered border-1 border-dashed w-full"
+          className={
+            isDarkMode
+              ? "input input-bordered border-1 border-white w-full bg-gray-700 text-white"
+              : "input input-bordered border-1 border-gray-900 w-full bg-gray-100 text-gray-900"
+          }
         />
       </div>
 
-      <select name="category" className="my-4 select select-bordered w-full">
+      <select
+        name="category"
+        className={
+          isDarkMode
+            ? "my-4 select select-bordered w-full border-white bg-gray-700 text-white"
+            : "my-4 select select-bordered w-full border-gray-900 bg-gray-100 text-gray-900"
+        }
+      >
         {categoryButton.map((category, idx) => (
           <option key={idx} value={category?.CategoryName}>
             {categoryButton.length && category?.CategoryName}
@@ -169,7 +193,11 @@ const WriteStories = ({ userDetails }) => {
       <div className="flex items-center justify-center">
         <label
           htmlFor="image"
-          className="flex flex-col items-center justify-center w-full h-36 border-1 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+          className={
+            isDarkMode
+              ? "flex flex-col items-center justify-center w-full h-36 border-1  hover:bg-bray-800 bg-gray-700 border-gray-600 hover:border-gray-500 hover:bg-gray-600 rounded-lg"
+              : "flex flex-col items-center justify-center w-full h-36 border-1 border-black-250 border-dashed rounded-lg cursor-pointer bg-gray-50"
+          }
         >
           <div className="flex flex-col items-center justify-center pt-5 pb-6">
             {image ? (

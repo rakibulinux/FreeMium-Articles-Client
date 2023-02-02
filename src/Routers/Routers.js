@@ -24,7 +24,7 @@ import MemberShipPage from "./../Pages/CreatorPage/MemberShipPage";
 import RefineRecommendations from "../Pages/UserProfileMenu/RefineRecommendations/RefineRecommendations";
 import ApplyToThePartnerProgram from "../Pages/UserProfileMenu/ApplyToThePartnerProgram/ApplyToThePartnerProgram";
 
-import SelectCategorySection from './../Pages/SelectCategoryPage/SelectCategorySection/SelectCategorySection';
+import SelectCategorySection from "./../Pages/SelectCategoryPage/SelectCategorySection/SelectCategorySection";
 import ArticlesDetails from "../Pages/ArticlesSection/ArticlesDetails/ArticlesDetails";
 import Search from "../Pages/Shared/Search/Search";
 import GiftMembership from "../Pages/UserProfileMenu/GiftMembership/GiftMembership";
@@ -33,7 +33,6 @@ import DashbordStory from "../Pages/Dashboard/DashbordStory/DashbordStory";
 import DashbordEditors from "../Pages/Dashboard/DashbordEditors/DashbordEditors";
 import DasReCharts from "../Pages/Dashboard/DasReCharts/DasReCharts";
 import DasReportedStory from "../Pages/Dashboard/DasReportedStory/DasReportedStory";
-
 
 const router = createBrowserRouter([
   {
@@ -72,10 +71,6 @@ const router = createBrowserRouter([
             <Settings></Settings>
           </PrivateRoute>
         ),
-      },
-      {
-        path: "/new-story",
-        element: <PrivateRoute>{/* <NewStory /> */}</PrivateRoute>,
       },
       {
         path: "/write-stories",
@@ -173,7 +168,7 @@ const router = createBrowserRouter([
         path: "/giftMembership",
         element: (
           <PrivateRoute>
-           <GiftMembership></GiftMembership>
+            <GiftMembership></GiftMembership>
           </PrivateRoute>
         ),
       },
@@ -205,25 +200,45 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path:'/dashboard/category',
-        element:<AdminRoute><DashbordCategory></DashbordCategory></AdminRoute>,
-       },
-       {
-        path:'/dashboard/storys',
-        element:<AdminRoute><DashbordStory></DashbordStory></AdminRoute>,
-       },
-       {
-        path:'/dashboard/editors',
-        element:<AdminRoute><DashbordEditors></DashbordEditors></AdminRoute>,
-       },
-       {
-        path:'/dashboard/charts',
-        element:<AdminRoute><DasReCharts></DasReCharts></AdminRoute>,
-       },
-       {
-        path:'/dashboard/reportedStory',
-        element:<AdminRoute><DasReportedStory></DasReportedStory></AdminRoute>,
-       }
+        path: "/dashboard/category",
+        element: (
+          <AdminRoute>
+            <DashbordCategory></DashbordCategory>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/storys",
+        element: (
+          <AdminRoute>
+            <DashbordStory></DashbordStory>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/editors",
+        element: (
+          <AdminRoute>
+            <DashbordEditors></DashbordEditors>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/charts",
+        element: (
+          <AdminRoute>
+            <DasReCharts></DasReCharts>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/reportedStory",
+        element: (
+          <AdminRoute>
+            <DasReportedStory></DasReportedStory>
+          </AdminRoute>
+        ),
+      },
     ],
   },
 ]);

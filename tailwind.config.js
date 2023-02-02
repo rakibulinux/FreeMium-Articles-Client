@@ -5,27 +5,36 @@ module.exports = {
     themes: [
       {
         mytheme: {
+          primary: "#6419E6",
 
-          "primary": "#6419E6",
+          secondary: "#D926A9",
 
-          "secondary": "#D926A9",
+          accent: "#1FB2A6",
 
-          "accent": "#1FB2A6",
-
-          "neutral": "#191D24",
+          neutral: "#191D24",
 
           "base-100": "#ffff",
 
-          "info": "#3ABFF8",
+          info: "#3ABFF8",
 
-          "success": "#36D399",
+          success: "#36D399",
 
-          "warning": "#FBBD23",
+          warning: "#FBBD23",
 
-          "error": "#F87272",
+          error: "#F87272",
         },
       },
     ],
+  },
+  theme: {
+    extend: {
+      colors: {
+        black: {
+          350: "#0D1117",
+          250: "#161B22",
+        },
+      },
+    },
   },
   plugins: [require("daisyui")],
 };

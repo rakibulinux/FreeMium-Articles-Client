@@ -21,7 +21,6 @@ const ArticleDetailsCard = ({ articleData }) => {
     articleTitle,
     writerImg,
     writerName,
-   
   } = articleData;
   const { isDarkMode, setIsDarkMode } = useContext(APIContext);
   const toggleDarkMode = () => {
@@ -62,24 +61,19 @@ const ArticleDetailsCard = ({ articleData }) => {
     </svg>
   );
 
-  
-  
-
-   // reported handler
-   const reportedHandler=id=>{
-        
-    fetch(`${process.env.REACT_APP_API_URL}/story/reportedStory/${id}`,{
-method:'PUT'
-})
-.then(res=>res.json())
-.then(data=>{
-console.log(data)
-if(data.acknowledged===true){
-    toast.success('Add Report  successfully')
-   
-  }    
-})  
-  }
+  // reported handler
+  const reportedHandler = (id) => {
+    fetch(`${process.env.REACT_APP_API_URL}/story/reportedStory/${id}`, {
+      method: "PUT",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.acknowledged === true) {
+          toast.success("Add Report  successfully");
+        }
+      });
+  };
   return (
     <div>
       {/* card */}
@@ -252,20 +246,39 @@ if(data.acknowledged===true){
                     : "text-gray-500 transition hover:text-black"
                 }
               > */}
-                {/* 3 dot */}
-                <div className="dropdown dropdown-end">
-      <button className="btn btn-square btn-ghost">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-5 h-5 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"></path></svg>
-    </button>
-      <ul tabIndex={0} className="mt-2 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
-        <li>
-          <a href="/">Mute this author</a>
-        </li>
-        <li><a href="/">Mute this publication</a></li>
-        <li><button onClick={()=>reportedHandler(_id)}>Report</button></li>
-      </ul>
-    </div>
-  
+              {/* 3 dot */}
+              <div className="dropdown dropdown-end">
+                <button className="btn btn-square btn-ghost">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    className="inline-block w-5 h-5 stroke-current"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"
+                    ></path>
+                  </svg>
+                </button>
+                <ul
+                  tabIndex={0}
+                  className="mt-2 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
+                >
+                  <li>
+                    <a href="/">Mute this author</a>
+                  </li>
+                  <li>
+                    <a href="/">Mute this publication</a>
+                  </li>
+                  <li>
+                    <button onClick={() => reportedHandler(_id)}>Report</button>
+                  </li>
+                </ul>
+              </div>
+
               {/* </a> */}
             </li>
           </ul>
@@ -362,8 +375,13 @@ if(data.acknowledged===true){
           <input type="checkbox" id="comment-modal" className="modal-toggle" />
           <div className="modal flex justify-end ">
             <div className="modal-box h-full w-full md:w-6/12 lg:w-4/12">
-              <label htmlFor="comment-modal" className="btn btn-sm btn-circle bg-white hover:bg-white hover:text-black border-none absolute right-2 top-2">✕</label>
-             <Comments id={_id}></Comments>
+              <label
+                htmlFor="comment-modal"
+                className="btn btn-sm btn-circle bg-white hover:bg-white hover:text-black border-none absolute right-2 top-2"
+              >
+                ✕
+              </label>
+              <Comments id={_id}></Comments>
             </div>
           </div>
 

@@ -4,8 +4,15 @@ import Spinner from "../components/Spinner/Spinner";
 import { AuthContext } from "../contexts/AuthProvider";
 import useAdmin from "../hooks/useAdmin";
 import Navbar from "../Pages/Shared/Navbar/Navbar";
-import { FaFolder,FaFile,FaPencilRuler,FaRegChartBar,FaLaptop,FaExclamationCircle} from 'react-icons/fa';
-import '../Pages/Dashboard/DashbordEditors/DashbordEditorsTable/DashordEditorsTable.css';
+import {
+  FaFolder,
+  FaFile,
+  FaPencilRuler,
+  FaRegChartBar,
+  FaLaptop,
+  FaExclamationCircle,
+} from "react-icons/fa";
+import "../Pages/Dashboard/DashbordEditors/DashbordEditorsTable/DashordEditorsTable.css";
 const DashboardLayout = () => {
   const { user, loading } = useContext(AuthContext);
   const [isAdmin] = useAdmin(user?.email);
@@ -28,19 +35,50 @@ const DashboardLayout = () => {
         </div>
         <div className="drawer-side ">
           <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
-          <ul className="menu p-4 w-80 bg-[#292828ee] text-base-300">
-            
+          <ul className="menu p-4 w-80 bg-green-600 text-base-300">
             {/* {isAdmin && ( */}
-              <>
-              <li><Link to="/dashboard"><FaLaptop/> Dashboard</Link></li>
-                <li><Link to='/dashboard/category'> <FaFolder />Categories</Link></li>
-      <li><Link to='/dashboard/storys'> <FaFile />Storys</Link></li>
-      <li><Link to='/dashboard/editors'> <FaPencilRuler />Editors</Link></li>
-      
-      <li><Link to='/dashboard/charts'><FaRegChartBar />Charts</Link></li>
-      
-      <li><Link to='/dashboard/reportedStory'><FaExclamationCircle />Reported story</Link></li>
-              </>
+            <>
+              <li>
+                <Link to="/dashboard">
+                  <FaLaptop /> Dashboard
+                </Link>
+              </li>
+              <li>
+                <Link to="/dashboard/category">
+                  {" "}
+                  <FaFolder />
+                  Categories
+                </Link>
+              </li>
+              <li>
+                <Link to="/dashboard/storys">
+                  {" "}
+                  <FaFile />
+                  Storys
+                </Link>
+              </li>
+              <li>
+                <Link to="/dashboard/editors">
+                  {" "}
+                  <FaPencilRuler />
+                  Editors
+                </Link>
+              </li>
+
+              <li>
+                <Link to="/dashboard/charts">
+                  <FaRegChartBar />
+                  Charts
+                </Link>
+              </li>
+
+              <li>
+                <Link to="/dashboard/reportedStory">
+                  <FaExclamationCircle />
+                  Reported story
+                </Link>
+              </li>
+            </>
             {/* )} */}
           </ul>
         </div>

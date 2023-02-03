@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
+import { APIContext } from "../../../contexts/APIProvider";
 
 const DasAddCategory = () => {
+  const { isDarkMode } = useContext(APIContext);
   const navigate = useNavigate();
   const {
     register,
@@ -32,15 +34,37 @@ const DasAddCategory = () => {
     <div>
       <Link to="/dashboard/category">
         {" "}
-        <button className="btn ">back to category</button>
+        <button
+          className={
+            isDarkMode
+              ? "btn bg-green-500 hover:bg-green-700 text-white"
+              : "btn bg-black-250 text-white"
+          }
+        >
+          back to category
+        </button>
       </Link>
-      <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 mx-auto p-10 my-20">
-        <h1 className="text-2xl font-bold text-center">add category</h1>
+      <div
+        className={
+          isDarkMode
+            ? "card flex-shrink-0 w-full max-w-sm shadow-2xl mx-auto p-10 my-20 bg-black-250 text-white"
+            : "card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 mx-auto p-10 my-20 text-gray-900"
+        }
+      >
+        <h1 className="text-2xl font-bold text-center">Add A Category</h1>
         {/* added form */}
         <form onSubmit={handleSubmit(addCategoryHandler)}>
           <div className="form-control">
             <label className="label">
-              <span className="label-text">category name</span>
+              <span
+                className={
+                  isDarkMode
+                    ? "label-text text-white"
+                    : "label-text text-black-250"
+                }
+              >
+                Category name
+              </span>
             </label>
             <input
               type="text"
@@ -56,8 +80,12 @@ const DasAddCategory = () => {
           </div>
           <div className="form-control mt-6">
             <input
-              className=" bg-black input input-bordered w-full  text-white"
-              value="Submit"
+              className={
+                isDarkMode
+                  ? "btn bg-green-500 hover:bg-green-700 text-white"
+                  : "btn bg-black-250 text-white"
+              }
+              value="Add category"
               type="submit"
             />
           </div>

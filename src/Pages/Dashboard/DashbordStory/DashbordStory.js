@@ -1,25 +1,43 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { FaCheck } from "react-icons/fa";
-import { FaTimes } from "react-icons/fa";
+import { FaCheck, FaTimes } from "react-icons/fa";
+import { APIContext } from "../../../contexts/APIProvider";
+import Spinner from "../../../components/Spinner/Spinner";
 
 const DashbordStory = () => {
-  const { data: allArticles = [] } = useQuery({
-    queryKey: ["allArticles"],
-    queryFn: async () => {
-      const res = await fetch(`${process.env.REACT_APP_API_URL}/allArticles`);
-      const data = await res.json();
-      return data;
-    },
-  });
-  console.log(allArticles);
+  const { articles, articlesLoading, articlesRefetch, isDarkMode } =
+    useContext(APIContext);
+  console.log(articles);
+  if (articlesLoading) {
+    return <Spinner />;
+  }
   return (
-    <div>
-      <h2 className="text-4xl text-center font-bold m-5"> All Articles</h2>
-      <div className="overflow-x-auto w-auto ">
-        <table className="table w-full ">
-          <thead className="dark:bg-slate-800">
+    <div
+      className={
+        isDarkMode ? "text-white !bg-black-250" : "text-black-250 bg-base-100"
+      }
+    >
+      <h2 className="text-4xl text-center font-bold m-5">All Articles</h2>
+      <div
+        className={
+          isDarkMode
+            ? "overflow-x-auto w-auto !bg-black-250 p-4"
+            : "bg-base-100 overflow-x-auto w-auto"
+        }
+      >
+        <table
+          className={
+            isDarkMode ? "table !bg-black-250 p-4" : "bg-base-100 table w-full "
+          }
+        >
+          <thead
+            className={
+              isDarkMode
+                ? "table !bg-black-250 p-4"
+                : "bg-base-100 table w-full "
+            }
+          >
             <tr>
               <th></th>
               <th className="text-xl">Image</th>
@@ -30,9 +48,22 @@ const DashbordStory = () => {
               <th className="text-xl">Actions</th>
             </tr>
           </thead>
-          <tbody>
-            {allArticles.map((articles, i) => (
-              <tr key={articles._id} className="hover bg-slate-800">
+          <tbody
+            className={
+              isDarkMode
+                ? "table !bg-black-250 p-4"
+                : "bg-base-100 table w-full "
+            }
+          >
+            {articles.map((articles, i) => (
+              <tr
+                key={articles._id}
+                className={
+                  isDarkMode
+                    ? "text-white bg-black-250"
+                    : "text-black-250 bg-base-100 hover:bg-slate-800"
+                }
+              >
                 <th>{i + 1}</th>
                 <td>
                   <div className="avatar">
@@ -66,12 +97,23 @@ const DashbordStory = () => {
                 <td>{articles.articleSubmitDate}</td>
                 <td>
                   <div className="dropdown dropdown-end">
-                    <label tabIndex={0} className="btn btn-sm m-1">
+                    <label
+                      tabIndex={0}
+                      className={
+                        isDarkMode
+                          ? "btn btn-sm m-1 shadow bg-black-350 rounded-box w-auto"
+                          : "btn btn-sm m-1 shadow bg-base-100 rounded-box w-auto"
+                      }
+                    >
                       Actions
                     </label>
                     <ul
                       tabIndex={0}
-                      className="dropdown-content menu p-1 shadow bg-base-100 rounded-box w-auto"
+                      className={
+                        isDarkMode
+                          ? "dropdown-content menu p-2 shadow bg-black-250 rounded-box w-auto"
+                          : "dropdown-content menu p-1 shadow bg-base-100 rounded-box w-auto"
+                      }
                     >
                       <li>
                         <Link>Edit article</Link>{" "}

@@ -37,8 +37,8 @@ const DasAddCategory = () => {
         <button
           className={
             isDarkMode
-              ? "btn bg-green-500 hover:bg-green-700 text-white"
-              : "btn bg-black-250 text-white"
+              ? "btn bg-green-500 rounded-full hover:bg-green-700 text-white"
+              : "btn bg-black-250 rounded-full text-white"
           }
         >
           back to category
@@ -82,8 +82,8 @@ const DasAddCategory = () => {
             <input
               className={
                 isDarkMode
-                  ? "btn bg-green-500 hover:bg-green-700 text-white"
-                  : "btn bg-black-250 text-white"
+                  ? "btn bg-green-500 hover:bg-green-700 text-white rounded-full"
+                  : "btn bg-green-600 rounded-full text-white"
               }
               value="Add category"
               type="submit"

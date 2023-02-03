@@ -1,27 +1,41 @@
 import React from "react";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import StaffPicks from './../../SideCategory/StaffPicks';
-import { APIContext } from './../../../contexts/APIProvider';
-import GetUnlimitedAccessButton from './../../../components/GetUnlimitedAccessButton/GetUnlimitedAccessButton';
-import Tabs from '../Tabs/Tabs';
-
+import StaffPicks from "./../../SideCategory/StaffPicks";
+import { APIContext } from "./../../../contexts/APIProvider";
+import GetUnlimitedAccessButton from "./../../../components/GetUnlimitedAccessButton/GetUnlimitedAccessButton";
+import Tabs from "../Tabs/Tabs";
+import Saved from "./Saved";
+import { toast } from "react-hot-toast";
 
 const List = () => {
- const tabsData = [
-        { id: 1, label: 'Saved', content: <div>Content for Tab 1</div> },
-        { id: 2, label: ' Highlights', content: <div>Content for Tab 2</div> },
-        
-    ];
-    
-  const {isDarkMode} = useContext(APIContext);
+  const hideMembershipBanner = () => {
+    toast.success("Story Added in your List");
+  };
+  const tabsData = [
+    {
+      id: 1,
+      label: "Saved",
+      content: (
+        <div>
+          <Saved></Saved>
+        </div>
+      ),
+    },
+    { id: 2, label: " Highlights", content: <div></div> },
+  ];
+
+  const { isDarkMode } = useContext(APIContext);
   return (
     <div className="container mx-auto mt-14 py-10">
       <div className="flex row">
         <div className=" basis-3/4 mb-10">
           <div className="flex justify-between">
             <h1 className="text-4xl font-bold">Your lists</h1>
-            <button className="btn btn-success bg-green-600 rounded-full  border-none text-white">
+            <button
+              onClick={hideMembershipBanner}
+              className="btn btn-success bg-green-600 rounded-full border-none text-white"
+            >
               New list
             </button>
           </div>
@@ -30,18 +44,21 @@ const List = () => {
             <Link className={isDarkMode ?"tab tab-bordered text-gray-200":"tab tab-bordered text-gray-900"}>Highlights</Link>
           </div> */}
 
-   
+          {/* tabs */}
+          <Tabs tabsData={tabsData} />
 
-                    {/* tabs */}
-                    <Tabs tabsData={tabsData} />
-                    
-{/* tabs */}
-   
+          {/* tabs */}
         </div>
-        <div className={isDarkMode ? "divider divider-horizontal ":"divider divider-horizontal"}></div>
+        <div
+          className={
+            isDarkMode
+              ? "divider divider-horizontal "
+              : "divider divider-horizontal"
+          }
+        ></div>
         <aside className="basis-1/4  hidden md:block lg:block">
-          <Link to={'/payment'}>
-            <GetUnlimitedAccessButton text={'Get unlimited access'} />
+          <Link to={"/payment"}>
+            <GetUnlimitedAccessButton text={"Get unlimited access"} />
           </Link>
           {/* <button className="bg-black text-white rounded-3xl py-3 w-10/12">
             Get unlimited access

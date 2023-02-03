@@ -42,8 +42,8 @@ const DashbordCategory = () => {
           <button
             className={
               isDarkMode
-                ? "btn bg-green-500 hover:bg-green-700 text-white"
-                : "btn bg-black-250 text-white"
+                ? "btn bg-green-500 hover:bg-green-700 text-white rounded-full"
+                : "btn bg-green-600 rounded-full text-white"
             }
           >
             Add category
@@ -80,7 +80,7 @@ const DashbordCategory = () => {
                   <label
                     onClick={() => setDeleteCategory(category)}
                     htmlFor="delete-modal"
-                    className="btn btn-ghost btn-xs"
+                    className="btn btn-ghost bg-red-500 text-white btn-xs"
                   >
                     delete
                   </label>

@@ -19,7 +19,7 @@ const Settings = () => {
   return (
     <div className='container mx-auto'>
       <div className='flex row'>
-        <div className=' basis-3/4 mb-10 container mx-auto p-48'>
+        <div className=' basis-3/4 mb-10 container mx-auto lg:p-48 md:p-36 sm:p-24'>
           <div className='flex justify-between'>
             <h1 className='text-5xl font-bold mb-8'>Settings</h1>
           

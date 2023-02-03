@@ -10,7 +10,7 @@ const Tabs = ({ tabsData }) => {
 
     return (
         <div>
-            <div className="flex border-b">
+            <div className="flex border-b flex-col md:flex-row">
                 {tabsData.map((tab, index) => (
                     <Link
                         key={tab.id}

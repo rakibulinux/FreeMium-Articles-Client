@@ -10,6 +10,7 @@ import GetUnlimitedAccessButton from "../../../components/GetUnlimitedAccessButt
 import SubscribButton from "../SubscribButton/SubscribButton";
 import { APIContext } from "../../../contexts/APIProvider";
 import ArticleDetailsCard from "../../ArticlesSection/ArticlesDetails/ArticleDetailsCard/ArticleDetailsCard";
+import axios from "axios";
 
 const ArticlesDetails = () => {
   // const [showFollow, setShowFollow] = useState(true);
@@ -17,10 +18,29 @@ const ArticlesDetails = () => {
   const articleData = useLoaderData();
   const { user } = useContext(AuthContext);
   const { isDarkMode } = useContext(APIContext);
+  const {
+    _id,
+    writerImg,
+    writerName,
+    articleTitle,
+    articleImg,
+    userId,
+    userEmail,
+  } = articleData;
 
-  const { writerImg, writerName, articleTitle, articleImg, userId, userEmail } =
-    articleData;
+  const [story, setStory] = useState({});
+  const [error, setError] = useState(null);
 
+  useEffect(() => {
+    const userId = localStorage.getItem("userId");
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/view-story/${_id}`, {
+        headers: { userid: userId },
+      })
+      .then((res) => setStory(res.data))
+      .catch((err) => setError(err.response.data.message));
+  }, [_id]);
+  // console.log(story, error);
   const title = articleTitle.replace(/<[^>]+>/g, "");
 
   useEffect(() => {
@@ -28,7 +48,7 @@ const ArticlesDetails = () => {
       .then((res) => res.json())
       .then((data) => setUsers(data));
   }, [userEmail, users]);
-
+  // console.log(users);
   if (!users) {
     return <Spinner />;
   }
@@ -119,7 +139,7 @@ const ArticlesDetails = () => {
 
             <div className="flex flex-col lg:flex-row">
               <div>
-                <div className="flex justify-center items-center gap-2 my-3">
+                <div className="flex items-center gap-2 my-3">
                   <img
                     src={writerImg}
                     alt={writerName}

@@ -45,10 +45,7 @@ const Manubar = () => {
               key={category?._id}
             >
               <Link
-                to={`/category/${category?.CategoryName.replace(
-                  /'/gi,
-                  ""
-                ).split("-")}`}
+                to={`/category/${category?.CategoryName.split("-")}`}
                 className={
                   isDarkMode ? "text-gray-100 p-2" : "p-2 text-gray-900"
                 }

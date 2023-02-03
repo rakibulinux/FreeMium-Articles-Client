@@ -11,7 +11,7 @@ import Saved from "./Saved";
 const List = () => {
  const tabsData = [
         { id: 1, label: 'Saved', content: <div><Saved></Saved></div> },
-        { id: 2, label: ' Highlights', content: <div>Content for Tab 2</div> },
+        { id: 2, label: ' Highlights', content: <div></div> },
         
     ];
     

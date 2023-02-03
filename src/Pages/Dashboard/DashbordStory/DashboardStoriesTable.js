@@ -12,14 +12,14 @@ const DashboardStoriesTable = ({ article, isDarkMode, idx }) => {
     //       : "bg-base-100 text-black-350"
     //   }
     >
-      <tr>
+      <tr className="hover:bg-slate-800">
         <th>{idx + 1}</th>
         <td>
           <img src={articleImg} className="w-16 h-14 rounded" alt={title} />
         </td>
         <td>{title}</td>
-        <td>{category}</td>
-        <td>
+        <td className="hidden lg:table-cell p-0">{category}</td>
+        <td className="hidden lg:table-cell">
           <label className="swap">
             <input type="checkbox" />
             <div className="swap-on ">
@@ -30,7 +30,7 @@ const DashboardStoriesTable = ({ article, isDarkMode, idx }) => {
             </div>
           </label>
         </td>
-        <td>{articleSubmitDate}</td>
+        <td className="hidden lg:table-cell">{articleSubmitDate}</td>
         <td>
           <div className="dropdown dropdown-end">
             <label
@@ -38,7 +38,7 @@ const DashboardStoriesTable = ({ article, isDarkMode, idx }) => {
               className={
                 isDarkMode
                   ? "btn btn-sm m-1 shadow bg-black-350 text-white rounded-box w-auto"
-                  : "btn btn-sm m-1 shadow bg-base-100 rounded-box w-auto"
+                  : "btn btn-sm m-1 shadow bg-base-100  text-gray-900 hover:text-white rounded-box w-auto"
               }
             >
               Actions

@@ -23,7 +23,7 @@ const DashboardLayout = () => {
           type="checkbox"
           className="drawer-toggle"
         />
-        <div className="drawer-content p-4 hideScrollbar">
+        <div className="drawer-content p-4 scrollbar-hide">
           <Outlet />
         </div>
         <div className="drawer-side ">

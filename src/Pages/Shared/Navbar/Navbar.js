@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import { NavLink } from "react-router-dom";
 import PrimaryButton from "../../../components/Button/PrimaryButton";
 import { AuthContext } from "../../../contexts/AuthProvider";
-import whiteScreen from "../../../Assets/white-screen.png";
+import logoFM from "../../../Assets/logoFM.png";
 // import BlackScreen from "../../../Assets/Black-screen-tp.png";
 import { CgProfile } from "react-icons/cg";
 import { AiOutlineDashboard, AiOutlineLogout } from "react-icons/ai";
@@ -213,7 +213,7 @@ const Navbar = () => {
                 }
                 to="/"
               >
-                <img className="w-56" src={whiteScreen} alt="" />
+                <img className="w-56" src={logoFM} alt="" />
               </NavLink>
               <Search searchPlaceholder={"Search article"} propsStyle={"4px"} />
             </div>
@@ -557,7 +557,7 @@ const Navbar = () => {
               }
               to="/"
             >
-              <img className="w-32 md:w-44" src={whiteScreen} alt="" />
+              <img className="w-32 md:w-44" src={logoFM} alt="" />
             </NavLink>
           </div>
           <div className="flex items-center gap-7">

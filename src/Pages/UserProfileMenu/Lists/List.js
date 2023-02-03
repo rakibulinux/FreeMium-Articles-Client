@@ -5,11 +5,12 @@ import StaffPicks from './../../SideCategory/StaffPicks';
 import { APIContext } from './../../../contexts/APIProvider';
 import GetUnlimitedAccessButton from './../../../components/GetUnlimitedAccessButton/GetUnlimitedAccessButton';
 import Tabs from '../Tabs/Tabs';
+import Saved from "./Saved";
 
 
 const List = () => {
  const tabsData = [
-        { id: 1, label: 'Saved', content: <div>Content for Tab 1</div> },
+        { id: 1, label: 'Saved', content: <div><Saved></Saved></div> },
         { id: 2, label: ' Highlights', content: <div>Content for Tab 2</div> },
         
     ];

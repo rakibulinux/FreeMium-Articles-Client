@@ -4,11 +4,16 @@ import { Link } from "react-router-dom";
 import StaffPicks from './../../SideCategory/StaffPicks';
 import { APIContext } from './../../../contexts/APIProvider';
 import GetUnlimitedAccessButton from './../../../components/GetUnlimitedAccessButton/GetUnlimitedAccessButton';
-
-
+import Tabs from '../Tabs/Tabs';
 
 
 const List = () => {
+ const tabsData = [
+        { id: 1, label: 'Saved', content: <div>Content for Tab 1</div> },
+        { id: 2, label: ' Highlights', content: <div>Content for Tab 2</div> },
+        
+    ];
+    
   const {isDarkMode} = useContext(APIContext);
   return (
     <div className="container mx-auto mt-14 py-10">
@@ -20,10 +25,18 @@ const List = () => {
               New list
             </button>
           </div>
-          <div className={isDarkMode ?"tabs mt-10 text-gray-200":"tabs mt-10 text-gray-900"}>
+          {/* <div className={isDarkMode ?"tabs mt-10 text-gray-200":"tabs mt-10 text-gray-900"}>
             <Link className={isDarkMode ?"tab text-gray-200 tab-bordered tab-active":"tab text-gray-900 tab-bordered tab-active"}>Saved</Link>
             <Link className={isDarkMode ?"tab tab-bordered text-gray-200":"tab tab-bordered text-gray-900"}>Highlights</Link>
-          </div>
+          </div> */}
+
+   
+
+                    {/* tabs */}
+                    <Tabs tabsData={tabsData} />
+                    
+{/* tabs */}
+   
         </div>
         <div className={isDarkMode ? "divider divider-horizontal ":"divider divider-horizontal"}></div>
         <aside className="basis-1/4  hidden md:block lg:block">

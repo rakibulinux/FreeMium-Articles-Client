@@ -4,9 +4,15 @@ import { Link } from "react-router-dom";
 import GetUnlimitedAccessButton from "../../../components/GetUnlimitedAccessButton/GetUnlimitedAccessButton";
 import StaffPicks from "../../SideCategory/StaffPicks";
 import { APIContext } from "./../../../contexts/APIProvider";
-
+import Tabs from '../Tabs/Tabs';
 const Stories = () => {
-  const { isDarkMode } = useContext(APIContext);
+      const tabsData = [
+        { id: 1, label: 'Drafts', content: <div>Drafts</div> },
+        { id: 2, label: ' Published', content: <div>Published</div> },
+        { id: 3, label: ' Responses', content: <div>Responses</div> },
+        
+    ];
+    const { isDarkMode } = useContext(APIContext);
   return (
     <div className="container mx-auto mt-14 py-10">
       <div className="flex row">
@@ -33,7 +39,7 @@ const Stories = () => {
               </button>
             </div>
           </div>
-          <div className="tabs mt-10">
+          {/* <div className="tabs mt-10">
             <Link
               className={
                 isDarkMode
@@ -60,8 +66,12 @@ const Stories = () => {
               }
             >
               Responses
-            </Link>
-          </div>
+            </Link>                    
+          </div> */}
+          {/* tabs */}
+                    <Tabs tabsData={tabsData} />
+                    
+{/* tabs */}
         </div>
         <div className="divider divider-horizontal"></div>
         <aside className="basis-1/4 hidden md:block lg:block">
@@ -75,5 +85,4 @@ const Stories = () => {
     </div>
   );
 };
-
 export default Stories;

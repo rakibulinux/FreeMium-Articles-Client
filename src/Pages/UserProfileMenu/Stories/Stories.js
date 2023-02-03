@@ -5,10 +5,12 @@ import GetUnlimitedAccessButton from "../../../components/GetUnlimitedAccessButt
 import StaffPicks from "../../SideCategory/StaffPicks";
 import { APIContext } from "./../../../contexts/APIProvider";
 import Tabs from '../Tabs/Tabs';
+import Published from "./Published";
+import Drafts from "./Drafts";
 const Stories = () => {
       const tabsData = [
-        { id: 1, label: 'Drafts', content: <div>Drafts</div> },
-        { id: 2, label: ' Published', content: <div>Published</div> },
+        { id: 1, label: 'Drafts', content: <div><Drafts/></div> },
+        { id: 2, label: ' Published', content: <div><Published/></div> },
         { id: 3, label: ' Responses', content: <div>Responses</div> },
         
     ];

@@ -1,6 +1,6 @@
 import React from "react";
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+
 import WhoToFollow from './../../SideCategory/WhoToFollow';
 import { APIContext } from './../../../contexts/APIProvider';
 import Tabs from '../Tabs/Tabs';

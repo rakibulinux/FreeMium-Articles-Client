@@ -4,17 +4,32 @@ import { Link } from "react-router-dom";
 import GetUnlimitedAccessButton from "../../../components/GetUnlimitedAccessButton/GetUnlimitedAccessButton";
 import StaffPicks from "../../SideCategory/StaffPicks";
 import { APIContext } from "./../../../contexts/APIProvider";
-import Tabs from '../Tabs/Tabs';
+import Tabs from "../Tabs/Tabs";
 import Published from "./Published";
 import Drafts from "./Drafts";
 const Stories = () => {
-      const tabsData = [
-        { id: 1, label: 'Drafts', content: <div><Drafts/></div> },
-        { id: 2, label: ' Published', content: <div><Published/></div> },
-        { id: 3, label: ' Responses', content: <div>Responses</div> },
-        
-    ];
-    const { isDarkMode } = useContext(APIContext);
+  const tabsData = [
+    {
+      id: 1,
+      label: "Drafts",
+      content: (
+        <div>
+          <Drafts />
+        </div>
+      ),
+    },
+    {
+      id: 2,
+      label: " Published",
+      content: (
+        <div>
+          <Published />
+        </div>
+      ),
+    },
+    { id: 3, label: " Responses", content: <div>Responses</div> },
+  ];
+  const { isDarkMode } = useContext(APIContext);
   return (
     <div className="container mx-auto mt-14 py-10">
       <div className="flex row">
@@ -31,12 +46,12 @@ const Stories = () => {
             </h1>
             <div>
               <Link
-                className="btn rounded-2xl btn-primary font-semibold ml-3 border-[1px] hover:border-[#1A8917] border-[#1A8917] bg-[#1A8917] text-[#fff] hover:bg-[#1A8917]"
+                className="btn rounded-full btn-primary font-semibold ml-3 border-[1px] hover:border-[#1A8917] border-[#1A8917] bg-[#1A8917] text-[#fff] hover:bg-[#1A8917]"
                 to="/write-stories"
               >
                 Write a story
               </Link>
-              <button className="btn rounded-2xl btn-primary font-semibold ml-3 border-[1px] hover:border-[#1A8917] border-[#1A8917] bg-slate-50 text-[#1A8917] hover:bg-white">
+              <button className="btn rounded-full btn-primary font-semibold ml-3 border-[1px] hover:border-[#1A8917] border-[#1A8917] bg-slate-50 text-[#1A8917] hover:bg-white">
                 Import a story
               </button>
             </div>
@@ -71,9 +86,9 @@ const Stories = () => {
             </Link>                    
           </div> */}
           {/* tabs */}
-                    <Tabs tabsData={tabsData} />
-                    
-{/* tabs */}
+          <Tabs tabsData={tabsData} />
+
+          {/* tabs */}
         </div>
         <div className="divider divider-horizontal"></div>
         <aside className="basis-1/4 hidden md:block lg:block">

@@ -7,28 +7,66 @@ import Notifications from "./Notifications";
 import SecurityAndApps from "./SecurityAndApps";
 import { APIContext } from "../../../contexts/APIProvider";
 const Settings = () => {
-    const tabsData = [
-        { id: 1, label: 'Account', content: <div><Account/></div> },
-        { id: 2, label: ' Publishing', content: <div>Publishing</div> },
-        { id: 3, label: ' Notifications', content: <div><Notifications></Notifications></div> },
-        { id: 4, label: ' Membership and payment', content: <div><MembershipAndPayment></MembershipAndPayment></div> },
-        { id: 5, label: ' Security and apps', content: <div><SecurityAndApps></SecurityAndApps></div> },
-        
+  const tabsData = [
+    {
+      id: 1,
+      label: "Account",
+      content: (
+        <div>
+          <Account />
+        </div>
+      ),
+    },
+    { id: 2, label: " Publishing", content: <div>Publishing</div> },
+    {
+      id: 3,
+      label: " Notifications",
+      content: (
+        <div>
+          <Notifications></Notifications>
+        </div>
+      ),
+    },
+    {
+      id: 4,
+      label: " Membership and payment",
+      content: (
+        <div>
+          <MembershipAndPayment></MembershipAndPayment>
+        </div>
+      ),
+    },
+    {
+      id: 5,
+      label: " Security and apps",
+      content: (
+        <div>
+          <SecurityAndApps></SecurityAndApps>
+        </div>
+      ),
+    },
   ];
-    const {isDarkMode} = useContext(APIContext);
+  const { isDarkMode } = useContext(APIContext);
   return (
-    <div className='container mx-auto mt-14 py-10'>
-      <div className='flex row'>
-        <div className=' basis-3/4 mb-10 container mx-auto lg:p-48 md:p-36 sm:p-24'>
-          <div className='flex justify-between'>
-             <h1 className={isDarkMode ? 'text-5xl font-bold text-gray-100':'text-5xl font-bold text-gray-900'}>Settings</h1>
-          
+    <div className="container mx-auto mb-14 pb-10">
+      <div className="flex row">
+        <div className=" basis-3/4 mb-10 container mx-auto lg:px-48 md:px-36 sm:px-24">
+          <div className="flex justify-between">
+            <h1
+              className={
+                isDarkMode
+                  ? "text-5xl font-bold text-gray-100"
+                  : "text-5xl font-bold text-gray-900"
+              }
+            >
+              Settings
+            </h1>
           </div>
           {/* tabs */}
-                    <Tabs tabsData={tabsData} />
-                    
-{/* tabs */}
-       {/* <div className="tabs mt-10">
+          <Tabs tabsData={tabsData} />
+
+          {/* tabs */}
+          {/* <div className="tabs mt-10">
             <Link className={isDarkMode ?"text-gray-100 tab tab-bordered tab-active":"tab text-gray-900 tab-bordered tab-active"}>Account</Link>
             <Link className={isDarkMode ?"tab tab-bordered text-gray-100":"text-gray-900 tab tab-bordered "}>Publishing</Link>
             <Link className={isDarkMode ?"tab tab-bordered text-gray-100":"text-gray-900 tab tab-bordered "}>Notifications</Link>
@@ -38,13 +76,45 @@ const Settings = () => {
         </div>
         <div className="divider divider-horizontal"></div>
         <aside className="basis-1/4 px-8 leading-loose hidden md:block lg:block">
-          <h1 className={isDarkMode ?"text-lg font-semibold text-gray-100":"text-gray-900 text-lg font-semibold"}>Suggested help articles</h1>
-          <Link to="" className={isDarkMode ?" text-gray-100":"text-gray-900"}>Sign in or Sign up to FreeMium</Link>
-          <Link to="" className={isDarkMode ?" text-gray-100":"text-gray-900"}>Your profile page</Link>
-          <Link to="" className={isDarkMode ?" text-gray-100":"text-gray-900"}>Writing and Publishing your first story</Link>
-          <Link to="" className={isDarkMode ?" text-gray-100":"text-gray-900"}>About FreeMium's distribution system</Link>
-          <Link to="" className={isDarkMode ?" text-gray-100":"text-gray-900"}>Get started with the Partner Programs</Link>
-
+          <h1
+            className={
+              isDarkMode
+                ? "text-lg font-semibold text-gray-100"
+                : "text-gray-900 text-lg font-semibold"
+            }
+          >
+            Suggested help articles
+          </h1>
+          <Link
+            to=""
+            className={isDarkMode ? " text-gray-100" : "text-gray-900"}
+          >
+            Sign in or Sign up to FreeMium
+          </Link>
+          <Link
+            to=""
+            className={isDarkMode ? " text-gray-100" : "text-gray-900"}
+          >
+            Your profile page
+          </Link>
+          <Link
+            to=""
+            className={isDarkMode ? " text-gray-100" : "text-gray-900"}
+          >
+            Writing and Publishing your first story
+          </Link>
+          <Link
+            to=""
+            className={isDarkMode ? " text-gray-100" : "text-gray-900"}
+          >
+            About FreeMium's distribution system
+          </Link>
+          <Link
+            to=""
+            className={isDarkMode ? " text-gray-100" : "text-gray-900"}
+          >
+            Get started with the Partner Programs
+          </Link>
         </aside>
       </div>
     </div>

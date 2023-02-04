@@ -78,7 +78,7 @@ const ArticleDetailsCard = ({ articleData }) => {
     <div>
       {/* card */}
       <article className="p-4">
-        <div className="blogHadedr lg:flex md:flex-row sm:flex-row  justify-between">
+        <div className="blogHadedr lg:flex md:flex-row sm:flex-row items-center justify-between">
           {/*card left side writter info */}
           <div className="flex items-center mb-3 ">
             <img
@@ -141,7 +141,7 @@ const ArticleDetailsCard = ({ articleData }) => {
           </div>
           {/*  card right side writter socials */}
           {/* <div  className=" flex gap-5  rounded-md border bg-white text-center"> */}
-          <ul className="flex justify-start col-span-2 gap-6 lg:col-span-5 lg:justify-end">
+          <ul className="flex justify-start items-center col-span-2 gap-6 lg:col-span-5 lg:justify-end">
             <li>
               <a
                 href="/"
@@ -265,7 +265,11 @@ const ArticleDetailsCard = ({ articleData }) => {
                 </button>
                 <ul
                   tabIndex={0}
-                  className="mt-2 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
+                  className={
+                    isDarkMode
+                      ? "mt-2 p-2 shadow menu menu-compact dropdown-content bg-black-250 text-white rounded-box w-52"
+                      : "mt-2 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box text-black-350 w-52"
+                  }
                 >
                   <li>
                     <a href="/">Mute this author</a>

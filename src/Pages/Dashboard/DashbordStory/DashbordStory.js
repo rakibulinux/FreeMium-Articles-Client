@@ -18,8 +18,8 @@ const DashbordStory = () => {
       <div
         className={
           isDarkMode
-            ? "overflow-x-auto w-auto text-black-350 p-4"
-            : "bg-base-100 overflow-x-auto w-auto"
+            ? "overflow-x-auto w-auto text-black-350 pr-6 scrollbar-hide"
+            : "bg-base-100 overflow-x-auto w-auto pr-6 scrollbar-hide"
         }
       >
         <table
@@ -34,16 +34,17 @@ const DashbordStory = () => {
               : "bg-base-100 text-black-350 table w-full"
           }
         >
-          <thead>
-            <tr>
-              <th className="text-xl">No</th>
-              <th className="text-xl">Image</th>
-              <th className="text-xl">Story Title</th>
-              <th className="text-xl">Category</th>
-              <th className="text-xl">Status</th>
-              <th className="text-xl">Date</th>
-              <th className="text-xl">Actions</th>
-            </tr>
+          <thead className="scrollbar-hide">
+          <tr>
+        <th></th>
+        <th className='text-xl'>Image</th>
+        <th className='text-xl'>Story Title</th>
+        <th className='text-xl hidden lg:table-cell p-0'>Category</th>
+        <th className='text-xl hidden lg:table-cell p-0 '>Status</th>
+        <th className='text-xl hidden lg:table-cell '>Date</th>
+        <th className='text-xl'>Actions</th>
+        
+      </tr>
           </thead>
           {articles.map((article, idx) => (
             <DashboardStoriesTable

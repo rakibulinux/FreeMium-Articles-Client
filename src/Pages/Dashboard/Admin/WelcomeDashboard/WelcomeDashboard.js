@@ -6,7 +6,7 @@ import { APIContext } from "../../../../contexts/APIProvider";
 import { Link } from "react-router-dom";
 const WelcomeDashboard = () => {
   const { loading } = useContext(AuthContext);
-  const {categoryButton,reportedItems } = useContext(APIContext)
+  const {categoryButton,reportedItems,articles } = useContext(APIContext)
   
 //   test comment
   if (loading) {
@@ -46,7 +46,7 @@ const WelcomeDashboard = () => {
 
 <div className='ml-4 mt-2'>
 <p className=' font-bold'>Storys</p>
- <p className='text-2xl font-bold'>{categoryButton.length}</p>     
+ <p className='text-2xl font-bold'>{articles.length}</p>     
 </div>
     </div>
   </div>

@@ -202,27 +202,27 @@ const router = createBrowserRouter([
       },
       {
         path:'/dashboard/category',
-        element:<AdminRoute><DashbordCategory></DashbordCategory></AdminRoute>,
+        element:<DashbordCategory></DashbordCategory>,
        },
        {
         path:'/dashboard/storys',
-        element:<AdminRoute><DashbordStory></DashbordStory></AdminRoute>,
+        element:<DashbordStory></DashbordStory>,
        },
        {
         path:'/dashboard/editors',
-        element:<AdminRoute><DashbordEditors></DashbordEditors></AdminRoute>,
+        element:<DashbordEditors></DashbordEditors>,
        },
        {
         path:'/dashboard/charts',
-        element:<AdminRoute><DasReCharts></DasReCharts></AdminRoute>,
+        element:<DasReCharts></DasReCharts>,
        },
        {
         path:'/dashboard/reportedStory',
-        element:<AdminRoute><DasReportedStory></DasReportedStory></AdminRoute>,
+        element:<DasReportedStory></DasReportedStory>,
        },
        {
         path:'/dashboard/addCategory',
-        element:<AdminRoute><DasAddCategory></DasAddCategory></AdminRoute>,
+        element:<DasAddCategory></DasAddCategory>,
        }
     ],
   },

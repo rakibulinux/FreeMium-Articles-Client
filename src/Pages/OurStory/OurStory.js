@@ -12,13 +12,13 @@ const OurStory = () => {
   };
   return (
     <div>
-      <h1 className=" text-center text-4xl md:text-5xl lg:text-8xl my-32 font-semibold font-sans">
+      <h1 className="text-center text-4xl md:text-5xl lg:text-8xl my-32 font-semibold font-sans">
         Every idea needs a <span className="font-bold">Medium.</span>
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-2">
-        <div className="border ">
+        <div className="border">
           <p className="m-14 font-semibold">
-            The best ideas can change who we are. Medium is where those ideas
+            The best ideas can change who we are. Freemium is where those ideas
             take shape, take off, and spark powerful conversations. We’re an
             open platform where over 100 million readers come to find insightful
             and dynamic thinking. Here, expert and undiscovered voices alike
@@ -49,11 +49,11 @@ const OurStory = () => {
           A living network of <br /> curious minds.
         </h1>
         <p className="mx-16 md:mx-36 lg:mx-96 font-semibold">
-          Anyone can write on Medium. Thought-leaders, journalists, experts, and
-          individuals with unique perspectives share their thinking here. You’ll
-          find pieces by independent writers from around the globe, stories we
-          feature and leading authors, and smart takes on our own suite of blogs
-          and publications.
+          Anyone can write on Freemium. Thought-leaders, journalists, experts,
+          and individuals with unique perspectives share their thinking here.
+          You’ll find pieces by independent writers from around the globe,
+          stories we feature and leading authors, and smart takes on our own
+          suite of blogs and publications.
         </p>
         <div className="mt-10 mx-10 grid grid-cols-1 md:grid-cols-3">
           <div className="flex mb-5">
@@ -130,10 +130,10 @@ const OurStory = () => {
           </div>
         </div>
       </div>
-      <div>
+      <div className="text-black-250">
         <div className="grid grid-cols-1 md:grid-cols-2 bg-black">
           <div className="border flex lg:justify-center lg:items-center">
-            <h1 className="m-8 text-4xl lg:text-8xl font-semibold text-white pr-20">
+            <h1 className="m-8 text-4xl lg:text-8xl font-semibold pr-20">
               Over 100 million readers and growing.
             </h1>
           </div>
@@ -144,7 +144,7 @@ const OurStory = () => {
               alt=""
             />
 
-            <p className="text-white  mx-16 lg:mr-48 mb-10 font-semibold text-lg">
+            <p className="text-black-350  mx-16 lg:mr-48 mb-10 font-semibold text-lg">
               "Freemium is a great place to read and learn from a wide range of
               authors. It’s not muddied up by ads. It feels like one of the few
               pure places to go online." <br /> <br />
@@ -152,14 +152,14 @@ const OurStory = () => {
             </p>
           </div>
         </div>
-        <div className="bg-black text-white  py-10">
+        <div className="bg-black text-black-350  py-10">
           <h2 className="text-4xl md:text-6xl lg:text-8xl text-center mx-10 md:mx-16  lg:mx-44 font-semibold">
             Create the space for your thinking to take off.
           </h2>
           <p className="mx-16 lg:mx-96 my-5 text-center font-semibold">
-            A blank page is also a door. At Medium you can walk through it. It's
-            easy and free to share your thinking on any topic, connect with an
-            audience, express yourself with a range of publishing tools, and
+            A blank page is also a door. At Freemium you can walk through it.
+            It's easy and free to share your thinking on any topic, connect with
+            an audience, express yourself with a range of publishing tools, and
             even earn money for your work.
           </p>
           <Link to="" className="flex justify-center">

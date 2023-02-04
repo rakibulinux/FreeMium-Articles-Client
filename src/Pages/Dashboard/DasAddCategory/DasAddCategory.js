@@ -27,7 +27,7 @@ const DasAddCategory = () => {
     }
     return (
         <div>
-         <Link to='/dashboard/category'> <button className='btn '>back to category</button></Link>
+        <Link to='/dashboard/category'><button className='btn '>Back ot category</button></Link>
              <div  className='card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 mx-auto p-10 my-20'>
              <h1 className="text-2xl font-bold text-center">add category</h1>
              {/* added form */}
@@ -40,7 +40,7 @@ const DasAddCategory = () => {
   {errors.categoryname && <p role="alert">{errors.categoryname?.message}</p>}
 </div> 
 <div className="form-control mt-6">
-      <input className=" bg-black input input-bordered w-full  text-white" value="Submit" type="submit" />
+      <input className=" input input-bordered w-full " value="Submit" type="submit" />
       </div>
 </form>
              </div>

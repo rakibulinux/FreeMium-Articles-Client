@@ -33,6 +33,7 @@
     "react-scripts": "5.0.1",
     "react-slick": "^0.29.0",
     "react-tsparticles": "^2.8.0",
+    "recharts": "^2.1.15",
     "slick-carousel": "^1.8.1",
     "socket.io-client": "^4.5.4",
     "swiper": "^8.4.6",

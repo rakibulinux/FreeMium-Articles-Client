@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { APIContext } from '../../../contexts/APIProvider';
 
 const Following = () => {
+    const { isDarkMode } = useContext(APIContext);
     return (
-        <div>
+        <div className={isDarkMode ? "mt-5 text-gray-100":"mt-5 text-gray-900"}>
             <h1>Writers</h1>
             <div className="divider"></div> 
             <h1>Publications</h1>

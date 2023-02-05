@@ -12,7 +12,7 @@ const RefineRecommendations = () => {
   const tabsData = [
         { id: 1, label: 'Following', content: <div><Following/></div> },
         { id: 2, label: ' Reading history', content: <div><ReadingHistory/></div> },
-        { id: 3, label: ' Muted', content: <div>Content for Tab 2</div> },
+        { id: 3, label: ' Muted', content: <div> Muted section</div> },
         { id: 4, label: ' Suggestions', content: <div><Suggestions/></div> },
        
   ]

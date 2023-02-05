@@ -9,7 +9,7 @@ const Following = () => {
             <h1>Writers</h1>
             <div className="divider"></div> 
             <h1>Publications</h1>
-            <p>You haven’t followed any publications yet.</p>
+            <p>You haven followed any publications yet.</p>
             <Link className='link-success'>See suggestions</Link>
             <div className="divider"></div> 
             <h1>Topics</h1>

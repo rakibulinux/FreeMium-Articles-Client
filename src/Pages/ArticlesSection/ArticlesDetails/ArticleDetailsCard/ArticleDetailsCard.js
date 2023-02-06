@@ -376,9 +376,11 @@ const ArticleDetailsCard = ({ articleData }) => {
 
           {/* Modal body for comment */}
           {/* Put this part before </body> tag */}
-          <input type="checkbox" id="comment-modal" className="modal-toggle" />
+          <input type="checkbox" id="comment-modal" className="modal-toggle " />
+
           <div className="modal flex justify-end ">
-            <div className="modal-box h-full w-full md:w-6/12 lg:w-4/12">
+            <div className="modal-box h-full rounded shadow w-full md:w-6/12 lg:w-3/12">
+              
               <label
                 htmlFor="comment-modal"
                 className="btn btn-sm btn-circle bg-white hover:bg-white hover:text-black border-none absolute right-2 top-2"

@@ -3,10 +3,13 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from '../../../contexts/AuthProvider';
 import { format } from "date-fns";
 import toast from "react-hot-toast";
+import { AiOutlineLike } from "react-icons/ai";
+import { Link } from 'react-router-dom';
 
 const Comments = ({ id }) => {
 
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, reset, watch } = useForm();
+    const comment = watch('comment');
     const { user } = useContext(AuthContext);
     const date = format(new Date(), "PP");
     // const formattedTime = format(currentTime, 'HH:mm:ss');
@@ -17,7 +20,7 @@ const Comments = ({ id }) => {
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState(false)
 
-    console.log(comments);
+    // console.log(comments);
 
 
     const handleComment = data => {
@@ -45,7 +48,8 @@ const Comments = ({ id }) => {
                 console.log(result);
                 if (result.acknowledged) {
                     toast.success('Review placed successfully')
-                    // form.reset()
+
+                    reset();
 
                     setNewComment(true);
                 }
@@ -67,7 +71,7 @@ const Comments = ({ id }) => {
 
     return (
         <div>
-            <h1 className='font-semibold text-2xl mb-5 '>Responses</h1>
+            <h1 className='font-semibold text-2xl mb-5 '>Responses ({comments.length})</h1>
             <div className='flex mb-5'>
                 <img className='w-8 rounded-full' src={user?.photoURL} alt="" />
                 <h4 className='mt-1 ml-3'>{user?.displayName}</h4>
@@ -76,46 +80,63 @@ const Comments = ({ id }) => {
             <form onSubmit={handleSubmit(handleComment)}>
                 <textarea className="textarea  textarea-sm w-full " {...register("comment")} placeholder="What are your thoughts" />
                 {/* <p>{data}</p> */}
-                <div className='flex justify-end'>
-                    <input className="btn bg-[#0F730C] hover:bg-[#0F730C] btn-sm rounded-full text-white" type="submit" />
+                <div className='flex justify-end my-5'>
+                    <input disabled={!comment} className="btn bg-[#059b00] hover:bg-[#0F730C] btn-sm rounded-full text-white" type="submit" />
                 </div>
             </form>
             <div>
-                <div className="  bg-base-100 shadow-sm">
-                    <div className="card-body">
-
+                <div>
+                    <div>
                         {
-                            comments?.map(comment => <div key={comment._id} className="avatar">
-                                {
-
-                                    comment?.profileImage ? <div className="avatar ">
-                                        <div className="w-8 rounded-full mt-3 ">
-                                            <img src={comment?.profileImage} alt='' />
-                                            {/* <h2>{comment?.userName}</h2> */}
-                                            {/* <div className="bg-neutral-focus text-neutral-content rounded-full w-12"></div> */}
-                                        </div>
-                                    </div>
-                                        :
-                                        <div className='avatar placeholder  mt-3'>
-                                            <div className="bg-neutral-focus text-neutral-content rounded-full w-16">
-                                                <span className="text-sm ml-5"> <span className='text-sm ml-1 mb-0'> No</span> <span className='ml-3 mt-0'>Image</span></span>
-                                                <span className="text-xs"><span className='ml-2'>No</span> <br /> <span>Image</span></span>
+                            comments?.map(comment => <div className='border-y' key={comment._id}>
+                                <div className='my-5'>
+                                    <div className='flex justify-between'>
+                                        <div className='flex'>
+                                            {
+                                                comment?.profileImage ? <div className="avatar ">
+                                                    <div className="w-8 rounded-full mt-3 ">
+                                                        <img src={comment?.profileImage} alt='' />
+                                                        <h2>{comment?.userName}</h2>
+                                                        <div className="bg-neutral-focus text-neutral-content rounded-full w-8"></div>
+                                                    </div>
+                                                </div>
+                                                    :
+                                                    <div className='avatar placeholder  mt-3'>
+                                                        <div className="bg-neutral-focus text-neutral-content rounded-full w-8">
+                                                            <span className="text-sm ml-5"> <span className='text-sm ml-1 mb-0'> No</span> <span className='ml-3 mt-0'>Image</span></span>
+                                                            <span className="text-xs"><span className='ml-2'>No</span> <br /> <span>Image</span></span>
+                                                        </div>
+                                                    </div>
+                                            }
+                                            <div>
+                                                <p className='text-xs ml-3 mt-3 text-blue-600'>{comment?.userName}</p>
+                                                <p className='text-xs ml-3'>{comment?.commentDate}</p>
                                             </div>
                                         </div>
-                                }
-                                <div className='mt-2 w-fit'>
-                                    <div className=''>
-                                        <h2 className=" text-blue-700 text-xs mt-1 ml-5">{comment?.userName}</h2>
-                                        <p className='text-xs ml-5'>{comment?.commentDate}</p>
+                                        <div className='flex'>
+                                            <div className="dropdown  dropdown-left">
+                                                <button><label tabIndex={0} className="font-bold text-xl">...</label></button>
+                                                <ul tabIndex={0} className="dropdown-content  mt-5 border menu p-2 shadow-lg bg-base-100 rounded-box w-44">
+                                                    <li><Link to='' className='text-xs font-semibold'>Edit This Response</Link></li>
+                                                    <li><Link to='' className='text-xs font-semibold'>Delete</Link></li>
+                                                </ul>
+                                            </div>
+
+                                        </div>
+
+
                                     </div>
-                                    <p className='ml-6 text-sm'>{comment?.comment}</p>
+                                    <p className='text-xs my-3'>{comment?.comment}</p>
+                                    <div className='flex justify-between'>
+                                        <button><AiOutlineLike></AiOutlineLike></button>
+                                        <button className='font-semibold text-sm'>Reply</button>
+                                    </div>
                                 </div>
                             </div>)
                         }
                     </div>
                 </div>
             </div>
-
         </div>
     );
 };

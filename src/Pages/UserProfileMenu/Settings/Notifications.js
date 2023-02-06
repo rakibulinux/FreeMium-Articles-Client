@@ -20,19 +20,6 @@ const Notifications = () => {
                   <option>Monthly</option>
                 </select>
             </div>
-            {/* <div>
-                <div>
-                <h1>Recommended reading</h1>
-                <p>Featured stories, columns, and collections that we think you’ll enjoy based on your reading history.</p>
-                </div>
-            </div> */}
-{/* <div className="form-control">
-  <label className="cursor-pointer label">
-    <span className="label-text"><h1>Recommended reading</h1>
-                <p>Featured stories, columns, and collections that we think you’ll enjoy based on your reading history.</p></span>
-    <input type="checkbox" checked className="checkbox checkbox-success" />
-  </label>
-        </div> */}
         
               <Checkbox
         label="Recommended reading
@@ -95,7 +82,8 @@ const Notifications = () => {
         <div className="divider"></div>
         
  <Checkbox
-        label="Allow email notifications"
+          label="Allow email notifications"
+          label2="You’ll still receive administrative emails even if this setting is off."
         checked={checkboxState}
         onChange={() => setCheckboxState(!checkboxState)}
       /> 

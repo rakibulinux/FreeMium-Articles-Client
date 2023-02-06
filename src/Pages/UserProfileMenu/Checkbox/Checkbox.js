@@ -1,6 +1,6 @@
 import React from "react";
 
-function Checkbox({ label, checked, onChange }) {
+function Checkbox({ label,label2, checked, onChange }) {
     return (
       <>
     {/* <label className="relative flex items-center">
@@ -16,7 +16,9 @@ function Checkbox({ label, checked, onChange }) {
 
  <div className="form-control mb-8">
                 <label className="cursor-pointer label">
-                  <span className="label-text">{label}</span>
+            <span className="label-text">{label}<br/>{label2}
+            </span>
+                 
                     <input type="checkbox" checked={checked}
                   onChange={onChange}
                         className="checkbox checkbox-success" />

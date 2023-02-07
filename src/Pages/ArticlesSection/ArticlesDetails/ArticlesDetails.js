@@ -14,8 +14,8 @@ import ArticleDetailsCard from "../../ArticlesSection/ArticlesDetails/ArticleDet
 const ArticlesDetails = () => {
   // const [showFollow, setShowFollow] = useState(true);
   const [users, setUsers] = useState({});
-  // const articleData = useLoaderData();
-  const {id}=useParams()
+  const articleData = useLoaderData();
+  // const {id}=useParams()
   const { user } = useContext(AuthContext);
   const { isDarkMode,articles,articlesLoading } = useContext(APIContext);
 // const [articleData,setArticleData]=useState()
@@ -28,7 +28,7 @@ const ArticlesDetails = () => {
   // }, [id]);
 
   console.log(articles)
-  const articleData = articles.find(artical=>artical._id=id)
+  // const articleData = articles.find(artical=>artical._id=id)
   
   const { writerImg, writerName, articleTitle, articleImg, userId, userEmail } =
   articleData;

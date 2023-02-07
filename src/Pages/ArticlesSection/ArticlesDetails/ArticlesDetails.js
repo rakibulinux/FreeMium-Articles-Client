@@ -14,13 +14,25 @@ import ArticleDetailsCard from "../../ArticlesSection/ArticlesDetails/ArticleDet
 const ArticlesDetails = () => {
   // const [showFollow, setShowFollow] = useState(true);
   const [users, setUsers] = useState({});
-  const articleData = useLoaderData();
+  // const articleData = useLoaderData();
+  const {id}=useParams()
   const { user } = useContext(AuthContext);
-  const { isDarkMode } = useContext(APIContext);
+  const { isDarkMode,articles,articlesLoading } = useContext(APIContext);
+// const [articleData,setArticleData]=useState()
 
+// get specific story data
+  // useEffect(() => {
+  //   fetch(`${process.env.REACT_APP_API_URL}/view-story/${id}`)
+  //     .then((res) => res.json())
+  //     .then((data) => setArticleData(data));
+  // }, [id]);
+
+  console.log(articles)
+  const articleData = articles.find(artical=>artical._id=id)
+  
   const { writerImg, writerName, articleTitle, articleImg, userId, userEmail } =
-    articleData;
-
+  articleData;
+// console.log(articleData)
   const title = articleTitle.replace(/<[^>]+>/g, "");
 
   useEffect(() => {
@@ -28,9 +40,12 @@ const ArticlesDetails = () => {
       .then((res) => res.json())
       .then((data) => setUsers(data));
   }, [userEmail, users]);
-
+ 
   if (!users) {
     return <Spinner />;
+  }
+  if(articlesLoading){
+    return <Spinner></Spinner>
   }
   return (
     <div className="border-t-[1px] w-11/12 mx-auto">
@@ -38,7 +53,7 @@ const ArticlesDetails = () => {
         {/* left side content */}
         <div className="border-r-0 lg:border-r-[1px] col-span-2  ">
           <div className="mr-10 my-10">
-            <ArticleDetailsCard articleData={articleData} users={users} />
+            <ArticleDetailsCard articleData={articleData} users={users} setUsers={setUsers}/>
           </div>
         </div>
         {/* right side content*/}

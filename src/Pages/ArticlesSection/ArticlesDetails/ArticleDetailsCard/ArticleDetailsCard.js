@@ -13,7 +13,7 @@ import Comments from "../../ShowMoreArtical/Comments";
 import UpvoteButton from "../../UpvoteButton/UpvoteButton";
 
 
-const ArticleDetailsCard = ({ articleData,users }) => {
+const ArticleDetailsCard = ({ articleData,users,setUsers }) => {
   const { user } = useContext(AuthContext);
   
   const {

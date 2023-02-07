@@ -9,8 +9,8 @@ import { APIContext } from '../../../contexts/APIProvider';
 
 const UpvoteButton = ({ user, storyId, upVoteId, classes}) => {
     const [upVote,setUpVote]=useState(false)
-     const [newUpvote,setNewUpvote]=useState()
-    const { isDarkMode } = useContext(APIContext);
+    //  const [newUpvote,setNewUpvote]=useState()
+    const { isDarkMode,articlesRefetch } = useContext(APIContext);
     useEffect(() => {
         axios
           .get(
@@ -18,9 +18,9 @@ const UpvoteButton = ({ user, storyId, upVoteId, classes}) => {
           )
           .then((res) => {
             setUpVote(res?.data?.upVote);
-            
+            // setNewUpvote(res?.data?.upVote)
           });
-      }, [storyId, user?.email,newUpvote]);
+      }, [storyId, user?.email]);
     
       const handleUpVote = () => {
         axios
@@ -30,7 +30,7 @@ const UpvoteButton = ({ user, storyId, upVoteId, classes}) => {
           })
           .then((res) => {
             setUpVote(true);
-            // articlesRefetch()            
+                      
           });
       };
     

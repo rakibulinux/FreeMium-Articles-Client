@@ -70,6 +70,7 @@ const ArticleDetailsCard = ({ articleData,users,setUsers }) => {
 
   // reported handler
   const reportedHandler = (id) => {
+   
     fetch(`${process.env.REACT_APP_API_URL}/story/reportedStory/${id}`, {
       method: "PUT",
     })

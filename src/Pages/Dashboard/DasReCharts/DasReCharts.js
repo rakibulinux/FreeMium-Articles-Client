@@ -1,7 +1,6 @@
 import React from 'react';
 import ProductStatusCard from './ProductStatusCard/ProductStatusCard';
 import VisitorsTraking from './VisitorsTraking/VisitorsTraking';
-
 const DasReCharts = () => {
     return (
         <div>

@@ -55,7 +55,7 @@ const ProductStatusCard = () => {
                 <h2 className="card-title">Total Articles</h2>
               <div className='flex justify-between items-center'>
                 <div className='flex justify-between items-center'>
-                    <BsGraphUp className='mr-2 text-[#05c46b] font-bold text-lg' />
+                <BsGraphUp className='mr-2 text-[#05c46b] font-bold text-lg' />
                     <h1 className='text-xl font-semibold text-gray-900'>4500</h1>
                 </div>
               <div>

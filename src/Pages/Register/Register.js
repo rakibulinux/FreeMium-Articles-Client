@@ -15,7 +15,7 @@ const Register = () => {
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e) =>{
     e.preventDefault();
     const form = e.target;
     const name = form.name.value;

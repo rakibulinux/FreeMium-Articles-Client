@@ -379,7 +379,7 @@ const ArticleDetailsCard = ({ articleData }) => {
           <input type="checkbox" id="comment-modal" className="modal-toggle " />
 
           <div className="modal flex justify-end ">
-            <div className="modal-box h-full rounded shadow w-full md:w-6/12 lg:w-3/12">
+            <div className="modal-box h-full my-0 rounded shadow w-full md:w-6/12 lg:w-3/12">
               
               <label
                 htmlFor="comment-modal"

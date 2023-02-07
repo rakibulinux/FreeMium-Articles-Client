@@ -33,10 +33,8 @@ const Comments = ({ id }) => {
             commentDate: date
         }
         console.log(comment);
-
-
         // save post information to the database
-        fetch('http://localhost:5000/comments', {
+        fetch(`${process.env.REACT_APP_API_URL}/comments`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -58,9 +56,17 @@ const Comments = ({ id }) => {
 
     }
 
+    const handleCommentReply = event => {
+        event.preventDefault();
+     
+        const form =event.target;
+           const message =form.message.value;
+           console.log(message);
+    }
+
     useEffect(() => {
 
-        fetch(`http://localhost:5000/comments?articleId=${id}`)
+        fetch(`${process.env.REACT_APP_API_URL}/comments?articleId=${id}`)
             .then(res => res.json())
             .then(data => {
                 setComments(data)
@@ -129,7 +135,19 @@ const Comments = ({ id }) => {
                                     <p className='text-xs my-3'>{comment?.comment}</p>
                                     <div className='flex justify-between'>
                                         <button><AiOutlineLike></AiOutlineLike></button>
-                                        <button className='font-semibold text-sm'>Reply</button>
+                                        <div className="dropdown dropdown-left">
+                                            <label tabIndex={0} className="btn m-1">Click</label>
+                                            <div tabIndex={0} className="dropdown-content card card-compact w-64 p-2 shadow bg-primary text-primary-content">
+                                                <div className="card-body">
+                                                    <form onSubmit={handleCommentReply}>
+                                                        <textarea name="message" className="textarea textarea-bordered text-" placeholder="write comment" required></textarea><br />
+                                                        <button type='submit' className="btn " >update</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>)
@@ -142,3 +160,10 @@ const Comments = ({ id }) => {
 };
 
 export default Comments;
+
+
+
+
+
+
+

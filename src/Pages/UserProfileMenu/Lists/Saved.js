@@ -1,10 +1,20 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { APIContext } from "../../../contexts/APIProvider";
-import MembershipAndPayment from "../Settings/MembershipAndPayment";
-
+// import MembershipAndPayment from "../Settings/MembershipAndPayment";
+import axios from 'axios';
+import ArticlesCard from "../../ArticlesSection/ArticlesCard/ArticlesCard";
 const Saved = () => {
+  const [articles, setArticles] = useState([]);
+
+
+  useEffect(() => {
+    axios.get('http://localhost:5000/save-article')
+      .then(res => setArticles(res.data))
+      .catch(err => console.error(err));
+  }, []);
+
   const [visible, setVisible] = useState(true);
   const { isDarkMode } = useContext(APIContext);
   const hideMembershipBanner = () => {
@@ -49,7 +59,39 @@ const Saved = () => {
       <div className="card lg:card-side bg-base-200 mt-8">
         <div className="card-body">
           <h2 className="card-title">Reading list</h2>
-          <p>7 stories</p>
+
+
+
+
+
+          
+
+      <ul>
+        {articles.map(data => (
+          // <li key={article._id}>{article.articleTitle}</li>
+          
+                    <ArticlesCard data={data} key={data?._id}
+                    
+                    
+                    
+                    ></ArticlesCard>
+        ))}
+      </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       
           {/* <div className="card-actions justify-end">
       <button className="btn btn-primary">Listen</button>
     </div> */}

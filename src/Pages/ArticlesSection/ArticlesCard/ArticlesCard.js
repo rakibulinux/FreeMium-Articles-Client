@@ -1,11 +1,12 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthProvider";
 import Spinner from "../../../components/Spinner/Spinner";
 import { APIContext } from "../../../contexts/APIProvider";
 import { BsBookmarkPlus } from "react-icons/bs";
 
-const ArticlesCard = ({ data }) => {
+const ArticlesCard = ({ data,handleSave }) => {
+  
   const { loading } = useContext(AuthContext);
   const { isDarkMode } = useContext(APIContext);
   const {
@@ -70,7 +71,9 @@ const ArticlesCard = ({ data }) => {
               {articleRead}-read
             </span>
             </div>
-            <BsBookmarkPlus/>
+            <div className="tooltip" data-tip="Save">
+              <button onClick={() => handleSave(data)}><BsBookmarkPlus /></button>
+              </div>
           </div>
         </div>
       </div>

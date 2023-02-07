@@ -18,7 +18,7 @@ const List = () => {
       label: "Saved",
       content: (
         <div>
-          <Saved></Saved>
+          <Saved/>
         </div>
       ),
     },

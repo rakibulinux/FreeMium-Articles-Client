@@ -34,13 +34,6 @@ const Login = () => {
 
   const [userEmail, setUserEmail] = useState("");
 
-  const [users, setUsers] = useState({});
-  useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/user/${loginUserEmail}`)
-      .then((res) => res.json())
-      .then((data) => setUsers(data));
-  }, [loginUserEmail, users]);
-  console.log(users);
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -57,7 +50,6 @@ const Login = () => {
         const user = result.user;
         toast.success("Login with email success");
         setLoginUserEmail(user?.email);
-        setUsers(user?.email);
         setAuthToken(user);
         navigate(from, { replace: true });
       })

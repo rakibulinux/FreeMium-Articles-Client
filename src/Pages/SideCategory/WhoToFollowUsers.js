@@ -5,7 +5,7 @@ import FollowButton from "../FollowButton/FollowButton";
 const WhoToFollowUsers = ({ users, isDarkMode }) => {
   const { user } = useContext(AuthContext);
   const { name, picture } = users;
-  console.log(users);
+
   return (
     <div className="flex mb-5 justify-between items-center">
       <div className="flex items-center">

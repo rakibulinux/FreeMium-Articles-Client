@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Route } from "react-router-dom";
 import DashboardLayout from "../Layout/DashboardLayout";
 import Main from "../Layout/Main";
 import WelcomeDashboard from "../Pages/Dashboard/Admin/WelcomeDashboard/WelcomeDashboard";
@@ -109,14 +109,19 @@ const router = createBrowserRouter([
         path: "/search",
         element: <Search></Search>,
       },
+
       {
         path: "/view-story/:id",
         element: <ArticlesDetails></ArticlesDetails>,
-        loader: async ({ params }) =>
-          await fetch(
-            `${process.env.REACT_APP_API_URL}/view-story/${params.id}`
-          ),
+        // loader: async ({ params }) =>
+        //   await fetch(
+        //     `${process.env.REACT_APP_API_URL}/view-story/${params.id}`
+        //   ),
       },
+      // {
+      //   path: "/view-story/:id",
+      //   element: <ArticlesDetails />,
+      // },
       {
         path: "/list",
         element: (
@@ -201,29 +206,29 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path:'/dashboard/category',
-        element:<DashbordCategory></DashbordCategory>,
-       },
-       {
-        path:'/dashboard/storys',
-        element:<DashbordStory></DashbordStory>,
-       },
-       {
-        path:'/dashboard/editors',
-        element:<DashbordEditors></DashbordEditors>,
-       },
-       {
-        path:'/dashboard/charts',
-        element:<DasReCharts></DasReCharts>,
-       },
-       {
-        path:'/dashboard/reportedStory',
-        element:<DasReportedStory></DasReportedStory>,
-       },
-       {
-        path:'/dashboard/addCategory',
-        element:<DasAddCategory></DasAddCategory>,
-       }
+        path: "/dashboard/category",
+        element: <DashbordCategory></DashbordCategory>,
+      },
+      {
+        path: "/dashboard/storys",
+        element: <DashbordStory></DashbordStory>,
+      },
+      {
+        path: "/dashboard/editors",
+        element: <DashbordEditors></DashbordEditors>,
+      },
+      {
+        path: "/dashboard/charts",
+        element: <DasReCharts></DasReCharts>,
+      },
+      {
+        path: "/dashboard/reportedStory",
+        element: <DasReportedStory></DasReportedStory>,
+      },
+      {
+        path: "/dashboard/addCategory",
+        element: <DasAddCategory></DasAddCategory>,
+      },
     ],
   },
 ]);

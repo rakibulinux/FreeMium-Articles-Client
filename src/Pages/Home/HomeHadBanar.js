@@ -38,7 +38,15 @@ const HomeHadBanar = () => {
               other blogging tool. Tap into intuitive, flexible tools that put
               writers, bloggers, and creators first..
             </p>
-            <button className="btn btn-primary bg-black">Start bloging</button>
+            <button
+              className={
+                isDarkMode
+                  ? "btn bg-black-250 hover:bg-black-250 border-0 rounded-full"
+                  : "btn bg-black-250 hover:bg-black-250 border-0 rounded-full"
+              }
+            >
+              Start bloging
+            </button>
           </div>
         </div>
       </div>

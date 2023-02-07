@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useLoaderData } from "react-router-dom";
+import { Link, useLoaderData, useParams } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../../contexts/AuthProvider";
 import { useState } from "react";
@@ -38,7 +38,7 @@ const ArticlesDetails = () => {
         {/* left side content */}
         <div className="border-r-0 lg:border-r-[1px] col-span-2  ">
           <div className="mr-10 my-10">
-            <ArticleDetailsCard articleData={articleData} />
+            <ArticleDetailsCard articleData={articleData} users={users} />
           </div>
         </div>
         {/* right side content*/}

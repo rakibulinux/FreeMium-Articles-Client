@@ -112,10 +112,10 @@ const router = createBrowserRouter([
       {
         path: "/view-story/:id",
         element: <ArticlesDetails></ArticlesDetails>,
-        loader: async ({ params }) =>
-          await fetch(
-            `${process.env.REACT_APP_API_URL}/view-story/${params.id}`
-          ),
+        // loader: async ({ params }) =>
+        //   await fetch(
+        //     `${process.env.REACT_APP_API_URL}/view-story/${params.id}`
+        //   ),        
       },
       {
         path: "/list",

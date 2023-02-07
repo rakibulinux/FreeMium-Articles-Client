@@ -1,18 +1,21 @@
 import {
-  HomeIcon,
-  LanguageIcon,
   LinkIcon,
   ShareIcon,
 } from "@heroicons/react/24/solid";
-import React from "react";
+import React, { useState } from "react";
 import { useContext } from "react";
 import { toast } from "react-hot-toast";
-import { Link } from "react-router-dom";
 import { APIContext } from "../../../../contexts/APIProvider";
+import { AuthContext } from "../../../../contexts/AuthProvider";
 import DemoWritter from "../../../Home/DemoWritter";
+import DownVoteButton from "../../DownVoteButton/DownVoteButton";
 import Comments from "../../ShowMoreArtical/Comments";
+import UpvoteButton from "../../UpvoteButton/UpvoteButton";
 
-const ArticleDetailsCard = ({ articleData }) => {
+
+const ArticleDetailsCard = ({ articleData,users,setUsers }) => {
+  const { user } = useContext(AuthContext);
+  
   const {
     _id,
     articleDetails,
@@ -21,7 +24,11 @@ const ArticleDetailsCard = ({ articleData }) => {
     articleTitle,
     writerImg,
     writerName,
+    userEmail,
+    upVote,
+    downVote
   } = articleData;
+  // console.log(articleData)
   const { isDarkMode, setIsDarkMode } = useContext(APIContext);
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
@@ -71,6 +78,7 @@ const ArticleDetailsCard = ({ articleData }) => {
         console.log(data);
         if (data.acknowledged === true) {
           toast.success("Add Report  successfully");
+         
         }
       });
   };
@@ -304,31 +312,39 @@ const ArticleDetailsCard = ({ articleData }) => {
         {/* bottom link */}
         <div>
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 mt-5">
-            <div className="">
-              {/* <p className="text-xs text-left text-gray-500"> */}
-              <button
-                className={
-                  isDarkMode
-                    ? "text-gray-300 hover:text-gray-200"
-                    : "text-gray-500 hover:text-black "
-                }
-              >
-                <Link to="/" className=" ">
-                  <LanguageIcon className="h-6 w-6  text-gray " />
-                </Link>
-              </button>
-              {/* </p> */}
-              <button
-                className={
-                  isDarkMode
-                    ? "text-gray-300 hover:text-black ml-6"
-                    : "text-gray-500 hover:text-black ml-6"
-                }
-              >
-                <Link to="/" className=" ">
-                  <HomeIcon className="h-6 w-6  text-gray " />
-                </Link>
-              </button>
+            <div className="flex  justify-start gap-2 text-xs ">
+             
+              
+               <div className="flex   gap-2 border rounded-full ">
+               {
+                // newUpvote &&
+                <UpvoteButton
+                user={user}
+                users={users}
+                storyId={_id}
+                userEmail={userEmail}
+                upVoteId={user?.email}
+               
+                 >
+
+                </UpvoteButton>
+               }
+                <p className="pl-0 p-2"> {upVote?.length}</p>
+                <DownVoteButton
+                user={user}
+                users={users}
+                storyId={_id}
+                userEmail={userEmail}
+                downVoteId={user?.email}
+               
+                 >
+
+                </DownVoteButton>
+                <p className="pl-0 p-2"> {downVote?.length}</p>
+
+               </div>
+              
+            
 
               {/* Modal for comment */}
               {/* The button to open modal */}

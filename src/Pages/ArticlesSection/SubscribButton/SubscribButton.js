@@ -4,7 +4,7 @@ import { toast } from 'react-hot-toast';
 import { EnvelopeIcon } from "@heroicons/react/24/solid";
 
 
-const SubscribButton = ({ user, users, userId, subscribId, unfollowingId,writerName }) => {
+const SubscribButton = ({ user, users, userId, subscribId, writerName }) => {
     const [isSubscrib, setIsSubscrib] = useState(false);
 
   useEffect(() => {

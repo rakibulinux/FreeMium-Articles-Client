@@ -135,13 +135,15 @@ const Comments = ({ id }) => {
                                     <p className='text-xs my-3'>{comment?.comment}</p>
                                     <div className='flex justify-between'>
                                         <button><AiOutlineLike></AiOutlineLike></button>
-                                        <div className="dropdown dropdown-left">
-                                            <label tabIndex={0} className="btn m-1">Click</label>
-                                            <div tabIndex={0} className="dropdown-content card card-compact w-64 p-2 shadow bg-primary text-primary-content">
+                                        <div className="dropdown dropdown-left dropdown-top">
+                                            <label tabIndex={0} className="m-1">Reply</label>
+                                            <div tabIndex={0} className="dropdown-content card-compact w-64 p-2 shadow text-primary-content">
                                                 <div className="card-body">
                                                     <form onSubmit={handleCommentReply}>
-                                                        <textarea name="message" className="textarea textarea-bordered text-" placeholder="write comment" required></textarea><br />
-                                                        <button type='submit' className="btn " >update</button>
+                                                        <textarea name="message" className="textarea w-full text-black-350" placeholder="write comment" required></textarea><br />
+                                                        <div className='flex justify-end'>
+                                                        <button type='submit' className="btn mt-2 bg-[#059b00] hover:bg-[#0F730C] btn-sm rounded-full text-white" >Respond</button>
+                                                        </div>
                                                     </form>
                                                 </div>
                                             </div>

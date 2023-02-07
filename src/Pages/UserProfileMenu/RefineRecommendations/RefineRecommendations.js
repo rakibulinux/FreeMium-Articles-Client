@@ -4,14 +4,17 @@ import { useContext } from "react";
 import WhoToFollow from './../../SideCategory/WhoToFollow';
 import { APIContext } from './../../../contexts/APIProvider';
 import Tabs from '../Tabs/Tabs';
+import Following from "./Following";
+import ReadingHistory from "./ReadingHistory";
+import Suggestions from "./Suggestions";
 
 const RefineRecommendations = () => {
   const tabsData = [
-        { id: 1, label: 'Following', content: <div>Content for Tab 1</div> },
-        { id: 2, label: ' Reading history', content: <div>Content for Tab 2</div> },
-        { id: 3, label: ' Muted', content: <div>Content for Tab 2</div> },
-        { id: 4, label: ' Suggestions', content: <div>Content for Tab 2</div> },
-        { id: 5, label: ' Security and apps', content: <div>Content for Tab 2</div> },
+        { id: 1, label: 'Following', content: <div><Following/></div> },
+        { id: 2, label: ' Reading history', content: <div><ReadingHistory/></div> },
+        { id: 3, label: ' Muted', content: <div> Muted section</div> },
+        { id: 4, label: ' Suggestions', content: <div><Suggestions/></div> },
+       
   ]
   const {isDarkMode} = useContext(APIContext);
   return (

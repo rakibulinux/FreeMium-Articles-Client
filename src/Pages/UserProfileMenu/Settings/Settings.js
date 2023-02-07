@@ -6,61 +6,24 @@ import MembershipAndPayment from "./MembershipAndPayment";
 import Notifications from "./Notifications";
 import SecurityAndApps from "./SecurityAndApps";
 import { APIContext } from "../../../contexts/APIProvider";
+import Publishing from "./Publishing";
 const Settings = () => {
-  const tabsData = [
-    {
-      id: 1,
-      label: "Account",
-      content: (
-        <div>
-          <Account />
-        </div>
-      ),
-    },
-    { id: 2, label: " Publishing", content: <div>Publishing</div> },
-    {
-      id: 3,
-      label: " Notifications",
-      content: (
-        <div>
-          <Notifications></Notifications>
-        </div>
-      ),
-    },
-    {
-      id: 4,
-      label: " Membership and payment",
-      content: (
-        <div>
-          <MembershipAndPayment></MembershipAndPayment>
-        </div>
-      ),
-    },
-    {
-      id: 5,
-      label: " Security and apps",
-      content: (
-        <div>
-          <SecurityAndApps></SecurityAndApps>
-        </div>
-      ),
-    },
+    const tabsData = [
+        { id: 1, label: 'Account', content: <div><Account/></div> },
+        { id: 2, label: ' Publishing', content: <div><Publishing/></div> },
+        { id: 3, label: ' Notifications', content: <div><Notifications></Notifications></div> },
+        { id: 4, label: ' Membership and payment', content: <div><MembershipAndPayment></MembershipAndPayment></div> },
+        { id: 5, label: ' Security and apps', content: <div><SecurityAndApps></SecurityAndApps></div> },
+        
   ];
   const { isDarkMode } = useContext(APIContext);
   return (
-    <div className="container mx-auto mb-14 pb-10">
-      <div className="flex row">
-        <div className=" basis-3/4 mb-10 container mx-auto lg:px-48 md:px-36 sm:px-24">
-          <div className="flex justify-between">
-            <h1
-              className={
-                isDarkMode
-                  ? "text-5xl font-bold text-gray-100"
-                  : "text-5xl font-bold text-gray-900"
-              }
-            >
-              Settings
-            </h1>
+    <div className='container mx-auto mt-14 py-10'>
+      <div className='flex row'>
+        <div className=' basis-3/4 mb-10 container mx-auto lg:p-48 md:p-36 sm:p-24'>
+          <div className='flex justify-between'>
+             <h1 className={isDarkMode ? 'text-5xl font-bold text-gray-100':'text-5xl font-bold text-gray-900'}>Settings</h1>
+          
           </div>
           {/* tabs */}
           <Tabs tabsData={tabsData} />

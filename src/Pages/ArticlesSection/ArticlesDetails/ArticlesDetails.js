@@ -10,8 +10,8 @@ import GetUnlimitedAccessButton from "../../../components/GetUnlimitedAccessButt
 import SubscribButton from "../SubscribButton/SubscribButton";
 import { APIContext } from "../../../contexts/APIProvider";
 import ArticleDetailsCard from "../../ArticlesSection/ArticlesDetails/ArticleDetailsCard/ArticleDetailsCard";
-
 import cookie from "react-cookies";
+
 const ArticlesDetails = () => {
   const [story, setStory] = useState({});
   const [error, setError] = useState(null);
@@ -21,7 +21,7 @@ const ArticlesDetails = () => {
   const [users, setUsers] = useState({});
   const [loginUser, setLoginUser] = useState({});
   const { user } = useContext(AuthContext);
-  const { isDarkMode, articlesLoading } = useContext(APIContext);
+  const { isDarkMode } = useContext(APIContext);
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/user/${user?.email}`)
       .then((res) => res.json())
@@ -68,6 +68,7 @@ const ArticlesDetails = () => {
         setLoading(false);
       });
   }, [id, loginUser]);
+
   const { writerImg, writerName, articleTitle, articleImg, userId, userEmail } =
     story;
 
@@ -90,9 +91,9 @@ const ArticlesDetails = () => {
   if (!users) {
     return <Spinner />;
   }
-  if (articlesLoading) {
-    return <Spinner></Spinner>;
-  }
+  // if (articlesLoading) {
+  //   return <Spinner></Spinner>;
+  // }
   return (
     // <div>
     //   <h1>Story</h1>
@@ -105,7 +106,7 @@ const ArticlesDetails = () => {
             <ArticleDetailsCard
               articleData={story}
               users={users}
-              setUsers={setUsers}
+              // setUsers={setUsers}
             />
           </div>
         </div>
@@ -173,15 +174,29 @@ const ArticlesDetails = () => {
               {/* <Link className="bg-gray-500 border-0 rounded-full p-2">
                 <EnvelopeIcon className="h-4 w-4 text-white " />
               </Link> */}
-              <SubscribButton
-                user={user}
-                // users={users}
-                userId={userId}
-                userEmail={userEmail}
-                subscribId={user?.email}
-                unsubscribId={user?.email}
-                writerName={writerName}
-              ></SubscribButton>
+              {user?.uid ? (
+                <SubscribButton
+                  user={user}
+                  // users={users}
+                  userId={userId}
+                  userEmail={userEmail}
+                  subscribId={user?.email}
+                  unsubscribId={user?.email}
+                  writerName={writerName}
+                />
+              ) : (
+                <Link to="/login">
+                  <button
+                    className={
+                      isDarkMode
+                        ? `btn btn-sm bg-gray-100 hover:bg-gray-300 hover:text-gray-800 text-gray-900 rounded-full btn-outline`
+                        : `btn btn-sm rounded-full bg-gray-500 border-0 text-white btn-outline`
+                    }
+                  >
+                    Follow
+                  </button>
+                </Link>
+              )}
             </div>
           </div>
           {/* more form section */}

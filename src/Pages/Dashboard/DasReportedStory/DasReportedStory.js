@@ -2,7 +2,7 @@ import React from "react";
 import { useContext } from "react";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
-import { useQuery } from "react-query";
+
 import Spinner from "../../../components/Spinner/Spinner";
 import { APIContext } from "../../../contexts/APIProvider";
 import ReportStoryModal from "./ReportStoryModal";

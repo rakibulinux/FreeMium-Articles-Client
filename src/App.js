@@ -1,8 +1,7 @@
 import { useContext } from "react";
-import { BrowserRouter, Route, RouterProvider } from "react-router-dom";
+import { RouterProvider } from "react-router-dom";
 import "./App.css";
 import { APIContext } from "./contexts/APIProvider";
-import ArticlesDetails from "./Pages/ArticlesSection/ArticlesDetails/ArticlesDetails";
 import router from "./Routers/Routers";
 
 function App() {
@@ -15,10 +14,6 @@ function App() {
       }
     >
       <RouterProvider router={router} />
-      {/* <BrowserRouter>
-        <Route path="/stories" exact component={Stories} />
-        <Route path="/view-story/:storyId" component={ArticlesDetails} />
-      </BrowserRouter> */}
     </div>
   );
 }

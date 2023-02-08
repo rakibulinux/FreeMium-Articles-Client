@@ -20,7 +20,6 @@ const ArticlesDetails = () => {
 
   const [users, setUsers] = useState({});
   const [loginUser, setLoginUser] = useState({});
-  // const articleData = useLoaderData();
   const { user } = useContext(AuthContext);
   const { isDarkMode } = useContext(APIContext);
   useEffect(() => {
@@ -35,7 +34,6 @@ const ArticlesDetails = () => {
     if (!loginUser) {
       return <Spinner />;
     }
-    // const userId = loginUser?._id;
     let visitorId = cookie.load("visitorId");
     let visitorMacAddress = cookie.load("visitorMacAddress");
     if (!visitorId || !visitorMacAddress) {

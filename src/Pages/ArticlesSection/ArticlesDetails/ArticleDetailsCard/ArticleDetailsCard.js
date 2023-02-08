@@ -279,7 +279,9 @@ const ArticleDetailsCard = ({ articleData,users,setUsers }) => {
                       ? "mt-2 p-2 shadow menu menu-compact dropdown-content bg-black-250 text-white rounded-box w-52"
                       : "mt-2 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box text-black-350 w-52"
                   }
-                >
+                >{
+                  user.email === userEmail
+                  ?<>
                   <li>
                     <a href="/">Mute this author</a>
                   </li>
@@ -289,6 +291,25 @@ const ArticleDetailsCard = ({ articleData,users,setUsers }) => {
                   <li>
                     <button onClick={() => reportedHandler(_id)}>Report</button>
                   </li>
+                  <li>
+                    <button>Edit Story</button>
+                  </li>
+                  </>
+                  :
+                  <>
+                  <li>
+                    <a href="/">Mute this author</a>
+                  </li>
+                  <li>
+                    <a href="/">Mute this publication</a>
+                  </li>
+                  <li>
+                    <button onClick={() => reportedHandler(_id)}>Report</button>
+                  </li>
+                  </>
+                  
+                }
+                  
                 </ul>
               </div>
 

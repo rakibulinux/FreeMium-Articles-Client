@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useLoaderData, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../../contexts/AuthProvider";
 import { useState } from "react";
@@ -10,72 +10,68 @@ import GetUnlimitedAccessButton from "../../../components/GetUnlimitedAccessButt
 import SubscribButton from "../SubscribButton/SubscribButton";
 import { APIContext } from "../../../contexts/APIProvider";
 import ArticleDetailsCard from "../../ArticlesSection/ArticlesDetails/ArticleDetailsCard/ArticleDetailsCard";
-import axios from "axios";
-import { useQuery } from "@tanstack/react-query";
-import { async } from "@firebase/util";
 
+import cookie from "react-cookies";
 const ArticlesDetails = () => {
-  // const [story, setStory] = useState({});
+  const [story, setStory] = useState({});
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
   const { id } = useParams();
-  console.log(id);
+
   const [users, setUsers] = useState({});
-
-  const articleData = useLoaderData();
-  const { user, loginUser } = useContext(AuthContext);
+  const [loginUser, setLoginUser] = useState({});
+  // const articleData = useLoaderData();
+  const { user } = useContext(AuthContext);
   const { isDarkMode } = useContext(APIContext);
-
-  // localStorage.setItem("userId", user?.email);
-  // useEffect(() => {
-  //   fetch(`${process.env.REACT_APP_API_URL}/user/${user?.email}`)
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setLoginUser(data);
-  //       localStorage.setItem("userId", data?._id);
-  //     });
-  // }, [user?.email]);
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_API_URL}/user/${user?.email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setLoginUser(data);
+      });
+  }, [user?.email]);
 
   useEffect(() => {
-    const userId = localStorage.getItem("userId");
-    console.log(userId);
+    if (!loginUser) {
+      return <Spinner />;
+    }
+    // const userId = loginUser?._id;
+    let visitorId = cookie.load("visitorId");
+    let visitorMacAddress = cookie.load("visitorMacAddress");
+    if (!visitorId || !visitorMacAddress) {
+      visitorId =
+        Math.random().toString(36).substring(2, 15) +
+        Math.random().toString(36).substring(2, 15);
+      visitorMacAddress =
+        Math.random().toString(36).substring(2, 15) +
+        Math.random().toString(36).substring(2, 15);
+      cookie.save("visitorId", visitorId, { path: "/" });
+      cookie.save("visitorMacAddress", visitorMacAddress, { path: "/" });
+    }
+
     fetch(`${process.env.REACT_APP_API_URL}/view-story/${id}`, {
-      headers: { userid: loginUser?._id },
+      headers: {
+        "Visitor-Id": visitorId,
+        "Visitor-Mac-Address": visitorMacAddress,
+        "user-id": localStorage.getItem("userId"),
+      },
     })
       .then((res) => res.json())
-      .then((data) => console.log(data))
-      .catch((err) => setError(err.response.data.message));
-  }, [id, loginUser?._id]);
-
-  // const title = articleTitle.replace(/<[^>]+>/g, "");
-
-  const {
-    data: story,
-    isLoading,
-    refetch,
-  } = useQuery({
-    queryKey: [`/view-story/${id}`],
-    queryFn: async () => {
-      const res = await fetch(
-        `${process.env.REACT_APP_API_URL}/view-story/${id}`,
-        {
-          headers: { userid: loginUser?._id },
+      .then((data) => {
+        if (data.error) {
+          setError(data.error);
+        } else {
+          setStory(data);
         }
-      );
-      const data = await res.json();
-      console.log(data);
-      return data;
-    },
-  });
-  console.log(story, id);
-  const {
-    // _id,
-    writerImg,
-    writerName,
-    articleTitle,
-    articleImg,
-    userId,
-    userEmail,
-  } = story;
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err.message);
+        setLoading(false);
+      });
+  }, [id, loginUser]);
+  const { writerImg, writerName, articleTitle, articleImg, userId, userEmail } =
+    story;
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/user/${userEmail}`)
@@ -83,16 +79,29 @@ const ArticlesDetails = () => {
       .then((data) => setUsers(data));
   }, [userEmail, users]);
 
-  if (isLoading && !users && !loginUser && !id) {
+  if (loading) {
+    return <Spinner />;
+  }
+
+  if (error) {
+    return <p>Error: {error}</p>;
+  }
+
+  const title = articleTitle?.replace(/<[^>]+>/g, "");
+
+  if (!users) {
     return <Spinner />;
   }
   return (
+    // <div>
+    //   <h1>Story</h1>
+    // </div>
     <div className="border-t-[1px] w-11/12 mx-auto">
       <div className="container mx-auto lg:grid lg:grid-cols-3 grid-cols-1">
         {/* left side content */}
         <div className="border-r-0 lg:border-r-[1px] col-span-2  ">
           <div className="mr-10 my-10">
-            <ArticleDetailsCard articleData={articleData} />
+            <ArticleDetailsCard articleData={story} />
           </div>
         </div>
         {/* right side content*/}
@@ -196,16 +205,12 @@ const ArticlesDetails = () => {
                 <div>
                   <h1
                     className="text-xl font-bold"
-                    dangerouslySetInnerHTML={{ __html: articleTitle }}
+                    dangerouslySetInnerHTML={{ __html: title }}
                   />
                 </div>
               </div>
               <div className="flex items-center gap-2 my-3">
-                <img
-                  src={articleImg}
-                  alt={articleTitle}
-                  className="w-24 h-20"
-                />
+                <img src={articleImg} alt={title} className="w-24 h-20" />
               </div>
             </div>
             {/* demo writter end */}

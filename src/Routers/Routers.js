@@ -34,6 +34,7 @@ import DashbordEditors from "../Pages/Dashboard/DashbordEditors/DashbordEditors"
 import DasReCharts from "../Pages/Dashboard/DasReCharts/DasReCharts";
 import DasReportedStory from "../Pages/Dashboard/DasReportedStory/DasReportedStory";
 import DasAddCategory from "../Pages/Dashboard/DasAddCategory/DasAddCategory";
+import UpdateCategory from "../Pages/Dashboard/DashbordCategory/UpdateCategory/UpdateCategory";
 
 const router = createBrowserRouter([
   {
@@ -177,6 +178,10 @@ const router = createBrowserRouter([
         path: "/membership",
         element: <MemberShipPage />,
       },
+      {
+        path:"/updateCategory/:id",
+        element:<UpdateCategory></UpdateCategory>
+      }
     ],
   },
   {

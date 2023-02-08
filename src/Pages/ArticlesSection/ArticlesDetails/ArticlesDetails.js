@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useLoaderData, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../../contexts/AuthProvider";
 import { useState } from "react";
@@ -11,49 +11,102 @@ import SubscribButton from "../SubscribButton/SubscribButton";
 import { APIContext } from "../../../contexts/APIProvider";
 import ArticleDetailsCard from "../../ArticlesSection/ArticlesDetails/ArticleDetailsCard/ArticleDetailsCard";
 
+import cookie from "react-cookies";
 const ArticlesDetails = () => {
-  // const [showFollow, setShowFollow] = useState(true);
+  const [story, setStory] = useState({});
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const { id } = useParams();
+
   const [users, setUsers] = useState({});
-  const articleData = useLoaderData();
-  // const {id}=useParams()
+  const [loginUser, setLoginUser] = useState({});
   const { user } = useContext(AuthContext);
-  const { isDarkMode,articles,articlesLoading } = useContext(APIContext);
-// const [articleData,setArticleData]=useState()
+  const { isDarkMode, articlesLoading } = useContext(APIContext);
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_API_URL}/user/${user?.email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setLoginUser(data);
+      });
+  }, [user?.email]);
 
-// get specific story data
-  // useEffect(() => {
-  //   fetch(`${process.env.REACT_APP_API_URL}/view-story/${id}`)
-  //     .then((res) => res.json())
-  //     .then((data) => setArticleData(data));
-  // }, [id]);
+  useEffect(() => {
+    if (!loginUser) {
+      return <Spinner />;
+    }
+    let visitorId = cookie.load("visitorId");
+    let visitorMacAddress = cookie.load("visitorMacAddress");
+    if (!visitorId || !visitorMacAddress) {
+      visitorId =
+        Math.random().toString(36).substring(2, 15) +
+        Math.random().toString(36).substring(2, 15);
+      visitorMacAddress =
+        Math.random().toString(36).substring(2, 15) +
+        Math.random().toString(36).substring(2, 15);
+      cookie.save("visitorId", visitorId, { path: "/" });
+      cookie.save("visitorMacAddress", visitorMacAddress, { path: "/" });
+    }
 
-  console.log(articles)
-  // const articleData = articles.find(artical=>artical._id=id)
-  
+    fetch(`${process.env.REACT_APP_API_URL}/view-story/${id}`, {
+      headers: {
+        "Visitor-Id": visitorId,
+        "Visitor-Mac-Address": visitorMacAddress,
+        "user-id": localStorage.getItem("userId"),
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.error) {
+          setError(data.error);
+        } else {
+          setStory(data);
+        }
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err.message);
+        setLoading(false);
+      });
+  }, [id, loginUser]);
   const { writerImg, writerName, articleTitle, articleImg, userId, userEmail } =
-  articleData;
-// console.log(articleData)
-  const title = articleTitle.replace(/<[^>]+>/g, "");
+    story;
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/user/${userEmail}`)
       .then((res) => res.json())
       .then((data) => setUsers(data));
   }, [userEmail, users]);
- 
+
+  if (loading) {
+    return <Spinner />;
+  }
+
+  if (error) {
+    return <p>Error: {error}</p>;
+  }
+
+  const title = articleTitle?.replace(/<[^>]+>/g, "");
+
   if (!users) {
     return <Spinner />;
   }
-  if(articlesLoading){
-    return <Spinner></Spinner>
+  if (articlesLoading) {
+    return <Spinner></Spinner>;
   }
   return (
+    // <div>
+    //   <h1>Story</h1>
+    // </div>
     <div className="border-t-[1px] w-11/12 mx-auto">
       <div className="container mx-auto lg:grid lg:grid-cols-3 grid-cols-1">
         {/* left side content */}
         <div className="border-r-0 lg:border-r-[1px] col-span-2  ">
           <div className="mr-10 my-10">
-            <ArticleDetailsCard articleData={articleData} users={users} setUsers={setUsers}/>
+            <ArticleDetailsCard
+              articleData={story}
+              users={users}
+              setUsers={setUsers}
+            />
           </div>
         </div>
         {/* right side content*/}
@@ -94,7 +147,7 @@ const ArticlesDetails = () => {
               Entrepreneurship — timdenning.com/mb Follow
             </p>
             <div className="card-actions justify-center lg:justify-start items-center">
-              {users && (
+              {user?.uid ? (
                 <FollowButton
                   user={user}
                   users={users}
@@ -103,6 +156,18 @@ const ArticlesDetails = () => {
                   followingId={user?.email}
                   unfollowingId={user?.email}
                 />
+              ) : (
+                <Link to="/login">
+                  <button
+                    className={
+                      isDarkMode
+                        ? `btn btn-sm bg-gray-100 hover:bg-gray-300 hover:text-gray-800 text-gray-900 rounded-full btn-outline`
+                        : `btn btn-sm rounded-full bg-gray-500 border-0 text-white btn-outline`
+                    }
+                  >
+                    Follow
+                  </button>
+                </Link>
               )}
 
               {/* <Link className="bg-gray-500 border-0 rounded-full p-2">
@@ -134,7 +199,7 @@ const ArticlesDetails = () => {
 
             <div className="flex flex-col lg:flex-row">
               <div>
-                <div className="flex justify-center items-center gap-2 my-3">
+                <div className="flex items-center gap-2 my-3">
                   <img
                     src={writerImg}
                     alt={writerName}

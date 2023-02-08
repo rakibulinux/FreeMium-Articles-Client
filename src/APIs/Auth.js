@@ -1,10 +1,11 @@
-export const setAuthToken = (user, role) => {
+export const setAuthToken = (user, role, verify, paid) => {
   const currentUser = {
     name: user?.displayName,
     picture: user?.photoURL,
     email: user?.email,
     role,
     verify: false,
+    paid: false,
   };
   console.log(currentUser);
   // Save user is DB

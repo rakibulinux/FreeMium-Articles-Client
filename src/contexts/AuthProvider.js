@@ -21,6 +21,7 @@ const googleProvider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [loginUser, setLoginUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   //Create User Account
@@ -67,7 +68,14 @@ const AuthProvider = ({ children }) => {
     setLoading(true);
     return sendPasswordResetEmail(auth, email);
   };
-
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_API_URL}/user/${user?.email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setLoginUser(data);
+        localStorage.setItem("userId", data?._id);
+      });
+  }, [user?.email]);
   useEffect(() => {
     //this part will execute once the component is mounted.
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -93,6 +101,7 @@ const AuthProvider = ({ children }) => {
     resetUserAccountPassword,
     loading,
     setLoading,
+    loginUser,
   };
 
   return (

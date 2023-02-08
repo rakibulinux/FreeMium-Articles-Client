@@ -109,13 +109,14 @@ const router = createBrowserRouter([
         path: "/search",
         element: <Search></Search>,
       },
+
       {
         path: "/view-story/:id",
         element: <ArticlesDetails></ArticlesDetails>,
         loader: async ({ params }) =>
           await fetch(
             `${process.env.REACT_APP_API_URL}/view-story/${params.id}`
-          ),        
+          ),
       },
       {
         path: "/list",
@@ -201,29 +202,29 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path:'/dashboard/category',
-        element:<DashbordCategory></DashbordCategory>,
-       },
-       {
-        path:'/dashboard/storys',
-        element:<DashbordStory></DashbordStory>,
-       },
-       {
-        path:'/dashboard/editors',
-        element:<DashbordEditors></DashbordEditors>,
-       },
-       {
-        path:'/dashboard/charts',
-        element:<DasReCharts></DasReCharts>,
-       },
-       {
-        path:'/dashboard/reportedStory',
-        element:<DasReportedStory></DasReportedStory>,
-       },
-       {
-        path:'/dashboard/addCategory',
-        element:<DasAddCategory></DasAddCategory>,
-       }
+        path: "/dashboard/category",
+        element: <DashbordCategory></DashbordCategory>,
+      },
+      {
+        path: "/dashboard/storys",
+        element: <DashbordStory></DashbordStory>,
+      },
+      {
+        path: "/dashboard/editors",
+        element: <DashbordEditors></DashbordEditors>,
+      },
+      {
+        path: "/dashboard/charts",
+        element: <DasReCharts></DasReCharts>,
+      },
+      {
+        path: "/dashboard/reportedStory",
+        element: <DasReportedStory></DasReportedStory>,
+      },
+      {
+        path: "/dashboard/addCategory",
+        element: <DasAddCategory></DasAddCategory>,
+      },
     ],
   },
 ]);

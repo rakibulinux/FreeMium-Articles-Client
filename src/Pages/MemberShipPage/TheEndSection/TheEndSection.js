@@ -17,7 +17,7 @@ const TheEndSection = () => {
             </h1>
             <div className="mt-8 flex flex-wrap justify-center gap-4">
               <Link to="/payment">
-                <button  className="block w-full rounded-full text-white bg-black px-12 py-3 text-xl font-medium  shadow hover:bg-[#4171f8] hover:border-2 hover:text-white sm:w-auto">
+                <button className="block w-full rounded-full text-white bg-black-350 px-12 py-3 text-xl font-medium  shadow hover:bg-[#4171f8] hover:border-2 hover:text-white sm:w-auto">
                   Get unlimited access
                 </button>
               </Link>

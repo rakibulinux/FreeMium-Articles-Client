@@ -19,7 +19,7 @@ const DashbordCategory = () => {
   if (isCategoryLoading) {
     return <Spinner />;
   }
-
+console.log(categoryButton)
   // delete seller
   const categoryDeleteHandl = (category) => {
     fetch(`${process.env.REACT_APP_API_URL}/categoryButton/${category._id}`, {
@@ -87,10 +87,12 @@ const DashbordCategory = () => {
                 </td>
 
                 <th>
+                  <Link to={`/updateCategory/${category._id}`}>
                   <button className="btn btn-ghost btn-xs">
-                    {" "}
+                    
                     <FaPencilAlt />
                   </button>
+                  </Link>
                 </th>
               </tr>
             ))}

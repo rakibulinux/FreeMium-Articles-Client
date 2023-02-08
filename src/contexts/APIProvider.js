@@ -9,7 +9,7 @@ const APIProvider = ({ children }) => {
   const [allUsers, setAllUsers] = useState([]);
   const [threeUsers, setThreeUsers] = useState([]);
   const [isDarkMode, setIsDarkMode] = useState(false);
-  
+  // const [categoryData,setCategoryData]=useState() 
 
   useEffect(() => {
     const storedValue = localStorage.getItem("isDarkMode");

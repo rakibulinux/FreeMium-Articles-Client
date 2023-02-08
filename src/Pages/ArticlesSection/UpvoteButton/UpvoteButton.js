@@ -10,7 +10,7 @@ import { APIContext } from '../../../contexts/APIProvider';
 const UpvoteButton = ({ user, storyId, upVoteId, classes}) => {
     const [upVote,setUpVote]=useState(false)
     //  const [newUpvote,setNewUpvote]=useState()
-    const { isDarkMode,articlesRefetch } = useContext(APIContext);
+    const { isDarkMode} = useContext(APIContext);
     useEffect(() => {
         axios
           .get(

@@ -13,6 +13,8 @@ import DemoWritter from "../../../Home/DemoWritter";
 import Comments from "../../ShowMoreArtical/Comments";
 
 const ArticleDetailsCard = ({ articleData }) => {
+  const { isDarkMode, setIsDarkMode } = useContext(APIContext);
+
   const {
     _id,
     articleDetails,
@@ -22,11 +24,11 @@ const ArticleDetailsCard = ({ articleData }) => {
     writerImg,
     writerName,
   } = articleData;
-  const { isDarkMode, setIsDarkMode } = useContext(APIContext);
+
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
   };
-  const title = articleTitle.replace(/<[^>]+>/g, "");
+  const title = articleTitle?.replace(/<[^>]+>/g, "");
 
   const lightIcon = (
     <svg

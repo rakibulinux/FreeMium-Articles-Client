@@ -27,12 +27,14 @@ const AuthProvider = ({ children }) => {
   //Create User Account
   const createUserAccount = (email, password) => {
     setLoading(true);
+    localStorage.setItem("userId", loginUser?._id);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
   //Login with Password
   const loginUserAccount = (email, password) => {
     setLoading(true);
+    localStorage.setItem("userId", loginUser?._id);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
@@ -48,12 +50,15 @@ const AuthProvider = ({ children }) => {
   //Google Signin
   const signInWithGoogle = () => {
     setLoading(true);
+    localStorage.setItem("userId", loginUser?._id);
     return signInWithPopup(auth, googleProvider);
   };
 
   //Logout
   const logoutUserAccount = () => {
     setLoading(true);
+
+    localStorage.removeItem("userId");
     localStorage.removeItem("freeMiumToken");
     return signOut(auth);
   };
@@ -68,14 +73,13 @@ const AuthProvider = ({ children }) => {
     setLoading(true);
     return sendPasswordResetEmail(auth, email);
   };
+
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/user/${user?.email}`)
       .then((res) => res.json())
-      .then((data) => {
-        setLoginUser(data);
-        localStorage.setItem("userId", data?._id);
-      });
+      .then((data) => setLoginUser(data));
   }, [user?.email]);
+
   useEffect(() => {
     //this part will execute once the component is mounted.
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -85,10 +89,10 @@ const AuthProvider = ({ children }) => {
 
     return () => {
       //this part will execute once the component is unmounted.
-      // setLoading(false);
+
       return unSubscribe();
     };
-  }, []);
+  }, [loginUser?._id]);
 
   const authInfo = {
     user,

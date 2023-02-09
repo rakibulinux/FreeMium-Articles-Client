@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { APIContext } from "./../../contexts/APIProvider";
 
 const DemoWritter = ({ articleData }) => {
+  const { isDarkMode } = useContext(APIContext);
+
   const {
     articleDetails,
     articleImg,
@@ -13,8 +15,7 @@ const DemoWritter = ({ articleData }) => {
     writerName,
     _id,
   } = articleData;
-  const title = articleTitle.replace(/<[^>]+>/g, "");
-  const { isDarkMode } = useContext(APIContext);
+  const title = articleTitle?.replace(/<[^>]+>/g, "");
   return (
     <div className="mt-7">
       <Link
@@ -61,7 +62,7 @@ const DemoWritter = ({ articleData }) => {
             className={
               isDarkMode ? "text-sm text-gray-100" : "text-sm text-gray-500"
             }
-            dangerouslySetInnerHTML={{ __html: articleDetails.slice(0, 190) }}
+            dangerouslySetInnerHTML={{ __html: articleDetails?.slice(0, 190) }}
           />
           ...
         </div>

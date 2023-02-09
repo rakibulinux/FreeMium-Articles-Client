@@ -1,7 +1,4 @@
-import {
-  LinkIcon,
-  ShareIcon,
-} from "@heroicons/react/24/solid";
+import { LinkIcon, ShareIcon } from "@heroicons/react/24/solid";
 import React, { useState } from "react";
 import { useContext } from "react";
 import { toast } from "react-hot-toast";
@@ -12,10 +9,9 @@ import DownVoteButton from "../../DownVoteButton/DownVoteButton";
 import Comments from "../../ShowMoreArtical/Comments";
 import UpvoteButton from "../../UpvoteButton/UpvoteButton";
 
-
-const ArticleDetailsCard = ({ articleData,users,setUsers }) => {
+const ArticleDetailsCard = ({ articleData, users, setUsers }) => {
   const { user } = useContext(AuthContext);
-  
+
   const {
     _id,
     articleDetails,
@@ -26,14 +22,14 @@ const ArticleDetailsCard = ({ articleData,users,setUsers }) => {
     writerName,
     userEmail,
     upVote,
-    downVote
+    downVote,
   } = articleData;
   // console.log(articleData)
   const { isDarkMode, setIsDarkMode } = useContext(APIContext);
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
   };
-  const title = articleTitle.replace(/<[^>]+>/g, "");
+  const title = articleTitle?.replace(/<[^>]+>/g, "");
 
   const lightIcon = (
     <svg
@@ -70,7 +66,6 @@ const ArticleDetailsCard = ({ articleData,users,setUsers }) => {
 
   // reported handler
   const reportedHandler = (id) => {
-   
     fetch(`${process.env.REACT_APP_API_URL}/story/reportedStory/${id}`, {
       method: "PUT",
     })
@@ -79,7 +74,6 @@ const ArticleDetailsCard = ({ articleData,users,setUsers }) => {
         console.log(data);
         if (data.acknowledged === true) {
           toast.success("Add Report  successfully");
-         
         }
       });
   };
@@ -314,38 +308,27 @@ const ArticleDetailsCard = ({ articleData,users,setUsers }) => {
         <div>
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 mt-5">
             <div className="flex  justify-start gap-2 text-xs ">
-             
-              
-               <div className="flex   gap-2 border rounded-full ">
-               {
-                // newUpvote &&
-                <UpvoteButton
-                user={user}
-                users={users}
-                storyId={_id}
-                userEmail={userEmail}
-                upVoteId={user?.email}
-               
-                 >
-
-                </UpvoteButton>
-               }
+              <div className="flex   gap-2 border rounded-full ">
+                {
+                  // newUpvote &&
+                  <UpvoteButton
+                    user={user}
+                    users={users}
+                    storyId={_id}
+                    userEmail={userEmail}
+                    upVoteId={user?.email}
+                  ></UpvoteButton>
+                }
                 <p className="pl-0 p-2"> {upVote?.length}</p>
                 <DownVoteButton
-                user={user}
-                users={users}
-                storyId={_id}
-                userEmail={userEmail}
-                downVoteId={user?.email}
-               
-                 >
-
-                </DownVoteButton>
+                  user={user}
+                  users={users}
+                  storyId={_id}
+                  userEmail={userEmail}
+                  downVoteId={user?.email}
+                ></DownVoteButton>
                 <p className="pl-0 p-2"> {downVote?.length}</p>
-
-               </div>
-              
-            
+              </div>
 
               {/* Modal for comment */}
               {/* The button to open modal */}
@@ -397,7 +380,6 @@ const ArticleDetailsCard = ({ articleData,users,setUsers }) => {
 
           <div className="modal flex justify-end ">
             <div className="modal-box h-full my-0 rounded shadow w-full md:w-6/12 lg:w-3/12">
-              
               <label
                 htmlFor="comment-modal"
                 className="btn btn-sm btn-circle bg-white hover:bg-white hover:text-black border-none absolute right-2 top-2"

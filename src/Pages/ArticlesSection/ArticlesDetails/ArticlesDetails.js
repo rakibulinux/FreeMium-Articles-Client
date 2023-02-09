@@ -15,25 +15,13 @@ import cookie from "react-cookies";
 const ArticlesDetails = () => {
   const [story, setStory] = useState({});
   const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [newLoading, setNewLoading] = useState(true);
   const { id } = useParams();
-
   const [users, setUsers] = useState({});
-  const [loginUser, setLoginUser] = useState({});
   const { user } = useContext(AuthContext);
   const { isDarkMode } = useContext(APIContext);
-  useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/user/${user?.email}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setLoginUser(data);
-      });
-  }, [user?.email]);
 
   useEffect(() => {
-    if (!loginUser) {
-      return <Spinner />;
-    }
     let visitorId = cookie.load("visitorId");
     let visitorMacAddress = cookie.load("visitorMacAddress");
     if (!visitorId || !visitorMacAddress) {
@@ -46,13 +34,17 @@ const ArticlesDetails = () => {
       cookie.save("visitorId", visitorId, { path: "/" });
       cookie.save("visitorMacAddress", visitorMacAddress, { path: "/" });
     }
-
+    const userIds = localStorage.getItem("userId");
+    const headers = {
+      "Content-Type": "application/json",
+      "Visitor-Id": visitorId,
+      "Visitor-Mac-Address": visitorMacAddress,
+    };
+    if (userIds) {
+      headers["user-id"] = userIds;
+    }
     fetch(`${process.env.REACT_APP_API_URL}/view-story/${id}`, {
-      headers: {
-        "Visitor-Id": visitorId,
-        "Visitor-Mac-Address": visitorMacAddress,
-        "user-id": localStorage.getItem("userId"),
-      },
+      headers,
     })
       .then((res) => res.json())
       .then((data) => {
@@ -61,14 +53,13 @@ const ArticlesDetails = () => {
         } else {
           setStory(data);
         }
-        setLoading(false);
+        setNewLoading(false);
       })
       .catch((err) => {
         setError(err.message);
-        setLoading(false);
+        setNewLoading(false);
       });
-  }, [id, loginUser]);
-
+  }, [id]);
   const { writerImg, writerName, articleTitle, articleImg, userId, userEmail } =
     story;
 
@@ -78,7 +69,7 @@ const ArticlesDetails = () => {
       .then((data) => setUsers(data));
   }, [userEmail, users]);
 
-  if (loading) {
+  if (newLoading) {
     return <Spinner />;
   }
 

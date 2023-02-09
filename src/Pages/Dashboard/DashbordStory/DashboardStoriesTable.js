@@ -76,7 +76,7 @@ const DashboardStoriesTable = ({ article, isDarkMode, idx, articlesRefetch }) =>
               }
             >
               <li>
-                <Link>Edit article</Link>{" "}
+                <Link to={`/edit-article/${_id}`}>Edit article</Link>
               </li>
               <li>
               <label

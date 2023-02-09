@@ -35,6 +35,7 @@ import DasReCharts from "../Pages/Dashboard/DasReCharts/DasReCharts";
 import DasReportedStory from "../Pages/Dashboard/DasReportedStory/DasReportedStory";
 import DasAddCategory from "../Pages/Dashboard/DasAddCategory/DasAddCategory";
 import UpdateCategory from "../Pages/Dashboard/DashbordCategory/UpdateCategory/UpdateCategory";
+import EditArticle from "../Pages/ArticlesSection/EditArticle/EditArticle";
 
 const router = createBrowserRouter([
   {
@@ -118,6 +119,14 @@ const router = createBrowserRouter([
           await fetch(
             `${process.env.REACT_APP_API_URL}/view-story/${params.id}`
           ),
+      },
+      {
+        path: "edit-article/:id",
+        element: <EditArticle></EditArticle>,
+        loader: async ({ params }) =>
+          await fetch(
+            `${process.env.REACT_APP_API_URL}/view-story/${params.id}`
+          ), 
       },
       {
         path: "/list",

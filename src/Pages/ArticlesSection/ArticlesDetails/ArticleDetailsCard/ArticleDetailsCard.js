@@ -2,6 +2,7 @@ import { LinkIcon, ShareIcon } from "@heroicons/react/24/solid";
 import React, { useState } from "react";
 import { useContext } from "react";
 import { toast } from "react-hot-toast";
+import { Link } from "react-router-dom";
 import { APIContext } from "../../../../contexts/APIProvider";
 import { AuthContext } from "../../../../contexts/AuthProvider";
 import DemoWritter from "../../../Home/DemoWritter";
@@ -273,7 +274,9 @@ const ArticleDetailsCard = ({ articleData, users, setUsers }) => {
                       ? "mt-2 p-2 shadow menu menu-compact dropdown-content bg-black-250 text-white rounded-box w-52"
                       : "mt-2 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box text-black-350 w-52"
                   }
-                >
+                >{
+                  user.email === userEmail
+                  ?<>
                   <li>
                     <a href="/">Mute this author</a>
                   </li>
@@ -283,6 +286,25 @@ const ArticleDetailsCard = ({ articleData, users, setUsers }) => {
                   <li>
                     <button onClick={() => reportedHandler(_id)}>Report</button>
                   </li>
+                  <li>
+                    <Link to={`/edit-article/${_id}`}>Edit Story</Link >
+                  </li>
+                  </>
+                  :
+                  <>
+                  <li>
+                    <a href="/">Mute this author</a>
+                  </li>
+                  <li>
+                    <a href="/">Mute this publication</a>
+                  </li>
+                  <li>
+                    <button onClick={() => reportedHandler(_id)}>Report</button>
+                  </li>
+                  </>
+                  
+                }
+                  
                 </ul>
               </div>
 

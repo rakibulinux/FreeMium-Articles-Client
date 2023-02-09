@@ -1,16 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaCheck, FaTimes } from "react-icons/fa";
-const DashboardStoriesTable = ({ article, isDarkMode, idx }) => {
-  const { articleTitle, articleImg, category, articleSubmitDate } = article;
+import { toast } from "react-hot-toast";
+
+import ReportStoryModal from "../DasReportedStory/ReportStoryModal";
+const DashboardStoriesTable = ({ article, isDarkMode, idx, articlesRefetch }) => {
+  const { writerName,articleTitle, articleImg,_id, category, articleSubmitDate } = article;
   const title = articleTitle.replace(/<[^>]+>/g, "").slice(0, 50);
+
+  const [deleteItem, setDeleteItem] = useState(null);
+  const closeReportedModal = () => {
+    setDeleteItem(null);
+  };
+  // delete articles Item
+  const aricleItemDeleteHandl = () => {
+    fetch(`${process.env.REACT_APP_API_URL}/Story/reportedStory/${_id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.deletedCount > 0) {
+          toast.success("successfully delete");
+          articlesRefetch();
+        }
+      });
+  };
+  // console.log(reportedItems);
+  // if (reportLoading) {
+  //   return <Spinner />;
+  // }
   return (
+    
+      
     <tbody
-    //   className={
-    //     isDarkMode
-    //       ? "!bg-black-250 p-4 text-black-350"
-    //       : "bg-base-100 text-black-350"
-    //   }
+    
     >
       <tr className="hover:bg-slate-800">
         <th>{idx + 1}</th>
@@ -52,16 +76,36 @@ const DashboardStoriesTable = ({ article, isDarkMode, idx }) => {
               }
             >
               <li>
-                <Link>Edit article</Link>{" "}
+                <Link to={`/edit-article/${_id}`}>Edit article</Link>
               </li>
               <li>
-                <Link>Delete</Link>
+              <label
+                    onClick={() => setDeleteItem(title)}
+                    htmlFor="delete-modal"
+                    className="btn btn-ghost"
+                  >
+                    Delete
+                  </label>
               </li>
             </ul>
           </div>
         </td>
       </tr>
+      <div>
+      {deleteItem && (
+      <ReportStoryModal
+        title={`Are you sure to delete ${title}`}
+        message={`If you delete ${writerName},it can not undone`}
+        closeReportedModal={closeReportedModal}
+        btnName={"Delete"}
+        deleteHandler={aricleItemDeleteHandl}
+        itemData={deleteItem}
+      ></ReportStoryModal>
+    )}
+  </div>
     </tbody>
+    
+  
   );
 };
 

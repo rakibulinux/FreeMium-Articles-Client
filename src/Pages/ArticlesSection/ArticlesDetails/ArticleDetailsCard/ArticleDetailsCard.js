@@ -275,7 +275,7 @@ const ArticleDetailsCard = ({ articleData, users, setUsers }) => {
                       : "mt-2 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box text-black-350 w-52"
                   }
                 >{
-                  user.email === userEmail
+                  user?.email === userEmail
                   ?<>
                   <li>
                     <a href="/">Mute this author</a>

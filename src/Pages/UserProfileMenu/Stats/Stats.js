@@ -17,7 +17,7 @@ const Stats = () => {
       setCount(response.data.count);
     }
     fetchData();
-  }, []);
+  }, [user?.email]);
   
   
 

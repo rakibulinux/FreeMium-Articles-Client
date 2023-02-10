@@ -3,10 +3,9 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthProvider";
 import Spinner from "../../../components/Spinner/Spinner";
 import { APIContext } from "../../../contexts/APIProvider";
-import { BsBookmarkPlus, BsBookmarkStar } from "react-icons/bs";
+import { BsBookmarkPlus } from "react-icons/bs";
 
 const ArticlesCard = ({ data,handleSave,liked }) => {
-   const [like, setLike] = useState(liked);
   const { loading,user } = useContext(AuthContext);
   const { isDarkMode } = useContext(APIContext);
   const {
@@ -74,11 +73,6 @@ const ArticlesCard = ({ data,handleSave,liked }) => {
             {user&& <div className="tooltip" data-tip="Save">
               <button onClick={() => handleSave(data)}><BsBookmarkPlus /></button>
             </div>}
-
-
-
-
-
 
           </div>
         </div>

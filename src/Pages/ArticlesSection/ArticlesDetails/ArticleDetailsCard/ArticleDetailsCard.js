@@ -5,6 +5,7 @@ import {
 import React, { useState } from "react";
 import { useContext } from "react";
 import { toast } from "react-hot-toast";
+import { Link, Navigate } from "react-router-dom";
 import { APIContext } from "../../../../contexts/APIProvider";
 import { AuthContext } from "../../../../contexts/AuthProvider";
 import DemoWritter from "../../../Home/DemoWritter";
@@ -316,34 +317,57 @@ const ArticleDetailsCard = ({ articleData,users,setUsers }) => {
             <div className="flex  justify-start gap-2 text-xs ">
              
               
-               <div className="flex   gap-2 border rounded-full ">
-               {
-                // newUpvote &&
+              { user?.uid?
+              <div className="flex   gap-2 border rounded-full ">              
+                
                 <UpvoteButton
                 user={user}
                 users={users}
                 storyId={_id}
                 userEmail={userEmail}
-                upVoteId={user?.email}
-               
+                upVoteId={user?.email}               
                  >
-
                 </UpvoteButton>
-               }
+               
                 <p className="pl-0 p-2"> {upVote?.length}</p>
                 <DownVoteButton
                 user={user}
                 users={users}
                 storyId={_id}
                 userEmail={userEmail}
-                downVoteId={user?.email}
-               
+                downVoteId={user?.email}               
                  >
 
                 </DownVoteButton>
                 <p className="pl-0 p-2"> {downVote?.length}</p>
-
                </div>
+               :
+               <Link to='/login'>
+                <div className="flex   gap-2 border rounded-full ">              
+                
+                <UpvoteButton
+                user={user}
+                users={users}
+                storyId={_id}
+                userEmail={userEmail}
+                upVoteId={user?.email}               
+                 >
+                </UpvoteButton>
+               
+                <p className="pl-0 p-2"> {upVote?.length}</p>
+                <DownVoteButton
+                user={user}
+                users={users}
+                storyId={_id}
+                userEmail={userEmail}
+                downVoteId={user?.email}               
+                 >
+
+                </DownVoteButton>
+                <p className="pl-0 p-2"> {downVote?.length}</p>
+               </div>
+                 </Link>
+               }
               
             
 

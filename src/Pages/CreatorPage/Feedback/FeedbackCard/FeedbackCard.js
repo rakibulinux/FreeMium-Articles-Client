@@ -13,9 +13,9 @@ const FeedbackCard = () => {
             />
             <div className="px-4 mt-2">
               <p className="font-semibold text-gray-900">
-                "I love Medium’s membership — it gives me access to the stories
-                I love by the writers I love, and it allows me to help support
-                those writers financially."
+                "I love FreeMium’s membership — it gives me access to the
+                stories I love by the writers I love, and it allows me to help
+                support those writers financially."
               </p>
               <h1 className="text-2xl font-semibold mt-2 text-gray-900">
                 Kayt Molina

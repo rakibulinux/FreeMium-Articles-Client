@@ -11,6 +11,7 @@ import SubscribButton from "../SubscribButton/SubscribButton";
 import { APIContext } from "../../../contexts/APIProvider";
 import ArticleDetailsCard from "../../ArticlesSection/ArticlesDetails/ArticleDetailsCard/ArticleDetailsCard";
 import cookie from "react-cookies";
+import { EnvelopeIcon } from "@heroicons/react/24/solid";
 
 const ArticlesDetails = () => {
   const [story, setStory] = useState({});
@@ -184,7 +185,7 @@ const ArticlesDetails = () => {
                         : `btn btn-sm rounded-full bg-gray-500 border-0 text-white btn-outline`
                     }
                   >
-                    Follow
+                    <EnvelopeIcon className="h-4 w-4 text-white " />
                   </button>
                 </Link>
               )}

@@ -5,7 +5,7 @@ module.exports = {
     themes: [
       {
         mytheme: {
-          primary: "#6419E6",
+          primary: "#32a852",
 
           secondary: "#D926A9",
 
@@ -36,8 +36,5 @@ module.exports = {
       },
     },
   },
-  plugins: [
-    require("daisyui"),
-    require('tailwind-scrollbar-hide')
-],
+  plugins: [require("daisyui"), require("tailwind-scrollbar-hide")],
 };

@@ -279,10 +279,10 @@ const ArticleDetailsCard = ({ articleData, users, setUsers }) => {
                   user?.email === userEmail
                   ?<>
                   <li>
-                    <a href="/">Mute this author</a>
+                    <Link to="">Mute this author</Link>
                   </li>
                   <li>
-                    <a href="/">Mute this publication</a>
+                    <Link to="">Mute this publication</Link>
                   </li>
                   <li>
                     <button onClick={() => reportedHandler(_id)}>Report</button>

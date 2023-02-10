@@ -330,27 +330,61 @@ const ArticleDetailsCard = ({ articleData, users, setUsers }) => {
         <div>
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 mt-5">
             <div className="flex  justify-start gap-2 text-xs ">
-              <div className="flex   gap-2 border rounded-full ">
-                {
-                  // newUpvote &&
-                  <UpvoteButton
-                    user={user}
-                    users={users}
-                    storyId={_id}
-                    userEmail={userEmail}
-                    upVoteId={user?.email}
-                  ></UpvoteButton>
-                }
+             
+              
+              { user?.uid?
+              <div className="flex   gap-2 border rounded-full ">              
+                
+                <UpvoteButton
+                user={user}
+                users={users}
+                storyId={_id}
+                userEmail={userEmail}
+                upVoteId={user?.email}               
+                 >
+                </UpvoteButton>
+               
                 <p className="pl-0 p-2"> {upVote?.length}</p>
                 <DownVoteButton
-                  user={user}
-                  users={users}
-                  storyId={_id}
-                  userEmail={userEmail}
-                  downVoteId={user?.email}
-                ></DownVoteButton>
+                user={user}
+                users={users}
+                storyId={_id}
+                userEmail={userEmail}
+                downVoteId={user?.email}               
+                 >
+
+                </DownVoteButton>
                 <p className="pl-0 p-2"> {downVote?.length}</p>
-              </div>
+               </div>
+               :
+               <Link to='/login'>
+                <div className="flex   gap-2 border rounded-full ">              
+                
+                <UpvoteButton
+                user={user}
+                users={users}
+                storyId={_id}
+                userEmail={userEmail}
+                upVoteId={user?.email}               
+                 >
+                </UpvoteButton>
+               
+                <p className="pl-0 p-2"> {upVote?.length}</p>
+                <DownVoteButton
+                user={user}
+                users={users}
+                storyId={_id}
+                userEmail={userEmail}
+                downVoteId={user?.email}               
+                 >
+
+                </DownVoteButton>
+                <p className="pl-0 p-2"> {downVote?.length}</p>
+               </div>
+                 </Link>
+               }
+              
+            
 
               {/* Modal for comment */}
               {/* The button to open modal */}

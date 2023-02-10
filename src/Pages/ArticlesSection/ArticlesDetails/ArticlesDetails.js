@@ -75,7 +75,24 @@ const ArticlesDetails = () => {
   }
 
   if (error) {
-    return <p>Error: {error}</p>;
+    return (
+      <div className="flex flex-col gap-4 items-center min-h-screen justify-center">
+        <p className="text-4xl font-bold">{error}</p>
+        {user?.uid ? (
+          <>
+            <Link to="/payment" className="text-2xl font-medium text-sky-500">
+              To see more stories please upgrade your membership
+            </Link>
+          </>
+        ) : (
+          <>
+            <Link className="text-2xl font-medium text-sky-500" to="/login">
+              Login to Visit more story
+            </Link>
+          </>
+        )}
+      </div>
+    );
   }
 
   const title = articleTitle?.replace(/<[^>]+>/g, "");
@@ -98,6 +115,7 @@ const ArticlesDetails = () => {
             <ArticleDetailsCard
               articleData={story}
               users={users}
+              error={error}
               // setUsers={setUsers}
             />
           </div>

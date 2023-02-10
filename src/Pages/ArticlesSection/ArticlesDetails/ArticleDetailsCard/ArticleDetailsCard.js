@@ -275,37 +275,39 @@ const ArticleDetailsCard = ({ articleData, users, setUsers }) => {
                       ? "mt-2 p-2 shadow menu menu-compact dropdown-content bg-black-250 text-white rounded-box w-52"
                       : "mt-2 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box text-black-350 w-52"
                   }
-                >{
-                  user?.email === userEmail
-                  ?<>
-                  <li>
-                    <Link to="">Mute this author</Link>
-                  </li>
-                  <li>
-                    <Link to="">Mute this publication</Link>
-                  </li>
-                  <li>
-                    <button onClick={() => reportedHandler(_id)}>Report</button>
-                  </li>
-                  <li>
-                    <Link to={`/edit-article/${_id}`}>Edit Story</Link >
-                  </li>
-                  </>
-                  :
-                  <>
-                  <li>
-                    <a href="/">Mute this author</a>
-                  </li>
-                  <li>
-                    <a href="/">Mute this publication</a>
-                  </li>
-                  <li>
-                    <button onClick={() => reportedHandler(_id)}>Report</button>
-                  </li>
-                  </>
-                  
-                }
-                  
+                >
+                  {user?.email === userEmail ? (
+                    <>
+                      <li>
+                        <a href="/">Mute this author</a>
+                      </li>
+                      <li>
+                        <a href="/">Mute this publication</a>
+                      </li>
+                      <li>
+                        <button onClick={() => reportedHandler(_id)}>
+                          Report
+                        </button>
+                      </li>
+                      <li>
+                        <Link to={`/edit-article/${_id}`}>Edit Story</Link>
+                      </li>
+                    </>
+                  ) : (
+                    <>
+                      <li>
+                        <a href="/">Mute this author</a>
+                      </li>
+                      <li>
+                        <a href="/">Mute this publication</a>
+                      </li>
+                      <li>
+                        <button onClick={() => reportedHandler(_id)}>
+                          Report
+                        </button>
+                      </li>
+                    </>
+                  )}
                 </ul>
               </div>
 
@@ -331,65 +333,56 @@ const ArticleDetailsCard = ({ articleData, users, setUsers }) => {
         <div>
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 mt-5">
             <div className="flex  justify-start gap-2 text-xs ">
-             
-              
-              { user?.uid?
-              <div className="flex   gap-2 border rounded-full ">              
-                
-                <UpvoteButton
-                user={user}
-                users={users}
-                storyId={_id}
-                userEmail={userEmail}
-                upVoteId={user?.email}               
-                 >
-                </UpvoteButton>
-               
-                <p className="pl-0 p-2"> {upVote?.length}</p>
-                <DownVoteButton
-                user={user}
-                users={users}
-                storyId={_id}
-                userEmail={userEmail}
-                downVoteId={user?.email}               
-                 >
+              {user?.uid ? (
+                <div className="flex   gap-2 border rounded-full ">
+                  <UpvoteButton
+                    user={user}
+                    users={users}
+                    storyId={_id}
+                    userEmail={userEmail}
+                    upVoteId={user?.email}
+                  ></UpvoteButton>
 
-                </DownVoteButton>
-                <p className="pl-0 p-2"> {downVote?.length}</p>
-               </div>
-               :
-               <Link to='/login'>
-                <div className="flex   gap-2 border rounded-full ">              
-                
-                <UpvoteButton
-                user={user}
-                users={users}
-                storyId={_id}
-                userEmail={userEmail}
-                upVoteId={user?.email}               
-                 >
-                </UpvoteButton>
-               
-                <p className="pl-0 p-2"> {upVote?.length}</p>
-                <DownVoteButton
-                user={user}
-                users={users}
-                storyId={_id}
-                userEmail={userEmail}
-                downVoteId={user?.email}               
-                 >
+                  {/* <p className="pl-0 p-2"> {upVote?.length}</p> */}
+                  <DownVoteButton
+                    user={user}
+                    users={users}
+                    storyId={_id}
+                    userEmail={userEmail}
+                    downVoteId={user?.email}
+                  ></DownVoteButton>
+                  {/* <p className="pl-0 p-2"> {downVote?.length}</p> */}
+                </div>
+              ) : (
+                <Link to="/login">
+                  <div className="flex   gap-2 border rounded-full ">
+                    <UpvoteButton
+                      user={user}
+                      users={users}
+                      storyId={_id}
+                      userEmail={userEmail}
+                      upVoteId={user?.email}
+                    ></UpvoteButton>
 
-                </DownVoteButton>
-                <p className="pl-0 p-2"> {downVote?.length}</p>
-               </div>
-                 </Link>
-               }
-              
-            
+                    {/* <p className="pl-0 p-2"> {upVote?.length}</p> */}
+                    <DownVoteButton
+                      user={user}
+                      users={users}
+                      storyId={_id}
+                      userEmail={userEmail}
+                      downVoteId={user?.email}
+                    ></DownVoteButton>
+                    {/* <p className="pl-0 p-2"> {downVote?.length}</p> */}
+                  </div>
+                </Link>
+              )}
 
               {/* Modal for comment */}
               {/* The button to open modal */}
-              <label htmlFor="comment-modal" className=" ml-5 mt-2 cursor-pointer">
+              <label
+                htmlFor="comment-modal"
+                className=" ml-5 mt-2 cursor-pointer"
+              >
                 <HiOutlineChat className="text-2xl"></HiOutlineChat>
               </label>
             </div>

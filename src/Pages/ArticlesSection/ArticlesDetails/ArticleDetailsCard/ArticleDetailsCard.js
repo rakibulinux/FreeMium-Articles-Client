@@ -10,7 +10,7 @@ import DownVoteButton from "../../DownVoteButton/DownVoteButton";
 import Comments from "../../ShowMoreArtical/Comments";
 import UpvoteButton from "../../UpvoteButton/UpvoteButton";
 
-const ArticleDetailsCard = ({ articleData, users, setUsers }) => {
+const ArticleDetailsCard = ({ articleData, users, newUpvote,setNewUpvote}) => {
   const { user } = useContext(AuthContext);
 
   const {
@@ -340,7 +340,9 @@ const ArticleDetailsCard = ({ articleData, users, setUsers }) => {
                 users={users}
                 storyId={_id}
                 userEmail={userEmail}
-                upVoteId={user?.email}               
+                upVoteId={user?.email} 
+                newUpvote ={newUpvote}
+                setNewUpvote={setNewUpvote}
                  >
                 </UpvoteButton>
                

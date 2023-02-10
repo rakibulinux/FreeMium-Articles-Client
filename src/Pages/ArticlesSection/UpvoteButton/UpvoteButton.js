@@ -5,12 +5,11 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 
 import { HiArrowNarrowUp} from "react-icons/hi";
-import { useNavigate } from 'react-router-dom';
 import { APIContext } from '../../../contexts/APIProvider';
 
 const UpvoteButton = ({ user, storyId, upVoteId, classes}) => {
     const [upVote,setUpVote]=useState(false)
-    //  const [newUpvote,setNewUpvote]=useState()
+     
     
     const { isDarkMode} = useContext(APIContext);
     useEffect(() => {
@@ -20,10 +19,11 @@ const UpvoteButton = ({ user, storyId, upVoteId, classes}) => {
           )
           .then((res) => {
             setUpVote(res?.data?.upVote);
-            // setNewUpvote(res?.data?.upVote)
+            
             
           });
-      }, [storyId, user?.email]);
+      }, [storyId, user?.email,upVote]);
+
     
       const handleUpVote = () => {
         axios
@@ -33,7 +33,7 @@ const UpvoteButton = ({ user, storyId, upVoteId, classes}) => {
           })
           .then((res) => {
             setUpVote(true);
-                 
+           
           });
       };
     
@@ -45,7 +45,7 @@ const UpvoteButton = ({ user, storyId, upVoteId, classes}) => {
           })
           .then((res) => {
             setUpVote(false);
-                
+           
           });
       };
     return (

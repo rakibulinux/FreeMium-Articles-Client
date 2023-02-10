@@ -9,6 +9,7 @@ import DemoWritter from "../../../Home/DemoWritter";
 import DownVoteButton from "../../DownVoteButton/DownVoteButton";
 import Comments from "../../ShowMoreArtical/Comments";
 import UpvoteButton from "../../UpvoteButton/UpvoteButton";
+import { HiOutlineChat } from "react-icons/hi";
 
 const ArticleDetailsCard = ({ articleData, users, setUsers }) => {
   const { user } = useContext(AuthContext);
@@ -388,8 +389,8 @@ const ArticleDetailsCard = ({ articleData, users, setUsers }) => {
 
               {/* Modal for comment */}
               {/* The button to open modal */}
-              <label htmlFor="comment-modal" className="btn btn-sm ml-5">
-                Comment
+              <label htmlFor="comment-modal" className=" ml-5 mt-2 cursor-pointer">
+                <HiOutlineChat className="text-2xl"></HiOutlineChat>
               </label>
             </div>
 

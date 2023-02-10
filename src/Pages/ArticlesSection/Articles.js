@@ -7,7 +7,7 @@ import ArticlesCard from './ArticlesCard/ArticlesCard';
 
 const Articles = () => {
     const [savedArticles, setSavedArticles] = useState([]);
-    const { articles, articlesLoading, searchResults } = useContext(APIContext);
+    const { articles, articlesLoading, searchResults,user } = useContext(APIContext);
     if (articlesLoading) {
         return <Spinner />;
     }
@@ -41,6 +41,11 @@ const Articles = () => {
                     <ArticlesCard data={data} key={data?._id}
                     handleSave={handleSave}
                     
+                    liked={
+               data.likes.filter((like) => like.user === user._id).length > 0
+                 ? true
+                 : false
+             }
                     
                     ></ArticlesCard>
                 ))}

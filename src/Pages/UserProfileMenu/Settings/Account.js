@@ -5,6 +5,18 @@ import { AuthContext } from '../../../contexts/AuthProvider';
 
 const Account = () => {
     const { user, logoutUserAccount } = useContext(AuthContext);
+  const handleDelete = () => {
+    user.delete()
+        .then(() => {
+            // User deleted.
+            toast.success("User Account Deleted Successful");
+        })
+        .catch((error) => {
+            // An error ocurred
+            // ...
+        });
+  }
+  
 
     const handleLogOut = () => {
     logoutUserAccount()
@@ -46,7 +58,7 @@ const Account = () => {
             <p className='text-red-500'>Deactivate account</p>
                 <p className='text-sm'>Deactivating will suspend your account until you sign back in.</p>
             </button>
-            <button className='w-full text-left leading-loose'  onClick={handleLogOut}>
+            <button className='w-full text-left leading-loose'  onClick={handleDelete}>
             
             <p className='text-red-500'>Delete account
 </p>

@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthProvider";
 import Spinner from "../../../components/Spinner/Spinner";
 import { APIContext } from "../../../contexts/APIProvider";
-import { BsBookmarkPlus } from "react-icons/bs";
+import { BsBookmarkPlus, BsBookmarkStar } from "react-icons/bs";
 
-const ArticlesCard = ({ data,handleSave }) => {
-  
-  const { loading } = useContext(AuthContext);
+const ArticlesCard = ({ data,handleSave,liked }) => {
+   const [like, setLike] = useState(liked);
+  const { loading,user } = useContext(AuthContext);
   const { isDarkMode } = useContext(APIContext);
   const {
     articleDetails,
@@ -71,9 +71,15 @@ const ArticlesCard = ({ data,handleSave }) => {
               {articleRead}-read
             </span>
             </div>
-            <div className="tooltip" data-tip="Save">
+            {user&& <div className="tooltip" data-tip="Save">
               <button onClick={() => handleSave(data)}><BsBookmarkPlus /></button>
-              </div>
+            </div>}
+
+
+
+
+
+
           </div>
         </div>
       </div>

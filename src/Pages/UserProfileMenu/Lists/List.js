@@ -32,12 +32,12 @@ const List = () => {
         <div className=" basis-3/4 mb-10">
           <div className="flex justify-between">
             <h1 className="text-4xl font-bold">Your lists</h1>
-            <button
+            {/* <button
               onClick={hideMembershipBanner}
               className="btn btn-success bg-green-600 rounded-full border-none text-white"
             >
               New list
-            </button>
+            </button> */}
           </div>
           {/* <div className={isDarkMode ?"tabs mt-10 text-gray-200":"tabs mt-10 text-gray-900"}>
             <Link className={isDarkMode ?"tab text-gray-200 tab-bordered tab-active":"tab text-gray-900 tab-bordered tab-active"}>Saved</Link>

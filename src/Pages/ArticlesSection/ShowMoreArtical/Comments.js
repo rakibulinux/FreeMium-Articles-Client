@@ -33,7 +33,7 @@ const Comments = ({ id }) => {
 
 
         // save post information to the database
-        fetch('http://localhost:5000/comments', {
+        fetch(`${process.env.REACT_APP_API_URL}/comments`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -56,7 +56,7 @@ const Comments = ({ id }) => {
 
     useEffect(() => {
 
-        fetch(`http://localhost:5000/comments?articleId=${id}`)
+        fetch(`${process.env.REACT_APP_API_URL}/comments?articleId=${id}`)
             .then(res => res.json())
             .then(data => {
                 setComments(data)

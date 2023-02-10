@@ -18,7 +18,7 @@ const Articles = () => {
 
 
     
-    fetch(`http://localhost:5000/save-article`, {
+    fetch(`${process.env.REACT_APP_API_URL}/save-article`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

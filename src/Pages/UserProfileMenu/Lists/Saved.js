@@ -10,7 +10,7 @@ const Saved = () => {
 
 
   useEffect(() => {
-    axios.get('http://localhost:5000/save-article')
+    axios.get(`${process.env.REACT_APP_API_URL}/save-article`)
       .then(res => setArticles(res.data))
       .catch(err => console.error(err));
   }, []);

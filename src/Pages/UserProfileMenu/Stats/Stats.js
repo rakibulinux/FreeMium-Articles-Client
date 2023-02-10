@@ -13,7 +13,7 @@ const Stats = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await axios.get(`http://localhost:5000/count/${user?.email}`);
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/count/${user?.email}`);
       setCount(response.data.count);
     }
     fetchData();

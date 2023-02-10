@@ -39,14 +39,7 @@ const Articles = () => {
             {searchResults?.length === 0 &&
                 articles.map((data) => (
                     <ArticlesCard data={data} key={data?._id}
-                    handleSave={handleSave}
-                    
-                    liked={
-               data.likes.filter((like) => like.user === user._id).length > 0
-                 ? true
-                 : false
-             }
-                    
+                    handleSave={handleSave}                 
                     ></ArticlesCard>
                 ))}
             {searchResults?.length >= 0 &&

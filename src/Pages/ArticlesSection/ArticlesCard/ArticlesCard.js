@@ -1,11 +1,13 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthProvider";
 import Spinner from "../../../components/Spinner/Spinner";
 import { APIContext } from "../../../contexts/APIProvider";
+import { BsBookmarkPlus, BsBookmarkStar } from "react-icons/bs";
 
-const ArticlesCard = ({ data }) => {
-  const { loading } = useContext(AuthContext);
+const ArticlesCard = ({ data,handleSave,liked }) => {
+   const [like, setLike] = useState(liked);
+  const { loading,user } = useContext(AuthContext);
   const { isDarkMode } = useContext(APIContext);
   const {
     articleDetails,
@@ -62,11 +64,22 @@ const ArticlesCard = ({ data }) => {
               </div>
             </div>
           </Link>
-          <div className="flex items-center ml-3 lg:ml-2">
-            <span className="block font-semibold">{articleSubmitDate}</span>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center ml-3 lg:ml-2 ">
+              <span className="block font-semibold">{articleSubmitDate}</span>
             <span className="block ml-3 text-red-500 font-semibold">
               {articleRead}-read
             </span>
+            </div>
+            {user&& <div className="tooltip" data-tip="Save">
+              <button onClick={() => handleSave(data)}><BsBookmarkPlus /></button>
+            </div>}
+
+
+
+
+
+
           </div>
         </div>
       </div>

@@ -32,8 +32,10 @@ const Comments = ({ id }) => {
         };
         console.log(comment);
         // save post information to the database
+
         fetch(`${process.env.REACT_APP_API_URL}/comments`, {
             method: "POST",
+
             headers: {
                 "content-type": "application/json",
             },
@@ -61,10 +63,12 @@ const Comments = ({ id }) => {
     };
 
     useEffect(() => {
+
         fetch(`${process.env.REACT_APP_API_URL}/comments?articleId=${id}`)
             .then((res) => res.json())
             .then((data) => {
                 setComments(data);
+
                 // console.log(data);
             });
     }, [id, newComment]);

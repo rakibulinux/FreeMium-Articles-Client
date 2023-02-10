@@ -405,7 +405,7 @@ const Navbar = () => {
                     Refine recommendations
                   </NavLink>
                 </li>
-                <li
+                {/* <li
                   className={
                     isDarkMode
                       ? "justify-between bg-black-250 text-white text-lg font-semibold text-semibold"
@@ -422,7 +422,7 @@ const Navbar = () => {
                   >
                     Manage publications
                   </NavLink>
-                </li>
+                </li> */}
                 <div className="divider"></div>
                 <li
                   className={

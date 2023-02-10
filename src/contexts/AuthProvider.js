@@ -65,7 +65,7 @@ const AuthProvider = ({ children }) => {
 
   const deleteUserAccount = (email) => {
     setLoading(true);
-    return deleteUser(email);
+    return deleteUser(auth,email);
   };
 
   //Forget Password

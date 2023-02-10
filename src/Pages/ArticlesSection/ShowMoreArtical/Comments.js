@@ -58,10 +58,9 @@ const Comments = ({ id }) => {
 
     const handleCommentReply = event => {
         event.preventDefault();
-     
-        const form =event.target;
-           const message =form.message.value;
-           console.log(message);
+        const form = event.target;
+        const message = form.message.value;
+        console.log(message);
     }
 
     useEffect(() => {
@@ -78,7 +77,10 @@ const Comments = ({ id }) => {
     return (
         <div>
             <h1 className='font-semibold text-2xl mb-5 '>Responses ({comments.length})</h1>
-            <div className='flex mb-5'>
+            {
+                user?.uid ? 
+                <>
+                <div className='flex mb-5'>
                 <img className='w-8 rounded-full' src={user?.photoURL} alt="" />
                 <h4 className='mt-1 ml-3'>{user?.displayName}</h4>
             </div>
@@ -90,6 +92,10 @@ const Comments = ({ id }) => {
                     <input disabled={!comment} className="btn bg-[#059b00] hover:bg-[#0F730C] btn-sm rounded-full text-white" type="submit" />
                 </div>
             </form>
+                </>
+                :
+                <span>Please <Link to='/login' className='text-[#059b00] font-semibold'>Login</Link> to Respond</span>
+            }
             <div>
                 <div>
                     <div>
@@ -100,7 +106,7 @@ const Comments = ({ id }) => {
                                         <div className='flex'>
                                             {
                                                 comment?.profileImage ? <div className="avatar ">
-                                                    <div className="w-8 rounded-full mt-3 ">
+                                                    <div className="w-10 rounded-full mt-3 ">
                                                         <img src={comment?.profileImage} alt='' />
                                                         <h2>{comment?.userName}</h2>
                                                         <div className="bg-neutral-focus text-neutral-content rounded-full w-8"></div>
@@ -108,14 +114,14 @@ const Comments = ({ id }) => {
                                                 </div>
                                                     :
                                                     <div className='avatar placeholder  mt-3'>
-                                                        <div className="bg-neutral-focus text-neutral-content rounded-full w-8">
-                                                            <span className="text-sm ml-5"> <span className='text-sm ml-1 mb-0'> No</span> <span className='ml-3 mt-0'>Image</span></span>
-                                                            <span className="text-xs"><span className='ml-2'>No</span> <br /> <span>Image</span></span>
+                                                        <div className="bg-neutral-focus text-neutral-content rounded-full w-10">
+                                                            {/* <span className="text-sm ml-5"> <span className='text-xs ml-1 mb-0'> No</span> <span className='ml-3 mt-0 text-xs'>Img</span></span> */}
+                                                            <span className="text-xs"><span className='ml-2 text-xs'>No</span> <br /> <span>Image</span></span>
                                                         </div>
                                                     </div>
                                             }
                                             <div>
-                                                <p className='text-xs ml-3 mt-3 text-blue-600'>{comment?.userName}</p>
+                                                <p className='text-xs ml-3 mt-3 text-black-250 font-semibold'>{comment?.userName}</p>
                                                 <p className='text-xs ml-3'>{comment?.commentDate}</p>
                                             </div>
                                         </div>
@@ -142,14 +148,12 @@ const Comments = ({ id }) => {
                                                     <form onSubmit={handleCommentReply}>
                                                         <textarea name="message" className="textarea w-full text-black-350" placeholder="write comment" required></textarea><br />
                                                         <div className='flex justify-end'>
-                                                        <button type='submit' className="btn mt-2 bg-[#059b00] hover:bg-[#0F730C] btn-sm rounded-full text-white" >Respond</button>
+                                                            <button type='submit' className="btn mt-2 bg-[#059b00] hover:bg-[#0F730C] btn-sm rounded-full text-white" >Respond</button>
                                                         </div>
                                                     </form>
                                                 </div>
                                             </div>
                                         </div>
-
-
                                     </div>
                                 </div>
                             </div>)

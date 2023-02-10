@@ -35,6 +35,7 @@ import DasReCharts from "../Pages/Dashboard/DasReCharts/DasReCharts";
 import DasReportedStory from "../Pages/Dashboard/DasReportedStory/DasReportedStory";
 import DasAddCategory from "../Pages/Dashboard/DasAddCategory/DasAddCategory";
 import UpdateCategory from "../Pages/Dashboard/DashbordCategory/UpdateCategory/UpdateCategory";
+import AskMeAnything from "../Pages/AskMeAnything/AskMeAnything";
 
 const router = createBrowserRouter([
   {
@@ -105,6 +106,10 @@ const router = createBrowserRouter([
       {
         path: "/our-story",
         element: <OurStory></OurStory>,
+      },
+      {
+        path: "/hexa-ai",
+        element: <AskMeAnything />,
       },
       {
         path: "/search",
@@ -180,9 +185,9 @@ const router = createBrowserRouter([
         element: <MemberShipPage />,
       },
       {
-        path:"/updateCategory/:id",
-        element:<UpdateCategory></UpdateCategory>
-      }
+        path: "/updateCategory/:id",
+        element: <UpdateCategory></UpdateCategory>,
+      },
     ],
   },
   {

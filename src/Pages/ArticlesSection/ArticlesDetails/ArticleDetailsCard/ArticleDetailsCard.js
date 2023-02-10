@@ -2,6 +2,7 @@ import { LinkIcon, ShareIcon } from "@heroicons/react/24/solid";
 import React, { useState } from "react";
 import { useContext } from "react";
 import { toast } from "react-hot-toast";
+import { Link } from "react-router-dom";
 import { APIContext } from "../../../../contexts/APIProvider";
 import { AuthContext } from "../../../../contexts/AuthProvider";
 import DemoWritter from "../../../Home/DemoWritter";
@@ -275,10 +276,10 @@ const ArticleDetailsCard = ({ articleData, users, setUsers }) => {
                   }
                 >
                   <li>
-                    <a href="/">Mute this author</a>
+                    <Link to="">Mute this author</Link>
                   </li>
                   <li>
-                    <a href="/">Mute this publication</a>
+                    <Link to="">Mute this publication</Link>
                   </li>
                   <li>
                     <button onClick={() => reportedHandler(_id)}>Report</button>

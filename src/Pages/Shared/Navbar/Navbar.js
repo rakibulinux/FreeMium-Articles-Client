@@ -231,6 +231,18 @@ const Navbar = () => {
                 {writeIcon} Write
               </NavLink>
             </div>
+            {/* <div className="block">
+              <NavLink
+                className={
+                  isDarkMode
+                    ? "flex items-center gap-2 text-white hover:text-black"
+                    : "flex items-center gap-2 text-gray-900 hover:text-black"
+                }
+                to="/hexa-ai"
+              >
+                {writeIcon} Askme
+              </NavLink>
+            </div> */}
 
             {/* notification Section */}
             <button className="btn btn-ghost btn-circle">

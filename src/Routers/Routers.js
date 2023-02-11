@@ -37,6 +37,7 @@ import DasAddCategory from "../Pages/Dashboard/DasAddCategory/DasAddCategory";
 import UpdateCategory from "../Pages/Dashboard/DashbordCategory/UpdateCategory/UpdateCategory";
 import EditArticle from "../Pages/ArticlesSection/EditArticle/EditArticle";
 import AskMeAnything from "../Pages/AskMeAnything/AskMeAnything";
+import Messages from "../Pages/Messages/Messages";
 
 const router = createBrowserRouter([
   {
@@ -111,6 +112,10 @@ const router = createBrowserRouter([
       {
         path: "/hexa-ai",
         element: <AskMeAnything />,
+      },
+      {
+        path: "/messages",
+        element: <Messages />,
       },
       {
         path: "/search",

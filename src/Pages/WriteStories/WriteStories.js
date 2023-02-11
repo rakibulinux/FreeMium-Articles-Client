@@ -1,8 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./WriteStories.css";
-import Editor from "react-medium-editor";
-import "medium-editor/dist/css/medium-editor.css";
-import "medium-editor/dist/css/themes/beagle.css";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
 import { toast } from "react-hot-toast";
@@ -18,9 +17,9 @@ const WriteStories = () => {
   const [users, setUsers] = useState({});
   const [title, setTitle] = useState("");
   const [image, setImage] = useState("");
-  // const [category, setCategory] = useState("");
+  const [preview, setPreview] = useState("");
   const imageHostKey = process.env.REACT_APP_IMG_BB_KEY;
-  const [desc, setDesc] = useState("");
+  const [content, setContent] = useState("");
 
   const navigate = useNavigate();
   const date = format(new Date(), "PP");
@@ -30,10 +29,32 @@ const WriteStories = () => {
       .then((data) => setUsers(data));
   }, [user?.email]);
 
+  const handleImageUpload = (image, callback) => {
+    const input = document.createElement("input");
+    input.setAttribute("type", "file");
+    input.setAttribute("accept", "image/*");
+    input.click();
+
+    input.onchange = () => {
+      const file = input.files[0];
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        callback(e.target.result, file);
+      };
+      reader.readAsDataURL(file);
+    };
+  };
+
+  const handleImageChange = (event) => {
+    const image = event.target.files[0];
+    setImage(image);
+    setPreview(URL.createObjectURL(image));
+  };
+
   const handleSubmitStories = (e) => {
     e.preventDefault();
     const form = e.target;
-    const image = form.image.files[0];
     const category = form.category.value;
     const number = form.number.value;
 
@@ -49,7 +70,7 @@ const WriteStories = () => {
         if (imgData.success) {
           toast.success("Image upload success");
           const body = {
-            articleDetails: desc,
+            articleDetails: content,
             userId: users?._id,
             userEmail: user?.email,
             writerName: user?.displayName,
@@ -80,6 +101,39 @@ const WriteStories = () => {
       });
   };
 
+  const modules = {
+    toolbar: [
+      [{ font: [] }],
+      [{ header: [1, 2, 3, 4, 5, 6, false] }],
+      ["bold", "italic", "underline", "strike"],
+      [{ color: [] }, { background: [] }],
+      [{ script: "sub" }, { script: "super" }],
+      ["blockquote", "code-block"],
+      [{ list: "ordered" }, { list: "bullet" }],
+      [{ indent: "-1" }, { indent: "+1" }, { align: [] }],
+      ["link", "image", "video"],
+      ["clean"],
+    ],
+  };
+
+  const formats = [
+    "header",
+    "bold",
+    "italic",
+    "underline",
+    "strike",
+    "blockquote",
+    "code-block",
+    "list",
+    "bullet",
+    "link",
+    "image",
+    "video",
+    "color",
+    "font",
+    "align",
+  ];
+
   if (isLoading) {
     return <Spinner />;
   }
@@ -88,11 +142,12 @@ const WriteStories = () => {
       onSubmit={handleSubmitStories}
       className={
         isDarkMode
-          ? "w-10/12 mx-auto p-6 my-6 rounded-md sm:p-10 bg-black-250 text-white"
-          : "w-10/12 mx-auto p-6 my-6 rounded-md sm:p-10 bg-gray-100 text-gray-900"
+          ? "w-10/12 mx-auto p-6 my-6 rounded-md sm:p-10  text-white"
+          : "w-10/12 mx-auto p-6 my-6 rounded-md sm:p-10 text-gray-900"
       }
     >
-      <div className="flex">
+      <div className="flex justify-between mb-4 items-center">
+        <h3 className="text-lg font-medium">Publish a post</h3>
         <button
           className="bg-green-600 text-white py-2 px-3 rounded-3xl ml-auto"
           // onClick={}
@@ -100,65 +155,28 @@ const WriteStories = () => {
           Publish
         </button>
       </div>
-      <div className="my-2.5 text-center">
-        <h2>Title of the Story</h2>
+      <div className="mb-4">
+        <label className="block font-medium mb-2">Title of the Story</label>
+        <input
+          type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          placeholder="Title"
+          className={
+            isDarkMode
+              ? "bg-black-350 border border-gray-400 p-3 rounded-lg w-full label-text text-white"
+              : "border border-gray-400 p-3 rounded-lg w-full label-text text-black-350"
+          }
+        />
       </div>
-      <Editor
-        tag="pre"
-        text={title}
-        onChange={(text, medium) => {
-          setTitle(text);
-        }}
-        options={{
-          toolbar: {
-            buttons: [
-              "bold",
-              "italic",
-              "underline",
-              "anchor",
-              "h1",
-              "h2",
-              "h3",
-              "h4",
-              "h5",
-              "h6",
-              "quote",
-              "unorderedlist",
-              "orderedlist",
-              "subscript",
-              "superscript",
-              "outdent",
-              "indent",
-              "code",
-              // "image",
-            ],
-          },
-          placeholder: {
-            text: "Title of the story.",
-          },
-
-          autoLink: true,
-          anchor: {
-            placeholderText: "Enter reference link",
-            customClassOption: "btn",
-            customClassOptionText: "Refernce link",
-          },
-          paste: {
-            cleanPastedHTML: true,
-            cleanAttrs: ["style", "dir"],
-            cleanTags: ["label", "meta"],
-          },
-          anchorPreview: {
-            hideDelay: 300,
-          },
-        }}
-      />
 
       <div className="form-control w-full">
         <label className="label">
           <span
             className={
-              isDarkMode ? "label-text  text-white" : "label-text text-gray-900"
+              isDarkMode
+                ? "label-text  text-white"
+                : "label-text text-black-350"
             }
           >
             Read Time
@@ -170,18 +188,26 @@ const WriteStories = () => {
           placeholder="Read Time"
           className={
             isDarkMode
-              ? "input input-bordered border-1 border-white w-full bg-gray-700 text-white"
-              : "input input-bordered border-1 border-gray-900 w-full bg-gray-100 text-gray-900"
+              ? "bg-black-350 border border-gray-400 p-3 rounded-lg w-full label-text text-white"
+              : "border border-gray-400 p-3 rounded-lg w-full label-text text-black-350"
           }
         />
       </div>
-
+      <label className="label">
+        <span
+          className={
+            isDarkMode ? "label-text  text-white" : "label-text text-black-350"
+          }
+        >
+          Select Category
+        </span>
+      </label>
       <select
         name="category"
         className={
           isDarkMode
-            ? "my-4 select select-bordered w-full border-white bg-gray-700 text-white"
-            : "my-4 select select-bordered w-full border-gray-900 bg-gray-100 text-gray-900"
+            ? "bg-black-350 border border-gray-400 p-3 rounded-lg w-full label-text text-white"
+            : "bg-white border border-gray-400 p-3 rounded-lg w-full label-text text-black-350"
         }
       >
         {categoryButton.map((category, idx) => (
@@ -190,18 +216,35 @@ const WriteStories = () => {
           </option>
         ))}
       </select>
-      <div className="flex items-center justify-center">
+      <div className="flex flex-col my-4 justify-center">
+        <label className="label">
+          <span
+            className={
+              isDarkMode
+                ? "label-text  text-white"
+                : "label-text text-black-350"
+            }
+          >
+            Select Image
+          </span>
+        </label>
         <label
-          htmlFor="image"
+          htmlFor="image-input"
           className={
             isDarkMode
-              ? "flex flex-col items-center justify-center w-full h-36 border-1  hover:bg-bray-800 bg-gray-700 border-gray-600 hover:border-gray-500 hover:bg-gray-600 rounded-lg"
-              : "flex flex-col items-center justify-center w-full h-36 border-1 border-black-250 border-dashed rounded-lg cursor-pointer bg-gray-50"
+              ? "flex flex-col items-center justify-center border  py-2 hover:bg-bray-800 bg-black-350 border-gray-400 hover:border-gray-500 hover:bg-black-250 rounded-lg"
+              : "flex flex-col items-center justify-center border-black-250 border py-2 rounded-lg cursor-pointer bg-gray-50"
           }
         >
-          <div className="flex flex-col items-center justify-center pt-5 pb-6">
-            {image ? (
-              <p>Image Uploaded {image}</p>
+          <div className="flex flex-col items-center justify-center">
+            {preview ? (
+              <div>
+                <img
+                  src={preview || "https://via.placeholder.com/300x300"}
+                  alt=""
+                  className="w-full h-72"
+                />
+              </div>
             ) : (
               <>
                 <svg
@@ -229,75 +272,54 @@ const WriteStories = () => {
               </>
             )}
           </div>
-
           <input
+            type="file"
+            accept="image/*"
+            onChange={handleImageChange}
+            className="hidden"
+            id="image-input"
+          />
+          {/* <input
             onChange={(e) => {
-              setImage(e.target.value);
+              handleImage(e.target.value);
             }}
             id="image"
             name="image"
             type="file"
             className="hidden"
             accept="image/*"
-          />
+          /> */}
         </label>
       </div>
-      {/* <div className="m-0 ml-2.5 text-center">
-        <h2>Description of story</h2>
-      </div> */}
-      <Editor
-        tag="div"
-        text={desc}
-        onChange={(text) => setDesc(text)}
-        options={{
-          // extensions: {
-          //   embedButton: new EmbedButtonExtension(),
-          // },
-          toolbar: {
-            buttons: [
-              "bold",
-              "italic",
-              "underline",
-              "anchor",
-              "h1",
-              "h2",
-              "h3",
-              "h4",
-              "h5",
-              "h6",
-              "quote",
-              "justified",
-              "unorderedlist",
-              "orderedlist",
-              "subscript",
-              "superscript",
-              "outdent",
-              "indent",
-              "code",
-              "horizontal",
-              // "image",
-            ],
-          },
-          placeholder: {
-            text: "Write  your story.",
-          },
-
-          autoLink: true,
-          anchor: {
-            placeholderText: "Enter reference link",
-            customClassOption: "btn",
-            customClassOptionText: "Refernce link",
-          },
-          paste: {
-            cleanPastedHTML: true,
-            cleanAttrs: ["style", "dir"],
-            cleanTags: ["label", "meta"],
-          },
-          anchorPreview: {
-            hideDelay: 300,
-          },
-        }}
-      />
+      <div className={isDarkMode ? "py-2 text-white" : "py-2 text-black-350"}>
+        <label className="label">
+          <span
+            className={
+              isDarkMode
+                ? "label-text  text-white"
+                : "label-text text-black-350"
+            }
+          >
+            Write your story
+          </span>
+        </label>
+        <ReactQuill
+          value={content}
+          onChange={setContent}
+          modules={modules}
+          formats={formats}
+          placeholder="Write your story here..."
+          theme="snow"
+          style={
+            isDarkMode
+              ? { height: "500px", color: "white" }
+              : { height: "500px" }
+          }
+          className={isDarkMode ? "text-white" : "text-black-350"}
+          bounds=".app"
+          callback={handleImageUpload}
+        />
+      </div>
     </form>
   ) : (
     <Creator />

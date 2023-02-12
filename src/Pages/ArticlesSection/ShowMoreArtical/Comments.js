@@ -5,11 +5,13 @@ import { format } from "date-fns";
 import toast from "react-hot-toast";
 import { AiOutlineLike } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import ReplyComment from "./ReplyComment";
 
 const Comments = ({ id }) => {
-    const { register, handleSubmit, reset, watch } = useForm();
+    const { register, handleSubmit,reset, watch } = useForm();
     const comment = watch("comment");
     const { user } = useContext(AuthContext);
+    // console.log(user);
     const date = format(new Date(), "PP");
     // const formattedTime = format(currentTime, 'HH:mm:ss');
     // const postTime = new Date('2022-12-01T08:30:00.000Z');
@@ -25,6 +27,7 @@ const Comments = ({ id }) => {
         // console.log(data);
         const comment = {
             articleId: id,
+            userEmail: user?.email,
             userName: user?.displayName,
             profileImage: user?.photoURL,
             comment: data.comment,
@@ -43,7 +46,7 @@ const Comments = ({ id }) => {
             .then((result) => {
                 console.log(result);
                 if (result.acknowledged) {
-                    toast.success("Review placed successfully");
+                    toast.success("Respond placed successfully");
 
                     reset();
 
@@ -52,13 +55,11 @@ const Comments = ({ id }) => {
             });
     };
 
-    const handleCommentReply = (event) => {
-        event.preventDefault();
+    // const handleCommentReply = (event) => {
+    //     event.preventDefault();
+    //     const form = event.target;
 
-        const form = event.target;
-        const message = form.message.value;
-        console.log(message);
-    };
+    // };
 
     useEffect(() => {
         fetch(`${process.env.REACT_APP_API_URL}/comments?articleId=${id}`)
@@ -84,7 +85,7 @@ const Comments = ({ id }) => {
 
                         <form onSubmit={handleSubmit(handleComment)}>
                             <textarea className="textarea  textarea-sm w-full " {...register("comment")} placeholder="What are your thoughts" />
-                            {/* <p>{data}</p> */}
+                            
                             <div className='flex justify-end my-5'>
                                 <input disabled={!comment} className="btn bg-[#059b00] hover:bg-[#0F730C] btn-sm rounded-full text-white" type="submit" />
                             </div>
@@ -138,25 +139,44 @@ const Comments = ({ id }) => {
                                         <div className="flex">
                                             <div className="dropdown  dropdown-left">
                                                 <button>
-                                                    <label tabIndex={0} className="font-bold text-xl">
+                                                    <label tabIndex={0} className="font-bold text-xl cursor-pointer">
                                                         ...
                                                     </label>
                                                 </button>
-                                                <ul
-                                                    tabIndex={0}
-                                                    className="dropdown-content  mt-5 border menu p-2 shadow-lg bg-base-100 rounded-box w-44"
-                                                >
-                                                    <li>
-                                                        <Link to="" className="text-xs font-semibold">
-                                                            Edit This Response
-                                                        </Link>
-                                                    </li>
-                                                    <li>
-                                                        <Link to="" className="text-xs font-semibold">
-                                                            Delete
-                                                        </Link>
-                                                    </li>
-                                                </ul>
+
+                                                {
+                                                    user?.email === comment?.userEmail ?
+                                                        <>
+                                                            <ul
+                                                                tabIndex={0}
+                                                                className="dropdown-content  mt-5 border menu p-2 shadow-lg bg-base-100 rounded-box w-44"
+                                                            >
+                                                                <li>
+                                                                    <Link to="" className="text-xs font-semibold">
+                                                                        Edit This Response
+                                                                    </Link>
+                                                                </li>
+                                                                <li>
+                                                                    <Link to="" className="text-xs font-semibold">
+                                                                        Delete
+                                                                    </Link>
+                                                                </li>
+                                                            </ul>
+                                                        </>
+                                                        :
+                                                        <ul
+                                                            tabIndex={0}
+                                                            className="dropdown-content  mt-5 border menu p-2 shadow-lg bg-base-100 rounded-box w-44"
+                                                        >
+                                                            <li>
+                                                                <Link to="" className="text-xs font-semibold">
+                                                                    Report
+                                                                </Link>
+                                                            </li>
+                                                        </ul>
+
+                                                }
+
                                             </div>
                                         </div>
                                     </div>
@@ -165,38 +185,21 @@ const Comments = ({ id }) => {
                                         <button>
                                             <AiOutlineLike></AiOutlineLike>
                                         </button>
-                                        <div className="dropdown dropdown-left dropdown-top">
-                                            <label tabIndex={0} className="m-1">
+                                        <div className="dropdown dropdown-top dropdown-left">
+                                            <label tabIndex={0} className="m-1 cursor-pointer">
                                                 Reply
                                             </label>
                                             <div
                                                 tabIndex={0}
-                                                className="dropdown-content card-compact w-64 p-2 shadow text-primary-content"
-                                            >
-                                                <div className="card-body">
-                                                    <form onSubmit={handleCommentReply}>
-                                                        <textarea
-                                                            name="message"
-                                                            className="textarea w-full text-black-350"
-                                                            placeholder="write comment"
-                                                            required
-                                                        ></textarea>
-                                                        <br />
-                                                        <div className="flex justify-end">
-                                                            <button
-                                                                type="submit"
-                                                                className="btn mt-2 bg-[#059b00] hover:bg-[#0F730C] btn-sm rounded-full text-white"
-                                                            >
-                                                                Respond
-                                                            </button>
-                                                        </div>
-                                                    </form>
+                                                className="dropdown-content card-compact w-64  shadow text-primary-content"
+                                            >   
                                                 </div>
+                                                <ReplyComment comment={comment}></ReplyComment>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            
                         ))}
                     </div>
                 </div>

@@ -122,7 +122,6 @@ const EditArticle = () => {
         <label className="block font-medium mb-2">Title of the Story</label>
         <input
           type="text"
-          value={title}
           defaultValue={title}
           onChange={(e) => setTitles(e.target.value)}
           placeholder="Title"
@@ -200,7 +199,7 @@ const EditArticle = () => {
         </label>
         <ReactQuill
           // value={details}
-          defaultValue={details}
+          defaultValue={articleDetails}
           onChange={setDesc}
           modules={modules}
           formats={formats}

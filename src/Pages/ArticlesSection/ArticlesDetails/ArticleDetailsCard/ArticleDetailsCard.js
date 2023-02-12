@@ -11,7 +11,7 @@ import Comments from "../../ShowMoreArtical/Comments";
 import UpvoteButton from "../../UpvoteButton/UpvoteButton";
 import { HiOutlineChat } from "react-icons/hi";
 
-const ArticleDetailsCard = ({ articleData, users, setUsers }) => {
+const ArticleDetailsCard = ({ articleData, users, newUpvote,setNewUpvote}) => {
   const { user } = useContext(AuthContext);
 
   const {
@@ -333,7 +333,7 @@ const ArticleDetailsCard = ({ articleData, users, setUsers }) => {
         <div>
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 mt-5">
             <div className="flex  justify-start gap-2 text-xs ">
-              {user?.uid ? (
+            {user?.uid ? (
                 <div className="flex   gap-2 border rounded-full ">
                   <UpvoteButton
                     user={user}

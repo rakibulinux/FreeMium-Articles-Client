@@ -21,7 +21,7 @@ const ArticlesDetails = () => {
   const [users, setUsers] = useState({});
   const { user } = useContext(AuthContext);
   const { isDarkMode } = useContext(APIContext);
-
+  // const [newUpvote,setNewUpvote]=useState()
   useEffect(() => {
     let visitorId = cookie.load("visitorId");
     let visitorMacAddress = cookie.load("visitorMacAddress");
@@ -53,6 +53,8 @@ const ArticlesDetails = () => {
           setError(data.error);
         } else {
           setStory(data);
+          // update upvote
+          // setNewUpvote(data)
         }
         setNewLoading(false);
       })

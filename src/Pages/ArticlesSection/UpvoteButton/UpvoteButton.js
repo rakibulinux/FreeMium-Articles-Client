@@ -4,9 +4,6 @@ import { useContext } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { BiUpvote } from "react-icons/bi";
-
-import { HiArrowNarrowUp } from "react-icons/hi";
-import { useNavigate } from "react-router-dom";
 import { APIContext } from "../../../contexts/APIProvider";
 
 const UpvoteButton = ({ user, storyId, upVoteId, classes }) => {

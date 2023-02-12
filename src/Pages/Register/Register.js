@@ -15,7 +15,7 @@ const Register = () => {
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
-  const handleSubmit = (e) =>{
+  const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
     const name = form.name.value;
@@ -76,7 +76,7 @@ const Register = () => {
   };
 
   return (
-    <div className="flex justify-center items-center pt-8 my-10">
+    <div className="flex justify-center min-h-screen items-center pt-8 my-10">
       <div
         className={
           isDarkMode

@@ -7,7 +7,7 @@ const Notification = () => {
   const [notifications, setNotifications] = useState([]);
 
   useEffect(() => {
-    const socket = socketIOClient("http://localhost:3000", {
+    const socket = socketIOClient(`${process.env.REACT_APP_API_URL}`, {
       query: { userId },
     });
     socket.on("connect", () => {

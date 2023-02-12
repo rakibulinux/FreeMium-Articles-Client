@@ -36,6 +36,8 @@ import DasReportedStory from "../Pages/Dashboard/DasReportedStory/DasReportedSto
 import DasAddCategory from "../Pages/Dashboard/DasAddCategory/DasAddCategory";
 import UpdateCategory from "../Pages/Dashboard/DashbordCategory/UpdateCategory/UpdateCategory";
 import EditArticle from "../Pages/ArticlesSection/EditArticle/EditArticle";
+import AskMeAnything from "../Pages/AskMeAnything/AskMeAnything";
+import Messages from "../Pages/Messages/Messages";
 
 const router = createBrowserRouter([
   {
@@ -108,6 +110,14 @@ const router = createBrowserRouter([
         element: <OurStory></OurStory>,
       },
       {
+        path: "/hexa-ai",
+        element: <AskMeAnything />,
+      },
+      {
+        path: "/messages",
+        element: <Messages />,
+      },
+      {
         path: "/search",
         element: <Search></Search>,
       },
@@ -126,7 +136,7 @@ const router = createBrowserRouter([
         loader: async ({ params }) =>
           await fetch(
             `${process.env.REACT_APP_API_URL}/view-story/${params.id}`
-          ), 
+          ),
       },
       {
         path: "/list",
@@ -189,9 +199,9 @@ const router = createBrowserRouter([
         element: <MemberShipPage />,
       },
       {
-        path:"/updateCategory/:id",
-        element:<UpdateCategory></UpdateCategory>
-      }
+        path: "/updateCategory/:id",
+        element: <UpdateCategory></UpdateCategory>,
+      },
     ],
   },
   {

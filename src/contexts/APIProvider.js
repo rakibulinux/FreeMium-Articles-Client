@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
+import { AuthContext } from "./AuthProvider";
 
 export const APIContext = createContext();
 
@@ -9,7 +10,16 @@ const APIProvider = ({ children }) => {
   const [allUsers, setAllUsers] = useState([]);
   const [threeUsers, setThreeUsers] = useState([]);
   const [isDarkMode, setIsDarkMode] = useState(false);
-  // const [categoryData,setCategoryData]=useState() 
+  const [singleUsers, setSingleUsers] = useState({});
+  const { user } = useContext(AuthContext);
+  // const [categoryData,setCategoryData]=useState()
+
+  //
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_API_URL}/user/${user?.email}`)
+      .then((res) => res.json())
+      .then((data) => setSingleUsers(data));
+  }, [user?.email, singleUsers]);
 
   useEffect(() => {
     const storedValue = localStorage.getItem("isDarkMode");
@@ -71,16 +81,19 @@ const APIProvider = ({ children }) => {
       .then((data) => setThreeUsers(data));
   }, []);
 
-  //get reported item 
-  const {data:reportedItems=[],isLoading:reportLoading,refetch:reportRefetch}=useQuery({  
-    queryKey:['reportedItem'],
-    queryFn:async()=>{
-        const res = await fetch(`${process.env.REACT_APP_API_URL}/reportedItem`)
-        const data = await res.json();
-        return data;
-      }
-      
-    })
+  //get reported item
+  const {
+    data: reportedItems = [],
+    isLoading: reportLoading,
+    refetch: reportRefetch,
+  } = useQuery({
+    queryKey: ["reportedItem"],
+    queryFn: async () => {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/reportedItem`);
+      const data = await res.json();
+      return data;
+    },
+  });
   const apiInfo = {
     categoryButton,
     isCategoryLoading,
@@ -98,7 +111,8 @@ const APIProvider = ({ children }) => {
     threeUsers,
     reportedItems,
     reportLoading,
-    reportRefetch
+    reportRefetch,
+    singleUsers,
   };
   return <APIContext.Provider value={apiInfo}>{children}</APIContext.Provider>;
 };

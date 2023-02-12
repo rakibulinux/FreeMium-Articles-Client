@@ -11,6 +11,7 @@ import SubscribButton from "../SubscribButton/SubscribButton";
 import { APIContext } from "../../../contexts/APIProvider";
 import ArticleDetailsCard from "../../ArticlesSection/ArticlesDetails/ArticleDetailsCard/ArticleDetailsCard";
 import cookie from "react-cookies";
+import { EnvelopeIcon } from "@heroicons/react/24/solid";
 
 const ArticlesDetails = () => {
   const [story, setStory] = useState({});
@@ -20,7 +21,7 @@ const ArticlesDetails = () => {
   const [users, setUsers] = useState({});
   const { user } = useContext(AuthContext);
   const { isDarkMode } = useContext(APIContext);
-
+  // const [newUpvote,setNewUpvote]=useState()
   useEffect(() => {
     let visitorId = cookie.load("visitorId");
     let visitorMacAddress = cookie.load("visitorMacAddress");
@@ -52,6 +53,8 @@ const ArticlesDetails = () => {
           setError(data.error);
         } else {
           setStory(data);
+          // update upvote
+          // setNewUpvote(data)
         }
         setNewLoading(false);
       })
@@ -74,7 +77,24 @@ const ArticlesDetails = () => {
   }
 
   if (error) {
-    return <p>Error: {error}</p>;
+    return (
+      <div className="flex flex-col gap-4 items-center min-h-screen justify-center">
+        <p className="text-4xl font-bold">{error}</p>
+        {user?.uid ? (
+          <>
+            <Link to="/payment" className="text-2xl font-medium text-sky-500">
+              To see more stories please upgrade your membership
+            </Link>
+          </>
+        ) : (
+          <>
+            <Link className="text-2xl font-medium text-sky-500" to="/login">
+              Login to Visit more story
+            </Link>
+          </>
+        )}
+      </div>
+    );
   }
 
   const title = articleTitle?.replace(/<[^>]+>/g, "");
@@ -97,6 +117,7 @@ const ArticlesDetails = () => {
             <ArticleDetailsCard
               articleData={story}
               users={users}
+              error={error}
               // setUsers={setUsers}
             />
           </div>
@@ -184,7 +205,7 @@ const ArticlesDetails = () => {
                         : `btn btn-sm rounded-full bg-gray-500 border-0 text-white btn-outline`
                     }
                   >
-                    Follow
+                    <EnvelopeIcon className="h-4 w-4 text-white " />
                   </button>
                 </Link>
               )}

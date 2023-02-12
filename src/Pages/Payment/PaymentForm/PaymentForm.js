@@ -198,6 +198,7 @@ const PaymentForm = () => {
                   required
                   placeholder="email"
                   className="input input-bordered text-gray-900"
+                  readOnly
                 />
               </div>
               <div className="form-control">
@@ -217,6 +218,7 @@ const PaymentForm = () => {
                   type="text"
                   placeholder="email"
                   className="input input-bordered text-gray-900"
+                  readOnly
                 />
               </div>
               <div className="form-control">
@@ -259,7 +261,10 @@ const PaymentForm = () => {
                 />
               </div>
               <div className="form-control mt-6">
-                <button type="submit" className="btn btn-primary text-lg">
+                <button
+                  type="submit"
+                  className="btn bg-black-350 text-white text-lg"
+                >
                   Pay
                 </button>
               </div>

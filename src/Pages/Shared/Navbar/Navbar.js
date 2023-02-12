@@ -205,6 +205,26 @@ const Navbar = () => {
         <div className="navbar">
           <div className="navbar-start">
             <div className="flex gap-2 items-center">
+              <label
+                htmlFor="dashboard-drawer"
+                tabIndex={2}
+                className="btn btn-ghost lg:hidden"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M4 6h16M4 12h8m-8 6h16"
+                  />
+                </svg>
+              </label>
               <NavLink
                 className={({ isActive }) =>
                   isActive
@@ -231,9 +251,33 @@ const Navbar = () => {
                 {writeIcon} Write
               </NavLink>
             </div>
+            <div className="hidden md:block">
+              <NavLink
+                className={
+                  isDarkMode
+                    ? "flex items-center gap-2 text-white hover:text-black"
+                    : "flex items-center gap-2 text-gray-900 hover:text-black"
+                }
+                to="/hexa-ai"
+              >
+                {writeIcon} Askme
+              </NavLink>
+            </div>
+            <div className="hidden md:block">
+              <NavLink
+                className={
+                  isDarkMode
+                    ? "flex items-center gap-2 text-white hover:text-black"
+                    : "flex items-center gap-2 text-gray-900 hover:text-black"
+                }
+                to="/messages"
+              >
+                {writeIcon} Messages Me
+              </NavLink>
+            </div>
 
             {/* notification Section */}
-            <button className="btn btn-ghost btn-circle">
+            <button className="btn btn-ghost  btn-circle">
               <div className="indicator">
                 {/* notification svg icon */}
                 <svg
@@ -250,7 +294,7 @@ const Navbar = () => {
                     d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
                   />
                 </svg>
-                <span className="badge badge-xs badge-primary indicator-item">
+                <span className="badge badge-xs text-white badge-primary indicator-item">
                   1
                 </span>
               </div>

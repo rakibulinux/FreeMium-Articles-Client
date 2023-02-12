@@ -36,8 +36,8 @@ const AskMeAnything = () => {
 
         <div className="w-full h-screen bg-gray-300 gap-4 p-8">
           <div className="w-full mt-8">
-            <div class="p-4 overflow-y-auto">
-              <code class="!whitespace-pre">{response}</code>
+            <div className="p-4 overflow-y-auto">
+              <code className="!whitespace-pre">{response}</code>
             </div>
           </div>
           <div className="p-2 my-2 rounded-lg flex gap-4">

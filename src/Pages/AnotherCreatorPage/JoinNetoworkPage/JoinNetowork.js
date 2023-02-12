@@ -20,7 +20,7 @@ const JoinNetowork = () => {
       </div>
       <div className="px-5 mt-8">
         {userData.map((data) => (
-          <TopMember data={data} />
+          <TopMember key={data?._id} data={data} />
         ))}
       </div>
     </div>

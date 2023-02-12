@@ -5,29 +5,25 @@ import {
   FaBriefcase,
   FaMapMarkerAlt,
   FaUniversity,
-  FaUser,
-  FaUserAlt,
 } from "react-icons/fa";
 import { APIContext } from "./../../contexts/APIProvider";
-import { IoLocationSharp } from "react-icons/io5";
+
 const Profile = () => {
-  const { user } = useContext(AuthContext);
-  const { isDarkMode } = useContext(APIContext);
+  const { isDarkMode, singleUsers } = useContext(APIContext);
   const [editMode, setEditMode] = useState(false);
 
   const toggleEditMode = () => {
     setEditMode(!editMode);
   };
 
-  const [users, setUsers] = useState({});
   const userId = localStorage.getItem("userId");
 
   const [formData, setFormData] = useState({
-    name: users.name,
-    location: users.location,
-    occupation: users.occupation,
-    education: users.education,
-    bio: users.bio,
+    name: singleUsers.name,
+    location: singleUsers.location,
+    occupation: singleUsers.occupation,
+    education: singleUsers.education,
+    bio: singleUsers.bio,
   });
 
   const handleChange = (event) => {
@@ -61,23 +57,18 @@ const Profile = () => {
     toggleEditMode();
   };
 
-  console.log(userId);
-  useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/user/${user?.email}`)
-      .then((res) => res.json())
-      .then((data) => setUsers(data));
-  }, [user?.email]);
-  console.log(users);
-
   return (
-    <div className="w-full mx-auto mt-10 p-10 bg-white rounded-lg shadow-lg">
+    <div
+      className={
+        isDarkMode
+          ? "w-full mx-auto mt-10 p-10 bg-black-350 text-white rounded-lg shadow-lg"
+          : "w-full mx-auto mt-10 p-10 bg-white text-black-350 rounded-lg shadow-lg"
+      }
+    >
       {editMode ? (
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label
-              className="block text-gray-700 font-medium mb-2"
-              htmlFor="name"
-            >
+            <label className="block font-medium mb-2" htmlFor="name">
               Name
             </label>
             <input
@@ -85,16 +76,13 @@ const Profile = () => {
               id="name"
               type="text"
               name="name"
-              defaultValue={users?.name}
+              defaultValue={singleUsers?.name}
               value={formData.name}
               onChange={handleChange}
             />
           </div>
           <div className="mb-4">
-            <label
-              className="block text-gray-700 font-medium mb-2"
-              htmlFor="location"
-            >
+            <label className="block  font-medium mb-2" htmlFor="location">
               Location
             </label>
             <input
@@ -102,16 +90,13 @@ const Profile = () => {
               id="location"
               type="text"
               name="location"
-              defaultValue={users?.location}
+              defaultValue={singleUsers?.location}
               value={formData.location}
               onChange={handleChange}
             />
           </div>
           <div className="mb-4">
-            <label
-              className="block text-gray-700 font-medium mb-2"
-              htmlFor="occupation"
-            >
+            <label className="block  font-medium mb-2" htmlFor="occupation">
               Occupation
             </label>
             <input
@@ -119,16 +104,13 @@ const Profile = () => {
               id="occupation"
               type="text"
               name="occupation"
-              defaultValue={users?.occupation}
+              defaultValue={singleUsers?.occupation}
               value={formData.occupation}
               onChange={handleChange}
             />
           </div>
           <div className="mb-4">
-            <label
-              className="block text-gray-700 font-medium mb-2"
-              htmlFor="education"
-            >
+            <label className="block  font-medium mb-2" htmlFor="education">
               Education
             </label>
             <input
@@ -136,23 +118,20 @@ const Profile = () => {
               id="education"
               type="text"
               name="education"
-              defaultValue={users?.education}
+              defaultValue={singleUsers?.education}
               value={formData.education}
               onChange={handleChange}
             />
           </div>
           <div className="mb-4">
-            <label
-              className="block text-gray-700 font-medium mb-2"
-              htmlFor="bio"
-            >
+            <label className="block  font-medium mb-2" htmlFor="bio">
               Bio
             </label>
             <textarea
               className="border border-gray-400 p-2 w-full"
               id="bio"
               name="bio"
-              defaultValue={users?.bio}
+              defaultValue={singleUsers?.bio}
               value={formData.bio}
               onChange={handleChange}
             />
@@ -177,28 +156,28 @@ const Profile = () => {
           </div>
           <div className="text-center">
             <div className="flex justify-center gap-3">
-              <h3 className="text-4xl font-semibold leading-normal text-gray-700 mb-2">
-                {users?.name}
+              <h3 className="text-4xl font-semibold leading-normal  mb-2">
+                {singleUsers?.name}
               </h3>
             </div>
-            <div className="flex justify-center items-center gap-2 text-sm leading-normal mt-0 mb-2 text-gray-400 font-bold uppercase">
+            <div className="flex justify-center items-center gap-2 text-sm leading-normal mt-0 mb-2 font-bold uppercase">
               <FaMapMarkerAlt />
-              {users?.location}
+              {singleUsers?.location}
             </div>
-            <div className="flex justify-center items-center gap-2 mb-2 text-gray-600 mt-10">
+            <div className="flex justify-center items-center gap-2 mb-2 mt-10">
               <FaBriefcase />
-              {users?.occupation}
+              {singleUsers?.occupation}
             </div>
-            <div className="flex justify-center items-center gap-2 mb-2 text-gray-600">
+            <div className="flex justify-center items-center gap-2 mb-2">
               <FaUniversity />
-              {users?.education}
+              {singleUsers?.education}
             </div>
             <div className="mt-10 py-10 border-t border-gray-200 text-center">
               <div className="flex flex-col items-center justify-center">
                 <div className="flex justify-center items-center gap-2 w-full lg:w-9/12 px-4">
                   <FaAudioDescription />
-                  <p className="mb-4 text-lg leading-relaxed text-gray-700">
-                    {users?.bio}
+                  <p className="mb-4 text-lg leading-relaxed ">
+                    {singleUsers?.bio}
                   </p>
                 </div>
                 <a href="#pablo" className="font-normal text-pink-500">

@@ -65,7 +65,7 @@ const AuthProvider = ({ children }) => {
 
   const deleteUserAccount = (email) => {
     setLoading(true);
-    return deleteUser(auth,email);
+    return deleteUser(auth, email);
   };
 
   //Forget Password
@@ -78,7 +78,7 @@ const AuthProvider = ({ children }) => {
     fetch(`${process.env.REACT_APP_API_URL}/user/${user?.email}`)
       .then((res) => res.json())
       .then((data) => setLoginUser(data));
-  }, [user?.email]);
+  }, [user]);
 
   useEffect(() => {
     //this part will execute once the component is mounted.

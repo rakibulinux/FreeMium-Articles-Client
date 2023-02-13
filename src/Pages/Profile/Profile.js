@@ -1,12 +1,6 @@
 import React, { useContext, useState } from "react";
 import { BiUserCircle } from "react-icons/bi";
-import {
-  FaAudioDescription,
-  FaBriefcase,
-  FaMapMarkerAlt,
-  FaUniversity,
-  FaUser,
-} from "react-icons/fa";
+import { FaMapMarkerAlt, FaUser } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import Spinner from "../../components/Spinner/Spinner";
 import { APIContext } from "./../../contexts/APIProvider";
@@ -179,9 +173,9 @@ const Profile = () => {
         </form>
       ) : (
         <div>
-          <div class="h-full">
-            <div class="border-b-2 block md:flex">
-              <div class="w-full md:w-3/5 p-4 sm:p-6 lg:p-8 bg-white shadow-md">
+          <div className="h-full">
+            <div className="border-b-2 block md:flex">
+              <div className="w-full md:w-3/5 p-4 sm:p-6 lg:p-8 bg-white shadow-md">
                 <div className="flex justify-end">
                   <button
                     className="bg-green-500 text-white p-2 hover:bg-green-600"
@@ -191,40 +185,40 @@ const Profile = () => {
                   </button>
                 </div>
 
-                <div class="w-full p-8 mx-2 flex justify-center">
+                <div className="w-full p-8 mx-2 flex justify-center">
                   <img
                     id="showImage"
-                    class="max-w-xs w-32 items-center border"
+                    className="max-w-xs w-32 items-center border"
                     src={singleUsers?.picture}
                     alt=""
                   />
                 </div>
-                <div class="pb-4">
+                <div className="pb-4">
                   <label
                     for="occupation"
-                    class="font-semibold text-gray-700 block pb-1"
+                    className="font-semibold text-gray-700 block pb-1"
                   >
                     Occupation
                   </label>
                   <input
                     disabled
                     id="occupation"
-                    class="border-1  rounded-r pr-4 py-2 w-full"
+                    className="border-1  rounded-r pr-4 py-2 w-full"
                     type="occupation"
                     value={singleUsers?.occupation}
                   />
                 </div>
                 <p className="mb-4 text-lg leading-relaxed">
-                  <span class="text-gray-600">{singleUsers?.bio}</span>
+                  <span className="text-gray-600">{singleUsers?.bio}</span>
                 </p>
               </div>
 
-              <div class="w-full md:w-2/5 p-8 bg-white lg:ml-4 shadow-md">
-                <div class="rounded  shadow p-6">
-                  <div class="pb-6">
+              <div className="w-full md:w-2/5 p-8 bg-white lg:ml-4 shadow-md">
+                <div className="rounded  shadow p-6">
+                  <div className="pb-6">
                     <label
                       for="name"
-                      class="font-semibold text-gray-700 block pb-1"
+                      className="font-semibold text-gray-700 block pb-1"
                     >
                       Name
                     </label>
@@ -233,16 +227,16 @@ const Profile = () => {
                       <input
                         disabled
                         id="name"
-                        class="border-1  rounded-r pr-4 py-2 w-full"
+                        className="border-1  rounded-r pr-4 py-2 w-full"
                         type="text"
                         value={singleUsers?.name}
                       />
                     </div>
                   </div>
-                  <div class="pb-6">
+                  <div className="pb-6">
                     <label
                       for="username"
-                      class="font-semibold text-gray-700 block pb-1"
+                      className="font-semibold text-gray-700 block pb-1"
                     >
                       Username
                     </label>
@@ -251,16 +245,16 @@ const Profile = () => {
                       <input
                         disabled
                         id="username"
-                        class="border-1  rounded-r pr-4 py-2 w-full"
+                        className="border-1  rounded-r pr-4 py-2 w-full"
                         type="text"
                         value={singleUsers?.username}
                       />
                     </div>
                   </div>
-                  <div class="pb-4">
+                  <div className="pb-4">
                     <label
                       for="email"
-                      class="font-semibold text-gray-700 block pb-1"
+                      className="font-semibold text-gray-700 block pb-1"
                     >
                       Email
                     </label>
@@ -269,22 +263,22 @@ const Profile = () => {
                       <input
                         disabled
                         id="email"
-                        class="border-1  rounded-r pr-4 py-2 w-full"
+                        className="border-1  rounded-r pr-4 py-2 w-full"
                         type="email"
                         value={singleUsers?.email}
                       />
                     </div>
                   </div>
-                  <div class="pb-4">
+                  <div className="pb-4">
                     <label
                       for="education"
-                      class="font-semibold text-gray-700 block pb-1"
+                      className="font-semibold text-gray-700 block pb-1"
                     >
                       Education
                     </label>
                     <div className="flex items-center gap-2">
                       <svg
-                        class="h-5"
+                        className="h-5"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
@@ -305,16 +299,16 @@ const Profile = () => {
                       <input
                         disabled
                         id="education"
-                        class="border-1  rounded-r pr-4 py-2 w-full"
+                        className="border-1  rounded-r pr-4 py-2 w-full"
                         type="education"
                         value={singleUsers?.education}
                       />
                     </div>
                   </div>
-                  <div class="pb-4">
+                  <div className="pb-4">
                     <label
                       for="location"
-                      class="font-semibold text-gray-700 block pb-1"
+                      className="font-semibold text-gray-700 block pb-1"
                     >
                       Location
                     </label>
@@ -323,7 +317,7 @@ const Profile = () => {
                       <input
                         disabled
                         id="location"
-                        class="border-1  rounded-r pr-4 py-2 w-full"
+                        className="border-1  rounded-r pr-4 py-2 w-full"
                         type="location"
                         value={singleUsers?.location}
                       />

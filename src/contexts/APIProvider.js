@@ -19,7 +19,7 @@ const APIProvider = ({ children }) => {
     fetch(`${process.env.REACT_APP_API_URL}/user/${user?.email}`)
       .then((res) => res.json())
       .then((data) => setSingleUsers(data));
-  }, [user?.email, singleUsers]);
+  }, [user, singleUsers]);
 
   useEffect(() => {
     const storedValue = localStorage.getItem("isDarkMode");

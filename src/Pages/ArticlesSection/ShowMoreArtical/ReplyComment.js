@@ -1,7 +1,8 @@
 import { format } from 'date-fns';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
+// import { AiOutlineLike } from 'react-icons/ai';
 import { AuthContext } from '../../../contexts/AuthProvider';
 
 const ReplyComment = ({ comment }) => {
@@ -10,10 +11,10 @@ const ReplyComment = ({ comment }) => {
     const { user } = useContext(AuthContext);
     const date = format(new Date(), "PP");
     // console.log(user);
-    console.log(comment);
+    // console.log(comment);
 
     // const [comments, setComments] = useState([]);
-    const [newReplyComment, setNewReplyComment] = useState(false);
+    // const [newReplyComment, setNewReplyComment] = useState(false);
 
     const handleCommentReply = (data) => {
         //    console.log(data);
@@ -25,7 +26,7 @@ const ReplyComment = ({ comment }) => {
             replyComment: data.replyComment,
             commentDate: date,
         };
-        console.log(comment._id);
+        // console.log(comment._id);
 
         fetch(`${process.env.REACT_APP_API_URL}/replyComment/${comment._id}`, {
             method: "POST",
@@ -43,7 +44,7 @@ const ReplyComment = ({ comment }) => {
 
                     reset();
 
-                    setNewReplyComment(true);
+                    // setNewReplyComment(true);
                 }
             });
 
@@ -53,11 +54,12 @@ const ReplyComment = ({ comment }) => {
 
     return (
         <div>
-            <div className="dropdown">
+
+            <div className="dropdown rounded">
 
                 <div
                     tabIndex={0}
-                    className="dropdown-content bg-base-100 card-compact w-60  shadow text-primary-content"
+                    className="dropdown-content bg-base-100  card-compact w-56 border text-primary-content"
                 >
                     <div className="card-body bg-base-100">
 

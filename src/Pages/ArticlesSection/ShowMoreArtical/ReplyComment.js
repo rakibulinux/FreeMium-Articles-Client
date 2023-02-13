@@ -14,7 +14,6 @@ const ReplyComment = ({comment}) => {
     const handleCommentReply = (data) => {
        console.log(data);
        const replyComment = {
-        // articleId: id,
         comment: comment._id,
         userEmail: user?.email,
         userName: user?.displayName,
@@ -37,7 +36,7 @@ const ReplyComment = ({comment}) => {
                                                 <div className="card-body bg-base-100">
 
                                                      <form onSubmit={handleSubmit(handleCommentReply)}>
-                                                        <textarea className="textarea  textarea-sm w-full text-black-350 " {...register("replyComment")} placeholder="What are your thoughts" />
+                                                        <textarea className="textarea  textarea-sm w-full text-black-350 " {...register("replyComment")} placeholder={`Reply to ${comment?.userName}`} />
                                                         {/* <p>{data}</p> */}
                                                          <div className='flex justify-end my-5'>
                                                             <input disabled={!replyComment} className="btn bg-[#059b00] hover:bg-[#0F730C] btn-sm rounded-full text-white" type="submit" />

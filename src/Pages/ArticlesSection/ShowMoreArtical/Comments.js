@@ -183,75 +183,74 @@ const Comments = ({ id }) => {
                                         </div>
                                         <p className="text-xs my-2 ">{comment?.comment}</p>
 
-                                        <div className="flex justify-between items-center">
-                                            <button>
-                                                <AiOutlineLike></AiOutlineLike>
-                                            </button>
-                                            <div className="collapse">
-                                                <input type="checkbox" />
-                                                <button className="collapse-title">
-                                                    <HiOutlineChat></HiOutlineChat>
+                                        <div className="grid grid-cols-12 justify-center items-center">
+                                            <div className="">
+                                                <button>
+                                                    <AiOutlineLike></AiOutlineLike>
                                                 </button>
-                                                <div className="collapse-content  w-full">
-                                                    <div>
-                                                        <div className="">
-                                                            {
+                                            </div>
+                                            <div className="collapse col-span-10">
+                                                <input type="checkbox" />
+                                                <button className="collapse-title flex" >
+                                                    <HiOutlineChat className="text-2xl"></HiOutlineChat>
+                                                    {
+                                                        <span>{comment?.replyComment?.length} reply</span>
+                                                    }
+                                                </button>
+                                                <div className="collapse-content p-0" >
 
-                                                                comment?.replyComment?.map((reply) =>
-                                                                    <div className="" key={reply?._id}>
-                                                                        <div className="m-3 border w-full" >
 
-                                                                            <div >
-                                                                                <div className="flex mr-3">
-                                                                                    <div>
-                                                                                        {
-                                                                                            comment?.profileImage ? <div className="avatar ">
-                                                                                                <div className="w-8 rounded-full mt-3 ml-5">
-                                                                                                    <img src={reply?.profileImage} alt='' />
-                                                                                                    <div className="bg-neutral-focus text-neutral-content rounded-full w-12"></div>
-                                                                                                </div>
+                                                    {
+
+                                                        comment?.replyComment?.map((reply) =>
+                                                            <div className="block" key={reply?._id}>
+                                                                <div className="border-x" >
+
+                                                                    <div >
+                                                                        <div className="flex mr-3">
+                                                                            <div>
+                                                                                {
+                                                                                    comment?.profileImage ? <div className="avatar ">
+                                                                                        <div className="w-8 rounded-full mt-3 ml-3">
+                                                                                            <img src={reply?.profileImage} alt='' />
+                                                                                            <div className="bg-neutral-focus text-neutral-content rounded-full w-12"></div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                        :
+                                                                                        <div className='avatar placeholder ml-5 mt-3'>
+                                                                                            <div className="bg-neutral-focus text-neutral-content rounded-full w-8">
+                                                                                                {/* <span className="text-sm ml-5"> <span className='text-sm ml-1 mb-0'> No</span> <span className='ml-3 mt-0'>Image</span></span> */}
+                                                                                                <span className="text-xs"><span className='ml-2'>No</span> <br /> <span cl>Image</span></span>
                                                                                             </div>
-                                                                                                :
-                                                                                                <div className='avatar placeholder ml-5 mt-3'>
-                                                                                                    <div className="bg-neutral-focus text-neutral-content rounded-full w-16">
-                                                                                                        {/* <span className="text-sm ml-5"> <span className='text-sm ml-1 mb-0'> No</span> <span className='ml-3 mt-0'>Image</span></span> */}
-                                                                                                        <span className="text-xs"><span className='ml-2'>No</span> <br /> <span cl>Image</span></span>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                        }
-                                                                                    </div>
-                                                                                    <div>
-                                                                                        <p className="text-xs ml-3 mt-3 text-black-350 font-semibold">
-                                                                                            {reply?.userName}
-                                                                                        </p>
-                                                                                        <p className="text-xs ml-3">{reply?.commentDate}</p>
-                                                                                    </div>
-                                                                                </div>
+                                                                                        </div>
+                                                                                }
                                                                             </div>
-                                                                            <div className="text-xs ml-4 mb-2">
-                                                                                {reply?.replyComment}
+                                                                            <div>
+                                                                                <p className="text-xs ml-3 mt-3 text-black-350 font-semibold">
+                                                                                    {reply?.userName}
+                                                                                </p>
+                                                                                <p className="text-xs ml-3">{reply?.commentDate}</p>
                                                                             </div>
                                                                         </div>
                                                                     </div>
+                                                                    <div className="text-xs mx-2 my-1">
+                                                                        {reply?.replyComment}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
 
-                                                                )
+                                                        )
+                                                    }
 
-
-                                                            }
-
-
-                                                        </div>
-                                                        <div>
-
-                                                        </div>
-                                                        <div>
-
-                                                        </div>
+                                                    <div>
                                                     </div>
+                                                    <div>
+                                                    </div>
+
                                                 </div>
                                             </div>
                                             <div className="dropdown dropdown-top dropdown-left">
-                                                <label tabIndex={0} className=" cursor-pointer">
+                                                <label tabIndex={0} className=" cursor-pointer ml-1">
                                                     Reply
                                                 </label>
                                                 <div

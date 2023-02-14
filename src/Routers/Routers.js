@@ -38,6 +38,7 @@ import UpdateCategory from "../Pages/Dashboard/DashbordCategory/UpdateCategory/U
 import EditArticle from "../Pages/ArticlesSection/EditArticle/EditArticle";
 import AskMeAnything from "../Pages/AskMeAnything/AskMeAnything";
 import Messages from "../Pages/Messages/Messages";
+import ImportStory from "../Pages/UserProfileMenu/Stories/ImportStory";
 
 const router = createBrowserRouter([
   {
@@ -58,6 +59,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <Profile />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/import-story",
+        element: (
+          <PrivateRoute>
+            <ImportStory />
           </PrivateRoute>
         ),
       },

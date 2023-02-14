@@ -51,9 +51,12 @@ const Stories = () => {
               >
                 Write a story
               </Link>
-              <button className="btn rounded-full btn-primary font-semibold ml-3 border-[1px] hover:border-green-550 border-green-550 bg-slate-50 text-green-550 hover:bg-white">
+              <Link
+                to="/import-story"
+                className="btn rounded-full btn-primary font-semibold ml-3 border-[1px] hover:border-green-550 border-green-550 bg-slate-50 text-green-550 hover:bg-white"
+              >
                 Import a story
-              </button>
+              </Link>
             </div>
           </div>
           {/* <div className="tabs mt-10">

@@ -1,13 +1,16 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../../../contexts/AuthProvider";
-import Spinner from "../../../components/Spinner/Spinner";
-import { APIContext } from "../../../contexts/APIProvider";
-import { BsBookmarkPlus } from "react-icons/bs";
+import Spinner from "../../../../components/Spinner/Spinner";
+import { APIContext } from "../../../../contexts/APIProvider";
+import { AuthContext } from "../../../../contexts/AuthProvider";
 
-const ArticlesCard = ({ data, handleSave, liked }) => {
-  const { loading, user } = useContext(AuthContext);
+const MyStorie = ({ story }) => {
+  const { user } = useContext(AuthContext);
   const { isDarkMode } = useContext(APIContext);
+  if (!story) {
+    return <Spinner />;
+  }
+
   const {
     articleDetails,
     articleRead,
@@ -17,19 +20,16 @@ const ArticlesCard = ({ data, handleSave, liked }) => {
     writerName,
     articleImg,
     _id,
-  } = data;
-  const title = articleTitle.replace(/<[^>]+>/g, "").slice(0, 60) + "...";
+  } = story;
+  const title = articleTitle?.replace(/<[^>]+>/g, "").slice(0, 60) + "...";
 
-  const description = articleDetails.replace(/<[^>]+>/g, "");
+  const description = articleDetails?.replace(/<[^>]+>/g, "");
 
   const descriptionSlice =
     description?.length > 170
       ? description?.slice(0, 170) + "..."
       : description;
 
-  if (loading) {
-    return <Spinner />;
-  }
   return (
     <>
       <div
@@ -72,9 +72,9 @@ const ArticlesCard = ({ data, handleSave, liked }) => {
             </div>
             {user && (
               <div className="tooltip" data-tip="Save">
-                <button onClick={() => handleSave(data)}>
-                  <BsBookmarkPlus />
-                </button>
+                {/* <button onClick={() => handleSave(data)}>
+                        <BsBookmarkPlus />
+                      </button> */}
               </div>
             )}
           </div>
@@ -84,4 +84,4 @@ const ArticlesCard = ({ data, handleSave, liked }) => {
   );
 };
 
-export default ArticlesCard;
+export default MyStorie;

@@ -5,7 +5,7 @@ export const setAuthToken = (user, role, verify, paid) => {
     email: user?.email,
     role,
     verify: false,
-    paid: false,
+    isPaid: false,
   };
   console.log(currentUser);
   // Save user is DB

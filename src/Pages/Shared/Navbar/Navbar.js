@@ -2,7 +2,6 @@ import React from "react";
 import { useContext } from "react";
 import toast from "react-hot-toast";
 import { NavLink } from "react-router-dom";
-import PrimaryButton from "../../../components/Button/PrimaryButton";
 import { AuthContext } from "../../../contexts/AuthProvider";
 import logoFM from "../../../Assets/logoFM.png";
 // import BlackScreen from "../../../Assets/Black-screen-tp.png";

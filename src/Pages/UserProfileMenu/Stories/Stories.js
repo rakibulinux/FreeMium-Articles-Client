@@ -8,6 +8,7 @@ import Tabs from "../Tabs/Tabs";
 import Published from "./Published";
 import Drafts from "./Drafts";
 const Stories = () => {
+  const { myStories, isDarkMode } = useContext(APIContext);
   const tabsData = [
     {
       id: 1,
@@ -23,13 +24,12 @@ const Stories = () => {
       label: " Published",
       content: (
         <div>
-          <Published />
+          <Published myStories={myStories} />
         </div>
       ),
     },
     { id: 3, label: " Responses", content: <div>Responses</div> },
   ];
-  const { isDarkMode } = useContext(APIContext);
   return (
     <div className="container mx-auto mt-14 py-10">
       <div className="flex row">

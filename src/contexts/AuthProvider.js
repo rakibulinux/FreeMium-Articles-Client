@@ -34,7 +34,7 @@ const AuthProvider = ({ children }) => {
   //Login with Password
   const loginUserAccount = (email, password) => {
     setLoading(true);
-    localStorage.setItem("userId", loginUser?._id);
+    // localStorage.setItem("userId", loginUser?._id);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
@@ -50,14 +50,13 @@ const AuthProvider = ({ children }) => {
   //Google Signin
   const signInWithGoogle = () => {
     setLoading(true);
-    localStorage.setItem("userId", loginUser?._id);
+    // localStorage.setItem("userId", loginUser?._id);
     return signInWithPopup(auth, googleProvider);
   };
 
   //Logout
   const logoutUserAccount = () => {
     setLoading(true);
-
     localStorage.removeItem("userId");
     localStorage.removeItem("freeMiumToken");
     return signOut(auth);
@@ -84,6 +83,7 @@ const AuthProvider = ({ children }) => {
     //this part will execute once the component is mounted.
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      localStorage.setItem("userId", loginUser?._id);
       setLoading(false);
     });
 

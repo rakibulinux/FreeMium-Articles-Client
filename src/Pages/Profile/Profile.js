@@ -26,6 +26,7 @@ const Profile = () => {
   if (!singleUsers) {
     return <Spinner />;
   }
+
   const handleChange = (event) => {
     setFormData({
       ...formData,
@@ -231,17 +232,22 @@ const Profile = () => {
                 />
               </div>
               <div className="pb-4 text-center">
-                <input
+                {/* <input
                   disabled
                   id="occupation"
+                  
+                  type="occupation"
+                  defaultValue=
+                /> */}
+                <p
                   className={
                     isDarkMode
                       ? "border-1 text-center bg-black-250 rounded-r pr-4 py-2 w-full"
                       : "border-1 text-center rounded-r pr-4 py-2 w-full"
                   }
-                  type="occupation"
-                  value={singleUsers?.occupation}
-                />
+                >
+                  {singleUsers?.occupation}
+                </p>
               </div>
               <p className="mb-4 text-lg leading-relaxed text-center">
                 <span className={isDarkMode ? "text-white" : "text-gray-600"}>
@@ -280,7 +286,7 @@ const Profile = () => {
                           : "border-1 rounded-r pr-4 py-2 w-full"
                       }
                       type="text"
-                      value={singleUsers?.name}
+                      defaultValue={singleUsers?.name}
                     />
                   </div>
                 </div>
@@ -306,7 +312,7 @@ const Profile = () => {
                           : "border-1 rounded-r pr-4 py-2 w-full"
                       }
                       type="text"
-                      value={singleUsers?.username}
+                      defaultValue={singleUsers?.username}
                     />
                   </div>
                 </div>
@@ -332,7 +338,7 @@ const Profile = () => {
                           : "border-1 rounded-r pr-4 py-2 w-full"
                       }
                       type="email"
-                      value={singleUsers?.email}
+                      defaultValue={singleUsers?.email}
                     />
                   </div>
                 </div>
@@ -376,7 +382,7 @@ const Profile = () => {
                           : "border-1 rounded-r pr-4 py-2 w-full"
                       }
                       type="education"
-                      value={singleUsers?.education}
+                      defaultValue={singleUsers?.education}
                     />
                   </div>
                 </div>
@@ -402,7 +408,7 @@ const Profile = () => {
                           : "border-1 rounded-r pr-4 py-2 w-full"
                       }
                       type="location"
-                      value={singleUsers?.location}
+                      defaultValue={singleUsers?.location}
                     />
                   </div>
                 </div>

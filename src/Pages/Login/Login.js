@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import PrimaryButton from "../../components/Button/PrimaryButton";
@@ -10,7 +10,7 @@ import { APIContext } from "../../contexts/APIProvider";
 
 const Login = () => {
   const { isDarkMode } = useContext(APIContext);
-  const [role, setRole] = useState("user");
+  const [role] = useState("user");
   const {
     signInWithGoogle,
     loginUserAccount,
@@ -27,10 +27,6 @@ const Login = () => {
   const from = location.state?.from?.pathname || "/";
   const [loginUserEmail, setLoginUserEmail] = useState("");
   const [token] = useToken(loginUserEmail);
-  // const token = localStorage.getItem("freeMiumToken");
-  // if (token) {
-
-  // }
 
   const [userEmail, setUserEmail] = useState("");
 

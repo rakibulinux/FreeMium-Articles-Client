@@ -54,6 +54,15 @@ const Comments = ({ id }) => {
             });
     };
 
+// fetch comment after delete
+
+const fetchComments = () => {
+    fetch(`${process.env.REACT_APP_API_URL}/comments?articleId=${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setComments(data);
+      });
+  };
     
 
 
@@ -70,6 +79,7 @@ const Comments = ({ id }) => {
         if (data.deletedCount > 0) {
           toast.success("successfully delete");
         //   reportRefetch();
+        fetchComments();
         }
       });
   };
@@ -83,7 +93,7 @@ const Comments = ({ id }) => {
             .then((res) => res.json())
             .then((data) => {
                 setComments(data);
-
+                fetchComments();
                 // console.log(data);
             });
     }, [id, newComment]);
@@ -165,12 +175,12 @@ const Comments = ({ id }) => {
                                                                     className="dropdown-content  mt-5 border menu p-2 shadow-lg bg-base-100 rounded-box w-44"
                                                                 >
                                                                     <li>
-                                                                        <Link to="" className="text-xs font-semibold">
+                                                                        <button className="text-xs font-semibold">
                                                                             Edit This Response
-                                                                        </Link>
+                                                                        </button>
                                                                     </li>
                                                                     <li>
-                                                                        <button onClick={()=>deleteCommentHandle(comment?._id)} to="" className="text-xs font-semibold">
+                                                                        <button onClick={()=>deleteCommentHandle(comment?._id)} className="text-xs font-semibold">
                                                                             Delete
                                                                         </button>
                                                                     </li>

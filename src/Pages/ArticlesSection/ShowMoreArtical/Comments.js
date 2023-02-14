@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from "../../../contexts/AuthProvider";
 import { format } from "date-fns";
 import toast from "react-hot-toast";
-import { AiOutlineLike, AiOutlineWechat } from "react-icons/ai";
+import { AiOutlineLike } from "react-icons/ai";
 import { HiOutlineChat } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import ReplyComment from "./ReplyComment";
@@ -12,12 +12,8 @@ const Comments = ({ id }) => {
     const { register, handleSubmit, reset, watch } = useForm();
     const comment = watch("comment");
     const { user } = useContext(AuthContext);
-    // console.log(user);
     const date = format(new Date(), "PP");
-    // const formattedTime = format(currentTime, 'HH:mm:ss');
-    // const postTime = new Date('2022-12-01T08:30:00.000Z');
-    // const timeSincePost = distanceInWordsToNow(postTime, { includeSeconds: true });
-    // console.log(user);
+
 
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState(false);
@@ -57,6 +53,29 @@ const Comments = ({ id }) => {
                 }
             });
     };
+
+    
+
+
+
+ // for delete comment
+ const deleteCommentHandle = (id) => {
+    // console.log(id);
+    fetch(`${process.env.REACT_APP_API_URL}/comment/deleteComment/${id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.deletedCount > 0) {
+          toast.success("successfully delete");
+        //   reportRefetch();
+        }
+      });
+  };
+
+//   Update comment
+
 
     useEffect(() => {
 
@@ -115,14 +134,7 @@ const Comments = ({ id }) => {
                                                     ) : (
                                                         <div className="avatar placeholder  mt-3">
                                                             <div className="bg-neutral-focus text-neutral-content rounded-full w-8">
-                                                                {/* <span className="text-sm ml-5">
-                                                                    {" "}
-                                                                    <span className="text-xs mb-0">
-                                                                        {" "}
-                                                                        No
-                                                                    </span>{" "}
-                                                                    <span className="mr-2 mt-0 text-xs">Img</span>
-                                                                </span> */}
+
                                                                 <span className="text-xs">
                                                                     <span className="ml-1">No</span> <br />{" "}
                                                                     <span>Img</span>
@@ -158,9 +170,9 @@ const Comments = ({ id }) => {
                                                                         </Link>
                                                                     </li>
                                                                     <li>
-                                                                        <Link to="" className="text-xs font-semibold">
+                                                                        <button onClick={()=>deleteCommentHandle(comment?._id)} to="" className="text-xs font-semibold">
                                                                             Delete
-                                                                        </Link>
+                                                                        </button>
                                                                     </li>
                                                                 </ul>
                                                             </>
@@ -250,11 +262,11 @@ const Comments = ({ id }) => {
                                                 </div>
                                             </div>
                                             <div className="dropdown dropdown-top dropdown-left">
-                                                <label tabIndex={0} className=" cursor-pointer ml-1">
+                                                <label tabIndex={1} className=" cursor-pointer ml-1">
                                                     Reply
                                                 </label>
                                                 <div
-                                                    tabIndex={0}
+                                                    tabIndex={1}
                                                     className="dropdown-content"
                                                 >   <ReplyComment comment={comment}></ReplyComment>
                                                 </div>

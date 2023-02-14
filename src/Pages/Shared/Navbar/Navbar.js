@@ -259,7 +259,7 @@ const Navbar = () => {
                 }
                 to="/hexa-ai"
               >
-                {writeIcon} Askme
+                Askme
               </NavLink>
             </div>
             <div className="hidden md:block">
@@ -271,7 +271,7 @@ const Navbar = () => {
                 }
                 to="/messages"
               >
-                {writeIcon} Messages Me
+                Messages Me
               </NavLink>
             </div>
 

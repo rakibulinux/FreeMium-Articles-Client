@@ -40,7 +40,7 @@ const ApplyToThePartnerProgram = () => {
         <h1
           className={
             isDarkMode
-              ? "text-8xl font-medium font-serif text-center mt-14 my-11 text-[#fff]"
+              ? "text-8xl font-medium font-serif text-center mt-14 my-11 text-white"
               : "text-8xl font-medium font-serif text-center mt-14 my-11 text-[#000]"
           }
         >

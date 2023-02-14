@@ -14,7 +14,7 @@ import "./Home.css";
 const Home = () => {
   const { user } = useContext(AuthContext);
   return (
-    <div className="w-11/12 mx-auto my-10">
+    <div className="w-11/12 mx-auto py-10">
       {user?.uid ? ( // after log in user  UI
         <div>
           <div className="grid sm:grid-rows-1 md:grid-cols-3 gap-4">

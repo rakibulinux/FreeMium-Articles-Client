@@ -44,8 +44,8 @@ const TopWritersCard = ({ writerData }) => {
               <FollowButton
                 classes={
                   isDarkMode
-                    ? "py-1 px-6 rounded-2xl font-semibold text-white hover:bg-[#257422] bg-[#1A8917] mt-2 lg:mt-0"
-                    : "py-1 px-6 rounded-2xl font-semibold text-white hover:bg-[#257422] bg-[#1A8917] mt-2 lg:mt-0"
+                    ? "py-1 px-6 rounded-2xl font-semibold text-white hover:bg-[#257422] bg-green-550 mt-2 lg:mt-0"
+                    : "py-1 px-6 rounded-2xl font-semibold text-white hover:bg-[#257422] bg-green-550 mt-2 lg:mt-0"
                 }
                 user={user}
                 users={writerData}

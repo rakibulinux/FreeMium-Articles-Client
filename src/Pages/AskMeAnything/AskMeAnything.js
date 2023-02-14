@@ -4,16 +4,13 @@ import { AiOutlineSend } from "react-icons/ai";
 import SideSection from "./SideSection/SideSection";
 import AILogo from "../../Assets/AILogo.png";
 import { useContext } from "react";
-import { AuthContext } from "./../../contexts/AuthProvider";
+import { APIContext } from "../../contexts/APIProvider";
 
 const AskMeAnything = () => {
-  const { user } = useContext(AuthContext);
-  const userName = user?.displayName;
-  const firstWord = userName.split("")[0];
-  // const secondWord = firstName.split("")[1];
-
+  const { singleUsers } = useContext(APIContext);
   const [prompt, setPrompt] = useState("");
   const [response, setResponse] = useState("");
+  console.log(prompt);
   const handleSubmit = (e) => {
     e.preventDefault();
     // Send a request to the server with the prompt
@@ -39,7 +36,7 @@ const AskMeAnything = () => {
         >
           <div className="w-full h-screen gap-4 p-8">
             <div className="w-full mt-8">
-              <div class="px-40 overflow-y-auto">
+              <div className="px-40 overflow-y-auto">
                 <div className="flex items-center bg-[#343541] py-10 shadow-sm rounded-2xl">
                   <div className="p-1 rounded-full mr-2">
                     <img src={AILogo} className="w-9" alt="" />
@@ -51,10 +48,15 @@ const AskMeAnything = () => {
                   </div>
                 </div>
                 <div className="flex items-center bg-[#343541] py-10 shadow-sm rounded-2xl mt-1">
-                  <div className="px-4 py-2 rounded-full bg-[#1A8917] mr-2">
-                    <h1 className="text-xl font-semibold text-white">
+                  <div className="px-4 py-2 rounded-full bg-green-550 mr-2">
+                    {/* <h1 className="text-xl font-semibold text-white">
                       {firstWord}
-                    </h1>
+                    </h1> */}
+                    <img
+                      className="w-10 h-10"
+                      src={singleUsers?.picture}
+                      alt=""
+                    />
                   </div>
                   <div>
                     <h1 className="text-base font-semibold text-gray-100">
@@ -62,7 +64,7 @@ const AskMeAnything = () => {
                     </h1>
                   </div>
                 </div>
-                {/* <code class="!whitespace-pre">{response}</code> */}
+                <code className="!whitespace-pre max-w-xl">{response}</code>
               </div>
             </div>
             <div className="p-2 my-2 rounded-lg flex gap-4 absolute top-[100%] w-[50%] left-[35%]">
@@ -74,10 +76,18 @@ const AskMeAnything = () => {
                 className="w-11/12 p-2 rounded-lg input input-bordered input-info"
               />
               <div className="flex items-center">
-                <AiOutlineSend
+                <button type="submit">
+                  <AiOutlineSend
+                    type="submit"
+                    title="Sent"
+                    className="text-4xl text-green-550 cursor-pointer"
+                  />
+                </button>
+                {/* <AiOutlineSend
+                  type="submit"
                   title="Sent"
-                  className="text-4xl text-[#1A8917] cursor-pointer"
-                />
+                  className="text-4xl text-green-550 cursor-pointer"
+                /> */}
               </div>
             </div>
           </div>

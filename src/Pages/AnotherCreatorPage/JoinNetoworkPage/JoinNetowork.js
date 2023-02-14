@@ -12,7 +12,7 @@ const JoinNetowork = () => {
       .then((data) => setUserData(data));
   }, [userData]);
   return (
-    <div className="bg-[#000000] lg:grid grid-cols-2 px-10 py-2 flex flex-col">
+    <div className="bg-black-450 lg:grid grid-cols-2 px-10 py-2 flex flex-col">
       <div>
         <h1 className="lg:text-7xl text-5xl font-serif text font-semibold text-gray-100 mt-8">
           Join a network <br /> of curious <br /> minds.

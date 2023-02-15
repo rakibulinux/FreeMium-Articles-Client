@@ -463,7 +463,7 @@ const ArticleDetailsCard = ({ articleData, users }) => {
               >
                 ✕
               </label>
-              <Comments id={_id}></Comments>
+              <Comments key={_id} id={_id}></Comments>
             </div>
           </div>
 

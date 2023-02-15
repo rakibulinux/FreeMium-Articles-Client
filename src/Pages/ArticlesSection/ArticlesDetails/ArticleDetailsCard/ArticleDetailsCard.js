@@ -1,5 +1,5 @@
 import { LinkIcon, ShareIcon } from "@heroicons/react/24/solid";
-import React, { useState } from "react";
+import React from "react";
 import { useContext } from "react";
 import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
@@ -12,12 +12,7 @@ import UpvoteButton from "../../UpvoteButton/UpvoteButton";
 import { HiOutlineChat } from "react-icons/hi";
 import ListenButton from "./ListenButton";
 
-const ArticleDetailsCard = ({
-  articleData,
-  users,
-  newUpvote,
-  setNewUpvote,
-}) => {
+const ArticleDetailsCard = ({ articleData, users }) => {
   const { user } = useContext(AuthContext);
 
   const {

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useContext } from "react";
 import { toast } from "react-hot-toast";
-import Editor from "react-medium-editor/dist/editor";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import Spinner from "../../../components/Spinner/Spinner";
 import { APIContext } from "../../../contexts/APIProvider";
@@ -21,7 +20,7 @@ const EditArticle = () => {
   }
   const { articleTitle, articleDetails, _id } = data;
   const title = articleTitle?.replace(/<[^>]+>/g, "");
-  const details = articleDetails?.replace(/<[^>]+>/g, "");
+
   const handleArticleUpdate = (e) => {
     e.preventDefault();
 
@@ -113,11 +112,6 @@ const EditArticle = () => {
           value="Save and Publish"
         />
       </div>
-      {/* <div className="form-control">
-        <label className="label">
-          <span className="label-text text-2xl font-bold">Article Title </span>
-        </label> */}
-      {/* <textarea name='title' className="textarea textarea-bordered text-center text-4xl h-max" defaultValue={title} placeholder="Bio"></textarea> */}
       <div className="mb-4">
         <label className="block font-medium mb-2">Title of the Story</label>
         <input
@@ -132,58 +126,6 @@ const EditArticle = () => {
           }
         />
       </div>
-      {/* <Editor
-          tag="pre"
-          text={title}
-          onChange={(text, medium) => {
-            setTitles(text);
-          }}
-          options={{
-            toolbar: {
-              buttons: [
-                "bold",
-                "italic",
-                "underline",
-                "anchor",
-                "h1",
-                "h2",
-                "h3",
-                "h4",
-                "h5",
-                "h6",
-                "quote",
-                "unorderedlist",
-                "orderedlist",
-                "subscript",
-                "superscript",
-                "outdent",
-                "indent",
-                "code",
-                // "image",
-              ],
-            },
-            placeholder: {
-              text: "Title of the story.",
-            },
-
-            autoLink: true,
-            anchor: {
-              placeholderText: "Enter reference link",
-              customClassOption: "btn",
-              customClassOptionText: "Refernce link",
-            },
-            paste: {
-              cleanPastedHTML: true,
-              cleanAttrs: ["style", "dir"],
-              cleanTags: ["label", "meta"],
-            },
-            anchorPreview: {
-              hideDelay: 300,
-            },
-          }}
-        />
-      </div> */}
-
       <br />
       <div className={isDarkMode ? "py-2 text-white" : "py-2 text-black-350"}>
         <label className="label">

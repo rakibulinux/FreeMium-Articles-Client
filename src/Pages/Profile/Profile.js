@@ -1,12 +1,6 @@
 import React, { useContext, useState } from "react";
 import { BiUserCircle } from "react-icons/bi";
-import {
-  FaAudioDescription,
-  FaBriefcase,
-  FaMapMarkerAlt,
-  FaUniversity,
-  FaUser,
-} from "react-icons/fa";
+import { FaMapMarkerAlt, FaUser } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import Spinner from "../../components/Spinner/Spinner";
 import { APIContext } from "./../../contexts/APIProvider";
@@ -32,6 +26,7 @@ const Profile = () => {
   if (!singleUsers) {
     return <Spinner />;
   }
+
   const handleChange = (event) => {
     setFormData({
       ...formData,
@@ -80,8 +75,8 @@ const Profile = () => {
     <div
       className={
         isDarkMode
-          ? "w-full mx-auto mt-10 p-10 bg-black-350 text-white rounded-lg shadow-lg"
-          : "w-full mx-auto mt-10 p-10 bg-white text-black-350 rounded-lg shadow-lg"
+          ? "w-full mx-auto mt-10 p-10 min-h-screen bg-black-350 text-white rounded-lg shadow-lg"
+          : "w-full mx-auto mt-10 p-10 min-h-screen bg-white text-black-350 rounded-lg shadow-lg"
       }
     >
       {editMode ? (
@@ -91,12 +86,16 @@ const Profile = () => {
               Name
             </label>
             <input
-              className="border border-gray-400 p-2 w-full"
+              className={
+                isDarkMode
+                  ? "border bg-black-250 border-gray-400 p-2 w-full"
+                  : "border border-gray-400 p-2 w-full"
+              }
               id="name"
               type="text"
               name="name"
               defaultValue={singleUsers?.name}
-              value={formData.name}
+              // value={formData.name}
               onChange={handleChange}
             />
           </div>
@@ -105,54 +104,70 @@ const Profile = () => {
               Username
             </label>
             <input
-              className="border border-gray-400 p-2 w-full"
+              className={
+                isDarkMode
+                  ? "border bg-black-250 border-gray-400 p-2 w-full"
+                  : "border border-gray-400 p-2 w-full"
+              }
               id="username"
               type="text"
               name="username"
               defaultValue={singleUsers?.username}
-              value={formData.username}
+              // value={formData.username}
               onChange={handleChange}
             />
           </div>
           <div className="mb-4">
-            <label className="block  font-medium mb-2" htmlFor="location">
+            <label className="block font-medium mb-2" htmlFor="location">
               Location
             </label>
             <input
-              className="border border-gray-400 p-2 w-full"
+              className={
+                isDarkMode
+                  ? "border bg-black-250 border-gray-400 p-2 w-full"
+                  : "border border-gray-400 p-2 w-full"
+              }
               id="location"
               type="text"
               name="location"
               defaultValue={singleUsers?.location}
-              value={formData.location}
+              // value={formData.location}
               onChange={handleChange}
             />
           </div>
           <div className="mb-4">
             <label className="block  font-medium mb-2" htmlFor="occupation">
-              Occupation
+              Professional Headline
             </label>
             <input
-              className="border border-gray-400 p-2 w-full"
+              className={
+                isDarkMode
+                  ? "border bg-black-250 border-gray-400 p-2 w-full"
+                  : "border border-gray-400 p-2 w-full"
+              }
               id="occupation"
               type="text"
               name="occupation"
               defaultValue={singleUsers?.occupation}
-              value={formData.occupation}
+              // value={formData.occupation}
               onChange={handleChange}
             />
           </div>
           <div className="mb-4">
-            <label className="block  font-medium mb-2" htmlFor="education">
+            <label className="block font-medium mb-2" htmlFor="education">
               Education
             </label>
             <input
-              className="border border-gray-400 p-2 w-full"
+              className={
+                isDarkMode
+                  ? "border bg-black-250 border-gray-400 p-2 w-full"
+                  : "border border-gray-400 p-2 w-full"
+              }
               id="education"
               type="text"
               name="education"
               defaultValue={singleUsers?.education}
-              value={formData.education}
+              // value={formData.education}
               onChange={handleChange}
             />
           </div>
@@ -161,173 +176,240 @@ const Profile = () => {
               Bio
             </label>
             <textarea
-              className="border border-gray-400 p-2 w-full"
+              className={
+                isDarkMode
+                  ? "border bg-black-250 border-gray-400 p-2 w-full"
+                  : "border border-gray-400 p-2 w-full"
+              }
               id="bio"
               name="bio"
               defaultValue={singleUsers?.bio}
-              value={formData.bio}
+              // value={formData.bio}
               onChange={handleChange}
             />
           </div>
-          <button
-            type="submit"
-            className="bg-green-500 text-white p-2 hover:bg-green-600"
-            // onClick={toggleEditMode}
-          >
-            Update Profile
-          </button>
+          <div className="flex gap-3">
+            <button
+              type="submit"
+              className="bg-green-500 text-white p-2 hover:bg-green-600"
+              // onClick={toggleEditMode}
+            >
+              Update Profile
+            </button>
+            <button
+              className="bg-red-400 text-white p-2 hover:bg-red-500"
+              onClick={toggleEditMode}
+            >
+              Cancle
+            </button>
+          </div>
         </form>
       ) : (
-        <div>
-          <div class="h-full">
-            <div class="border-b-2 block md:flex">
-              <div class="w-full md:w-3/5 p-4 sm:p-6 lg:p-8 bg-white shadow-md">
-                <div className="flex justify-end">
-                  <button
-                    className="bg-green-500 text-white p-2 hover:bg-green-600"
-                    onClick={toggleEditMode}
-                  >
-                    Edit Profile
-                  </button>
-                </div>
-
-                <div class="w-full p-8 mx-2 flex justify-center">
-                  <img
-                    id="showImage"
-                    class="max-w-xs w-32 items-center border"
-                    src={singleUsers?.picture}
-                    alt=""
-                  />
-                </div>
-                <div class="pb-4">
-                  <label
-                    for="occupation"
-                    class="font-semibold text-gray-700 block pb-1"
-                  >
-                    Occupation
-                  </label>
-                  <input
-                    disabled
-                    id="occupation"
-                    class="border-1  rounded-r pr-4 py-2 w-full"
-                    type="occupation"
-                    value={singleUsers?.occupation}
-                  />
-                </div>
-                <p className="mb-4 text-lg leading-relaxed">
-                  <span class="text-gray-600">{singleUsers?.bio}</span>
-                </p>
+        <div className="h-full">
+          <div className="block md:flex">
+            <div
+              className={
+                isDarkMode
+                  ? "w-full md:w-3/5 p-4 sm:p-6 lg:p-8 bg-black-250 text-white shadow-md"
+                  : "w-full md:w-3/5 p-4 sm:p-6 lg:p-8 bg-white shadow-md"
+              }
+            >
+              <div className="flex justify-end">
+                <button
+                  className="bg-green-500 text-white p-2 hover:bg-green-600"
+                  onClick={toggleEditMode}
+                >
+                  Edit Profile
+                </button>
               </div>
 
-              <div class="w-full md:w-2/5 p-8 bg-white lg:ml-4 shadow-md">
-                <div class="rounded  shadow p-6">
-                  <div class="pb-6">
-                    <label
-                      for="name"
-                      class="font-semibold text-gray-700 block pb-1"
+              <div className="w-full p-8 mx-2 flex justify-center items-center">
+                <img
+                  id="showImage"
+                  className="max-w-xs w-32 items-center border"
+                  src={singleUsers?.picture}
+                  alt=""
+                />
+              </div>
+              <div className="pb-4 text-center">
+                <input
+                  disabled
+                  id="occupation"
+                  className={
+                    isDarkMode
+                      ? "border-1 text-center bg-black-250 rounded-r pr-4 py-2 w-full"
+                      : "border-1 text-center rounded-r pr-4 py-2 w-full"
+                  }
+                  type="occupation"
+                  value={singleUsers?.occupation}
+                />
+              </div>
+              <p className="mb-4 text-lg leading-relaxed text-center">
+                <span className={isDarkMode ? "text-white" : "text-gray-600"}>
+                  {singleUsers?.bio}
+                </span>
+              </p>
+            </div>
+
+            <div
+              className={
+                isDarkMode
+                  ? "w-full md:w-2/5 p-8 bg-black-250 text-white lg:ml-4 shadow-md"
+                  : "w-full md:w-2/5 p-8 bg-white lg:ml-4 shadow-md"
+              }
+            >
+              <div className="rounded shadow p-6">
+                <div className="pb-6">
+                  {/* <label
+                      htmlFor="name"
+                      className={
+                        isDarkMode
+                          ? "font-semibold text-white block pb-1"
+                          : "font-semibold text-gray-700 block pb-1"
+                      }
                     >
                       Name
-                    </label>
-                    <div className="flex items-center gap-2">
-                      <BiUserCircle />
-                      <input
-                        disabled
-                        id="name"
-                        class="border-1  rounded-r pr-4 py-2 w-full"
-                        type="text"
-                        value={singleUsers?.name}
-                      />
-                    </div>
+                    </label> */}
+                  <div className="flex items-center gap-2">
+                    <BiUserCircle />
+                    <input
+                      disabled
+                      id="name"
+                      className={
+                        isDarkMode
+                          ? "border-1 bg-black-250 rounded-r pr-4 py-2 w-full"
+                          : "border-1 rounded-r pr-4 py-2 w-full"
+                      }
+                      type="text"
+                      value={singleUsers?.name}
+                      defaultValue={singleUsers?.name}
+                    />
                   </div>
-                  <div class="pb-6">
-                    <label
-                      for="username"
-                      class="font-semibold text-gray-700 block pb-1"
+                </div>
+                <div className="pb-6">
+                  {/* <label
+                      htmlFor="username"
+                      className={
+                        isDarkMode
+                          ? "font-semibold text-white block pb-1"
+                          : "font-semibold text-gray-700 block pb-1"
+                      }
                     >
                       Username
-                    </label>
-                    <div className="flex items-center gap-2">
-                      <FaUser />
-                      <input
-                        disabled
-                        id="username"
-                        class="border-1  rounded-r pr-4 py-2 w-full"
-                        type="text"
-                        value={singleUsers?.username}
-                      />
-                    </div>
+                    </label> */}
+                  <div className="flex items-center gap-2">
+                    <FaUser />
+                    <input
+                      disabled
+                      id="username"
+                      className={
+                        isDarkMode
+                          ? "border-1 bg-black-250 rounded-r pr-4 py-2 w-full"
+                          : "border-1 rounded-r pr-4 py-2 w-full"
+                      }
+                      type="text"
+                      value={singleUsers?.username}
+                      defaultValue={singleUsers?.username}
+                    />
                   </div>
-                  <div class="pb-4">
-                    <label
-                      for="email"
-                      class="font-semibold text-gray-700 block pb-1"
+                </div>
+                <div className="pb-4">
+                  {/* <label
+                      htmlFor="email"
+                      className={
+                        isDarkMode
+                          ? "font-semibold text-white block pb-1"
+                          : "font-semibold text-gray-700 block pb-1"
+                      }
                     >
                       Email
-                    </label>
-                    <div className="flex items-center gap-2">
-                      <MdEmail />
-                      <input
-                        disabled
-                        id="email"
-                        class="border-1  rounded-r pr-4 py-2 w-full"
-                        type="email"
-                        value={singleUsers?.email}
-                      />
-                    </div>
+                    </label> */}
+                  <div className="flex items-center gap-2">
+                    <MdEmail />
+                    <input
+                      disabled
+                      id="email"
+                      className={
+                        isDarkMode
+                          ? "border-1 bg-black-250 rounded-r pr-4 py-2 w-full"
+                          : "border-1 rounded-r pr-4 py-2 w-full"
+                      }
+                      type="email"
+                      value={singleUsers?.email}
+                      defaultValue={singleUsers?.email}
+                    />
                   </div>
-                  <div class="pb-4">
-                    <label
-                      for="education"
-                      class="font-semibold text-gray-700 block pb-1"
+                </div>
+                <div className="pb-4">
+                  {/* <label
+                      htmlFor="education"
+                      className={
+                        isDarkMode
+                          ? "font-semibold text-white block pb-1"
+                          : "font-semibold text-gray-700 block pb-1"
+                      }
                     >
                       Education
-                    </label>
-                    <div className="flex items-center gap-2">
-                      <svg
-                        class="h-5"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path fill="#fff" d="M12 14l9-5-9-5-9 5 9 5z" />
-                        <path
-                          fill="#fff"
-                          d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"
-                        />
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"
-                        />
-                      </svg>
-                      <input
-                        disabled
-                        id="education"
-                        class="border-1  rounded-r pr-4 py-2 w-full"
-                        type="education"
-                        value={singleUsers?.education}
+                    </label> */}
+                  <div className="flex items-center gap-2">
+                    <svg
+                      className="h-5"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path fill="#fff" d="M12 14l9-5-9-5-9 5 9 5z" />
+                      <path
+                        fill="#fff"
+                        d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"
                       />
-                    </div>
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"
+                      />
+                    </svg>
+                    <input
+                      disabled
+                      id="education"
+                      className={
+                        isDarkMode
+                          ? "border-1 bg-black-250 rounded-r pr-4 py-2 w-full"
+                          : "border-1 rounded-r pr-4 py-2 w-full"
+                      }
+                      type="education"
+                      value={singleUsers?.education}
+                      defaultValue={singleUsers?.education}
+                    />
                   </div>
-                  <div class="pb-4">
-                    <label
-                      for="location"
-                      class="font-semibold text-gray-700 block pb-1"
+                </div>
+                <div className="pb-4">
+                  {/* <label
+                      htmlFor="location"
+                      className={
+                        isDarkMode
+                          ? "font-semibold text-white block pb-1"
+                          : "font-semibold text-gray-700 block pb-1"
+                      }
                     >
                       Location
-                    </label>
-                    <div className="flex items-center gap-2">
-                      <FaMapMarkerAlt />
-                      <input
-                        disabled
-                        id="location"
-                        class="border-1  rounded-r pr-4 py-2 w-full"
-                        type="location"
-                        value={singleUsers?.location}
-                      />
-                    </div>
+                    </label> */}
+                  <div className="flex items-center gap-2">
+                    <FaMapMarkerAlt />
+                    <input
+                      disabled
+                      id="location"
+                      className={
+                        isDarkMode
+                          ? "border-1 bg-black-250 rounded-r pr-4 py-2 w-full"
+                          : "border-1 rounded-r pr-4 py-2 w-full"
+                      }
+                      type="location"
+                      value={singleUsers?.location}
+                      defaultValue={singleUsers?.location}
+                    />
                   </div>
                 </div>
               </div>

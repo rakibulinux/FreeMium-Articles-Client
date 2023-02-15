@@ -32,8 +32,8 @@ const TopWriters = () => {
         <span
           className={
             isDarkMode
-              ? "text-[#ffff] font-semibold"
-              : "text-[#1A8917] font-semibold"
+              ? "text-white font-semibold"
+              : "text-green-550 font-semibold"
           }
         >
           See-more

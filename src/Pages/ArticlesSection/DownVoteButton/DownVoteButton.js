@@ -3,10 +3,16 @@ import React from "react";
 import { useState } from "react";
 import { useContext } from "react";
 import { useEffect } from "react";
-import { BiDownvote, BiUpvote } from "react-icons/bi";
-import { HiArrowNarrowDown } from "react-icons/hi";
+import { BiDownvote } from "react-icons/bi";
 import { APIContext } from "../../../contexts/APIProvider";
-const DownVoteButton = ({ user, users, storyId, downVoteId, classes }) => {
+const DownVoteButton = ({
+  articleData,
+  user,
+  users,
+  storyId,
+  downVoteId,
+  classes,
+}) => {
   const [downVote, setDownVote] = useState(false);
   const { isDarkMode } = useContext(APIContext);
   useEffect(() => {

@@ -111,7 +111,7 @@ const Stats = () => {
         >
           Your stats
         </h1>
-        {/* <button className="btn btn-primary font-semibold ml-3 border-[1px] hover:border-[#1A8917] border-[#1A8917] bg-[#1A8917] rounded-full text-[#fff] hover:bg-[#1A8917]">
+        {/* <button className="btn btn-primary font-semibold ml-3 border-[1px] hover:border-green-550 border-green-550 bg-green-550 rounded-full text-white hover:bg-green-550">
           Audience stats
         </button> */}
       </div>

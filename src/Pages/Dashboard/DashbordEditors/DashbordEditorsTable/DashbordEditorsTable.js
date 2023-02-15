@@ -30,7 +30,7 @@ const DashbordEditorsTable = ({ selectedNumber }) => {
           }
         >
           {/* <!-- head --> */}
-          <thead className="bg-[#fff]">
+          <thead className="bg-white">
             <tr>
               <th>
                 <div className="flex items-center text-sm font-medium">
@@ -85,14 +85,14 @@ const DashbordEditorsTable = ({ selectedNumber }) => {
                   <div className="dropdown">
                     <label
                       tabIndex={0}
-                      className="btn btn-sm bg-[#1A8917] hover:bg-[#1A8917] border-none text-white flex items-center"
+                      className="btn btn-sm bg-green-550 hover:bg-green-550 border-none text-white flex items-center"
                     >
                       Action
                       <RiArrowDropDownLine className="text-xl" />
                     </label>
                     <ul
                       tabIndex={0}
-                      className="dropdown-content menu p-2 shadow-lg rounded-box w-52 bg-[#fff]"
+                      className="dropdown-content menu p-2 shadow-lg rounded-box w-52 bg-white"
                     >
                       <li>
                         <Link to={""} className="font-semibold text-gray-900">

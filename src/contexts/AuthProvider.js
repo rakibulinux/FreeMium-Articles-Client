@@ -34,7 +34,7 @@ const AuthProvider = ({ children }) => {
   //Login with Password
   const loginUserAccount = (email, password) => {
     setLoading(true);
-    localStorage.setItem("userId", loginUser?._id);
+    // localStorage.setItem("userId", loginUser?._id);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
@@ -50,14 +50,13 @@ const AuthProvider = ({ children }) => {
   //Google Signin
   const signInWithGoogle = () => {
     setLoading(true);
-    localStorage.setItem("userId", loginUser?._id);
+    // localStorage.setItem("userId", loginUser?._id);
     return signInWithPopup(auth, googleProvider);
   };
 
   //Logout
   const logoutUserAccount = () => {
     setLoading(true);
-
     localStorage.removeItem("userId");
     localStorage.removeItem("freeMiumToken");
     return signOut(auth);
@@ -65,7 +64,7 @@ const AuthProvider = ({ children }) => {
 
   const deleteUserAccount = (email) => {
     setLoading(true);
-    return deleteUser(auth,email);
+    return deleteUser(auth, email);
   };
 
   //Forget Password
@@ -78,12 +77,13 @@ const AuthProvider = ({ children }) => {
     fetch(`${process.env.REACT_APP_API_URL}/user/${user?.email}`)
       .then((res) => res.json())
       .then((data) => setLoginUser(data));
-  }, [user?.email]);
+  }, [user]);
 
   useEffect(() => {
     //this part will execute once the component is mounted.
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      localStorage.setItem("userId", loginUser?._id);
       setLoading(false);
     });
 

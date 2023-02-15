@@ -8,6 +8,7 @@ import Tabs from "../Tabs/Tabs";
 import Published from "./Published";
 import Drafts from "./Drafts";
 const Stories = () => {
+  const { myStories, isDarkMode } = useContext(APIContext);
   const tabsData = [
     {
       id: 1,
@@ -23,13 +24,12 @@ const Stories = () => {
       label: " Published",
       content: (
         <div>
-          <Published />
+          <Published myStories={myStories} />
         </div>
       ),
     },
     { id: 3, label: " Responses", content: <div>Responses</div> },
   ];
-  const { isDarkMode } = useContext(APIContext);
   return (
     <div className="container mx-auto mt-14 py-10">
       <div className="flex row">
@@ -46,14 +46,17 @@ const Stories = () => {
             </h1>
             <div>
               <Link
-                className="btn rounded-full btn-primary font-semibold ml-3 border-[1px] hover:border-[#1A8917] border-[#1A8917] bg-[#1A8917] text-[#fff] hover:bg-[#1A8917]"
+                className="btn rounded-full btn-primary font-semibold ml-3 border-[1px] hover:border-green-550 border-green-550 bg-green-550 text-white hover:bg-green-550"
                 to="/write-stories"
               >
                 Write a story
               </Link>
-              {/* <button className="btn rounded-full btn-primary font-semibold ml-3 border-[1px] hover:border-[#1A8917] border-[#1A8917] bg-slate-50 text-[#1A8917] hover:bg-white">
+              <Link
+                to="/import-story"
+                className="btn rounded-full btn-primary font-semibold ml-3 border-[1px] hover:border-green-550 border-green-550 bg-slate-50 text-green-550 hover:bg-white"
+              >
                 Import a story
-              </button> */}
+              </Link>
             </div>
           </div>
           {/* <div className="tabs mt-10">

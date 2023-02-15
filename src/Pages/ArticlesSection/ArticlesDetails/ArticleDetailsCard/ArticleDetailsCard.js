@@ -14,7 +14,12 @@ import Comments from "../../ShowMoreArtical/Comments";
 import UpvoteButton from "../../UpvoteButton/UpvoteButton";
 import { HiOutlineChat } from "react-icons/hi";
 
-const ArticleDetailsCard = ({ articleData, users, newUpvote,setNewUpvote}) => {
+const ArticleDetailsCard = ({
+  articleData,
+  users,
+  newUpvote,
+  setNewUpvote,
+}) => {
   const { user } = useContext(AuthContext);
 
 // const ArticleDetailsCard = ({ articleData,users,setUsers }) => {
@@ -27,6 +32,7 @@ const ArticleDetailsCard = ({ articleData, users, newUpvote,setNewUpvote}) => {
     articleSubmitDate,
     articleTitle,
     writerImg,
+    articleImg,
     writerName,
     userEmail,
     upVote,
@@ -335,13 +341,17 @@ const ArticleDetailsCard = ({ articleData, users, newUpvote,setNewUpvote}) => {
             }
             dangerouslySetInnerHTML={{ __html: title }}
           />
+          <div className="flex items-center justify-center">
+            <img src={articleImg} alt={title} />
+          </div>
+
           <div dangerouslySetInnerHTML={{ __html: articleDetails }} />
         </div>
         {/* bottom link */}
         <div>
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 mt-5">
             <div className="flex  justify-start gap-2 text-xs ">
-            {user?.uid ? (
+              {user?.uid ? (
                 <div className="flex   gap-2 border rounded-full ">
                   <UpvoteButton
                     user={user}
@@ -349,17 +359,19 @@ const ArticleDetailsCard = ({ articleData, users, newUpvote,setNewUpvote}) => {
                     storyId={_id}
                     userEmail={userEmail}
                     upVoteId={user?.email}
+                    articleData={articleData}
                   ></UpvoteButton>
 
-                  {/* <p className="pl-0 p-2"> {upVote?.length}</p> */}
+                  <p className="pl-0 p-2"> {upVote?.length}</p>
                   <DownVoteButton
                     user={user}
                     users={users}
                     storyId={_id}
                     userEmail={userEmail}
                     downVoteId={user?.email}
+                    articleData={articleData}
                   ></DownVoteButton>
-                  {/* <p className="pl-0 p-2"> {downVote?.length}</p> */}
+                  <p className="pl-0 p-2"> {downVote?.length}</p>
                 </div>
               ) : (
                 <Link to="/login">
@@ -372,7 +384,7 @@ const ArticleDetailsCard = ({ articleData, users, newUpvote,setNewUpvote}) => {
                       upVoteId={user?.email}
                     ></UpvoteButton>
 
-                    {/* <p className="pl-0 p-2"> {upVote?.length}</p> */}
+                    <p className="pl-0 p-2"> {upVote?.length}</p>
                     <DownVoteButton
                       user={user}
                       users={users}

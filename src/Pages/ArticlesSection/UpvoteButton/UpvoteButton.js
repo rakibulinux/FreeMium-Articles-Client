@@ -6,9 +6,9 @@ import { useEffect } from "react";
 import { BiUpvote } from "react-icons/bi";
 import { APIContext } from "../../../contexts/APIProvider";
 
-const UpvoteButton = ({ user, storyId, upVoteId, classes }) => {
+const UpvoteButton = ({ articleData, user, storyId, upVoteId, classes }) => {
   const [upVote, setUpVote] = useState(false);
-  //  const [newUpvote,setNewUpvote]=useState()
+  const [fetchData, setFetchData] = useState(false);
 
   const { isDarkMode } = useContext(APIContext);
   useEffect(() => {
@@ -18,9 +18,8 @@ const UpvoteButton = ({ user, storyId, upVoteId, classes }) => {
       )
       .then((res) => {
         setUpVote(res?.data?.upVote);
-        // setNewUpvote(res?.data?.upVote)
       });
-  }, [storyId, user?.email]);
+  }, [storyId, user?.email, fetchData]);
 
   const handleUpVote = () => {
     axios
@@ -30,6 +29,7 @@ const UpvoteButton = ({ user, storyId, upVoteId, classes }) => {
       })
       .then((res) => {
         setUpVote(true);
+        setFetchData(!fetchData);
       });
   };
 
@@ -41,6 +41,7 @@ const UpvoteButton = ({ user, storyId, upVoteId, classes }) => {
       })
       .then((res) => {
         setUpVote(false);
+        setFetchData(!fetchData);
       });
   };
   return (

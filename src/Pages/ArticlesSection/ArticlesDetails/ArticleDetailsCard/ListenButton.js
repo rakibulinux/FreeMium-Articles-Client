@@ -13,7 +13,7 @@ function ListenButton({ articleTitle, articleDetails }) {
   const { speak, cancel, speaking, voices } = useSpeechSynthesis({
     onEnd,
   });
-
+  // console.log(articleTitle);
   const voice = voices[voiceIndex] || null;
 
   return (

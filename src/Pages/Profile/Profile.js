@@ -87,7 +87,7 @@ const Profile = () => {
       }
     >
       {editMode ? (
-        <form onSubmit={handleSubmit}>
+        <form className="w-8/12 mx-auto" onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="block font-medium mb-2" htmlFor="name">
               Name
@@ -198,13 +198,13 @@ const Profile = () => {
           <div className="flex gap-3">
             <button
               type="submit"
-              className="bg-green-500 text-white p-2 hover:bg-green-600"
+              className="bg-primary rounded-full text-white p-2 hover:bg-green-600"
               // onClick={toggleEditMode}
             >
               Update Profile
             </button>
             <button
-              className="bg-red-400 text-white p-2 hover:bg-red-500"
+              className="bg-red-400 rounded-full text-white p-2 hover:bg-red-500"
               onClick={toggleEditMode}
             >
               Cancle

@@ -4,19 +4,16 @@ import { AuthContext } from "../../../contexts/AuthProvider";
 import { format } from "date-fns";
 import toast from "react-hot-toast";
 import { AiOutlineLike } from "react-icons/ai";
+import { HiOutlineChat } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import ReplyComment from "./ReplyComment";
 
 const Comments = ({ id }) => {
-    const { register, handleSubmit,reset, watch } = useForm();
+    const { register, handleSubmit, reset, watch } = useForm();
     const comment = watch("comment");
     const { user } = useContext(AuthContext);
-    // console.log(user);
     const date = format(new Date(), "PP");
-    // const formattedTime = format(currentTime, 'HH:mm:ss');
-    // const postTime = new Date('2022-12-01T08:30:00.000Z');
-    // const timeSincePost = distanceInWordsToNow(postTime, { includeSeconds: true });
-    // console.log(user);
+
 
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState(false);
@@ -57,11 +54,38 @@ const Comments = ({ id }) => {
             });
     };
 
-    // const handleCommentReply = (event) => {
-    //     event.preventDefault();
-    //     const form = event.target;
+// fetch comment after delete
 
-    // };
+const fetchComments = () => {
+    fetch(`${process.env.REACT_APP_API_URL}/comments?articleId=${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setComments(data);
+      });
+  };
+    
+
+
+
+ // for delete comment
+ const deleteCommentHandle = (id) => {
+    // console.log(id);
+    fetch(`${process.env.REACT_APP_API_URL}/comment/deleteComment/${id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.deletedCount > 0) {
+          toast.success("successfully delete");
+        //   reportRefetch();
+        fetchComments();
+        }
+      });
+  };
+
+//   Update comment
+
 
     useEffect(() => {
 
@@ -69,7 +93,7 @@ const Comments = ({ id }) => {
             .then((res) => res.json())
             .then((data) => {
                 setComments(data);
-
+                fetchComments();
                 // console.log(data);
             });
     }, [id, newComment]);
@@ -89,7 +113,7 @@ const Comments = ({ id }) => {
 
                         <form onSubmit={handleSubmit(handleComment)}>
                             <textarea className="textarea  textarea-sm w-full " {...register("comment")} placeholder="What are your thoughts" />
-                            
+
                             <div className='flex justify-end my-5'>
                                 <input disabled={!comment} className="btn bg-[#059b00] hover:bg-[#0F730C] btn-sm rounded-full text-white" type="submit" />
                             </div>
@@ -102,113 +126,172 @@ const Comments = ({ id }) => {
             <div>
                 <div>
                     <div>
-                        {comments?.map((comment) => (
-                            <div className="border-y" key={comment._id}>
-                                <div className="my-5">
-                                    <div className="flex justify-between">
-                                        <div className="flex">
-                                            {comment?.profileImage ? (
-                                                <div className="avatar ">
-                                                    <div className="w-8 rounded-full mt-3 ">
-                                                        <img src={comment?.profileImage} alt="" />
-                                                        <h2>{comment?.userName}</h2>
-                                                        <div className="bg-neutral-focus text-neutral-content rounded-full w-8"></div>
-                                                    </div>
-                                                </div>
-                                            ) : (
-                                                <div className="avatar placeholder  mt-3">
-                                                    <div className="bg-neutral-focus text-neutral-content rounded-full w-8">
-                                                        <span className="text-sm ml-5">
-                                                            {" "}
-                                                            <span className="text-sm ml-1 mb-0">
-                                                                {" "}
-                                                                No
-                                                            </span>{" "}
-                                                            <span className="ml-3 mt-0">Image</span>
-                                                        </span>
-                                                        <span className="text-xs">
-                                                            <span className="ml-2">No</span> <br />{" "}
-                                                            <span>Image</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            )}
-                                            <div>
-                                                <p className="text-xs ml-3 mt-3 text-black-350 font-semibold">
-                                                    {comment?.userName}
-                                                </p>
-                                                <p className="text-xs ml-3">{comment?.commentDate}</p>
-                                            </div>
-                                        </div>
-                                        <div className="flex">
-                                            <div className="dropdown  dropdown-left">
-                                                <button>
-                                                    <label tabIndex={0} className="font-bold text-xl cursor-pointer">
-                                                        ...
-                                                    </label>
-                                                </button>
-
+                        {
+                            comments?.map((comment) => (
+                                <div className="border-y" key={comment._id}>
+                                    <div className="my-5">
+                                        <div className="flex justify-between">
+                                            <div className="flex">
                                                 {
-                                                    user?.email === comment?.userEmail ?
-                                                        <>
+                                                    comment?.profileImage ? (
+                                                        <div className="avatar ">
+                                                            <div className="w-8 rounded-full mt-3 ">
+                                                                <img src={comment?.profileImage} alt="" />
+                                                                <h2>{comment?.userName}</h2>
+                                                                <div className="bg-neutral-focus text-neutral-content rounded-full w-8"></div>
+                                                            </div>
+                                                        </div>
+                                                    ) : (
+                                                        <div className="avatar placeholder  mt-3">
+                                                            <div className="bg-neutral-focus text-neutral-content rounded-full w-8">
+
+                                                                <span className="text-xs">
+                                                                    <span className="ml-1">No</span> <br />{" "}
+                                                                    <span>Img</span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    )}
+                                                <div>
+                                                    <p className="text-xs ml-3 mt-3 text-black-350 font-semibold">
+                                                        {comment?.userName}
+                                                    </p>
+                                                    <p className="text-xs ml-3">{comment?.commentDate}</p>
+                                                </div>
+                                            </div>
+                                            <div className="flex">
+                                                <div className="dropdown  dropdown-left">
+                                                    <button>
+                                                        <label tabIndex={0} className="font-bold text-xl cursor-pointer">
+                                                            ...
+                                                        </label>
+                                                    </button>
+
+                                                    {
+                                                        user?.email === comment?.userEmail ?
+                                                            <>
+                                                                <ul
+                                                                    tabIndex={0}
+                                                                    className="dropdown-content  mt-5 border menu p-2 shadow-lg bg-base-100 rounded-box w-44"
+                                                                >
+                                                                    <li>
+                                                                        <button className="text-xs font-semibold">
+                                                                            Edit This Response
+                                                                        </button>
+                                                                    </li>
+                                                                    <li>
+                                                                        <button onClick={()=>deleteCommentHandle(comment?._id)} className="text-xs font-semibold">
+                                                                            Delete
+                                                                        </button>
+                                                                    </li>
+                                                                </ul>
+                                                            </>
+                                                            :
                                                             <ul
                                                                 tabIndex={0}
                                                                 className="dropdown-content  mt-5 border menu p-2 shadow-lg bg-base-100 rounded-box w-44"
                                                             >
                                                                 <li>
                                                                     <Link to="" className="text-xs font-semibold">
-                                                                        Edit This Response
-                                                                    </Link>
-                                                                </li>
-                                                                <li>
-                                                                    <Link to="" className="text-xs font-semibold">
-                                                                        Delete
+                                                                        Report
                                                                     </Link>
                                                                 </li>
                                                             </ul>
-                                                        </>
-                                                        :
-                                                        <ul
-                                                            tabIndex={0}
-                                                            className="dropdown-content  mt-5 border menu p-2 shadow-lg bg-base-100 rounded-box w-44"
-                                                        >
-                                                            <li>
-                                                                <Link to="" className="text-xs font-semibold">
-                                                                    Report
-                                                                </Link>
-                                                            </li>
-                                                        </ul>
 
-                                                }
+                                                    }
 
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <p className="text-xs my-3">{comment?.comment}</p>
-                                    <div className="flex justify-between">
-                                        <button>
-                                            <AiOutlineLike></AiOutlineLike>
-                                        </button>
-                                        <div className="dropdown dropdown-top dropdown-left">
-                                            <label tabIndex={0} className="m-1 cursor-pointer">
-                                                Reply
-                                            </label>
-                                            <div
-                                                tabIndex={0}
-                                                className="dropdown-content card-compact w-64  shadow text-primary-content"
-                                            >   
-                                                </div>
-                                                <ReplyComment comment={comment}></ReplyComment>
+                                        <p className="text-xs my-2 ">{comment?.comment}</p>
+
+                                        <div className="grid grid-cols-12 justify-center items-center">
+                                            <div className="">
+                                                <button>
+                                                    <AiOutlineLike></AiOutlineLike>
+                                                </button>
                                             </div>
+                                            <div className="collapse col-span-10">
+                                                <input type="checkbox" />
+                                                <button className="collapse-title flex" >
+                                                    <HiOutlineChat className="text-2xl"></HiOutlineChat>
+                                                    {
+                                                        <span>{comment?.replyComment?.length} reply</span>
+                                                    }
+                                                </button>
+                                                <div className="collapse-content p-0" >
+
+
+                                                    {
+
+                                                        comment?.replyComment?.map((reply) =>
+                                                            <div className="block" key={reply?._id}>
+                                                                <div className="border-x" >
+
+                                                                    <div >
+                                                                        <div className="flex mr-3">
+                                                                            <div>
+                                                                                {
+                                                                                    comment?.profileImage ? <div className="avatar ">
+                                                                                        <div className="w-8 rounded-full mt-3 ml-3">
+                                                                                            <img src={reply?.profileImage} alt='' />
+                                                                                            <div className="bg-neutral-focus text-neutral-content rounded-full w-12"></div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                        :
+                                                                                        <div className='avatar placeholder ml-5 mt-3'>
+                                                                                            <div className="bg-neutral-focus text-neutral-content rounded-full w-8">
+                                                                                                {/* <span className="text-sm ml-5"> <span className='text-sm ml-1 mb-0'> No</span> <span className='ml-3 mt-0'>Image</span></span> */}
+                                                                                                <span className="text-xs"><span className='ml-2'>No</span> <br /> <span cl>Image</span></span>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                }
+                                                                            </div>
+                                                                            <div>
+                                                                                <p className="text-xs ml-3 mt-3 text-black-350 font-semibold">
+                                                                                    {reply?.userName}
+                                                                                </p>
+                                                                                <p className="text-xs ml-3">{reply?.commentDate}</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div className="text-xs mx-2 my-1">
+                                                                        {reply?.replyComment}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        )
+                                                    }
+
+                                                    <div>
+                                                    </div>
+                                                    <div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div className="dropdown dropdown-top dropdown-left">
+                                                <label tabIndex={1} className=" cursor-pointer ml-1">
+                                                    Reply
+                                                </label>
+                                                <div
+                                                    tabIndex={1}
+                                                    className="dropdown-content"
+                                                >   <ReplyComment comment={comment}></ReplyComment>
+                                                </div>
+
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
-                            
-                        ))}
+
+                            ))}
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 

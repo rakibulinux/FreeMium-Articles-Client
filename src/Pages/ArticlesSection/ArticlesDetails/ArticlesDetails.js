@@ -102,13 +102,8 @@ const ArticlesDetails = () => {
   if (!users) {
     return <Spinner />;
   }
-  // if (articlesLoading) {
-  //   return <Spinner></Spinner>;
-  // }
+
   return (
-    // <div>
-    //   <h1>Story</h1>
-    // </div>
     <div className="border-t-[1px] w-11/12 mx-auto">
       <div className="container mx-auto lg:grid lg:grid-cols-3 grid-cols-1">
         {/* left side content */}

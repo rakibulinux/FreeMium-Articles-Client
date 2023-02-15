@@ -10,6 +10,7 @@ import DownVoteButton from "../../DownVoteButton/DownVoteButton";
 import Comments from "../../ShowMoreArtical/Comments";
 import UpvoteButton from "../../UpvoteButton/UpvoteButton";
 import { HiOutlineChat } from "react-icons/hi";
+import ListenButton from "./ListenButton";
 
 const ArticleDetailsCard = ({
   articleData,
@@ -31,6 +32,7 @@ const ArticleDetailsCard = ({
     userEmail,
     upVote,
     downVote,
+    isPaid,
   } = articleData;
   // console.log(articleData)
   const { isDarkMode, setIsDarkMode } = useContext(APIContext);
@@ -38,6 +40,7 @@ const ArticleDetailsCard = ({
     setIsDarkMode(!isDarkMode);
   };
   const title = articleTitle?.replace(/<[^>]+>/g, "");
+  const details = articleDetails?.replace(/<[^>]+>/g, "");
 
   const lightIcon = (
     <svg
@@ -110,7 +113,7 @@ const ArticleDetailsCard = ({
               </h3>
 
               <div className="flow-root">
-                <ul className="-m-1 flex flex-wrap">
+                <ul className="-m-1 flex flex-wrap items-center">
                   <li className="p-1 leading-none">
                     <span
                       className={
@@ -134,18 +137,35 @@ const ArticleDetailsCard = ({
                       {articleRead} min read
                     </span>
                   </li>
-
-                  <li className="p-1 leading-none">
-                    <span
-                      className={
-                        isDarkMode
-                          ? "text-xs font-medium text-gray-300"
-                          : "text-xs font-medium text-gray-600"
-                      }
-                    >
-                      Member-only
-                    </span>
-                  </li>
+                  {!isPaid && (
+                    <li className="p-1 leading-none">
+                      <ListenButton
+                        articleTitle={title}
+                        articleDetails={details}
+                      />
+                    </li>
+                  )}
+                  {isPaid && (
+                    <>
+                      <li className="p-1 leading-none">
+                        <ListenButton
+                          articleTitle={title}
+                          articleDetails={details}
+                        />
+                      </li>
+                      <li className="p-1 leading-none">
+                        <span
+                          className={
+                            isDarkMode
+                              ? "text-xs font-medium text-gray-300"
+                              : "text-xs font-medium text-gray-600"
+                          }
+                        >
+                          Member-only
+                        </span>
+                      </li>
+                    </>
+                  )}
                 </ul>
               </div>
             </div>

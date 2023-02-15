@@ -7,9 +7,10 @@ import logoFM from "../../../Assets/logoFM.png";
 // import BlackScreen from "../../../Assets/Black-screen-tp.png";
 import { CgProfile } from "react-icons/cg";
 import { AiOutlineDashboard, AiOutlineLogout } from "react-icons/ai";
-import { BsBookmarksFill } from "react-icons/bs";
+import { BsBookmarksFill, BsSnapchat } from "react-icons/bs";
 import { MdAmpStories } from "react-icons/md";
 import { GiNetworkBars } from "react-icons/gi";
+import { TiMessages } from "react-icons/ti";
 import { CiLogin } from "react-icons/ci";
 import "./Navebar.css";
 import Search from "../Search/Search";
@@ -259,7 +260,7 @@ const Navbar = () => {
                 }
                 to="/hexa-ai"
               >
-                Askme
+                <BsSnapchat className="w-6 h-6" />
               </NavLink>
             </div>
             <div className="hidden md:block">
@@ -271,7 +272,7 @@ const Navbar = () => {
                 }
                 to="/messages"
               >
-                Messages Me
+                <TiMessages className="w-6 h-6" />
               </NavLink>
             </div>
 

@@ -120,6 +120,7 @@ const APIProvider = ({ children }) => {
     reportLoading,
     reportRefetch,
     singleUsers,
+    setSingleUsers,
     myStories,
   };
   return <APIContext.Provider value={apiInfo}>{children}</APIContext.Provider>;

@@ -1,19 +1,26 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { BiUserCircle } from "react-icons/bi";
 import { FaMapMarkerAlt, FaUser } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import Spinner from "../../components/Spinner/Spinner";
+import { AuthContext } from "../../contexts/AuthProvider";
 import { APIContext } from "./../../contexts/APIProvider";
 
 const Profile = () => {
-  const { isDarkMode, singleUsers } = useContext(APIContext);
+  const { user } = useContext(AuthContext);
+  const { isDarkMode } = useContext(APIContext);
   const [editMode, setEditMode] = useState(false);
-
+  const [singleUsers, setSingleUsers] = useState({});
   const toggleEditMode = () => {
     setEditMode(!editMode);
   };
 
   const userId = localStorage.getItem("userId");
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_API_URL}/user/${user?.email}`)
+      .then((res) => res.json())
+      .then((data) => setSingleUsers(data));
+  }, [user?.email, singleUsers]);
 
   const [formData, setFormData] = useState({
     name: singleUsers.name,
@@ -241,13 +248,19 @@ const Profile = () => {
                       : "border-1 text-center rounded-r pr-4 py-2 w-full"
                   }
                   type="occupation"
+                  defaultValue={singleUsers?.occupation}
                   value={singleUsers?.occupation}
                 />
               </div>
-              <p className="mb-4 text-lg leading-relaxed text-center">
-                <span className={isDarkMode ? "text-white" : "text-gray-600"}>
-                  {singleUsers?.bio}
-                </span>
+
+              <p
+                className={
+                  isDarkMode
+                    ? "border-1 text-center bg-black-250 rounded-r pr-4 py-2 w-full"
+                    : "border-1 text-center rounded-r pr-4 py-2 w-full"
+                }
+              >
+                {singleUsers?.bio}
               </p>
             </div>
 

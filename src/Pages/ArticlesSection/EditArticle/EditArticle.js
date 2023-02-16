@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useContext } from "react";
 import { toast } from "react-hot-toast";
-import Editor from "react-medium-editor/dist/editor";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import Spinner from "../../../components/Spinner/Spinner";
 import { APIContext } from "../../../contexts/APIProvider";

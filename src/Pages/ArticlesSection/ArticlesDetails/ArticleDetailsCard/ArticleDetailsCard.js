@@ -1,5 +1,8 @@
-import { LinkIcon, ShareIcon } from "@heroicons/react/24/solid";
-import React from "react";
+import {
+  LinkIcon,
+  ShareIcon,
+} from "@heroicons/react/24/solid";
+
 import { useContext } from "react";
 import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
@@ -15,6 +18,9 @@ import ListenButton from "./ListenButton";
 const ArticleDetailsCard = ({ articleData, users }) => {
   const { user } = useContext(AuthContext);
 
+// const ArticleDetailsCard = ({ articleData,users,setUsers }) => {
+//   const { user } = useContext(AuthContext);
+  
   const {
     _id,
     articleDetails,
@@ -72,6 +78,7 @@ const ArticleDetailsCard = ({ articleData, users }) => {
 
   // reported handler
   const reportedHandler = (id) => {
+   
     fetch(`${process.env.REACT_APP_API_URL}/story/reportedStory/${id}`, {
       method: "PUT",
     })
@@ -80,6 +87,7 @@ const ArticleDetailsCard = ({ articleData, users }) => {
         console.log(data);
         if (data.acknowledged === true) {
           toast.success("Add Report  successfully");
+         
         }
       });
   };
@@ -453,10 +461,9 @@ const ArticleDetailsCard = ({ articleData, users }) => {
 
           {/* Modal body for comment */}
           {/* Put this part before </body> tag */}
-          <input type="checkbox" id="comment-modal" className="modal-toggle " />
-
+          <input type="checkbox" id="comment-modal" className="modal-toggle" />
           <div className="modal flex justify-end ">
-            <div className="modal-box h-full my-0 rounded shadow w-full md:w-6/12 lg:w-3/12">
+            <div className="modal-box h-full w-full md:w-6/12 lg:w-4/12">
               <label
                 htmlFor="comment-modal"
                 className="btn btn-sm btn-circle bg-white hover:bg-white hover:text-black border-none absolute right-2 top-2"
@@ -495,4 +502,4 @@ const ArticleDetailsCard = ({ articleData, users }) => {
   );
 };
 
-export default ArticleDetailsCard;
+export default ArticleDetailsCard ;

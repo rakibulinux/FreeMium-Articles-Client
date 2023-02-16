@@ -200,9 +200,9 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className="container mx-auto print:hidden">
+    <div className="mx-auto print:hidden">
       {user?.uid ? (
-        <div className="navbar">
+        <div className="navbar p-0">
           <div className="navbar-start">
             <div className="flex gap-2 items-center">
               <label

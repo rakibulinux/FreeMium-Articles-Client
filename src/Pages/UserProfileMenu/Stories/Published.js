@@ -1,11 +1,14 @@
 import React from "react";
 import Spinner from "../../../components/Spinner/Spinner";
 import MyStorie from "./MyStories/MyStorie";
-const Published = ({ myStories }) => {
-  if (!myStories) {
+const Published = ({ myStories, isLoading, isError, error }) => {
+  if (isLoading) {
     return <Spinner />;
   }
 
+  if (isError) {
+    return <div>Error: {error.message}</div>;
+  }
   return (
     <div>
       {!myStories?.length && (

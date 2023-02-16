@@ -7,8 +7,16 @@ import { APIContext } from "./../../../contexts/APIProvider";
 import Tabs from "../Tabs/Tabs";
 import Published from "./Published";
 import Drafts from "./Drafts";
+import { AuthContext } from "../../../contexts/AuthProvider";
+import { useQuery } from "@tanstack/react-query";
 const Stories = () => {
-  const { myStories, isDarkMode } = useContext(APIContext);
+  const { fetchUserStories, isDarkMode } = useContext(APIContext);
+  const { user } = useContext(AuthContext);
+  const { isLoading, isError, data, error } = useQuery(
+    ["userStories", user?.email],
+    () => fetchUserStories(user?.email)
+  );
+
   const tabsData = [
     {
       id: 1,
@@ -24,14 +32,19 @@ const Stories = () => {
       label: " Published",
       content: (
         <div>
-          <Published myStories={myStories} />
+          <Published
+            myStories={data}
+            isLoading={isLoading}
+            isError={isError}
+            error={error}
+          />
         </div>
       ),
     },
     { id: 3, label: " Responses", content: <div>Responses</div> },
   ];
   return (
-    <div className="container mx-auto mt-14 py-10">
+    <div className="container w-11/12 mx-auto mt-14 py-10">
       <div className="flex row">
         <div className=" basis-3/4 mb-10">
           <div className="flex justify-between">

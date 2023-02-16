@@ -26,7 +26,19 @@ const APIProvider = ({ children }) => {
     )
       .then((res) => res.json())
       .then((data) => setMyStories(data));
-  }, [singleUsers, myStories]);
+  }, [singleUsers]);
+
+  const fetchUserStories = async (email) => {
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/my-stories?email=${email}`
+      );
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      throw new Error(`Failed to fetch user stories: ${error.message}`);
+    }
+  };
 
   useEffect(() => {
     const storedValue = localStorage.getItem("isDarkMode");
@@ -121,7 +133,7 @@ const APIProvider = ({ children }) => {
     reportRefetch,
     singleUsers,
     setSingleUsers,
-    myStories,
+    fetchUserStories,
   };
   return <APIContext.Provider value={apiInfo}>{children}</APIContext.Provider>;
 };

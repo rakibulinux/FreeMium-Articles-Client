@@ -1,11 +1,11 @@
 import { format } from 'date-fns';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 // import { AiOutlineLike } from 'react-icons/ai';
 import { AuthContext } from '../../../contexts/AuthProvider';
 
-const ReplyComment = ({ comment }) => {
+const ReplyComment = ({ comment, setReply }) => {
     const { register, handleSubmit, reset, watch } = useForm();
     const replyComment = watch("replyComment");
     const { user } = useContext(AuthContext);
@@ -39,9 +39,9 @@ const ReplyComment = ({ comment }) => {
             .then((res) => res.json())
             .then((result) => {
                 console.log(result);
-                if (result.acknowledged) {
+                if (result.message) {
                     toast.success("Respond placed successfully");
-
+                    setReply(result)
                     reset();
 
                     // setNewReplyComment(true);

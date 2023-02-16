@@ -39,6 +39,7 @@ import EditArticle from "../Pages/ArticlesSection/EditArticle/EditArticle";
 import AskMeAnything from "../Pages/AskMeAnything/AskMeAnything";
 import Messages from "../Pages/Messages/Messages";
 import ImportStory from "../Pages/UserProfileMenu/Stories/ImportStory";
+import HistoryAns from "../Pages/AskMeAnything/HistoryAns/HistoryAns";
 
 const router = createBrowserRouter([
   {
@@ -121,6 +122,17 @@ const router = createBrowserRouter([
       {
         path: "/hexa-ai",
         element: <AskMeAnything />,
+        children:[{
+          
+        }]
+      },
+      {
+        path: "/hexa-ai/:id",
+          element:<HistoryAns></HistoryAns>,
+          loader: async ({ params }) =>
+          await fetch(
+            `${process.env.REACT_APP_API_URL}/hexa-ai/${params.id}`
+          ),
       },
       {
         path: "/messages",

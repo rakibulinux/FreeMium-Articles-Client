@@ -1,22 +1,17 @@
-import React, { useState } from "react";
-import axios from "axios";
+import { useQuery } from '@tanstack/react-query';
+import React, { useContext } from 'react';
 import { AiOutlineSend } from "react-icons/ai";
-import SideSection from "./SideSection/SideSection";
+import { useLoaderData, useNavigate } from 'react-router-dom';
+import { APIContext } from '../../../contexts/APIProvider';
+import SideSection from '../SideSection/SideSection';
 
-import { useContext } from "react";
-import { APIContext } from "../../contexts/APIProvider";
-import { useQuery } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
-
-
-const AskMeAnything = () => {
-  const { singleUsers } = useContext(APIContext);
-  const [prompt, setPrompt] = useState("");
-  const [response, setResponse] = useState("");
-  const navigate = useNavigate();
-  // console.log(singleUsers.email);
-  const userEmail = singleUsers.email
-  const {data: questionAns = [], refetch} = useQuery({
+const HistoryAns = () => {
+    const { singleUsers } = useContext(APIContext);
+    const data = useLoaderData();
+    console.log(data)
+    const navigate = useNavigate();
+    const userEmail = singleUsers.email
+  const {data: questionAns = [], } = useQuery({
     queryKey: ["questionAns", userEmail],
     queryFn: async () => {
       const res = await fetch(`${process.env.REACT_APP_API_URL}/apiAns?email=${userEmail}`);
@@ -24,34 +19,20 @@ const AskMeAnything = () => {
       return data
     },
   });
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Send a request to the server with the prompt
-    axios
-      .post(`${process.env.REACT_APP_API_URL}/hexa-ai`, { prompt,userEmail })
-      .then((res) => {
-        // Update the response state with the server's response
-        setResponse(res.data);
-        refetch()
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  };
-  const handleNewChat = () =>{
-    setPrompt("")
-    setResponse('')
-    navigate("/hexa-ai")
-    
-  }
-  return (
-    <div className="grid h-screen" style={{ gridTemplateColumns: "1fr 4fr" }}>
+    const handleNewChat = () =>{
+        // setPrompt("")
+        // setResponse('')
+        navigate("/hexa-ai")
+        
+      }
+    return (
+        <div className="grid h-screen" style={{ gridTemplateColumns: "1fr 4fr" }}>
       <div className="bg-[#202123]">
         <SideSection handleNewChat={handleNewChat} questionAns={questionAns} />
       </div>
       <div className="w-full mx-auto bg-[#343541]">
         <form
-          onSubmit={handleSubmit}
+         
           className="flex flex-col justify-center items-center gap-4"
         >
           <div className="w-full  gap-4 p-8">
@@ -63,13 +44,13 @@ const AskMeAnything = () => {
                 </div>
               <div className="px-4 pt-5">
                 <h3 className="text-white text-2xl font-mono">
-                  {prompt}
+                  {data.question}
                 </h3>
               </div>
 
                 <div className="bg-[#343541]">
                   <p className="text-white max-w-screen-md p-4 whitespace-pre-line">
-                  {response}
+                {data.answer}
                   </p>
                 </div>
                 {/* <code className="!whitespace-pre max-w-xl">{response}</code> */}
@@ -78,8 +59,8 @@ const AskMeAnything = () => {
             <div className="p-16 mx-10 my-2 rounded-lg flex gap-4 ">
               <input
                 type="text"
-                value={prompt}
-                onChange={(e) => setPrompt(e.target.value)}
+                // value={prompt}
+                // onChange={(e) => setPrompt(e.target.value)}
                 placeholder="Ask me Anything"
                 className="w-11/12 p-2 rounded-lg input input-bordered input-info"
               />
@@ -102,7 +83,7 @@ const AskMeAnything = () => {
         </form>
       </div>
     </div>
-  );
+    );
 };
 
-export default AskMeAnything;
+export default HistoryAns;

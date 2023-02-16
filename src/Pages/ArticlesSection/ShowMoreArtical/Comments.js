@@ -14,6 +14,7 @@ const Comments = ({ id }) => {
     const { user } = useContext(AuthContext);
     const date = format(new Date(), "PP");
 
+    const [reply, setReply]=useState();
 
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState(false);
@@ -30,7 +31,7 @@ const Comments = ({ id }) => {
             comment: data.comment,
             commentDate: date,
         };
-        console.log(comment);
+        // console.log(comment);
         // save post information to the database
 
         fetch(`${process.env.REACT_APP_API_URL}/comments`, {
@@ -40,14 +41,14 @@ const Comments = ({ id }) => {
                 "content-type": "application/json",
             },
             body: JSON.stringify(comment),
-        })
-            .then((res) => res.json())
+        }).then((res) => res.json())
             .then((result) => {
                 console.log(result);
                 if (result.acknowledged) {
                     toast.success("Respond placed successfully");
 
                     reset();
+            
 
                     setNewComment(true);
                 }
@@ -78,7 +79,6 @@ const fetchComments = () => {
         console.log(data);
         if (data.deletedCount > 0) {
           toast.success("successfully delete");
-        //   reportRefetch();
         fetchComments();
         }
       });
@@ -87,16 +87,20 @@ const fetchComments = () => {
 //   Update comment
 
 
+// const fetchComment =()=>{
+
+// }
+
     useEffect(() => {
 
         fetch(`${process.env.REACT_APP_API_URL}/comments?articleId=${id}`)
             .then((res) => res.json())
             .then((data) => {
                 setComments(data);
-                fetchComments();
+                // fetchComments();
                 // console.log(data);
             });
-    }, [id, newComment]);
+    }, [id, newComment,reply]);
 
     return (
         <div>
@@ -225,7 +229,7 @@ const fetchComments = () => {
                                                     {
 
                                                         comment?.replyComment?.map((reply) =>
-                                                            <div className="block" key={reply?._id}>
+                                                            <div className="block" key={reply._id}>
                                                                 <div className="border-x" >
 
                                                                     <div >
@@ -278,7 +282,9 @@ const fetchComments = () => {
                                                 <div
                                                     tabIndex={1}
                                                     className="dropdown-content"
-                                                >   <ReplyComment comment={comment}></ReplyComment>
+                                                >   <ReplyComment comment={comment}
+                                                setReply={setReply}
+                                                ></ReplyComment>
                                                 </div>
 
                                             </div>

@@ -1,5 +1,6 @@
 import { format } from "date-fns";
 import React, { useContext, useEffect, useState } from "react";
+import { toast } from "react-hot-toast";
 
 import { useNavigate } from "react-router-dom";
 import { APIContext } from "../../../contexts/APIProvider";
@@ -43,8 +44,10 @@ const ImportStory = () => {
         }
       );
       const result = await response.json();
-      setImportStatus(result.message);
+      // setImportStatus(result.message);
+      toast.success(result.message);
       articlesRefetch();
+      navigate("/");
     } catch (error) {
       setImportStatus("Failed to import story");
     }

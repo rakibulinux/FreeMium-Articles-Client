@@ -30,9 +30,6 @@ const Profile = () => {
     education: singleUsers.education,
     bio: singleUsers.bio,
   });
-  if (!singleUsers) {
-    return <Spinner />;
-  }
 
   const handleChange = (event) => {
     setFormData({
@@ -77,7 +74,9 @@ const Profile = () => {
     updateProfile(formData);
     toggleEditMode();
   };
-
+  if (!singleUsers) {
+    return <Spinner />;
+  }
   return (
     <div
       className={

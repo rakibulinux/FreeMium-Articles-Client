@@ -8,7 +8,7 @@ import StaffPicksStory from "./StaffPicksStory";
 const StaffPicks = () => {
   const { isDarkMode, articles, articlesLoading } = useContext(APIContext);
   if (articlesLoading) {
-    return <Spinner />;
+    return;
   }
   return (
     <div>

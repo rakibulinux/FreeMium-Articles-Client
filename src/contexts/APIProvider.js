@@ -12,21 +12,12 @@ const APIProvider = ({ children }) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [singleUsers, setSingleUsers] = useState({});
   const { user } = useContext(AuthContext);
-  const [myStories, setMyStories] = useState([]);
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/user/${user?.email}`)
       .then((res) => res.json())
       .then((data) => setSingleUsers(data));
   }, [user?.email, singleUsers]);
-
-  useEffect(() => {
-    fetch(
-      `${process.env.REACT_APP_API_URL}/my-stories?email=${singleUsers?.email}`
-    )
-      .then((res) => res.json())
-      .then((data) => setMyStories(data));
-  }, [singleUsers]);
 
   const fetchUserStories = async (email) => {
     try {

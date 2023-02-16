@@ -1,60 +1,205 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
+import { toast } from "react-hot-toast";
+import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import socketIOClient from "socket.io-client";
+import { APIContext } from "../../contexts/APIProvider";
 import { AuthContext } from "../../contexts/AuthProvider";
+import MessagesJsRightSide from "./MessagesJsRightSide";
+
 
 const ENDPOINT = `${process.env.REACT_APP_API_URL}`;
 const socket = socketIOClient(ENDPOINT);
 
 function Messages({ userId }) {
   const { user } = useContext(AuthContext);
+  const scrollRef =useRef()
+const {friends,singleUsers,friendsRefetch} = useContext(APIContext)
 
-  const [messages, setMessages] = useState([]);
-  const [loginUserMe, setLoginUserMe] = useState(null);
+  const [newMessages, setNewMessages] = useState([]);
+  const [getMessage, setGetMessage] = useState();
   const [inputValue, setInputValue] = useState("");
-  // console.log(loginUserMe);
-  useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/user/${user?.email}`)
-      .then((res) => res.json())
-      .then((data) => setLoginUserMe(data));
-  }, [user?.email]);
-  useEffect(() => {
-    socket.on("new message", (message) => {
-      setMessages((prevMessages) => [...prevMessages, message]);
-    });
-  }, []);
+  const [currentFriend,setCurrentFriend] = useState('')
+  const {name,_id} =singleUsers
+  // console.log(getMessage);
+  // console.log(currentFriend?._id);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const message = {
-      sender: loginUserMe?._id,
-      recipient: "63c01ba462cbb666b24edabd",
-      message: inputValue,
-      timestamp: new Date(),
-    };
-    socket.emit("send message", message);
-    setInputValue("");
-  };
+// message input handler
+  const messageInputHandl =e=>{
+    setNewMessages(e.target.value)
+  }
+const sendMessage=e=>{
+  e.preventDefault()
+  console.log(newMessages);
+  const data ={
+    senderName:name,
+    senderId:_id,
+    reciverId:currentFriend?._id,
+    message:{text :newMessages? newMessages : '',image:''},
+    date:new Date()
+    
+  }
+  console.log(data);
+  fetch(`${process.env.REACT_APP_API_URL}/sendMessage`, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify({data}),
+  })
+    .then((res) => res.json())
+    .then((result) => {
+      console.log(result);
+      toast.success(`Saved message`);
+      setNewMessages('')
+    });
+}
+//get message
+useEffect(() => {
+  fetch(`${process.env.REACT_APP_API_URL}/sendMessage/${currentFriend?._id}/getMseeage/${singleUsers?._id}`)
+    .then((res) => res.json())
+    .then((data) => {
+      setGetMessage(data)
+      friendsRefetch()
+    });
+}, [currentFriend,getMessage]);
+
+//get default frist friend message  
+useEffect(() => {
+   if(friends && friends.length>0){
+    setCurrentFriend(friends[0])
+   }
+  }, [friends]);
+  // scrollRef
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView({behavior:"smooth"})
+   }, []);
+
+  // emonji handler
+  const emojiHnadler =emoje=>{
+    console.log(newMessages)
+    setNewMessages(`${newMessages}` + emoje)
+  } 
+//  img send
+const sendImage =e=>{
+  if(e.target.files.length !== 0){
+    console.log(e.target.files[0])
+    const imgName = e.target.files[0].name;
+    const newImgName = Date.new() + imgName;
+    const formData = new FormData();
+    formData.append("senderName",name);
+    formData.append("reciverId",currentFriend?._id);
+    formData.append("imageName",newImgName);
+    formData.append("image",e.target.files[0]);
+    // const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
+    // fetch(url, {
+    //   method: "POST",
+    //   body: formData,
+    // })
+   
+  
+}}
+  /*
+  conversetion data modal
+  {
+    creator: {
+      id: mongoose.Types.ObjectId,
+      name: String,
+      avatar: String,
+    },
+
+    participant: {
+      id: mongoose.Types.ObjectId,
+      name: String,
+      avatar: String,
+    },
+    last_updated: {
+      type: Date,
+      default: Date.now,
+    },
+  },
+  {
+    timestamps: true,
+  }
+
+ =========== message data modal=========
+  {
+    text: {
+      type: String,
+    },
+    attachment: [
+      {
+        type: String,
+      },
+    ],
+    sender: {
+      id: mongoose.Types.ObjectId,
+      name: String,
+      avatar: String,
+    },
+    receiver: {
+      id: mongoose.Types.ObjectId,
+      name: String,
+      avatar: String,
+    },
+    date_time: {
+      type: Date,
+      default: Date.now,
+    },
+    conversation_id: {
+      type: mongoose.Types.ObjectId,
+      required: true,
+    },
+  },
+  {
+    timestamps: true,
+  }
+   */
+  // console.log(friends)
+
+  // useEffect(() => {
+  //   fetch(`${process.env.REACT_APP_API_URL}/user/${user?.email}`)
+  //     .then((res) => res.json())
+  //     .then((data) => setLoginUserMe(data));
+  // }, [user?.email]);
+  // useEffect(() => {
+  //   socket.on("new message", (message) => {
+  //     setMessages((prevMessages) => [...prevMessages, message]);
+  //   });
+  // }, []);
+
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   const message = {
+  //     sender: loginUserMe?._id,
+  //     recipient: "63c01ba462cbb666b24edabd",
+  //     message: inputValue,
+  //     timestamp: new Date(),
+  //   };
+  //   socket.emit("send message", message);
+  //   setInputValue("");
+  // };
 
   return (
     <div>
-      <ul>
+      {/* <ul>
         {messages.map((message, index) => (
           <li key={index}>{message.message}</li>
         ))}
       </ul>
-      <form onSubmit={handleSubmit}>
+      <form >
         <input
           type="text"
           value={inputValue}
           onChange={(event) => setInputValue(event.target.value)}
         />
         <button type="submit">Send</button>
-      </form>
+        flex flex-row
+      </form> */}
 
       <div className="flex flex-row h-screen antialiased text-gray-800">
         <div className="flex flex-row w-96 flex-shrink-0 bg-gray-100 p-4">
-          <div className="flex flex-col items-center py-4 flex-shrink-0 w-20 bg-indigo-800 rounded-3xl">
+          {/* <div className="flex flex-col items-center py-4 flex-shrink-0 w-20 bg-indigo-800 rounded-3xl">
             <Link
               to="/"
               className="flex items-center justify-center h-12 w-12 bg-indigo-100 text-indigo-800 rounded-full"
@@ -178,13 +323,27 @@ function Messages({ userId }) {
                 ></path>
               </svg>
             </button>
-          </div>
+          </div> */}
           <div className="flex flex-col w-full h-full pl-4 pr-4 py-4 -mr-4">
             <div className="flex flex-row items-center">
               <div className="flex flex-row items-center">
-                <div className="text-xl font-semibold">Messages</div>
+                {/* <div className="text-xl font-semibold">Messages</div>
                 <div className="flex items-center justify-center ml-2 text-xs h-5 w-5 text-white bg-red-500 rounded-full font-medium">
                   5
+                </div> */}
+                <div className="flex flex-row items-center p-4">
+                  <img src={user?.photoURL} alt ='img'className="flex items-center justify-center h-10 w-10 rounded-full  font-bold flex-shrink-0">
+                    
+                  </img>
+                  <div className="flex flex-col flex-grow ml-3">
+                    <div className="flex items-center">
+                      <div className="text-sm font-medium">{user?.displayName}</div>
+                      <div className="h-2 w-2 rounded-full bg-green-500 ml-2"></div>
+                    </div>
+                    <div className="text-xs truncate w-40">
+                      Lorem ipsum
+                    </div>
+                  </div>
                 </div>
               </div>
               <div className="ml-auto">
@@ -217,84 +376,35 @@ function Messages({ userId }) {
                     <span className="absolute left-0 bottom-0 h-1 w-6 bg-indigo-800 rounded-full"></span>
                   </Link>
                 </li>
-                <li>
-                  <Link
-                    to="/"
-                    className="flex items-center pb-3 text-xs text-gray-700 font-semibold"
-                  >
-                    <span>Archived</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/"
-                    className="flex items-center pb-3 text-xs text-gray-700 font-semibold"
-                  >
-                    <span>Starred</span>
-                  </Link>
-                </li>
+              
               </ul>
             </div>
-            <div className="mt-5">
-              <div className="text-xs text-gray-400 font-semibold uppercase">
-                Team
-              </div>
-            </div>
-            <div className="mt-2">
-              <div className="flex flex-col -mx-4">
-                <div className="relative flex flex-row items-center p-4">
-                  <div className="absolute text-xs text-gray-500 right-0 top-0 mr-4 mt-3">
-                    5 min
-                  </div>
-                  <div className="flex items-center justify-center h-10 w-10 rounded-full bg-pink-500 text-pink-300 font-bold flex-shrink-0">
-                    T
-                  </div>
-                  <div className="flex flex-col flex-grow ml-3">
-                    <div className="text-sm font-medium">Cuberto</div>
-                    <div className="text-xs truncate w-40">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                      Debitis, doloribus?
-                    </div>
-                  </div>
-                  <div className="flex-shrink-0 ml-2 self-end mb-1">
-                    <span className="flex items-center justify-center h-5 w-5 bg-red-500 text-white text-xs rounded-full">
-                      5
-                    </span>
-                  </div>
-                </div>
-                <div className="flex flex-row items-center p-4 bg-gradient-to-r from-red-100 to-transparent border-l-2 border-red-500">
-                  <div className="flex items-center justify-center h-10 w-10 rounded-full bg-pink-500 text-pink-300 font-bold flex-shrink-0">
-                    T
-                  </div>
-                  <div className="flex flex-col flex-grow ml-3">
-                    <div className="flex items-center">
-                      <div className="text-sm font-medium">UI Art Design</div>
-                      <div className="h-2 w-2 rounded-full bg-green-500 ml-2"></div>
-                    </div>
-                    <div className="text-xs truncate w-40">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                      Debitis, doloribus?
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="mt-5">
-              <div className="text-xs text-gray-400 font-semibold uppercase">
-                Personal
-              </div>
-            </div>
+            
+            
             <div className="h-full overflow-hidden relative pt-2">
               <div className="flex flex-col divide-y h-full overflow-y-auto -mx-4">
-                <div className="flex flex-row items-center p-4 relative">
+                {/* friends */}
+                {
+                 friends && friends.length>0? friends?.map(user=>
+                  <div onClick={()=>setCurrentFriend(user)} user={user} key={user._id} className= "flex flex-row items-center p-4 relative" >
+                    
                   <div className="absolute text-xs text-gray-500 right-0 top-0 mr-4 mt-3">
                     2 hours ago
                   </div>
-                  <div className="flex items-center justify-center h-10 w-10 rounded-full bg-pink-500 text-pink-300 font-bold flex-shrink-0">
-                    T
-                  </div>
+                  {/* <img  src={user.picture}  alt="img" className=" flex items-center justify-center h-10 w-10 rounded-full font-bold flex-shrink-0">
+                    
+                  </img> */}
+                  <div className={`avatar`}>
+<div className="w-10 rounded-full">
+ <img src={user.picture} alt='img' />
+</div>
+</div>
                   <div className="flex flex-col flex-grow ml-3">
-                    <div className="text-sm font-medium">Flo Steinle</div>
+                  <div className="flex items-center">
+                    <div className="text-sm font-medium">{user.name}</div>
+                    
+                    
+                    </div>
                     <div className="text-xs truncate w-40">
                       Good after noon! how can i help you?
                     </div>
@@ -305,6 +415,10 @@ function Messages({ userId }) {
                     </span>
                   </div>
                 </div>
+                )
+                : 'no friend'
+                }
+                
                 <div className="flex flex-row items-center p-4">
                   <div className="flex items-center justify-center h-10 w-10 rounded-full bg-pink-500 text-pink-300 font-bold flex-shrink-0">
                     T
@@ -320,51 +434,7 @@ function Messages({ userId }) {
                     </div>
                   </div>
                 </div>
-                <div className="flex flex-row items-center p-4">
-                  <div className="flex items-center justify-center h-10 w-10 rounded-full bg-pink-500 text-pink-300 font-bold flex-shrink-0">
-                    T
-                  </div>
-                  <div className="flex flex-col flex-grow ml-3">
-                    <div className="flex items-center">
-                      <div className="text-sm font-medium">Sarah D</div>
-                      <div className="h-2 w-2 rounded-full bg-green-500 ml-2"></div>
-                    </div>
-                    <div className="text-xs truncate w-40">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                      Debitis, doloribus?
-                    </div>
-                  </div>
-                </div>
-                <div className="flex flex-row items-center p-4">
-                  <div className="flex items-center justify-center h-10 w-10 rounded-full bg-pink-500 text-pink-300 font-bold flex-shrink-0">
-                    T
-                  </div>
-                  <div className="flex flex-col flex-grow ml-3">
-                    <div className="flex items-center">
-                      <div className="text-sm font-medium">Sarah D</div>
-                      <div className="h-2 w-2 rounded-full bg-green-500 ml-2"></div>
-                    </div>
-                    <div className="text-xs truncate w-40">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                      Debitis, doloribus?
-                    </div>
-                  </div>
-                </div>
-                <div className="flex flex-row items-center p-4">
-                  <div className="flex items-center justify-center h-10 w-10 rounded-full bg-pink-500 text-pink-300 font-bold flex-shrink-0">
-                    T
-                  </div>
-                  <div className="flex flex-col flex-grow ml-3">
-                    <div className="flex items-center">
-                      <div className="text-sm font-medium">Sarah D</div>
-                      <div className="h-2 w-2 rounded-full bg-green-500 ml-2"></div>
-                    </div>
-                    <div className="text-xs truncate w-40">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                      Debitis, doloribus?
-                    </div>
-                  </div>
-                </div>
+               
               </div>
               <div className="absolute bottom-0 right-0 mr-2">
                 <button className="flex items-center justify-center shadow-sm h-10 w-10 bg-red-500 text-white rounded-full">
@@ -387,7 +457,7 @@ function Messages({ userId }) {
             </div>
           </div>
         </div>
-        <div className="flex flex-col h-full w-full bg-white px-4 py-6">
+        {/* <div className="flex flex-col h-full w-full bg-white px-4 py-6">
           <div className="flex flex-row items-center py-4 px-6 rounded-2xl shadow">
             <div className="flex items-center justify-center h-10 w-10 rounded-full bg-pink-500 text-pink-100">
               T
@@ -705,7 +775,24 @@ function Messages({ userId }) {
               </button>
             </div>
           </div>
-        </div>
+        </div> */}
+
+        {
+          currentFriend?
+          <MessagesJsRightSide 
+          friends={friends}
+          currentFriend={currentFriend} 
+          newMessages ={newMessages}
+          messageInputHandl ={messageInputHandl}
+          sendMessage ={sendMessage}
+          getMessage={getMessage}
+          singleUsers={singleUsers}
+          scrollRef={scrollRef}
+          emojiHnadler ={emojiHnadler}
+          sendImage={sendImage}
+          ></MessagesJsRightSide> 
+          : <p className="text-xl font-bold text-centar">Please select your friend</p>
+        }
       </div>
     </div>
   );

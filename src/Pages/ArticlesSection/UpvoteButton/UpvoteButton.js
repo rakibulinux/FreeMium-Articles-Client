@@ -30,6 +30,7 @@ const UpvoteButton = ({ user, storyId, upVoteId, classes }) => {
       })
       .then((res) => {
         setUpVote(true);
+        // window.location.reload(true)
       });
   };
 
@@ -41,6 +42,7 @@ const UpvoteButton = ({ user, storyId, upVoteId, classes }) => {
       })
       .then((res) => {
         setUpVote(false);
+        // window.location.reload(true)
       });
   };
   return (

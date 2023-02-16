@@ -343,7 +343,7 @@ const ArticleDetailsCard = ({ articleData, users, newUpvote,setNewUpvote}) => {
                     upVoteId={user?.email}
                   ></UpvoteButton>
 
-                  {/* <p className="pl-0 p-2"> {upVote?.length}</p> */}
+                  <p className="pl-0 p-2"> {upVote?.length}</p>
                   <DownVoteButton
                     user={user}
                     users={users}
@@ -364,7 +364,7 @@ const ArticleDetailsCard = ({ articleData, users, newUpvote,setNewUpvote}) => {
                       upVoteId={user?.email}
                     ></UpvoteButton>
 
-                    {/* <p className="pl-0 p-2"> {upVote?.length}</p> */}
+                    <p className="pl-0 p-2"> {upVote?.length}</p>
                     <DownVoteButton
                       user={user}
                       users={users}

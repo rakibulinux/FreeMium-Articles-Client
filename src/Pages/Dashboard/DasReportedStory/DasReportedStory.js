@@ -34,7 +34,7 @@ const DasReportedStory = () => {
   }
   return (
     <div>
-      <h2 className="text-center text-2xl">Reported Items</h2>
+      <h2 className="text-center text-2xl">Reported Stories</h2>
       <div className="overflow-x-auto w-full">
         <table
           className={
@@ -77,7 +77,7 @@ const DasReportedStory = () => {
                   <label
                     onClick={() => setDeleteItem(item)}
                     htmlFor="delete-modal"
-                    className="btn btn-ghost btn-xs"
+                    className="btn btn-ghost btn-xs bg-red-500 hover:bg-red-600 text-white"
                   >
                     delete
                   </label>

@@ -229,7 +229,7 @@ const Profile = () => {
             >
               <div className="flex justify-end">
                 <button
-                  className="bg-green-500 text-white p-2 hover:bg-green-600"
+                  className="bg-green-500 rounded-full text-white p-2 hover:bg-green-600"
                   onClick={toggleEditMode}
                 >
                   Edit Profile

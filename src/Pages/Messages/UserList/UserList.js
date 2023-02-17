@@ -92,7 +92,7 @@ const UserList = ({ users }) => {
         </div>
       </div>
       <div className="absolute bottom-0 right-0 mr-2">
-        <button className="flex items-center justify-center shadow-sm h-10 w-10 bg-red-500 text-white rounded-full">
+        <button className="flex items-center justify-center shadow-sm h-10 w-10 bg-red-500 hover:bg-red-600 text-white rounded-full">
           <svg
             className="w-6 h-6"
             fill="none"

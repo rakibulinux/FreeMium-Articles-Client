@@ -13,7 +13,7 @@ const StaffPicksStory = ({ article }) => {
         />
         <h2 className="font-semibold text-sm ml-3">{writerName}</h2>
       </div>
-      <Link to={_id}>
+      <Link to={`/view-story/${_id}`}>
         <h1
           className="font-bold"
           dangerouslySetInnerHTML={{

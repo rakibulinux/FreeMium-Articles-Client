@@ -7,11 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 
 const WhoToFollow = () => {
   const { isDarkMode, fetchAPI } = useContext(APIContext);
-  const {
-    isLoading,
-
-    data: threeUsers,
-  } = useQuery(["three-users"], () =>
+  const { isLoading, data: threeUsers } = useQuery(["three-users"], () =>
     fetchAPI(`${process.env.REACT_APP_API_URL}/three-users`)
   );
   return (

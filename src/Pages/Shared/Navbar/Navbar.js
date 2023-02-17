@@ -15,6 +15,7 @@ import { CiLogin } from "react-icons/ci";
 import "./Navebar.css";
 import Search from "../Search/Search";
 import { APIContext } from "../../../contexts/APIProvider";
+import { FaRobot } from "react-icons/fa";
 //
 const Navbar = () => {
   const { user, logoutUserAccount } = useContext(AuthContext);
@@ -203,7 +204,7 @@ const Navbar = () => {
     <div className="mx-auto print:hidden">
       {user?.uid ? (
         <div className="navbar p-0">
-          <div className="navbar-start">
+          <div className="navbar-start h-16">
             <div className="flex gap-2 items-center">
               <label
                 htmlFor="dashboard-drawer"
@@ -238,7 +239,7 @@ const Navbar = () => {
               <Search searchPlaceholder={"Search article"} propsStyle={"4px"} />
             </div>
           </div>
-          <div className="navbar-end gap-2 items-center">
+          <div className="navbar-end gap-2 items-center mr-5">
             <div className="block">
               <NavLink
                 className={
@@ -260,7 +261,10 @@ const Navbar = () => {
                 }
                 to="/hexa-ai"
               >
-                <BsSnapchat className="w-6 h-6" />
+                <FaRobot
+                  data-tip="Ask me Anything"
+                  className="tooltip w-6 h-6"
+                />
               </NavLink>
             </div>
             <div className="hidden md:block">
@@ -277,9 +281,9 @@ const Navbar = () => {
             </div>
 
             {/* notification Section */}
-            <button className="btn btn-ghost  btn-circle">
+            {/* notification svg icon */}
+            {/* <button className="btn btn-ghost  btn-circle">
               <div className="indicator">
-                {/* notification svg icon */}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-5 w-5"
@@ -298,7 +302,7 @@ const Navbar = () => {
                   1
                 </span>
               </div>
-            </button>
+            </button> */}
             <div className="dropdown dropdown-end">
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                 <div className="w-10 rounded-full">

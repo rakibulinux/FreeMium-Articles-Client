@@ -7,11 +7,6 @@ const Main = () => {
     <div className="min-h-screen">
       <Navbar />
       <Outlet />
-<<<<<<< HEAD
-=======
-      {/* </div> */}
-      
->>>>>>> munne
     </div>
   );
 };

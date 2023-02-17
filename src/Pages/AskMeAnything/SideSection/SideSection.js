@@ -38,7 +38,7 @@ const SideSection = ({
         {questionAns?.map((ans) => (
           <div className="mt-2 cursor-pointer border-solid hover:bg-black-250 rounded-lg border border-white w-full p-2 my-2">
             <Link to={`/hexa-ai/${ans._id}`} className="text-white">
-              {ans.question}
+              {ans?.question}
             </Link>
           </div>
         ))}

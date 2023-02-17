@@ -7,116 +7,111 @@ import { APIContext } from "../../contexts/APIProvider";
 import { AuthContext } from "../../contexts/AuthProvider";
 import MessagesJsRightSide from "./MessagesJsRightSide";
 
-
-// const ENDPOINT = `${process.env.REACT_APP_API_URL}`;
-// const socket = socketIOClient(ENDPOINT);
+const ENDPOINT = `${process.env.REACT_APP_API_URL}`;
+const socket = socketIOClient(ENDPOINT);
 
 function Messages({ userId }) {
   const { user } = useContext(AuthContext);
-  const scrollRef =useRef()
-const {friends,singleUsers,friendsRefetch} = useContext(APIContext)
+  const scrollRef = useRef();
+  const { friends, singleUsers, friendsRefetch } = useContext(APIContext);
 
   const [newMessages, setNewMessages] = useState([]);
   const [getMessage, setGetMessage] = useState();
   const [inputValue, setInputValue] = useState("");
-  const [currentFriend,setCurrentFriend] = useState('')
-  const {name,_id} =singleUsers
+  const [currentFriend, setCurrentFriend] = useState("");
+  const { name, _id } = singleUsers;
   // console.log(getMessage);
   // console.log(currentFriend?._id);
 
-// message input handler
-  const messageInputHandl =e=>{
-    setNewMessages(e.target.value)
-  }
-const sendMessage=e=>{
-  e.preventDefault()
-  console.log(newMessages);
-  const data ={
-    senderName:name,
-    senderId:_id,
-    reciverId:currentFriend?._id,
-    message:{text :newMessages? newMessages : '',image:''},
-    date:new Date()
-    
-  }
-  console.log(data);
-  fetch(`${process.env.REACT_APP_API_URL}/sendMessage`, {
-    method: "POST",
-    headers: {
-      "content-type": "application/json",
-    },
-    body: JSON.stringify({data}),
-  })
-    .then((res) => res.json())
-    .then((result) => {
-      console.log(result);
-      toast.success(`Saved message`);
-      setNewMessages('')
-    });
-}
-//get message
-useEffect(() => {
-  fetch(`${process.env.REACT_APP_API_URL}/sendMessage/${currentFriend?._id}/getMseeage/${singleUsers?._id}`)
-    .then((res) => res.json())
-    .then((data) => {
-      setGetMessage(data)
-      friendsRefetch()
-    });
-}, [currentFriend,getMessage]);
+  // message input handler
+  const messageInputHandl = (e) => {
+    setNewMessages(e.target.value);
+  };
+  const sendMessage = (e) => {
+    e.preventDefault();
+    console.log(newMessages);
+    const data = {
+      senderName: name,
+      senderId: _id,
+      reciverId: currentFriend?._id,
+      message: { text: newMessages ? newMessages : "", image: "" },
+      date: new Date(),
+    };
+    console.log(data);
+    fetch(`${process.env.REACT_APP_API_URL}/sendMessage`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ data }),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        console.log(result);
+        toast.success(`Saved message`);
+        setNewMessages("");
+      });
+  };
+  //get message
+  useEffect(() => {
+    fetch(
+      `${process.env.REACT_APP_API_URL}/sendMessage/${currentFriend?._id}/getMseeage/${singleUsers?._id}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setGetMessage(data);
+        friendsRefetch();
+      });
+  }, [currentFriend, getMessage]);
 
-//get default frist friend message  
-useEffect(() => {
-   if(friends && friends.length>0){
-    setCurrentFriend(friends[0])
-   }
+  //get default frist friend message
+  useEffect(() => {
+    if (friends && friends?.length > 0) {
+      setCurrentFriend(friends[0]);
+    }
   }, [friends]);
   // scrollRef
   useEffect(() => {
-    scrollRef.current?.scrollIntoView({behavior:"smooth"})
-   }, []);
+    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, []);
 
   // emonji handler
-  const emojiHnadler =emoje=>{
-    console.log(newMessages)
-    setNewMessages(`${newMessages}` + emoje)
-  } 
-//  img send
-const sendImage =e=>{
-  if(e.target.files.length !== 0){
-    console.log(e.target.files[0])
-    const imgName = e.target.files[0].name;
-    const newImgName = Date.new() + imgName;
-    const formData = new FormData();
-    formData.append("senderName",name);
-    formData.append("reciverId",currentFriend?._id);
-    formData.append("imageName",newImgName);
-    formData.append("image",e.target.files[0]);
-  
-    // fetch(`${process.env.REACT_APP_API_URL}/sendImage`, {
-    //   method: "POST",
-    //   headers: {
-    //     "content-type": "application/json",
-    //   },
-    //   body: JSON.stringify({formData}),
-    // })
-    //   .then((res) => res.json())
-    //   .then((result) => {
-    //     console.log(result);
-    //     toast.success(`Saved Image`);
-       
-    //   });
-  
-}}
+  const emojiHnadler = (emoje) => {
+    console.log(newMessages);
+    setNewMessages(`${newMessages}` + emoje);
+  };
+  //  img send
+  const sendImage = (e) => {
+    if (e.target.files.length !== 0) {
+      console.log(e.target.files[0]);
+      const imgName = e.target.files[0].name;
+      const newImgName = Date.new() + imgName;
+      const formData = new FormData();
+      formData.append("senderName", name);
+      formData.append("reciverId", currentFriend?._id);
+      formData.append("imageName", newImgName);
+      formData.append("image", e.target.files[0]);
 
+      // fetch(`${process.env.REACT_APP_API_URL}/sendImage`, {
+      //   method: "POST",
+      //   headers: {
+      //     "content-type": "application/json",
+      //   },
+      //   body: JSON.stringify({formData}),
+      // })
+      //   .then((res) => res.json())
+      //   .then((result) => {
+      //     console.log(result);
+      //     toast.success(`Saved Image`);
 
+      //   });
+    }
+  };
 
   return (
     <div>
-     
-
       <div className="flex flex-row h-screen antialiased text-gray-800">
         <div className="flex flex-row w-96 flex-shrink-0 bg-gray-100 p-4">
-         
           <div className="flex flex-col w-full h-full pl-4 pr-4 py-4 -mr-4">
             <div className="flex flex-row items-center">
               <div className="flex flex-row items-center">
@@ -125,16 +120,20 @@ const sendImage =e=>{
                   5
                 </div> */}
                 <div className="flex flex-row items-center p-4">
-                  <img src={user?.photoURL} alt ='img'className="flex items-center justify-center h-10 w-10 rounded-full  font-bold flex-shrink-0">
-                    
-                  </img>
+                  <img
+                    src={user?.photoURL}
+                    alt="img"
+                    className="flex items-center justify-center h-10 w-10 rounded-full  font-bold flex-shrink-0"
+                  ></img>
                   <div className="flex flex-col flex-grow ml-3">
                     <div className="flex items-center">
-                      <div className="text-sm font-medium">{user?.displayName}</div>
+                      <div className="text-sm font-medium">
+                        {user?.displayName}
+                      </div>
                       <div className="h-2 w-2 rounded-full bg-green-500 ml-2"></div>
                     </div>
                     <div className="text-xs truncate w-40">
-                      Lorem ipsum
+                      Full Stack Web Developer
                     </div>
                   </div>
                 </div>
@@ -169,49 +168,47 @@ const sendImage =e=>{
                     <span className="absolute left-0 bottom-0 h-1 w-6 bg-indigo-800 rounded-full"></span>
                   </Link>
                 </li>
-              
               </ul>
             </div>
-            
-            
+
             <div className="h-full overflow-hidden relative pt-2">
               <div className="flex flex-col divide-y h-full overflow-y-auto -mx-4">
                 {/* friends */}
-                {
-                 friends && friends.length>0? friends?.map(user=>
-                  <div onClick={()=>setCurrentFriend(user)} user={user} key={user._id} className= "flex flex-row items-center p-4 relative" >
-                    
-                  <div className="absolute text-xs text-gray-500 right-0 top-0 mr-4 mt-3">
-                    2 hours ago
-                  </div>
-                 
-                  <div className={`avatar`}>
-<div className="w-10 rounded-full">
- <img src={user.picture} alt='img' />
-</div>
-</div>
-                  <div className="flex flex-col flex-grow ml-3">
-                  <div className="flex items-center">
-                    <div className="text-sm font-medium">{user.name}</div>
-                    
-                    
-                    </div>
-                    <div className="text-xs truncate w-40">
-                      Good after noon! how can i help you?
-                    </div>
-                  </div>
-                  <div className="flex-shrink-0 ml-2 self-end mb-1">
-                    <span className="flex items-center justify-center h-5 w-5 bg-red-500 text-white text-xs rounded-full">
-                      3
-                    </span>
-                  </div>
-                </div>
-                )
-                : 'no friend'
-                }
-                
-               
-               
+                {friends && friends.length > 0
+                  ? friends?.map((user) => (
+                      <div
+                        onClick={() => setCurrentFriend(user)}
+                        user={user}
+                        key={user._id}
+                        className="flex flex-row items-center p-4 relative"
+                      >
+                        <div className="absolute text-xs text-gray-500 right-0 top-0 mr-4 mt-3">
+                          2 hours ago
+                        </div>
+
+                        <div className={`avatar`}>
+                          <div className="w-10 rounded-full">
+                            <img src={user.picture} alt="img" />
+                          </div>
+                        </div>
+                        <div className="flex flex-col flex-grow ml-3">
+                          <div className="flex items-center">
+                            <div className="text-sm font-medium">
+                              {user.name}
+                            </div>
+                          </div>
+                          <div className="text-xs truncate w-40">
+                            Good after noon! how can i help you?
+                          </div>
+                        </div>
+                        <div className="flex-shrink-0 ml-2 self-end mb-1">
+                          <span className="flex items-center justify-center h-5 w-5 bg-red-500 text-white text-xs rounded-full">
+                            3
+                          </span>
+                        </div>
+                      </div>
+                    ))
+                  : "no friend"}
               </div>
               <div className="absolute bottom-0 right-0 mr-2">
                 <button className="flex items-center justify-center shadow-sm h-10 w-10 bg-red-500 text-white rounded-full">
@@ -234,155 +231,27 @@ const sendImage =e=>{
             </div>
           </div>
         </div>
-<div className="flex flex-col justify-between w-full bg-white px-4 ">
-        {
-          currentFriend?
-          <MessagesJsRightSide 
-          friends={friends}
-          currentFriend={currentFriend} 
-          newMessages ={newMessages}
-          messageInputHandl ={messageInputHandl}
-          sendMessage ={sendMessage}
-          getMessage={getMessage}
-          singleUsers={singleUsers}
-          scrollRef={scrollRef}
-          emojiHnadler ={emojiHnadler}
-          sendImage={sendImage}
-          ></MessagesJsRightSide> 
-          : <p className="text-xl font-bold text-centar">Please select your friend</p>
-        }
-        </div> 
+        <div className="flex flex-col justify-between w-full bg-white px-4 ">
+          {currentFriend ? (
+            <MessagesJsRightSide
+              friends={friends}
+              currentFriend={currentFriend}
+              newMessages={newMessages}
+              messageInputHandl={messageInputHandl}
+              sendMessage={sendMessage}
+              getMessage={getMessage}
+              singleUsers={singleUsers}
+              scrollRef={scrollRef}
+              emojiHnadler={emojiHnadler}
+              sendImage={sendImage}
+            ></MessagesJsRightSide>
+          ) : (
+            <p className="text-xl font-bold text-centar">
+              Please select your friend
+            </p>
+          )}
+        </div>
       </div>
-    </div>
-  );
-}
-
-
-// import React, { useState, useEffect, useContext } from "react";
-// import axios from "axios";
-// import { APIContext } from "../../contexts/APIProvider";
-// import MessageForm from "./MessageForm/MessageForm";
-
-// const Messages = ({ currentUser, recipient }) => {
-//   const [message, setMessage] = useState("");
-//   const [conversation, setConversation] = useState([]);
-//   const { singleUsers, allUsers } = useContext(APIContext);
-//   // useEffect(() => {
-//   //   // Fetch the conversation history between the current user and the recipient
-//   //   axios
-//   //     .get(
-//   //       `${process.env.REACT_APP_API_URL}/conversations?sender=${singleUsers?._id}&recipient=${recipient._id}`
-//   //     )
-//   //     .then((res) => setConversation(res.data.conversation))
-//   //     .catch((err) => console.error(err));
-//   // }, [singleUsers, recipient]);
-
-//   // const handleSubmit = (e) => {
-//   //   e.preventDefault();
-//   //   // Send the message to the recipient
-//   //   axios
-//   //     .post(`${process.env.REACT_APP_API_URL}/conversations`, {
-//   //       sender: singleUsers._id,
-//   //       recipient: recipient._id,
-//   //       content: message,
-//   //       timestamp: new Date(),
-//   //     })
-//   //     .then((res) => setConversation([...conversation, res.data.message]))
-//   //     .catch((err) => console.error(err));
-//   //   setMessage("");
-//   // };
-
-//   return (
-//     <div className="h-full w-full flex flex-col bg-white">
-//       <div className="h-full overflow-auto">
-//         {/* conversation.map((m) => (
-//           <div
-//             key={m._id}
-//             className={`p-2 mb-2 rounded-lg ${
-//               m.sender._id === currentUser._id
-//                 ? "bg-blue-500 text-white"
-//                 : "bg-gray-200 text-black"
-//             }`}
-//           >
-//             {m.content}
-//           </div>
-//           ))*/}
-//       </div>
-//       <form
-//       // className="bg-gray-100 p-2" onSubmit={handleSubmit}
-//       >
-//         <input
-//           className="p-2 border border-gray-400"
-//           type="text"
-//           value={message}
-//           onChange={(e) => setMessage(e.target.value)}
-//         />
-//         {/* <MessageForm /> */}
-//         <button className="p-2 ml-2 bg-blue-500 text-white hover:bg-blue-600">
-//           Send
-//         </button>
-//       </form>
-//     </div>
-//   );
-// };
-
-// export default Messages;
-import React, { useContext, useState } from "react";
-import axios from "axios";
-import { APIContext } from "../../contexts/APIProvider";
-import MessageForm from "./MessageForm/MessageForm";
-
-function Messages() {
-  const [isLoading, setIsLoading] = useState(false);
-  const { singleUsers } = useContext(APIContext);
-  const senderId = `${singleUsers?._id}`; // replace this with the actual sender ID
-  const receiverId = "63cf470193ecd7eb239795b3"; // replace this with the actual receiver ID
-  async function handleClick(event) {
-    event.preventDefault();
-    setIsLoading(true);
-
-    try {
-      // const senderId = `${singleUsers?._id}`; // replace this with the actual sender ID
-      // const receiverId = "63cf470193ecd7eb239795b3"; // replace this with the actual receiver ID
-
-      const conversationId = await createConversation(senderId, receiverId);
-      console.log(`Created a new conversation with ID: ${conversationId}`);
-
-      // navigate to the conversation page, or show a success message, etc.
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsLoading(false);
-    }
-  }
-
-  async function createConversation() {
-    try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/conversations`,
-        {
-          senderId,
-          receiverId,
-        }
-      );
-      return response.data.id;
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  return (
-    <div>
-      <button
-        className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ${
-          isLoading ? "cursor-not-allowed opacity-50" : ""
-        }`}
-        disabled={isLoading}
-        onClick={handleClick}
-      >
-        {isLoading ? "Loading..." : "Start a Conversation"}
-      </button>
-      <MessageForm />
     </div>
   );
 }

@@ -13,11 +13,7 @@ const Articles = () => {
     }
      const handleSave = data => {
          setSavedArticles([...savedArticles, data]);
-         console.log("data click");
-
-
-
-    
+         console.log("data save");
     fetch(`${process.env.REACT_APP_API_URL}/save-article`, {
       method: "POST",
       headers: {
@@ -30,16 +26,31 @@ const Articles = () => {
         console.log(result);
         toast.success(`Saved article`);
       });
-
-
   };
 
+const handleDelete = (id) => {
+    // console.log(id);
+  toast.success("successfully Unsave");
+   console.log("data delete");
+    fetch(`${process.env.REACT_APP_API_URL}/save-article/delete-article/${id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.deletedCount > 0) {
+          toast.success("successfully Unsave");
+         
+        }
+      });
+  };
     return (
         <>
             {searchResults?.length === 0 &&
                 articles.map((data) => (
                     <ArticlesCard data={data} key={data?._id}
                     handleSave={handleSave}                 
+                    handleDelete={handleDelete}                 
                     ></ArticlesCard>
                 ))}
             {searchResults?.length >= 0 &&

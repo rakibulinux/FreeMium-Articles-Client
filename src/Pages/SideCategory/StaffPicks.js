@@ -1,3 +1,4 @@
+import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { useContext } from "react";
 import Spinner from "../../components/Spinner/Spinner";
@@ -6,8 +7,15 @@ import StaffPicksStory from "./StaffPicksStory";
 // import { useLoaderData } from 'react-router-dom';
 
 const StaffPicks = () => {
-  const { isDarkMode, articles, articlesLoading } = useContext(APIContext);
-  if (articlesLoading) {
+  const { isDarkMode, fetchAPI } = useContext(APIContext);
+  const {
+    isLoading,
+    refetch,
+    data: articles,
+  } = useQuery(["allArticles"], () =>
+    fetchAPI(`${process.env.REACT_APP_API_URL}/allArticles`)
+  );
+  if (isLoading) {
     return;
   }
   return (

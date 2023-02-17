@@ -122,17 +122,13 @@ const router = createBrowserRouter([
       {
         path: "/hexa-ai",
         element: <AskMeAnything />,
-        children:[{
-          
-        }]
+        children: [{}],
       },
       {
         path: "/hexa-ai/:id",
-          element:<HistoryAns></HistoryAns>,
-          loader: async ({ params }) =>
-          await fetch(
-            `${process.env.REACT_APP_API_URL}/hexa-ai/${params.id}`
-          ),
+        element: <HistoryAns></HistoryAns>,
+        loader: async ({ params }) =>
+          await fetch(`${process.env.REACT_APP_API_URL}/hexa-ai/${params.id}`),
       },
       {
         path: "/messages",

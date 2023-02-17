@@ -10,12 +10,18 @@ import {
 } from "react-icons/fa";
 import { APIContext } from "../../../../contexts/APIProvider";
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 const WelcomeDashboard = () => {
-  const { loading } = useContext(AuthContext);
-  const { categoryButton, reportedItems, articles } = useContext(APIContext);
-
+  const { categoryButton, reportedItems, fetchAPI } = useContext(APIContext);
+  const {
+    isLoading,
+    refetch,
+    data: articles,
+  } = useQuery(["allArticles"], () =>
+    fetchAPI(`${process.env.REACT_APP_API_URL}/allArticles`)
+  );
   //   test comment
-  if (loading) {
+  if (isLoading) {
     return <Spinner />;
   }
   // test comment

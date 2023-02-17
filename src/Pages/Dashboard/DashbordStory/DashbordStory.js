@@ -5,11 +5,18 @@ import React, { useContext } from "react";
 import { APIContext } from "../../../contexts/APIProvider";
 import Spinner from "../../../components/Spinner/Spinner";
 import DashboardStoriesTable from "./DashboardStoriesTable";
+import { useQuery } from "@tanstack/react-query";
 
 const DashbordStory = () => {
-  const { articles, articlesLoading, articlesRefetch, isDarkMode } = useContext(APIContext);
-  console.log(articles);
-  if (articlesLoading) {
+  const { isDarkMode, fetchAPI } = useContext(APIContext);
+  const {
+    isLoading,
+    refetch,
+    data: articles,
+  } = useQuery(["allArticles"], () =>
+    fetchAPI(`${process.env.REACT_APP_API_URL}/allArticles`)
+  );
+  if (isLoading) {
     return <Spinner />;
   }
   return (
@@ -35,16 +42,15 @@ const DashbordStory = () => {
           }
         >
           <thead className="scrollbar-hide">
-          <tr>
-        <th></th>
-        <th className='text-xl'>Image</th>
-        <th className='text-xl'>Story Title</th>
-        <th className='text-xl hidden lg:table-cell p-0'>Category</th>
-        <th className='text-xl hidden lg:table-cell p-0 '>Status</th>
-        <th className='text-xl hidden lg:table-cell '>Date</th>
-        <th className='text-xl'>Actions</th>
-        
-      </tr>
+            <tr>
+              <th></th>
+              <th className="text-xl">Image</th>
+              <th className="text-xl">Story Title</th>
+              <th className="text-xl hidden lg:table-cell p-0">Category</th>
+              <th className="text-xl hidden lg:table-cell p-0 ">Status</th>
+              <th className="text-xl hidden lg:table-cell ">Date</th>
+              <th className="text-xl">Actions</th>
+            </tr>
           </thead>
           {articles.map((article, idx) => (
             <DashboardStoriesTable
@@ -52,11 +58,10 @@ const DashbordStory = () => {
               article={article}
               idx={idx}
               isDarkMode={isDarkMode}
-              articlesRefetch={articlesRefetch}
+              refetch={refetch}
             />
           ))}
         </table>
-        
       </div>
     </div>
   );

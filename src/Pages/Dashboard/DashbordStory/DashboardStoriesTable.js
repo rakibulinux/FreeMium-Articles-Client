@@ -4,8 +4,15 @@ import { FaCheck, FaTimes } from "react-icons/fa";
 import { toast } from "react-hot-toast";
 
 import ReportStoryModal from "../DasReportedStory/ReportStoryModal";
-const DashboardStoriesTable = ({ article, isDarkMode, idx, articlesRefetch }) => {
-  const { writerName,articleTitle, articleImg,_id, category, articleSubmitDate } = article;
+const DashboardStoriesTable = ({ article, isDarkMode, idx, refetch }) => {
+  const {
+    writerName,
+    articleTitle,
+    articleImg,
+    _id,
+    category,
+    articleSubmitDate,
+  } = article;
   const title = articleTitle.replace(/<[^>]+>/g, "").slice(0, 50);
 
   const [deleteItem, setDeleteItem] = useState(null);
@@ -22,7 +29,7 @@ const DashboardStoriesTable = ({ article, isDarkMode, idx, articlesRefetch }) =>
         console.log(data);
         if (data.deletedCount > 0) {
           toast.success("successfully delete");
-          articlesRefetch();
+          refetch();
         }
       });
   };
@@ -31,11 +38,7 @@ const DashboardStoriesTable = ({ article, isDarkMode, idx, articlesRefetch }) =>
   //   return <Spinner />;
   // }
   return (
-    
-      
-    <tbody
-    
-    >
+    <tbody>
       <tr className="hover:bg-slate-800">
         <th>{idx + 1}</th>
         <td>
@@ -79,33 +82,31 @@ const DashboardStoriesTable = ({ article, isDarkMode, idx, articlesRefetch }) =>
                 <Link to={`/edit-article/${_id}`}>Edit article</Link>
               </li>
               <li>
-              <label
-                    onClick={() => setDeleteItem(title)}
-                    htmlFor="delete-modal"
-                    className="btn btn-ghost"
-                  >
-                    Delete
-                  </label>
+                <label
+                  onClick={() => setDeleteItem(title)}
+                  htmlFor="delete-modal"
+                  className="btn btn-ghost"
+                >
+                  Delete
+                </label>
               </li>
             </ul>
           </div>
         </td>
       </tr>
       <div>
-      {deleteItem && (
-      <ReportStoryModal
-        title={`Are you sure to delete ${title}`}
-        message={`If you delete ${writerName},it can not undone`}
-        closeReportedModal={closeReportedModal}
-        btnName={"Delete"}
-        deleteHandler={aricleItemDeleteHandl}
-        itemData={deleteItem}
-      ></ReportStoryModal>
-    )}
-  </div>
+        {deleteItem && (
+          <ReportStoryModal
+            title={`Are you sure to delete ${title}`}
+            message={`If you delete ${writerName},it can not undone`}
+            closeReportedModal={closeReportedModal}
+            btnName={"Delete"}
+            deleteHandler={aricleItemDeleteHandl}
+            itemData={deleteItem}
+          ></ReportStoryModal>
+        )}
+      </div>
     </tbody>
-    
-  
   );
 };
 

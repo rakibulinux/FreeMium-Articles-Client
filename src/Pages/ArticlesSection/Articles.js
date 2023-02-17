@@ -8,10 +8,11 @@ import ArticlesCard from "./ArticlesCard/ArticlesCard";
 
 const Articles = () => {
   const [savedArticles, setSavedArticles] = useState([]);
-  const { fetchAPI, searchResults, user } = useContext(APIContext);
+  const { fetchAPI, searchResults } = useContext(APIContext);
+
   const {
     isLoading,
-    refetch,
+
     data: articles,
   } = useQuery(["allArticles"], () =>
     fetchAPI(`${process.env.REACT_APP_API_URL}/allArticles`)
@@ -21,8 +22,7 @@ const Articles = () => {
   }
   const handleSave = (data) => {
     setSavedArticles([...savedArticles, data]);
-    console.log("data click");
-
+    console.log("data save");
     fetch(`${process.env.REACT_APP_API_URL}/save-article`, {
       method: "POST",
       headers: {
@@ -37,6 +37,24 @@ const Articles = () => {
       });
   };
 
+  const handleDelete = (id) => {
+    // console.log(id);
+    toast.success("successfully Unsave");
+    console.log("data delete");
+    fetch(
+      `${process.env.REACT_APP_API_URL}/save-article/delete-article/${id}`,
+      {
+        method: "DELETE",
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.deletedCount > 0) {
+          toast.success("successfully Unsave");
+        }
+      });
+  };
   return (
     <>
       {searchResults?.length === 0 &&
@@ -45,6 +63,7 @@ const Articles = () => {
             data={data}
             key={data?._id}
             handleSave={handleSave}
+            handleDelete={handleDelete}
           ></ArticlesCard>
         ))}
       {searchResults?.length >= 0 &&

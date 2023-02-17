@@ -279,16 +279,7 @@ const WriteStories = () => {
             className="hidden"
             id="image-input"
           />
-          {/* <input
-            onChange={(e) => {
-              handleImage(e.target.value);
-            }}
-            id="image"
-            name="image"
-            type="file"
-            className="hidden"
-            accept="image/*"
-          /> */}
+         
         </label>
       </div>
       <div className={isDarkMode ? "py-2 text-white" : "py-2 text-black-350"}>

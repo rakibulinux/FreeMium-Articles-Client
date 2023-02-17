@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { AuthContext } from "./AuthProvider";
+
 
 export const APIContext = createContext();
 
@@ -96,6 +96,21 @@ const APIProvider = ({ children }) => {
       return data;
     },
   });
+  const userIds = localStorage?.getItem("userId");
+  
+  //get friends
+    const {
+    data: friends = [],
+    isLoading: friendsLoading,
+    refetch: friendsRefetch,
+  } = useQuery({
+    queryKey: ["friends",userIds],
+    queryFn: async () => {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/friends?myId=${singleUsers?._id}`);
+      const data = await res.json();
+      return data;
+    },
+  });
   const apiInfo = {
     categoryButton,
     isCategoryLoading,
@@ -115,6 +130,10 @@ const APIProvider = ({ children }) => {
     reportLoading,
     reportRefetch,
     fetchAPI,
+    
+    friends,
+    friendsLoading,
+    friendsRefetch,
   };
   return <APIContext.Provider value={apiInfo}>{children}</APIContext.Provider>;
 };

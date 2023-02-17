@@ -29,7 +29,11 @@ const UpvoteButton = ({ articleData, user, storyId, upVoteId, classes }) => {
       })
       .then((res) => {
         setUpVote(true);
+<<<<<<< HEAD
         setFetchData(!fetchData);
+=======
+        // window.location.reload(true)
+>>>>>>> munne
       });
   };
 
@@ -41,7 +45,11 @@ const UpvoteButton = ({ articleData, user, storyId, upVoteId, classes }) => {
       })
       .then((res) => {
         setUpVote(false);
+<<<<<<< HEAD
         setFetchData(!fetchData);
+=======
+        // window.location.reload(true)
+>>>>>>> munne
       });
   };
   return (

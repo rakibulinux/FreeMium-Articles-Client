@@ -10,11 +10,14 @@ import Drafts from "./Drafts";
 import { AuthContext } from "../../../contexts/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
 const Stories = () => {
-  const { fetchUserStories, isDarkMode } = useContext(APIContext);
+  const { fetchAPI, isDarkMode } = useContext(APIContext);
   const { user } = useContext(AuthContext);
   const { isLoading, isError, data, error } = useQuery(
     ["userStories", user?.email],
-    () => fetchUserStories(user?.email)
+    () =>
+      fetchAPI(
+        `${process.env.REACT_APP_API_URL}/my-stories?email=${user?.email}`
+      )
   );
 
   const tabsData = [

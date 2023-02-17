@@ -3,24 +3,27 @@ import { toast } from "react-hot-toast";
 // import { Link } from "react-router-dom";
 import { APIContext } from "../../../contexts/APIProvider";
 // import MembershipAndPayment from "../Settings/MembershipAndPayment";
-import axios from 'axios';
+
 import ArticlesCard from "../../ArticlesSection/ArticlesCard/ArticlesCard";
+import { useQuery } from "@tanstack/react-query";
 const Saved = () => {
-  const [articles, setArticles] = useState([]);
-
-
-  useEffect(() => {
-    axios.get(`${process.env.REACT_APP_API_URL}/save-article`)
-      .then(res => setArticles(res.data))
-      .catch(err => console.error(err));
-  }, []);
-
   const [visible, setVisible] = useState(true);
-  const { isDarkMode } = useContext(APIContext);
+  const { isDarkMode, fetchAPI } = useContext(APIContext);
   const hideMembershipBanner = () => {
     toast.success("Story Added in your List");
     setVisible((prev) => !prev);
   };
+  const {
+    isLoading,
+    refetch,
+    data: articles,
+  } = useQuery(["save-article"], () =>
+    fetchAPI(`${process.env.REACT_APP_API_URL}/save-article`)
+  );
+  if (isLoading) {
+    return;
+  }
+
   return (
     <div>
       {visible && (
@@ -60,38 +63,14 @@ const Saved = () => {
         <div className="card-body">
           <h2 className="card-title">Reading list</h2>
 
+          <ul>
+            {articles.map((data) => (
+              // <li key={article._id}>{article.articleTitle}</li>
 
+              <ArticlesCard data={data} key={data?._id}></ArticlesCard>
+            ))}
+          </ul>
 
-
-
-          
-
-      <ul>
-        {articles.map(data => (
-          // <li key={article._id}>{article.articleTitle}</li>
-          
-                    <ArticlesCard data={data} key={data?._id}
-                    
-                    
-                    
-                    ></ArticlesCard>
-        ))}
-      </ul>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-       
           {/* <div className="card-actions justify-end">
       <button className="btn btn-primary">Listen</button>
     </div> */}

@@ -10,24 +10,16 @@ const APIProvider = ({ children }) => {
   const [allUsers, setAllUsers] = useState([]);
   const [threeUsers, setThreeUsers] = useState([]);
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const [singleUsers, setSingleUsers] = useState({});
-  const { user } = useContext(AuthContext);
 
-  useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/user/${user?.email}`)
-      .then((res) => res.json())
-      .then((data) => setSingleUsers(data));
-  }, [user?.email, singleUsers]);
-
-  const fetchUserStories = async (email) => {
+  const fetchAPI = async (url) => {
     try {
-      const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/my-stories?email=${email}`
-      );
+      const response = await fetch(url);
       const data = await response.json();
       return data;
     } catch (error) {
-      throw new Error(`Failed to fetch user stories: ${error.message}`);
+      throw new Error(
+        `Failed to fetch API Data from Backend: ${error.message}`
+      );
     }
   };
 
@@ -122,9 +114,7 @@ const APIProvider = ({ children }) => {
     reportedItems,
     reportLoading,
     reportRefetch,
-    singleUsers,
-    setSingleUsers,
-    fetchUserStories,
+    fetchAPI,
   };
   return <APIContext.Provider value={apiInfo}>{children}</APIContext.Provider>;
 };

@@ -1,3 +1,4 @@
+import { useQuery } from "@tanstack/react-query";
 import React, { useContext, useEffect, useState } from "react";
 import { BiUserCircle } from "react-icons/bi";
 import { FaMapMarkerAlt, FaUser } from "react-icons/fa";
@@ -8,27 +9,30 @@ import { APIContext } from "./../../contexts/APIProvider";
 
 const Profile = () => {
   const { user } = useContext(AuthContext);
-  const { isDarkMode } = useContext(APIContext);
+  const { isDarkMode, fetchAPI } = useContext(APIContext);
   const [editMode, setEditMode] = useState(false);
-  const [singleUsers, setSingleUsers] = useState({});
+  // const [singleUsers, setSingleUsers] = useState({});
   const toggleEditMode = () => {
     setEditMode(!editMode);
   };
 
   const userId = localStorage.getItem("userId");
-  useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/user/${user?.email}`)
-      .then((res) => res.json())
-      .then((data) => setSingleUsers(data));
-  }, [user?.email, singleUsers]);
+
+  const {
+    isLoading,
+    refetch,
+    data: singleUsers,
+  } = useQuery(["user", user?.email], () =>
+    fetchAPI(`${process.env.REACT_APP_API_URL}/user/${user?.email}`)
+  );
 
   const [formData, setFormData] = useState({
-    name: singleUsers.name,
-    username: singleUsers.username,
-    location: singleUsers.location,
-    occupation: singleUsers.occupation,
-    education: singleUsers.education,
-    bio: singleUsers.bio,
+    name: singleUsers?.name,
+    username: singleUsers?.username,
+    location: singleUsers?.location,
+    occupation: singleUsers?.occupation,
+    education: singleUsers?.education,
+    bio: singleUsers?.bio,
   });
 
   const handleChange = (event) => {
@@ -36,6 +40,7 @@ const Profile = () => {
       ...formData,
       [event.target.name]: event.target.value,
     });
+    refetch();
   };
 
   const updateProfile = (formData) => {
@@ -63,6 +68,7 @@ const Profile = () => {
       .then((data) => {
         console.log(data);
         // Update your state with the updated user data here
+        refetch();
       })
       .catch((error) => {
         console.error(error);
@@ -73,8 +79,9 @@ const Profile = () => {
     event.preventDefault();
     updateProfile(formData);
     toggleEditMode();
+    refetch();
   };
-  if (!singleUsers) {
+  if (isLoading) {
     return <Spinner />;
   }
   return (
@@ -247,7 +254,7 @@ const Profile = () => {
                       : "border-1 text-center rounded-r pr-4 py-2 w-full"
                   }
                   type="occupation"
-                  defaultValue={singleUsers?.occupation}
+                  // defaultValue={singleUsers?.occupation}
                   value={singleUsers?.occupation}
                 />
               </div>
@@ -294,7 +301,7 @@ const Profile = () => {
                       }
                       type="text"
                       value={singleUsers?.name}
-                      defaultValue={singleUsers?.name}
+                      // defaultValue={singleUsers?.name}
                     />
                   </div>
                 </div>
@@ -321,7 +328,7 @@ const Profile = () => {
                       }
                       type="text"
                       value={singleUsers?.username}
-                      defaultValue={singleUsers?.username}
+                      // defaultValue={singleUsers?.username}
                     />
                   </div>
                 </div>
@@ -348,7 +355,7 @@ const Profile = () => {
                       }
                       type="email"
                       value={singleUsers?.email}
-                      defaultValue={singleUsers?.email}
+                      // defaultValue={singleUsers?.email}
                     />
                   </div>
                 </div>
@@ -393,7 +400,7 @@ const Profile = () => {
                       }
                       type="education"
                       value={singleUsers?.education}
-                      defaultValue={singleUsers?.education}
+                      // defaultValue={singleUsers?.education}
                     />
                   </div>
                 </div>
@@ -420,7 +427,7 @@ const Profile = () => {
                       }
                       type="location"
                       value={singleUsers?.location}
-                      defaultValue={singleUsers?.location}
+                      // defaultValue={singleUsers?.location}
                     />
                   </div>
                 </div>

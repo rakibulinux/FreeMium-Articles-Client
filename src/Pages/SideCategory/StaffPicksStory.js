@@ -1,6 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 const StaffPicksStory = ({ article }) => {
-  const { articleTitle, writerName, writerImg } = article;
+  const { _id, articleTitle, writerName, writerImg } = article;
   const title = articleTitle.replace(/<[^>]+>/g, "");
   return (
     <div>
@@ -12,12 +13,14 @@ const StaffPicksStory = ({ article }) => {
         />
         <h2 className="font-semibold text-sm ml-3">{writerName}</h2>
       </div>
-      <h1
-        className="font-bold"
-        dangerouslySetInnerHTML={{
-          __html: title.slice(0, 70),
-        }}
-      />
+      <Link to={_id}>
+        <h1
+          className="font-bold"
+          dangerouslySetInnerHTML={{
+            __html: title.slice(0, 70),
+          }}
+        />
+      </Link>
     </div>
   );
 };

@@ -12,15 +12,16 @@ import { APIContext } from "../../../contexts/APIProvider";
 import ArticleDetailsCard from "../../ArticlesSection/ArticlesDetails/ArticleDetailsCard/ArticleDetailsCard";
 import cookie from "react-cookies";
 import { EnvelopeIcon } from "@heroicons/react/24/solid";
+import { useQuery } from "@tanstack/react-query";
 
 const ArticlesDetails = () => {
   const [story, setStory] = useState({});
   const [error, setError] = useState(null);
   const [newLoading, setNewLoading] = useState(true);
   const { id } = useParams();
-  const [users, setUsers] = useState({});
+  // const [users, setUsers] = useState({});
   const { user } = useContext(AuthContext);
-  const { isDarkMode } = useContext(APIContext);
+  const { isDarkMode, fetchAPI } = useContext(APIContext);
   // const [newUpvote,setNewUpvote]=useState()
   useEffect(() => {
     let visitorId = cookie.load("visitorId");
@@ -63,16 +64,18 @@ const ArticlesDetails = () => {
         setNewLoading(false);
       });
   }, [id]);
+
   const { writerImg, writerName, articleTitle, articleImg, userId, userEmail } =
     story;
+  const {
+    isLoading,
 
-  useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/user/${userEmail}`)
-      .then((res) => res.json())
-      .then((data) => setUsers(data));
-  }, [userEmail, users]);
+    data: users,
+  } = useQuery(["user", userEmail], () =>
+    fetchAPI(`${process.env.REACT_APP_API_URL}/user/${userEmail}`)
+  );
 
-  if (newLoading) {
+  if (newLoading && isLoading) {
     return <Spinner />;
   }
 

@@ -9,8 +9,11 @@ import { format } from "date-fns";
 import { APIContext } from "../../contexts/APIProvider";
 import Spinner from "../../components/Spinner/Spinner";
 import Creator from "../AnotherCreatorPage/Creator";
+import { useDispatch } from "react-redux";
+import { sendData } from "../../store/apiSlice";
 
 const WriteStories = () => {
+  const dispatch = useDispatch();
   const { user } = useContext(AuthContext);
   const { articlesRefetch, isDarkMode } = useContext(APIContext);
   const { categoryButton, isLoading } = useContext(APIContext);
@@ -52,7 +55,7 @@ const WriteStories = () => {
     setPreview(URL.createObjectURL(image));
   };
 
-  const handleSubmitStories = (e) => {
+  const handleSubmitStories = async (e) => {
     e.preventDefault();
     const form = e.target;
     const category = form.category.value;
@@ -68,7 +71,6 @@ const WriteStories = () => {
       .then((res) => res.json())
       .then((imgData) => {
         if (imgData.success) {
-          toast.success("Image upload success");
           const body = {
             articleDetails: content,
             userId: users?._id,
@@ -81,25 +83,71 @@ const WriteStories = () => {
             articleImg: imgData?.data?.url,
             category,
           };
-
-          // Update in database
-          fetch(`${process.env.REACT_APP_API_URL}/add-story`, {
-            method: "POST",
-            headers: {
-              "content-type": "application/json",
-              authorization: `bearer ${localStorage.getItem("freeMiumToken")}`,
-            },
-            body: JSON.stringify(body),
-          })
-            .then((res) => res.json())
-            .then((data) => {
-              toast.success(`${user?.displayName} added new story`);
-              articlesRefetch();
-              navigate("/");
-            });
+          try {
+            const data = dispatch(
+              sendData({
+                method: "post",
+                url: "/add-story",
+                data: body,
+              })
+            );
+            navigate("/");
+            console.log(data);
+          } catch (error) {
+            console.error(error);
+          }
         }
       });
   };
+
+  // const handleSubmitStoriess = (e) => {
+  //   e.preventDefault();
+  //   const form = e.target;
+  //   const category = form.category.value;
+  //   const number = form.number.value;
+
+  //   const formData = new FormData();
+  //   formData.append("image", image);
+  //   const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
+  //   fetch(url, {
+  //     method: "POST",
+  //     body: formData,
+  //   })
+  //     .then((res) => res.json())
+  //     .then((imgData) => {
+  //       if (imgData.success) {
+  //         toast.success("Image upload success");
+  //         const body = {
+  //           articleDetails: content,
+  //           userId: users?._id,
+  //           userEmail: user?.email,
+  //           writerName: user?.displayName,
+  //           writerImg: user?.photoURL,
+  //           articleTitle: title,
+  //           articleSubmitDate: date,
+  //           articleRead: number,
+  //           articleImg: imgData?.data?.url,
+  //           category,
+  //         };
+
+  //         // Update in database
+  //         fetch(`${process.env.REACT_APP_API_URL}/add-story`, {
+  //           method: "POST",
+  //           headers: {
+  //             "content-type": "application/json",
+  //             authorization: `bearer ${localStorage.getItem("freeMiumToken")}`,
+  //           },
+  //           body: JSON.stringify(body),
+  //         })
+  //           .then((res) => res.json())
+  //           .then((data) => {
+  //             toast.success(`${user?.displayName} added new story`);
+  //             articlesRefetch();
+  //             navigate("/");
+  //           });
+  //       }
+  //     });
+  // };
 
   const modules = {
     toolbar: [
@@ -279,7 +327,6 @@ const WriteStories = () => {
             className="hidden"
             id="image-input"
           />
-         
         </label>
       </div>
       <div className={isDarkMode ? "py-2 text-white" : "py-2 text-black-350"}>

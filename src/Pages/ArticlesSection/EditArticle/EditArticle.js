@@ -26,7 +26,7 @@ const EditArticle = () => {
   );
 
   if (!data) {
-    return <Spinner />;
+    return;
   }
   const { articleTitle, articleDetails, _id } = data;
   const title = articleTitle?.replace(/<[^>]+>/g, "");

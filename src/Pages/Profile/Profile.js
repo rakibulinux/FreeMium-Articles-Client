@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { BiUserCircle } from "react-icons/bi";
 import { FaMapMarkerAlt, FaUser } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
+import Counter from "../../components/Counter";
 import Spinner from "../../components/Spinner/Spinner";
 import { AuthContext } from "../../contexts/AuthProvider";
 import { APIContext } from "./../../contexts/APIProvider";
@@ -235,7 +236,7 @@ const Profile = () => {
                   Edit Profile
                 </button>
               </div>
-
+              <Counter />
               <div className="w-full p-8 mx-2 flex justify-center items-center">
                 <img
                   id="showImage"

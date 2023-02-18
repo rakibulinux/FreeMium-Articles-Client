@@ -97,32 +97,29 @@ const APIProvider = ({ children }) => {
     },
   });
   const userIds = localStorage?.getItem("userId");
-  const {
-    isLoading,
-    refetch,
-    data: singleUsers,
-  } = useQuery(["user", user?.email], () =>
-    fetchAPI(`${process.env.REACT_APP_API_URL}/user/${user?.email}`)
-  );
-  console.log(singleUsers);
+  // const {
+  //   isLoading,
+  //   refetch,
+  //   data: singleUsers,
+  // } = useQuery(["user", user?.email], () =>
+  //   fetchAPI(`${process.env.REACT_APP_API_URL}/user/${user?.email}`)
+  // );
+  // console.log(singleUsers);
   //get friends
-  const {
-    data: friends = [],
-    isLoading: friendsLoading,
-    refetch: friendsRefetch,
-  } = useQuery({
-    queryKey: ["friends", userIds],
-    queryFn: async () => {
-      const res = await fetch(
-        `${process.env.REACT_APP_API_URL}/friends?myId=${singleUsers?._id}`
-      );
-      const data = await res.json();
-      return data;
-    },
-  });
-  if (isLoading) {
-    return;
-  }
+  const userId = localStorage.getItem("userId");
+  // const {
+  //   data: friends = [],
+  //   isLoading: friendsLoading,
+  //   refetch: friendsRefetch,
+  // } = useQuery({
+  //   queryKey: ["friends", userIds],
+  //   queryFn: async () => {
+  //     const res = await fetch();
+  //     // `${process.env.REACT_APP_API_URL}/friends?myId=${userId?._id}`
+  //     const data = await res.json();
+  //     return data;
+  //   },
+  // });
   const apiInfo = {
     categoryButton,
     isCategoryLoading,
@@ -142,10 +139,10 @@ const APIProvider = ({ children }) => {
     reportLoading,
     reportRefetch,
     fetchAPI,
-    singleUsers,
-    friends,
-    friendsLoading,
-    friendsRefetch,
+
+    // friends,
+    // friendsLoading,
+    // friendsRefetch,
   };
   return <APIContext.Provider value={apiInfo}>{children}</APIContext.Provider>;
 };

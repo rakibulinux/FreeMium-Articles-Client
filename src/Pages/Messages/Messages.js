@@ -28,6 +28,7 @@ function Messages({ userId }) {
   const [inputValue, setInputValue] = useState("");
   const [currentFriend, setCurrentFriend] = useState("");
   // const { name, _id } = singleUsers;
+  const imageHostKey = process.env.REACT_APP_IMG_BB_KEY;
   // console.log(getMessage);
   // console.log(currentFriend?._id);
 
@@ -117,28 +118,47 @@ function Messages({ userId }) {
   //  img send
   const sendImage = (e) => {
     if (e.target.files.length !== 0) {
-      console.log(e.target.files[0]);
-      const imgName = e.target.files[0].name;
-      const newImgName = Date.new() + imgName;
+      // console.log(e.target.files[0]);
+      const img = e.target.files[0] 
+      // const imgName = e.target.files[0].name;
+      // const newImgName = Date.new() + imgName;
       const formData = new FormData();
-      formData.append("senderName", singleUsers?.name);
-      formData.append("reciverId", currentFriend?._id);
-      formData.append("imageName", newImgName);
-      formData.append("image", e.target.files[0]);
-
-      // fetch(`${process.env.REACT_APP_API_URL}/sendImage`, {
-      //   method: "POST",
-      //   headers: {
-      //     "content-type": "application/json",
-      //   },
-      //   body: JSON.stringify({formData}),
-      // })
-      //   .then((res) => res.json())
-      //   .then((result) => {
-      //     console.log(result);
-      //     toast.success(`Saved Image`);
-
-      //   });
+      // formData.append("senderName", name);
+      // formData.append("reciverId", currentFriend?._id);
+      // formData.append("imageName", newImgName);
+      formData.append("image", img);     
+      const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`
+      fetch(url,{
+        method:'POST',
+        body:formData
+      })
+      .then(res=>res.json())
+      .then(imgData=>{
+        if(imgData.success){
+          const data = {
+            senderName: singleUsers?.name,
+            senderId: singleUsers?._id,
+            reciverId: currentFriend?._id,
+            message: { text:"", image: imgData.data.url },
+            date: new Date(),
+          };
+          console.log(data);
+          fetch(`${process.env.REACT_APP_API_URL}/send-image`, {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify({ data }),
+          })
+            .then((res) => res.json())
+            .then((result) => {
+              console.log(result);
+              toast.success(`Saved img`);
+              setNewMessages("");
+            });
+        }
+      })
+   
     }
   };
 

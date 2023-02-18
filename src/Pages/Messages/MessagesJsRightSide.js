@@ -15,13 +15,7 @@ const MessagesJsRightSide = ({
 }) => {
   const { picture, name } = currentFriend;
 
-  const emojis = [
-    "😨",
-    "🤔",
-    "😕",
-    "😬",
-    "😊",
-    "😳",
+  const emojis = [ "😨", "🤔", "😕", "😬","😊","😳",
     "😲",
     "😟",
     "😒",
@@ -157,7 +151,7 @@ const MessagesJsRightSide = ({
                             me
                           </div>
                           <div className="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl">
-                            <div>{m?.message?.text}</div>
+                            <div>{m?.message?.text===""?<img src={m?.message?.image} alt="img"></img>: m?.message?.text}</div>
                           </div>
                         </div>
                       </div>
@@ -170,7 +164,7 @@ const MessagesJsRightSide = ({
                             className="flex items-center justify-center h-10 w-10 rounded-full  flex-shrink-0"
                           ></img>
                           <div className="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl">
-                            <div>{m.message.text}</div>
+                          <div>{m?.message?.text===""?<img src={m?.message?.image} alt="img"></img>: m?.message?.text}</div>
                           </div>
                         </div>
                       </div>

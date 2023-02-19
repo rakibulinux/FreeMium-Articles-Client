@@ -24,6 +24,7 @@ const WriteStories = () => {
   const imageHostKey = process.env.REACT_APP_IMG_BB_KEY;
   const [content, setContent] = useState("");
 
+  const [typeArticle, setTypeArticle]=useState('')
   const navigate = useNavigate();
   const date = format(new Date(), "PP");
   useEffect(() => {
@@ -59,8 +60,14 @@ const WriteStories = () => {
     e.preventDefault();
     const form = e.target;
     const category = form.category.value;
+    const articleType = form.articleType.value;
+    // console.log(articleType);
+    if(articleType === 'Paid Article'){
+      setTypeArticle(false);
+    }else{
+      setTypeArticle(true);
+    }
     const number = form.number.value;
-
     const formData = new FormData();
     formData.append("image", image);
     const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
@@ -82,6 +89,7 @@ const WriteStories = () => {
             articleRead: number,
             articleImg: imgData?.data?.url,
             category,
+            articleType: typeArticle,
           };
           try {
             const data = dispatch(
@@ -263,6 +271,26 @@ const WriteStories = () => {
             {categoryButton.length && category?.CategoryName}
           </option>
         ))}
+      </select>
+      <label className="label">
+        <span
+          className={
+            isDarkMode ? "label-text  text-white" : "label-text text-black-350"
+          }
+        >
+          Select article type
+        </span>
+      </label>
+      <select
+        name="articleType"
+        className={
+          isDarkMode
+            ? "bg-black-350 border border-gray-400 p-3 rounded-lg w-full label-text text-white"
+            : "bg-white border border-gray-400 p-3 rounded-lg w-full label-text text-black-350"
+        }
+      >
+        <option>Paid Article</option>
+        <option>Free Article</option>
       </select>
       <div className="flex flex-col my-4 justify-center">
         <label className="label">

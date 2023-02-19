@@ -40,6 +40,8 @@ import AskMeAnything from "../Pages/AskMeAnything/AskMeAnything";
 import Messages from "../Pages/Messages/Messages";
 import ImportStory from "../Pages/UserProfileMenu/Stories/ImportStory";
 import HistoryAns from "../Pages/AskMeAnything/HistoryAns/HistoryAns";
+import PendingArticles from "../Pages/Dashboard/PendingArticles/PendingArticles";
+import PendingArticlesDetailsCard from "../Pages/Dashboard/PendingArticles/PendingArticlesDetailsCard/PendingArticlesDetailsCard";
 
 const router = createBrowserRouter([
   {
@@ -142,6 +144,14 @@ const router = createBrowserRouter([
       {
         path: "/view-story/:id",
         element: <ArticlesDetails></ArticlesDetails>,
+        loader: async ({ params }) =>
+          await fetch(
+            `${process.env.REACT_APP_API_URL}/view-story/${params.id}`
+          ),
+      },
+      {
+        path: "/checkArticle/:id",
+        element: <PendingArticlesDetailsCard />,
         loader: async ({ params }) =>
           await fetch(
             `${process.env.REACT_APP_API_URL}/view-story/${params.id}`
@@ -257,6 +267,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/editors",
         element: <DashbordEditors></DashbordEditors>,
+      },
+      {
+        path: "/dashboard/pendingArticle",
+        element: <PendingArticles />,
       },
       {
         path: "/dashboard/charts",

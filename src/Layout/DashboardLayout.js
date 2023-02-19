@@ -4,6 +4,7 @@ import Spinner from "../components/Spinner/Spinner";
 import { AuthContext } from "../contexts/AuthProvider";
 import useAdmin from "../hooks/useAdmin";
 import Navbar from "../Pages/Shared/Navbar/Navbar";
+import { MdOutlinePending } from "react-icons/md";
 import {
   FaFolder,
   FaFile,
@@ -64,14 +65,19 @@ const DashboardLayout = () => {
                   Editors
                 </Link>
               </li>
-
+              <li>
+                <Link to="/dashboard/pendingArticle">
+                  {" "}
+                  <MdOutlinePending /> Pending
+                </Link>
+              </li>
               <li>
                 <Link to="/dashboard/charts">
                   <FaRegChartBar />
                   Charts
                 </Link>
               </li>
-
+              
               <li>
                 <Link to="/dashboard/reportedStory">
                   <FaExclamationCircle />

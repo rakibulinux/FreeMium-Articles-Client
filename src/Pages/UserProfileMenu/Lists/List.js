@@ -18,7 +18,7 @@ const List = () => {
       label: "Saved",
       content: (
         <div>
-          <Saved/>
+          <Saved />
         </div>
       ),
     },
@@ -27,7 +27,7 @@ const List = () => {
 
   const { isDarkMode } = useContext(APIContext);
   return (
-    <div className="container mx-auto mt-14 py-10">
+    <div className="py-10">
       <div className="flex row">
         <div className=" basis-3/4 mb-10">
           <div className="flex justify-between">

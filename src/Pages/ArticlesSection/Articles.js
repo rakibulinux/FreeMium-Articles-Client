@@ -12,7 +12,7 @@ const Articles = () => {
 
   const {
     isLoading,
-
+    refetch,
     data: articles,
   } = useQuery(["allArticles"], () =>
     fetchAPI(`${process.env.REACT_APP_API_URL}/allArticles`)

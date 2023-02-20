@@ -201,7 +201,7 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className="mx-auto print:hidden">
+    <div className="container mx-auto print:hidden">
       {user?.uid ? (
         <div className="navbar p-0">
           <div className="navbar-start h-16">
@@ -234,12 +234,12 @@ const Navbar = () => {
                 }
                 to="/"
               >
-                <img className="w-56" src={logoFM} alt="" />
+                <img className="w-56 md:w-6/12" src={logoFM} alt="" />
               </NavLink>
               <Search searchPlaceholder={"Search article"} propsStyle={"4px"} />
             </div>
           </div>
-          <div className="navbar-end gap-2 items-center mr-5">
+          <div className="navbar-end gap-4 items-center">
             <div className="block">
               <NavLink
                 className={
@@ -249,10 +249,10 @@ const Navbar = () => {
                 }
                 to="/write-stories"
               >
-                {writeIcon} Write
+                {writeIcon}
               </NavLink>
             </div>
-            <div className="hidden md:block">
+            <div className="">
               <NavLink
                 className={
                   isDarkMode
@@ -267,7 +267,7 @@ const Navbar = () => {
                 />
               </NavLink>
             </div>
-            <div className="hidden md:block">
+            <div className="">
               <NavLink
                 className={
                   isDarkMode
@@ -304,7 +304,10 @@ const Navbar = () => {
               </div>
             </button> */}
             <div className="dropdown dropdown-end">
-              <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+              <label
+                tabIndex={0}
+                className="btn btn-ghost border-none btn-circle avatar"
+              >
                 <div className="w-10 rounded-full">
                   <img
                     className="w-4"

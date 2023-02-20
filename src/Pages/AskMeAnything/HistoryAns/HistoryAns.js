@@ -63,7 +63,7 @@ const HistoryAns = () => {
                 {/* <code className="!whitespace-pre max-w-xl">{response}</code> */}
               </div>
             </div>
-            <div className="p-16 mx-10 my-2 rounded-lg flex gap-4 ">
+            <div className="p-16 mx-10 my-2 rounded-lg flex gap-4   ">
               <input
                 type="text"
                 // value={prompt}

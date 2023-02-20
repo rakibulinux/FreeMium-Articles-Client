@@ -7,6 +7,7 @@ import { AiOutlineLike } from "react-icons/ai";
 import { HiOutlineChat } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import ReplyComment from "./ReplyComment";
+import axios from "axios";
 
 const Comments = ({ id }) => {
     const { register, handleSubmit, reset, watch } = useForm();
@@ -85,6 +86,7 @@ const fetchComments = () => {
   };
 
 //   Update comment
+
 
 
 // const fetchComment =()=>{

@@ -31,6 +31,27 @@ const Home = () => {
                 </Link>
               </div>
               <SideCategory />
+              <button
+                data-test="btn-scroll-to-top"
+                type="button"
+                data-ev-unique_element_id="t-fwh_scrollToTop"
+                className="up-btn up-btn-default scroll-to-top m-0 py-10 px-20 show bg-white"
+              >
+                <span className="sr-only">Scroll to top</span>
+                <div className="up-icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                    viewBox="0 0 14 14"
+                    role="img"
+                  >
+                    <polygon
+                      fill-rule="evenodd"
+                      points="7 3 0 10.433 1.476 12 7 6.134 12.524 12 14 10.433"
+                    ></polygon>
+                  </svg>
+                </div>
+              </button>
             </aside>
           </div>
         </div>
@@ -50,6 +71,27 @@ const Home = () => {
                 </button> */}
               </Link>
               <SideCategory />
+              <button
+                data-test="btn-scroll-to-top"
+                type="button"
+                data-ev-unique_element_id="t-fwh_scrollToTop"
+                className="up-btn up-btn-default scroll-to-top m-0 py-10 px-20 show bg-white"
+              >
+                <span className="sr-only">Scroll to top</span>
+                <div className="up-icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                    viewBox="0 0 14 14"
+                    role="img"
+                  >
+                    <polygon
+                      fill-rule="evenodd"
+                      points="7 3 0 10.433 1.476 12 7 6.134 12.524 12 14 10.433"
+                    ></polygon>
+                  </svg>
+                </div>
+              </button>
             </div>
           </div>
         </>

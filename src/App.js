@@ -20,7 +20,9 @@ function App() {
     <Provider store={store}>
       <div
         className={
-          isDarkMode ? "bg-black-350 text-white" : "bg-base-100 text-black-350"
+          isDarkMode
+            ? "min-h-screen bg-black-350 text-white"
+            : "bg-base-100 text-black-350"
         }
       >
         <RouterProvider router={router} />

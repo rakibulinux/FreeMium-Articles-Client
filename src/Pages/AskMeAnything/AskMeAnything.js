@@ -52,7 +52,7 @@ const AskMeAnything = () => {
   };
   return (
     <div
-      className="grid min-h-screen"
+      className="grid min-h-screen h-[660px]"
       style={{ gridTemplateColumns: "1fr 4fr" }}
     >
       <div className="bg-[#202123]">
@@ -84,13 +84,14 @@ const AskMeAnything = () => {
                 {/* <code className="!whitespace-pre max-w-xl">{response}</code> */}
               </div>
             </div>
-            <div className="p-16 mx-10 my-2 bottom-0 rounded-lg flex gap-4 ">
+            <div className="p-16 mx-10 my-2 bottom-0 rounded-lg mt-56 absolute top-[353px]">
+              <div className='flex items-center justify-center gap-4 w-[50rem]'>
               <input
                 type="text"
                 value={prompt}
                 onChange={(e) => setPrompt(e.target.value)}
                 placeholder="Ask me Anything"
-                className="w-11/12 p-2 rounded-lg input input-bordered input-info"
+                className="p-2 w-2/4 rounded-lg input input-bordered input-info"
               />
               <div className="flex items-center">
                 <button type="submit">
@@ -105,6 +106,7 @@ const AskMeAnything = () => {
                   title="Sent"
                   className="text-4xl text-green-550 cursor-pointer"
                 /> */}
+              </div>
               </div>
             </div>
           </div>

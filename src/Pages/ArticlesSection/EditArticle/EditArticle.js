@@ -7,20 +7,29 @@ import { APIContext } from "../../../contexts/APIProvider";
 import { AuthContext } from "../../../contexts/AuthProvider";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import { useQuery } from "@tanstack/react-query";
 
 const EditArticle = () => {
   const [detailsStory, setDesc] = useState("");
   const [titles, setTitles] = useState("");
   const navigate = useNavigate();
-  const { isDarkMode, articlesRefetch, singleUsers } = useContext(APIContext);
+  const { isDarkMode, articlesRefetch, fetchAPI } = useContext(APIContext);
   const { user } = useContext(AuthContext);
   const data = useLoaderData();
+
+  const {
+    isLoading,
+    refetch,
+    data: singleUsers,
+  } = useQuery(["user", user?.email], () =>
+    fetchAPI(`${process.env.REACT_APP_API_URL}/user/${user?.email}`)
+  );
+
   if (!data) {
-    return <Spinner />;
+    return;
   }
   const { articleTitle, articleDetails, _id } = data;
   const title = articleTitle?.replace(/<[^>]+>/g, "");
-
   const handleArticleUpdate = (e) => {
     e.preventDefault();
 

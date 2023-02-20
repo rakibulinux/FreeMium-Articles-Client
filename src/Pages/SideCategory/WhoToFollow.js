@@ -3,9 +3,13 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { APIContext } from "./../../contexts/APIProvider";
 import WhoToFollowUsers from "./WhoToFollowUsers";
+import { useQuery } from "@tanstack/react-query";
 
 const WhoToFollow = () => {
-  const { isDarkMode, threeUsers } = useContext(APIContext);
+  const { isDarkMode, fetchAPI } = useContext(APIContext);
+  const { isLoading, data: threeUsers } = useQuery(["three-users"], () =>
+    fetchAPI(`${process.env.REACT_APP_API_URL}/three-users`)
+  );
   return (
     <div className="">
       <h1

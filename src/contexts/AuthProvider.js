@@ -83,7 +83,9 @@ const AuthProvider = ({ children }) => {
     //this part will execute once the component is mounted.
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      localStorage.setItem("userId", loginUser?._id);
+      if (user?.uid) {
+        return localStorage.setItem("userId", loginUser?._id);
+      }
       setLoading(false);
     });
 
@@ -92,7 +94,7 @@ const AuthProvider = ({ children }) => {
 
       return unSubscribe();
     };
-  }, [loginUser?._id]);
+  }, [user, loginUser]);
 
   const authInfo = {
     user,

@@ -1,7 +1,4 @@
-import {
-  LinkIcon,
-  ShareIcon,
-} from "@heroicons/react/24/solid";
+import { LinkIcon, ShareIcon } from "@heroicons/react/24/solid";
 
 import { useContext } from "react";
 import { toast } from "react-hot-toast";
@@ -18,9 +15,9 @@ import ListenButton from "./ListenButton";
 const ArticleDetailsCard = ({ articleData, users }) => {
   const { user } = useContext(AuthContext);
 
-// const ArticleDetailsCard = ({ articleData,users,setUsers }) => {
-//   const { user } = useContext(AuthContext);
-  
+  // const ArticleDetailsCard = ({ articleData,users,setUsers }) => {
+  //   const { user } = useContext(AuthContext);
+
   const {
     _id,
     articleDetails,
@@ -78,7 +75,6 @@ const ArticleDetailsCard = ({ articleData, users }) => {
 
   // reported handler
   const reportedHandler = (id) => {
-   
     fetch(`${process.env.REACT_APP_API_URL}/story/reportedStory/${id}`, {
       method: "PUT",
     })
@@ -87,7 +83,6 @@ const ArticleDetailsCard = ({ articleData, users }) => {
         console.log(data);
         if (data.acknowledged === true) {
           toast.success("Add Report  successfully");
-         
         }
       });
   };
@@ -502,4 +497,4 @@ const ArticleDetailsCard = ({ articleData, users }) => {
   );
 };
 
-export default ArticleDetailsCard ;
+export default ArticleDetailsCard;

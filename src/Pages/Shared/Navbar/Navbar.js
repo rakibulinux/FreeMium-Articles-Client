@@ -15,6 +15,7 @@ import { CiLogin } from "react-icons/ci";
 import "./Navebar.css";
 import Search from "../Search/Search";
 import { APIContext } from "../../../contexts/APIProvider";
+import { FaRobot } from "react-icons/fa";
 //
 const Navbar = () => {
   const { user, logoutUserAccount } = useContext(AuthContext);
@@ -200,10 +201,10 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className="mx-auto print:hidden">
+    <div className="container mx-auto print:hidden">
       {user?.uid ? (
         <div className="navbar p-0">
-          <div className="navbar-start">
+          <div className="navbar-start h-16">
             <div className="flex gap-2 items-center">
               <label
                 htmlFor="dashboard-drawer"
@@ -233,12 +234,12 @@ const Navbar = () => {
                 }
                 to="/"
               >
-                <img className="w-56" src={logoFM} alt="" />
+                <img className="w-56 md:w-6/12" src={logoFM} alt="" />
               </NavLink>
               <Search searchPlaceholder={"Search article"} propsStyle={"4px"} />
             </div>
           </div>
-          <div className="navbar-end gap-2 items-center">
+          <div className="navbar-end gap-4 items-center">
             <div className="block">
               <NavLink
                 className={
@@ -248,10 +249,10 @@ const Navbar = () => {
                 }
                 to="/write-stories"
               >
-                {writeIcon} Write
+                {writeIcon}
               </NavLink>
             </div>
-            <div className="hidden md:block">
+            <div className="">
               <NavLink
                 className={
                   isDarkMode
@@ -260,10 +261,13 @@ const Navbar = () => {
                 }
                 to="/hexa-ai"
               >
-                <BsSnapchat className="w-6 h-6" />
+                <FaRobot
+                  data-tip="Ask me Anything"
+                  className="tooltip w-6 h-6"
+                />
               </NavLink>
             </div>
-            <div className="hidden md:block">
+            <div className="">
               <NavLink
                 className={
                   isDarkMode
@@ -277,9 +281,9 @@ const Navbar = () => {
             </div>
 
             {/* notification Section */}
-            <button className="btn btn-ghost  btn-circle">
+            {/* notification svg icon */}
+            {/* <button className="btn btn-ghost  btn-circle">
               <div className="indicator">
-                {/* notification svg icon */}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-5 w-5"
@@ -298,9 +302,12 @@ const Navbar = () => {
                   1
                 </span>
               </div>
-            </button>
+            </button> */}
             <div className="dropdown dropdown-end">
-              <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+              <label
+                tabIndex={0}
+                className="btn btn-ghost border-none btn-circle avatar"
+              >
                 <div className="w-10 rounded-full">
                   <img
                     className="w-4"

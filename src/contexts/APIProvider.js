@@ -10,33 +10,16 @@ const APIProvider = ({ children }) => {
   const [allUsers, setAllUsers] = useState([]);
   const [threeUsers, setThreeUsers] = useState([]);
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const [singleUsers, setSingleUsers] = useState({});
   const { user } = useContext(AuthContext);
-  const [myStories, setMyStories] = useState([]);
-
-  useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/user/${user?.email}`)
-      .then((res) => res.json())
-      .then((data) => setSingleUsers(data));
-  }, [user?.email, singleUsers]);
-
-  useEffect(() => {
-    fetch(
-      `${process.env.REACT_APP_API_URL}/my-stories?email=${singleUsers?.email}`
-    )
-      .then((res) => res.json())
-      .then((data) => setMyStories(data));
-  }, [singleUsers]);
-
-  const fetchUserStories = async (email) => {
+  const fetchAPI = async (url) => {
     try {
-      const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/my-stories?email=${email}`
-      );
+      const response = await fetch(url);
       const data = await response.json();
       return data;
     } catch (error) {
-      throw new Error(`Failed to fetch user stories: ${error.message}`);
+      throw new Error(
+        `Failed to fetch API Data from Backend: ${error.message}`
+      );
     }
   };
 
@@ -113,6 +96,30 @@ const APIProvider = ({ children }) => {
       return data;
     },
   });
+  const userIds = localStorage?.getItem("userId");
+  // const {
+  //   isLoading,
+  //   refetch,
+  //   data: singleUsers,
+  // } = useQuery(["user", user?.email], () =>
+  //   fetchAPI(`${process.env.REACT_APP_API_URL}/user/${user?.email}`)
+  // );
+  // console.log(singleUsers);
+  //get friends
+  const userId = localStorage.getItem("userId");
+  // const {
+  //   data: friends = [],
+  //   isLoading: friendsLoading,
+  //   refetch: friendsRefetch,
+  // } = useQuery({
+  //   queryKey: ["friends", userIds],
+  //   queryFn: async () => {
+  //     const res = await fetch();
+  //     // `${process.env.REACT_APP_API_URL}/friends?myId=${userId?._id}`
+  //     const data = await res.json();
+  //     return data;
+  //   },
+  // });
   const apiInfo = {
     categoryButton,
     isCategoryLoading,
@@ -131,9 +138,11 @@ const APIProvider = ({ children }) => {
     reportedItems,
     reportLoading,
     reportRefetch,
-    singleUsers,
-    setSingleUsers,
-    fetchUserStories,
+    fetchAPI,
+
+    // friends,
+    // friendsLoading,
+    // friendsRefetch,
   };
   return <APIContext.Provider value={apiInfo}>{children}</APIContext.Provider>;
 };

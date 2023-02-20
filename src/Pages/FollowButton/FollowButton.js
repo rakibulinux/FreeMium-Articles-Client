@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { APIContext } from "../../contexts/APIProvider";
-function FollowButton({ user, userId, followingId, classes }) {
+function FollowButton({ refetch, user, userId, followingId, classes }) {
   const [isFollowing, setIsFollowing] = useState(false);
   const { isDarkMode } = useContext(APIContext);
   useEffect(() => {
@@ -23,6 +23,7 @@ function FollowButton({ user, userId, followingId, classes }) {
       })
       .then((res) => {
         setIsFollowing(true);
+        refetch();
         toast.success(`${followingId} Successfully followed user`);
       });
   };
@@ -35,6 +36,7 @@ function FollowButton({ user, userId, followingId, classes }) {
       })
       .then((res) => {
         setIsFollowing(false);
+        refetch();
         toast.success(`${followingId} Successfully unfollowed user`);
       });
   };

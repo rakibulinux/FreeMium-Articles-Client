@@ -13,7 +13,7 @@ const socket = socketIOClient(ENDPOINT);
 function Messages({ userId }) {
   const { user } = useContext(AuthContext);
   const scrollRef = useRef();
-  const { fetchAPI } = useContext(APIContext);
+  const { fetchAPI, isDarkMode } = useContext(APIContext);
 
   const {
     isLoading,
@@ -119,53 +119,58 @@ function Messages({ userId }) {
   const sendImage = (e) => {
     if (e.target.files.length !== 0) {
       // console.log(e.target.files[0]);
-      const img = e.target.files[0] 
+      const img = e.target.files[0];
       // const imgName = e.target.files[0].name;
       // const newImgName = Date.new() + imgName;
       const formData = new FormData();
       // formData.append("senderName", name);
       // formData.append("reciverId", currentFriend?._id);
       // formData.append("imageName", newImgName);
-      formData.append("image", img);     
-      const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`
-      fetch(url,{
-        method:'POST',
-        body:formData
+      formData.append("image", img);
+      const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
+      fetch(url, {
+        method: "POST",
+        body: formData,
       })
-      .then(res=>res.json())
-      .then(imgData=>{
-        if(imgData.success){
-          const data = {
-            senderName: singleUsers?.name,
-            senderId: singleUsers?._id,
-            reciverId: currentFriend?._id,
-            message: { text:"", image: imgData.data.url },
-            date: new Date(),
-          };
-          console.log(data);
-          fetch(`${process.env.REACT_APP_API_URL}/send-image`, {
-            method: "POST",
-            headers: {
-              "content-type": "application/json",
-            },
-            body: JSON.stringify({ data }),
-          })
-            .then((res) => res.json())
-            .then((result) => {
-              console.log(result);
-              toast.success(`Saved img`);
-              setNewMessages("");
-            });
-        }
-      })
-   
+        .then((res) => res.json())
+        .then((imgData) => {
+          if (imgData.success) {
+            const data = {
+              senderName: singleUsers?.name,
+              senderId: singleUsers?._id,
+              reciverId: currentFriend?._id,
+              message: { text: "", image: imgData.data.url },
+              date: new Date(),
+            };
+            console.log(data);
+            fetch(`${process.env.REACT_APP_API_URL}/send-image`, {
+              method: "POST",
+              headers: {
+                "content-type": "application/json",
+              },
+              body: JSON.stringify({ data }),
+            })
+              .then((res) => res.json())
+              .then((result) => {
+                console.log(result);
+                toast.success(`Saved img`);
+                setNewMessages("");
+              });
+          }
+        });
     }
   };
 
   return (
     <div>
-      <div className="flex flex-row h-screen antialiased text-gray-800">
-        <div className="flex flex-row w-96 flex-shrink-0 bg-gray-100 p-4">
+      <div
+        className={
+          isDarkMode
+            ? "flex flex-row h-screen antialiased bg-black-350 text-white"
+            : "flex flex-row h-screen antialiased text-gray-800"
+        }
+      >
+        <div className="flex flex-row w-96 flex-shrink-0  p-4">
           <div className="flex flex-col w-full h-full pl-4 pr-4 py-4 -mr-4">
             <div className="flex flex-row items-center">
               <div className="flex flex-row items-center">
@@ -213,14 +218,9 @@ function Messages({ userId }) {
             </div>
             <div className="mt-5">
               <ul className="flex flex-row items-center justify-between">
-                <li>
-                  <Link
-                    to="/"
-                    className="flex items-center pb-3 text-xs font-semibold relative text-indigo-800"
-                  >
-                    <span>All Conversations</span>
-                    <span className="absolute left-0 bottom-0 h-1 w-6 bg-indigo-800 rounded-full"></span>
-                  </Link>
+                <li className="flex items-center pb-3 text-xs font-semibold relative text-green-500">
+                  <span>All Conversations</span>
+                  <span className="absolute left-0 bottom-0 h-1 w-6 bg-green-500 rounded-full"></span>
                 </li>
               </ul>
             </div>
@@ -285,7 +285,13 @@ function Messages({ userId }) {
             </div>
           </div>
         </div>
-        <div className="flex flex-col justify-between w-full bg-white px-4 ">
+        <div
+          className={
+            isDarkMode
+              ? "flex flex-col justify-between w-full bg-black-350 text-white px-4 "
+              : "flex flex-col justify-between w-full bg-white px-4 "
+          }
+        >
           {currentFriend ? (
             <MessagesJsRightSide
               friends={friends}

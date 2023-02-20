@@ -69,7 +69,7 @@ const ArticlesDetails = () => {
     story;
   const {
     isLoading,
-
+    refetch,
     data: users,
   } = useQuery(["user", userEmail], () =>
     fetchAPI(`${process.env.REACT_APP_API_URL}/user/${userEmail}`)
@@ -78,7 +78,7 @@ const ArticlesDetails = () => {
   if (newLoading && isLoading) {
     return <Spinner />;
   }
-
+  console.log(users);
   if (error) {
     return (
       <div className="flex flex-col gap-4 items-center min-h-screen justify-center">
@@ -107,7 +107,7 @@ const ArticlesDetails = () => {
   }
 
   return (
-    <div className="border-t-[1px] w-11/12 mx-auto">
+    <div className="border-t-[1px] ">
       <div className="container mx-auto lg:grid lg:grid-cols-3 grid-cols-1">
         {/* left side content */}
         <div className="border-r-0 lg:border-r-[1px] col-span-2  ">
@@ -166,6 +166,7 @@ const ArticlesDetails = () => {
                   userEmail={userEmail}
                   followingId={user?.email}
                   unfollowingId={user?.email}
+                  refetch={refetch}
                 />
               ) : (
                 <Link to="/login">

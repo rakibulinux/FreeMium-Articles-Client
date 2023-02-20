@@ -6,7 +6,7 @@ const GiftMembership = () => {
   const { user, logoutUserAccount } = useContext(AuthContext);
   const { isDarkMode } = useContext(APIContext);
   return (
-    <div className="container mx-auto mt-14 py-10 px-12 lg:px-0">
+    <div className="py-10 px-12 lg:px-0">
       <div className="text-center">
         <h1
           className={

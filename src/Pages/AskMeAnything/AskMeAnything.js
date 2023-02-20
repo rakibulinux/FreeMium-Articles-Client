@@ -91,7 +91,7 @@ const AskMeAnything = () => {
                 value={prompt}
                 onChange={(e) => setPrompt(e.target.value)}
                 placeholder="Ask me Anything"
-                className="p-2 w-2/4 rounded-lg input input-bordered input-info"
+                className="p-2 w-3/4 rounded-lg input input-bordered input-info"
               />
               <div className="flex items-center">
                 <button type="submit">

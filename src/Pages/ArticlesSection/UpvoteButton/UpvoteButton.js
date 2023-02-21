@@ -6,7 +6,15 @@ import { useEffect } from "react";
 import { BiUpvote } from "react-icons/bi";
 import { APIContext } from "../../../contexts/APIProvider";
 
-const UpvoteButton = ({ articleData, user, storyId, upVoteId, classes }) => {
+const UpvoteButton = ({
+  refetch,
+  articleData,
+  user,
+  storyId,
+  upVoteId,
+  classes,
+  handleUpvote,
+}) => {
   const [upVote, setUpVote] = useState(false);
   const [fetchData, setFetchData] = useState(false);
 
@@ -30,6 +38,7 @@ const UpvoteButton = ({ articleData, user, storyId, upVoteId, classes }) => {
       .then((res) => {
         setUpVote(true);
         setFetchData(!fetchData);
+        refetch();
       });
   };
 
@@ -42,13 +51,14 @@ const UpvoteButton = ({ articleData, user, storyId, upVoteId, classes }) => {
       .then((res) => {
         setUpVote(false);
         setFetchData(!fetchData);
+        refetch();
       });
   };
   return (
     <div>
       {upVote ? (
         <button
-          onClick={handleDecUpVote}
+          onClick={handleUpvote}
           className={
             isDarkMode
               ? `btn btn-sm bg-gray-100 text-gray-800  hover:bg-gray-300 hover:text-gray-800 rounded-full btn-outline ${classes}`
@@ -59,7 +69,7 @@ const UpvoteButton = ({ articleData, user, storyId, upVoteId, classes }) => {
         </button>
       ) : (
         <button
-          onClick={handleUpVote}
+          onClick={handleUpvote}
           className={
             isDarkMode
               ? `btn btn-sm bg-gray-100 hover:bg-white hover:text-gray-800 text-gray-900 rounded-full btn-outline ${classes}`

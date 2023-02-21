@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../../contexts/AuthProvider";
@@ -23,47 +24,124 @@ const ArticlesDetails = () => {
   const { user } = useContext(AuthContext);
   const { isDarkMode, fetchAPI } = useContext(APIContext);
   // const [newUpvote,setNewUpvote]=useState()
+
+  const visitorId = cookie.load("visitorId");
+  const visitorMacAddress = cookie.load("visitorMacAddress");
+  const userIds = localStorage.getItem("userId");
+  const headers = {
+    "Content-Type": "application/json",
+    "Visitor-Id": visitorId,
+    "Visitor-Mac-Address": visitorMacAddress,
+  };
+  if (userIds) {
+    headers["user-id"] = userIds;
+  }
+
+  const {
+    data,
+    isLoading: isLoadings,
+    refetch: refetchs,
+  } = useQuery(["story", id], () =>
+    fetchAPI(`${process.env.REACT_APP_API_URL}/view-story/${id}`, headers)
+  );
+
   useEffect(() => {
-    let visitorId = cookie.load("visitorId");
-    let visitorMacAddress = cookie.load("visitorMacAddress");
-    if (!visitorId || !visitorMacAddress) {
-      visitorId =
-        Math.random().toString(36).substring(2, 15) +
-        Math.random().toString(36).substring(2, 15);
-      visitorMacAddress =
-        Math.random().toString(36).substring(2, 15) +
-        Math.random().toString(36).substring(2, 15);
-      cookie.save("visitorId", visitorId, { path: "/" });
-      cookie.save("visitorMacAddress", visitorMacAddress, { path: "/" });
+    if (!isLoadings) {
+      if (data.error) {
+        setError(data.error);
+      } else {
+        setStory(data);
+      }
+      setNewLoading(false);
     }
-    const userIds = localStorage.getItem("userId");
-    const headers = {
-      "Content-Type": "application/json",
-      "Visitor-Id": visitorId,
-      "Visitor-Mac-Address": visitorMacAddress,
-    };
-    if (userIds) {
-      headers["user-id"] = userIds;
+  }, [isLoadings, data]);
+
+  const {
+    isLoading: isUserLoading,
+    refetch: refetchUser,
+    data: singleUsers,
+  } = useQuery(["user", user?.email], () =>
+    fetchAPI(`${process.env.REACT_APP_API_URL}/user/${user?.email}`)
+  );
+  console.log(singleUsers);
+  const handleUpvote = async () => {
+    if (!user) {
+      return alert("Please login to upvote");
     }
-    fetch(`${process.env.REACT_APP_API_URL}/view-story/${id}`, {
-      headers,
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.error) {
-          setError(data.error);
-        } else {
-          setStory(data);
-          // update upvote
-          // setNewUpvote(data)
-        }
-        setNewLoading(false);
-      })
-      .catch((err) => {
-        setError(err.message);
-        setNewLoading(false);
-      });
-  }, [id]);
+
+    if (story?.upVote?.includes(singleUsers?._id)) {
+      return alert("You already upvoted this article");
+    }
+
+    const { data } = await axios.post(
+      `${process.env.REACT_APP_API_URL}/view-story/${story._id}/upvote`,
+      { userId: singleUsers?._id }
+    );
+    setStory(data.article);
+    console.log(data.article);
+  };
+
+  const handleDownvote = async () => {
+    if (!user) {
+      return alert("Please login to downvote");
+    }
+
+    if (story?.downVote?.includes(singleUsers?._id)) {
+      return alert("You already downvoted this article");
+    }
+
+    const { data } = await axios.post(
+      `${process.env.REACT_APP_API_URL}/view-story/${story._id}/downvote`,
+      { userId: singleUsers?._id }
+    );
+    setStory(data.article);
+    console.log(data.article);
+  };
+  console.log(story.article);
+  const handleUpgradeClick = () => {
+    // handle upgrade click
+  };
+  // useEffect(() => {
+  //   let visitorId = cookie.load("visitorId");
+  //   let visitorMacAddress = cookie.load("visitorMacAddress");
+  //   if (!visitorId || !visitorMacAddress) {
+  //     visitorId =
+  //       Math.random().toString(36).substring(2, 15) +
+  //       Math.random().toString(36).substring(2, 15);
+  //     visitorMacAddress =
+  //       Math.random().toString(36).substring(2, 15) +
+  //       Math.random().toString(36).substring(2, 15);
+  //     cookie.save("visitorId", visitorId, { path: "/" });
+  //     cookie.save("visitorMacAddress", visitorMacAddress, { path: "/" });
+  //   }
+  //   const userIds = localStorage.getItem("userId");
+  //   const headers = {
+  //     "Content-Type": "application/json",
+  //     "Visitor-Id": visitorId,
+  //     "Visitor-Mac-Address": visitorMacAddress,
+  //   };
+  //   if (userIds) {
+  //     headers["user-id"] = userIds;
+  //   }
+  //   fetch(`${process.env.REACT_APP_API_URL}/view-story/${id}`, {
+  //     headers,
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       if (data.error) {
+  //         setError(data.error);
+  //       } else {
+  //         setStory(data);
+  //         // update upvote
+  //         // setNewUpvote(data)
+  //       }
+  //       setNewLoading(false);
+  //     })
+  //     .catch((err) => {
+  //       setError(err.message);
+  //       setNewLoading(false);
+  //     });
+  // }, [id]);
 
   const { writerImg, writerName, articleTitle, articleImg, userId, userEmail } =
     story;
@@ -78,7 +156,7 @@ const ArticlesDetails = () => {
   if (newLoading && isLoading) {
     return <Spinner />;
   }
-  console.log(users);
+
   if (error) {
     return (
       <div className="flex flex-col gap-4 items-center min-h-screen justify-center">
@@ -116,6 +194,9 @@ const ArticlesDetails = () => {
               articleData={story}
               users={users}
               error={error}
+              refetch={refetchs}
+              handleUpvote={handleUpvote}
+              handleDownvote={handleDownvote}
               // setUsers={setUsers}
             />
           </div>

@@ -7,6 +7,7 @@ import { AiOutlineLike } from "react-icons/ai";
 import { HiOutlineChat } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import ReplyComment from "./ReplyComment";
+import axios from "axios";
 
 const Comments = ({ id }) => {
     const { register, handleSubmit, reset, watch } = useForm();
@@ -14,7 +15,7 @@ const Comments = ({ id }) => {
     const { user } = useContext(AuthContext);
     const date = format(new Date(), "PP");
 
-    const [reply, setReply]=useState();
+    const [reply, setReply] = useState();
 
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState(false);
@@ -48,48 +49,49 @@ const Comments = ({ id }) => {
                     toast.success("Respond placed successfully");
 
                     reset();
-            
+
 
                     setNewComment(true);
                 }
             });
     };
 
-// fetch comment after delete
+    // fetch comment after delete
 
-const fetchComments = () => {
-    fetch(`${process.env.REACT_APP_API_URL}/comments?articleId=${id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setComments(data);
-      });
-  };
-    
-
+    const fetchComments = () => {
+        fetch(`${process.env.REACT_APP_API_URL}/comments?articleId=${id}`)
+            .then((res) => res.json())
+            .then((data) => {
+                setComments(data);
+            });
+    };
 
 
- // for delete comment
- const deleteCommentHandle = (id) => {
-    // console.log(id);
-    fetch(`${process.env.REACT_APP_API_URL}/comment/deleteComment/${id}`, {
-      method: "DELETE",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data.deletedCount > 0) {
-          toast.success("successfully delete");
-        fetchComments();
-        }
-      });
-  };
-
-//   Update comment
 
 
-// const fetchComment =()=>{
+    // for delete comment
+    const deleteCommentHandle = (id) => {
+        // console.log(id);
+        fetch(`${process.env.REACT_APP_API_URL}/comment/deleteComment/${id}`, {
+            method: "DELETE",
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data);
+                if (data.deletedCount > 0) {
+                    toast.success("successfully delete");
+                    fetchComments();
+                }
+            });
+    };
 
-// }
+    //   Update comment
+    const handleUpdateComment = (id) => {
+        console.log('click');
+    }
+
+
+    // }
 
     useEffect(() => {
 
@@ -100,7 +102,7 @@ const fetchComments = () => {
                 // fetchComments();
                 // console.log(data);
             });
-    }, [id, newComment,reply]);
+    }, [id, newComment, reply]);
 
     return (
         <div>
@@ -126,6 +128,10 @@ const fetchComments = () => {
                     :
                     <span>Please <Link to='/login' className='text-[#059b00] font-semibold'>Login</Link> to Respond</span>
             }
+
+
+
+
 
             <div>
                 <div>
@@ -179,12 +185,11 @@ const fetchComments = () => {
                                                                     className="dropdown-content  mt-5 border menu p-2 shadow-lg bg-base-100 rounded-box w-44"
                                                                 >
                                                                     <li>
-                                                                        <button className="text-xs font-semibold">
-                                                                            Edit This Response
-                                                                        </button>
+
+                                                                        <label onClick={()=>handleUpdateComment(comment?._id)} htmlFor="my-modal" className=" text-xs font-semibold">Edit this respond</label>
                                                                     </li>
                                                                     <li>
-                                                                        <button onClick={()=>deleteCommentHandle(comment?._id)} className="text-xs font-semibold">
+                                                                        <button onClick={() => deleteCommentHandle(comment?._id)} className="text-xs font-semibold">
                                                                             Delete
                                                                         </button>
                                                                     </li>
@@ -207,6 +212,19 @@ const fetchComments = () => {
                                                 </div>
                                             </div>
                                         </div>
+                                        {/* Put this part before </body> tag */}
+                                        <input type="checkbox" id="my-modal" className="modal-toggle" />
+                                        <div className="modal">
+                                            <div className="modal-box">
+                                                <textarea defaultValue={comment?.comment} name="updateComment" className=" border-none textarea-lg w-full"></textarea>
+                                                <div className="modal-action">
+                                                    <label htmlFor="my-modal" className="btn btn-sm rounded-full bg-primary">Cancel</label>
+                                                    <label htmlFor="my-modal" className="btn btn-sm rounded-full bg-primary">update</label>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         <p className="text-xs my-2 ">{comment?.comment}</p>
 
                                         <div className="grid grid-cols-12 justify-center items-center">
@@ -283,7 +301,7 @@ const fetchComments = () => {
                                                     tabIndex={1}
                                                     className="dropdown-content"
                                                 >   <ReplyComment comment={comment}
-                                                setReply={setReply}
+                                                    setReply={setReply}
                                                 ></ReplyComment>
                                                 </div>
 

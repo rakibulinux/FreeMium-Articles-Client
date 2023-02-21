@@ -82,7 +82,16 @@ function Messages({ userId }) {
       date: new Date(),
     };
     console.log(data);
-    // socket.emit('reactEvent',{data})
+
+    // send message in socket server
+    socket.emit('sendMessage',{
+      senderId: singleUsers?._id,
+      senderName: singleUsers?.name,
+      reciverId: currentFriend?._id,
+      message: { text: newMessages ? newMessages : "", image: "" },
+      date: new Date(),
+    })
+
     fetch(`${process.env.REACT_APP_API_URL}/sendMessage`, {
       method: "POST",
       headers: {

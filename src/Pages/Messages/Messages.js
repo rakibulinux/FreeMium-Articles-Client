@@ -95,6 +95,7 @@ function Messages({ userId }) {
         console.log(result);
         toast.success(`Saved message`);
         setNewMessages("");
+        getMessageRefetch();
       });
   };
   /*==============
@@ -114,15 +115,13 @@ soket work
   }, [singleUsers]);
   console.log(active);
   //get message
-
   const {
     data: getMessage,
     isLoading: getMessageLoading,
     refetch: getMessageRefetch,
   } = useQuery(["sendMessage", currentFriend?._id, singleUsers?._id], () =>
     fetchAPI(
-      `${process.env.REACT_APP_API_URL}/sendMessage/${currentFriend?._id}/getMseeage/${singleUsers?._id}`,
-      friendsRefetch()
+      `${process.env.REACT_APP_API_URL}/sendMessage/${currentFriend?._id}/getMseeage/${singleUsers?._id}`
     )
   );
 
@@ -180,6 +179,7 @@ soket work
                 console.log(result);
                 toast.success(`Saved img`);
                 getMessageRefetch();
+
                 setNewMessages("");
               });
           }

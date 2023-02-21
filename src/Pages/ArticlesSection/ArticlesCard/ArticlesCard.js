@@ -20,7 +20,7 @@ const ArticlesCard = ({ data, handleSave, handleDelete }) => {
     _id,
     isPaid,
   } = data;
-  const title = articleTitle.replace(/<[^>]+>/g, "").slice(0, 60) + "...";
+  const title = articleTitle?.replace(/<[^>]+>/g, "").slice(0, 60) + "...";
 
   const description = articleDetails.replace(/<[^>]+>/g, "");
   const paidSimble = (

@@ -12,8 +12,9 @@ const MessagesJsRightSide = ({
   singleUsers,
   scrollRef,
   emojiHnadler,
+  active
 }) => {
-  const { picture, name } = currentFriend;
+  const { picture, name,_id } = currentFriend;
 
   const emojis = [ "😨", "🤔", "😕", "😬","😊","😳",
     "😲",
@@ -53,7 +54,12 @@ const MessagesJsRightSide = ({
 
           <div className="flex flex-col ml-3">
             <div className="font-semibold text-sm">{name}</div>
-            <div className="text-xs text-gray-500">Active</div>
+            {
+              active && active.length>0 && active.some(u=>u.userId === _id)?
+<div className="text-xs text-gray-500">Active</div>
+:''
+            }
+            
           </div>
           {/* <div className="ml-auto">
               <ul className="flex flex-row items-center space-x-2">

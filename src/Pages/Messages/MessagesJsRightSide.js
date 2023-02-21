@@ -14,8 +14,9 @@ const MessagesJsRightSide = ({
   singleUsers,
   scrollRef,
   emojiHnadler,
+  active
 }) => {
-  const { picture, name } = currentFriend;
+  const { picture, name,_id } = currentFriend;
 
   const { isDarkMode } = useContext(APIContext);
 
@@ -64,13 +65,21 @@ const MessagesJsRightSide = ({
         <div className="avatar">
           <div className="w-10 rounded-full">
             <img src={picture} alt="img" />
+          <div className="flex flex-col ml-3">
+            <div className="font-semibold text-sm">{name}</div>
+            {
+              active && active.length>0 && active.some(u=>u.userId === _id)?
+      <div className="text-xs text-gray-500">Active</div>
+        :''
+            }
+            
           </div>
         </div>
-
-        <div className="flex flex-col ml-3">
+        </div>
+        {/* <div className="flex flex-col ml-3">
           <div className="font-semibold text-sm">{name}</div>
           <div className="text-xs text-gray-500">Active</div>
-        </div>
+        </div> */}
         <div className="ml-auto">
           <ul className="flex flex-row items-center space-x-2">
             {/* <li>

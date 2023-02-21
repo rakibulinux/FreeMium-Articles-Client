@@ -2,26 +2,24 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useState, useEffect, useContext, useRef } from "react";
 import { toast } from "react-hot-toast";
 
-import  { io } from "socket.io-client";
+import { io } from "socket.io-client";
 import { APIContext } from "../../contexts/APIProvider";
 import { AuthContext } from "../../contexts/AuthProvider";
 import MessagesJsRightSide from "./MessagesJsRightSide";
 
 // const ENDPOINT = `${process.env.REACT_APP_API_URL}`;
 // const socket = socketIOClient(ENDPOINT);
-const socket = io.connect(`http://localhost:5000/`)
-
-
+const socket = io.connect(`http://localhost:5000/`);
 
 function Messages({ userId }) {
-  const [getMessage,setGetMessage] =useState()
+  const [getMessage, setGetMessage] = useState();
   const { user } = useContext(AuthContext);
   const scrollRef = useRef();
   const { fetchAPI, isDarkMode } = useContext(APIContext);
-  
-  const [newMessages, setNewMessages] = useState([]); 
- const [active,setActive] =useState([])
-  const [currentFriend, setCurrentFriend] = useState(""); 
+
+  const [newMessages, setNewMessages] = useState([]);
+  const [active, setActive] = useState([]);
+  const [currentFriend, setCurrentFriend] = useState("");
   const imageHostKey = process.env.REACT_APP_IMG_BB_KEY;
   // console.log(getMessage);
   // console.log(currentFriend?._id);
@@ -30,16 +28,13 @@ function Messages({ userId }) {
   //    socket = io.connect(`http://localhost:5000/`)
   // }, []);
 
-
   const {
     isLoading,
-    
+
     data: singleUsers,
   } = useQuery(["user", user?.email], () =>
     fetchAPI(`${process.env.REACT_APP_API_URL}/user/${user?.email}`)
   );
-
- 
 
   const {
     data: friends,
@@ -51,8 +46,6 @@ function Messages({ userId }) {
     )
   );
 
-
-
   //get default frist friend message
 
   useEffect(() => {
@@ -63,9 +56,7 @@ function Messages({ userId }) {
   // scrollRef
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, []);
-
-  
+  }, [newMessages]);
 
   // message input handler
   const messageInputHandl = (e) => {
@@ -95,26 +86,25 @@ function Messages({ userId }) {
         console.log(result);
         toast.success(`Saved message`);
         setNewMessages("");
-       
       });
   };
-/*==============
+  /*==============
 soket work
 ================*/
   // send user
   useEffect(() => {
-    socket.emit('addUser',singleUsers?._id,singleUsers)
+    socket.emit("addUser", singleUsers?._id, singleUsers);
   }, [singleUsers]);
 
   // get user from socket
   useEffect(() => {
-    socket.on('getUsers',(users)=>{
-      const filterUsers = users?.filter(u=>u.userId !== singleUsers?._id)
-      setActive(filterUsers)
-    })
+    socket.on("getUsers", (users) => {
+      const filterUsers = users?.filter((u) => u.userId !== singleUsers?._id);
+      setActive(filterUsers);
+    });
   }, []);
-console.log(active)
-//get message
+  console.log(active);
+  //get message
   useEffect(() => {
     fetch(
       `${process.env.REACT_APP_API_URL}/sendMessage/${currentFriend?._id}/getMseeage/${singleUsers?._id}`
@@ -135,15 +125,15 @@ console.log(active)
   const sendImage = (e) => {
     if (e.target.files.length !== 0) {
       // console.log(e.target.files[0]);
-      const img = e.target.files[0] 
-    
+      const img = e.target.files[0];
+
       const formData = new FormData();
-    
-      formData.append("image", img);     
-      const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`
-      fetch(url,{
-        method:'POST',
-        body:formData
+
+      formData.append("image", img);
+      const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
+      fetch(url, {
+        method: "POST",
+        body: formData,
       })
         .then((res) => res.json())
         .then((imgData) => {
@@ -205,12 +195,13 @@ console.log(active)
                       <div className="text-sm font-medium">
                         {user?.displayName}
                       </div>
-                      {
-              active && active.length>0 && active.some(u=>u.userId === singleUsers?._id)?
-<div className="h-2 w-2 rounded-full bg-green-500 ml-2"></div>
-:''
-            }
-                      
+                      {active &&
+                      active.length > 0 &&
+                      active.some((u) => u.userId === singleUsers?._id) ? (
+                        <div className="h-2 w-2 rounded-full bg-green-500 ml-2"></div>
+                      ) : (
+                        ""
+                      )}
                     </div>
                     <div className="text-xs truncate w-40">
                       Full Stack Web Developer
@@ -271,12 +262,13 @@ console.log(active)
                             <div className="text-sm font-medium">
                               {user.name}
                             </div>
-                            {
-              active && active.length>0 && active.some(u=>u.userId === user._id)?
-<div className="h-2 w-2 rounded-full bg-green-500 ml-2"></div>
-:''
-            }
-                            
+                            {active &&
+                            active.length > 0 &&
+                            active.some((u) => u.userId === user._id) ? (
+                              <div className="h-2 w-2 rounded-full bg-green-500 ml-2"></div>
+                            ) : (
+                              ""
+                            )}
                           </div>
                           <div className="text-xs truncate w-40">
                             Good after noon! how can i help you?

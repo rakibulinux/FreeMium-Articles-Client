@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { format } from "timeago.js";
 import { APIContext } from "../../contexts/APIProvider";
@@ -14,9 +14,9 @@ const MessagesJsRightSide = ({
   singleUsers,
   scrollRef,
   emojiHnadler,
-  active
+  active,
 }) => {
-  const { picture, name,_id } = currentFriend;
+  const { picture, name, _id } = currentFriend;
 
   const { isDarkMode } = useContext(APIContext);
 
@@ -65,16 +65,17 @@ const MessagesJsRightSide = ({
         <div className="avatar">
           <div className="w-10 rounded-full">
             <img src={picture} alt="img" />
-          <div className="flex flex-col ml-3">
-            <div className="font-semibold text-sm">{name}</div>
-            {
-              active && active.length>0 && active.some(u=>u.userId === _id)?
-      <div className="text-xs text-gray-500">Active</div>
-        :''
-            }
-            
+            <div className="flex flex-col ml-3">
+              <div className="font-semibold text-sm">{name}</div>
+              {active &&
+              active.length > 0 &&
+              active.some((u) => u.userId === _id) ? (
+                <div className="text-xs text-gray-500">Active</div>
+              ) : (
+                ""
+              )}
+            </div>
           </div>
-        </div>
         </div>
         {/* <div className="flex flex-col ml-3">
           <div className="font-semibold text-sm">{name}</div>
@@ -155,6 +156,7 @@ const MessagesJsRightSide = ({
           </ul>
         </div>
       </div>
+      {/* <div ref={scrollRef}> */}
       <div className="h-full overflow-hidden py-4">
         <div className="h-full overflow-y-auto">
           <div className="grid grid-cols-12 gap-y-2">
@@ -238,6 +240,7 @@ const MessagesJsRightSide = ({
           </div>
         </div>
       </div>
+      {/* </div> */}
       <div className="flex flex-row items-center ">
         <div className="flex flex-row items-center w-full border rounded-3xl h-12 px-2">
           <button className="flex items-center justify-center h-10 w-10 text-gray-400 ml-1">

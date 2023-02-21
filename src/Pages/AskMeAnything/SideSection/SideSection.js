@@ -36,11 +36,18 @@ const SideSection = ({
       </div>
       <div className="grid justify-items-center">
         {questionAns?.map((ans) => (
-          <div className="mt-2 cursor-pointer border-solid hover:bg-black-250 rounded-lg border border-white w-full p-2 my-2">
-            <Link to={`/hexa-ai/${ans._id}`} className="text-white">
-              {ans?.question}
-            </Link>
-          </div>
+          // <div
+          //   key={ans?._id}
+          //   className=""
+          // >
+          <Link
+            key={ans?._id}
+            to={`/hexa-ai/${ans._id}`}
+            className="mt-2 cursor-pointer border-solid hover:bg-black-250 rounded-lg border border-white w-full p-2 my-2 text-white"
+          >
+            {ans?.question}
+          </Link>
+          // </div>
         ))}
       </div>
     </div>

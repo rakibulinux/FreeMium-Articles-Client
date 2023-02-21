@@ -21,10 +21,9 @@ const ArticlesCard = ({ data, handleSave, handleDelete }) => {
     isPaid, 
     articleType
   } = data;
+  const title = articleTitle?.replace(/<[^>]+>/g, "").slice(0, 60) + "...";
 
-  const title = articleTitle.replace(/<[^>]+>/g, "").slice(0, 60) + "...";
-
-  const description = articleDetails.replace(/<[^>]+>/g, "");
+  const description = articleDetails?.replace(/<[^>]+>/g, "");
   const paidSimble = (
     <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
       <path

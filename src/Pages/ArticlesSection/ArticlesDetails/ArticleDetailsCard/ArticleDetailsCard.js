@@ -11,9 +11,16 @@ import Comments from "../../ShowMoreArtical/Comments";
 import UpvoteButton from "../../UpvoteButton/UpvoteButton";
 import { HiOutlineChat } from "react-icons/hi";
 import ListenButton from "./ListenButton";
+import { useQuery } from "@tanstack/react-query";
 
-const ArticleDetailsCard = ({ articleData, users }) => {
+const ArticleDetailsCard = ({
+  articleData,
+  users,
+  handleUpvote,
+  handleDownvote,
+}) => {
   const { user } = useContext(AuthContext);
+  const { fetchAPI } = useContext(APIContext);
 
   // const ArticleDetailsCard = ({ articleData,users,setUsers }) => {
   //   const { user } = useContext(AuthContext);
@@ -32,7 +39,7 @@ const ArticleDetailsCard = ({ articleData, users }) => {
     downVote,
     isPaid,
   } = articleData;
-  // console.log(articleData)
+  console.log(upVote, downVote);
   const { isDarkMode, setIsDarkMode } = useContext(APIContext);
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
@@ -370,6 +377,8 @@ const ArticleDetailsCard = ({ articleData, users }) => {
                     userEmail={userEmail}
                     upVoteId={user?.email}
                     articleData={articleData}
+                    // refetch={refetch}
+                    handleUpvote={handleUpvote}
                   ></UpvoteButton>
 
                   <p className="pl-0 p-2"> {upVote?.length}</p>
@@ -380,6 +389,8 @@ const ArticleDetailsCard = ({ articleData, users }) => {
                     userEmail={userEmail}
                     downVoteId={user?.email}
                     articleData={articleData}
+                    handleDownvote={handleDownvote}
+                    // refetch={refetch}
                   ></DownVoteButton>
                   <p className="pl-0 p-2"> {downVote?.length}</p>
                 </div>

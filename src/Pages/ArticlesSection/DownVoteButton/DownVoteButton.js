@@ -6,12 +6,14 @@ import { useEffect } from "react";
 import { BiDownvote } from "react-icons/bi";
 import { APIContext } from "../../../contexts/APIProvider";
 const DownVoteButton = ({
+  refetch,
   articleData,
   user,
   users,
   storyId,
   downVoteId,
   classes,
+  handleDownvote,
 }) => {
   const [downVote, setDownVote] = useState(false);
   const { isDarkMode } = useContext(APIContext);
@@ -33,6 +35,7 @@ const DownVoteButton = ({
       })
       .then((res) => {
         setDownVote(true);
+        refetch();
       });
   };
 
@@ -44,13 +47,14 @@ const DownVoteButton = ({
       })
       .then((res) => {
         setDownVote(false);
+        refetch();
       });
   };
   return (
     <div>
       {downVote ? (
         <button
-          onClick={handleDecDownVote}
+          onClick={handleDownvote}
           className={
             isDarkMode
               ? `btn btn-sm bg-gray-100 text-gray-800  hover:bg-gray-300 hover:text-gray-800 rounded-full btn-outline ${classes}`
@@ -61,7 +65,7 @@ const DownVoteButton = ({
         </button>
       ) : (
         <button
-          onClick={handleDownVote}
+          onClick={handleDownvote}
           className={
             isDarkMode
               ? `btn btn-sm bg-gray-100 hover:bg-white hover:text-gray-800 text-gray-900 rounded-full btn-outline ${classes}`

@@ -1,21 +1,19 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { useDispatch } from "react-redux";
-import fetchAPI from "./fetchAPI";
 
-const fetchedData = (state, action) => {
-  state.data = action.payload;
-};
-export const fetchAsync = createAsyncThunk(
-  "fetch/fetchAsync",
-  async (url, { dispatch }) => {
-    // const dispatch = useDispatch();
+const fetchAPI = async (url) => {
+  try {
     const response = await fetch(url);
-    console.log(url);
     const data = await response.json();
-    console.log(data);
-    return dispatch(fetchedData(data));
+    return data;
+  } catch (error) {
+    throw new Error(`Failed to fetch API Data from Backend: ${error.message}`);
   }
-);
+};
+
+export const fetchAsync = createAsyncThunk("fetch/fetchAsync", async (url) => {
+  const data = await fetchAPI(url);
+  return data;
+});
 
 const initialState = {
   data: null,
@@ -28,12 +26,8 @@ const fetchSlice = createSlice({
   name: "fetch",
   initialState,
   reducers: {
-    refetchData: (state) => {
-      if (state.refetchUrl) {
-        state.isLoading = true;
-        state.error = null;
-        state.refetchUrl = null;
-      }
+    refetchData: (state, action) => {
+      state.refetchUrl = action.payload;
     },
   },
   extraReducers: (builder) => {

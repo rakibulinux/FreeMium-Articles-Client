@@ -7,7 +7,7 @@ import { AiOutlineLike } from "react-icons/ai";
 import { HiOutlineChat } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import ReplyComment from "./ReplyComment";
-import axios from "axios";
+// import axios from "axios";
 
 const Comments = ({ id }) => {
     const { register, handleSubmit, reset, watch } = useForm();
@@ -19,6 +19,9 @@ const Comments = ({ id }) => {
 
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState(false);
+    // Update comment state
+    const [singleComent, setSingleComent] = useState([])
+    console.log(singleComent);
 
     // console.log(comments);
 
@@ -86,16 +89,42 @@ const Comments = ({ id }) => {
     };
 
     //   Update comment
-    const handleUpdateComment = (id) => {
-        console.log('click');
+    // get specific comment
+    const handleGetComment = id => {
+        // console.log(id)
+        const singleComent = comments.find(c => c._id === id)
+        setSingleComent(singleComent)
+    }
+
+    const handleUpdateComment = event => {
+
+        event.preventDefault();
+        const form = event.target;
+        const comment = form.updateComment.value;
+        console.log(comment)
+
+        fetch(`${process.env.REACT_APP_API_URL}/updateComment/${singleComent?._id}`, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({ comment })
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if (data.modifiedCount > 0) {
+                    toast("successful update comment");
+                    reset();
+                    fetchComments();
+
+
+                }
+
+            })
     }
 
 
-
-// const fetchComment =()=>{
-
-// }
-    // }
 
     useEffect(() => {
 
@@ -189,8 +218,7 @@ const Comments = ({ id }) => {
                                                                     className="dropdown-content  mt-5 border menu p-2 shadow-lg bg-base-100 rounded-box w-44"
                                                                 >
                                                                     <li>
-
-                                                                        <label onClick={()=>handleUpdateComment(comment?._id)} htmlFor="my-modal" className=" text-xs font-semibold">Edit this respond</label>
+                                                                        <label onClick={() => handleGetComment(comment?._id)} htmlFor="my-modal" className=" text-xs font-semibold">Edit this respond</label>
                                                                     </li>
                                                                     <li>
                                                                         <button onClick={() => deleteCommentHandle(comment?._id)} className="text-xs font-semibold">
@@ -216,18 +244,26 @@ const Comments = ({ id }) => {
                                                 </div>
                                             </div>
                                         </div>
+
+
                                         {/* Put this part before </body> tag */}
                                         <input type="checkbox" id="my-modal" className="modal-toggle" />
                                         <div className="modal">
                                             <div className="modal-box">
-                                                <textarea defaultValue={comment?.comment} name="updateComment" className=" border-none textarea-lg w-full"></textarea>
-                                                <div className="modal-action">
-                                                    <label htmlFor="my-modal" className="btn btn-sm rounded-full bg-primary">Cancel</label>
-                                                    <label htmlFor="my-modal" className="btn btn-sm rounded-full bg-primary">update</label>
+                                                <form onSubmit={handleUpdateComment}>
+                                                    <textarea defaultValue={singleComent?.comment} name="updateComment" className=" border-none textarea-lg w-full"></textarea>
+                                                    <div className="flex justify-end  items-end">
+                                                        <div className="modal-action">
+                                                            <label htmlFor="my-modal" className="btn btn-sm rounded-full bg-primary">Cancel</label>
+                                                        </div>
+                                                        <button type='submit' className=" rounded-full btn btn-sm mx-2 bg-green-500 text-white" >update</button>
+                                                    </div>
+                                                </form>
 
-                                                </div>
                                             </div>
                                         </div>
+
+
 
                                         <p className="text-xs my-2 ">{comment?.comment}</p>
 

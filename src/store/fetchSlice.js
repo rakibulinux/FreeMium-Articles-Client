@@ -1,10 +1,21 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { useDispatch } from "react-redux";
 import fetchAPI from "./fetchAPI";
 
-export const fetchAsync = createAsyncThunk("fetch/fetchAsync", async (url) => {
-  const data = await fetchAPI(url);
-  return data;
-});
+const fetchedData = (state, action) => {
+  state.data = action.payload;
+};
+export const fetchAsync = createAsyncThunk(
+  "fetch/fetchAsync",
+  async (url, { dispatch }) => {
+    // const dispatch = useDispatch();
+    const response = await fetch(url);
+    console.log(url);
+    const data = await response.json();
+    console.log(data);
+    return dispatch(fetchedData(data));
+  }
+);
 
 const initialState = {
   data: null,

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { format } from "timeago.js";
 import { APIContext } from "../../contexts/APIProvider";
@@ -12,14 +12,16 @@ const MessagesJsRightSide = ({
   sendMessage,
   getMessage,
   singleUsers,
-  scrollRef,
+  // scrollRef,
   emojiHnadler,
   active,
 }) => {
   const { picture, name, _id } = currentFriend;
-
+  const scrollRef = useRef();
   const { isDarkMode } = useContext(APIContext);
-
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [getMessage]);
   const emojis = [
     "😨",
     "🤔",
@@ -156,7 +158,7 @@ const MessagesJsRightSide = ({
           </ul>
         </div>
       </div>
-      {/* <div ref={scrollRef}> */}
+
       <div className="h-full overflow-hidden py-4">
         <div className="h-full overflow-y-auto">
           <div className="grid grid-cols-12 gap-y-2">
@@ -181,6 +183,7 @@ const MessagesJsRightSide = ({
                         key={m?._id + 2}
                         className="flex items-center justify-start flex-row-reverse"
                       >
+                        {/* <div ref={scrollRef} /> */}
                         <div
                           key={m?._id + 3}
                           className="flex items-center justify-center h-10 w-10 rounded-full flex-shrink-0"
@@ -191,6 +194,7 @@ const MessagesJsRightSide = ({
                             alt=""
                           />
                         </div>
+
                         <div
                           key={m?._id + 5}
                           className={
@@ -199,7 +203,7 @@ const MessagesJsRightSide = ({
                               : "relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl"
                           }
                         >
-                          <div key={m?._id + 5}>
+                          <div className="rs" key={m?._id + 5}>
                             {m?.message?.text === "" ? (
                               <img src={m?.message?.image} alt="img"></img>
                             ) : (
@@ -238,6 +242,7 @@ const MessagesJsRightSide = ({
                 )
               : ""}
           </div>
+          <div ref={scrollRef} />
         </div>
       </div>
       {/* </div> */}

@@ -12,6 +12,7 @@ import UpvoteButton from "../../UpvoteButton/UpvoteButton";
 import { HiOutlineChat } from "react-icons/hi";
 import ListenButton from "./ListenButton";
 import { useQuery } from "@tanstack/react-query";
+import Notification from "../../../../components/Notification/Notification";
 
 const ArticleDetailsCard = ({
   articleData,
@@ -35,11 +36,11 @@ const ArticleDetailsCard = ({
     articleImg,
     writerName,
     userEmail,
-    upVote,
-    downVote,
+    upvotes,
+    downvotes,
     isPaid,
   } = articleData;
-  console.log(upVote, downVote);
+  console.log(upvotes, downvotes);
   const { isDarkMode, setIsDarkMode } = useContext(APIContext);
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
@@ -367,9 +368,9 @@ const ArticleDetailsCard = ({
         {/* bottom link */}
         <div>
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 mt-5">
-            <div className="flex  justify-start gap-2 text-xs ">
+            <div className="flex justify-start items-center gap-2 text-xs">
               {user?.uid ? (
-                <div className="flex   gap-2 border rounded-full ">
+                <div className="flex gap-2 border rounded-full">
                   <UpvoteButton
                     user={user}
                     users={users}
@@ -377,12 +378,13 @@ const ArticleDetailsCard = ({
                     userEmail={userEmail}
                     upVoteId={user?.email}
                     articleData={articleData}
+                    // upVote={upVote}
+                    // downVote={downVote}
                     // refetch={refetch}
                     handleUpvote={handleUpvote}
                   ></UpvoteButton>
-
-                  <p className="pl-0 p-2"> {upVote?.length}</p>
-                  <DownVoteButton
+                  {/* <p className="pl-0 p-2"> {upvotes}</p> */}
+                  {/* <DownVoteButton
                     user={user}
                     users={users}
                     storyId={_id}
@@ -391,12 +393,12 @@ const ArticleDetailsCard = ({
                     articleData={articleData}
                     handleDownvote={handleDownvote}
                     // refetch={refetch}
-                  ></DownVoteButton>
-                  <p className="pl-0 p-2"> {downVote?.length}</p>
+                  ></DownVoteButton> */}
+                  {/* <p className="pl-0 p-2"> {downvotes}</p> */}
                 </div>
               ) : (
                 <Link to="/login">
-                  <div className="flex   gap-2 border rounded-full ">
+                  <div className="flex gap-2 border rounded-full ">
                     <UpvoteButton
                       user={user}
                       users={users}
@@ -405,7 +407,7 @@ const ArticleDetailsCard = ({
                       upVoteId={user?.email}
                     ></UpvoteButton>
 
-                    <p className="pl-0 p-2"> {upVote?.length}</p>
+                    {/* <p className="pl-0 p-2"> {downvotes}</p> */}
                     <DownVoteButton
                       user={user}
                       users={users}
@@ -420,10 +422,7 @@ const ArticleDetailsCard = ({
 
               {/* Modal for comment */}
               {/* The button to open modal */}
-              <label
-                htmlFor="comment-modal"
-                className=" ml-5 mt-2 cursor-pointer"
-              >
+              <label htmlFor="comment-modal" className="ml-5 cursor-pointer">
                 <HiOutlineChat className="text-2xl"></HiOutlineChat>
               </label>
             </div>

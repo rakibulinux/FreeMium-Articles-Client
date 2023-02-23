@@ -97,7 +97,13 @@ const ApplyToThePartnerProgram = () => {
         </h1>
         <div>
           <div className="overflow-x-auto">
-            <table className="table w-full shadow-none text-gray-900 font-semibold">
+            <table
+              className={
+                isDarkMode
+                  ? "table w-full shadow-none text-gray-900 font-semibold"
+                  : "table w-full shadow-none text-gray-900 font-semibold"
+              }
+            >
               <tbody className="">
                 <tr>
                   <th className="text-3xl font-serif text-gray-400">01</th>

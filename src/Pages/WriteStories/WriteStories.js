@@ -24,7 +24,7 @@ const WriteStories = () => {
   const imageHostKey = process.env.REACT_APP_IMG_BB_KEY;
   const [content, setContent] = useState("");
 
-  const [typeArticle, setTypeArticle]=useState('')
+  const [typeArticle, setTypeArticle] = useState("");
   const navigate = useNavigate();
   const date = format(new Date(), "PP");
   useEffect(() => {
@@ -62,9 +62,9 @@ const WriteStories = () => {
     const category = form.category.value;
     const articleType = form.articleType.value;
     // console.log(articleType);
-    if(articleType === 'Paid Article'){
+    if (articleType === "Paid Article") {
       setTypeArticle(false);
-    }else{
+    } else {
       setTypeArticle(true);
     }
     const number = form.number.value;
@@ -198,8 +198,8 @@ const WriteStories = () => {
       onSubmit={handleSubmitStories}
       className={
         isDarkMode
-          ? "w-10/12 mx-auto p-6 my-6 rounded-md sm:p-10  text-white"
-          : "w-10/12 mx-auto p-6 my-6 rounded-md sm:p-10 text-gray-900"
+          ? "w-10/12 mx-auto rounded-md p-0 m-0 sm:py-8 md:py-10 text-white"
+          : "w-10/12 mx-auto p-6 mt-6 rounded-md sm:p-10 py-10 text-gray-900"
       }
     >
       <div className="flex justify-between mb-4 items-center">

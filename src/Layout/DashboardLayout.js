@@ -14,8 +14,10 @@ import {
   FaExclamationCircle,
 } from "react-icons/fa";
 import "../Pages/Dashboard/DashbordEditors/DashbordEditorsTable/DashordEditorsTable.css";
+import { APIContext } from "../contexts/APIProvider";
 const DashboardLayout = () => {
   const { user, loading } = useContext(AuthContext);
+  const { isDarkMode } = useContext(APIContext);
   const [isAdmin] = useAdmin(user?.email);
 
   if (loading) {
@@ -23,8 +25,15 @@ const DashboardLayout = () => {
   }
   return (
     <div>
-      <Navbar />
-
+      <div
+        className={
+          isDarkMode
+            ? "w-11/12 mx-auto bg-black-350 text-white"
+            : "w-11/12 mx-auto bg-base-100 text-black-350"
+        }
+      >
+        <Navbar />
+      </div>
       <div className="drawer drawer-mobile">
         <input
           id="dashboard-drawer"
@@ -77,7 +86,7 @@ const DashboardLayout = () => {
                   Charts
                 </Link>
               </li>
-              
+
               <li>
                 <Link to="/dashboard/reportedStory">
                   <FaExclamationCircle />

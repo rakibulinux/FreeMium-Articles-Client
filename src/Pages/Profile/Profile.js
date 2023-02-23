@@ -236,7 +236,7 @@ const Profile = () => {
                   Edit Profile
                 </button>
               </div>
-              <Counter />
+              {/* <Counter /> */}
               <div className="w-full p-8 mx-2 flex justify-center items-center">
                 <img
                   id="showImage"

@@ -38,8 +38,6 @@ const Articles = () => {
   };
 
   const handleDelete = (id) => {
-    // console.log(id);
-    toast.success("successfully Unsave");
     console.log("data delete");
     fetch(
       `${process.env.REACT_APP_API_URL}/save-article/delete-article/${id}`,

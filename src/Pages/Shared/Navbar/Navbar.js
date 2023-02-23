@@ -16,6 +16,8 @@ import "./Navebar.css";
 import Search from "../Search/Search";
 import { APIContext } from "../../../contexts/APIProvider";
 import { FaRobot } from "react-icons/fa";
+import Notification from "../../../components/Notification/Notification";
+import NotificationIcon from "../../../components/Notification/NotificationIcon";
 //
 const Navbar = () => {
   const { user, logoutUserAccount } = useContext(AuthContext);
@@ -234,7 +236,7 @@ const Navbar = () => {
                 }
                 to="/"
               >
-                <img className="w-56 md:w-6/12" src={logoFM} alt="" />
+                <img className="w-56 md:h-10 md:w-40" src={logoFM} alt="" />
               </NavLink>
               <Search searchPlaceholder={"Search article"} propsStyle={"4px"} />
             </div>
@@ -282,27 +284,8 @@ const Navbar = () => {
 
             {/* notification Section */}
             {/* notification svg icon */}
-            {/* <button className="btn btn-ghost  btn-circle">
-              <div className="indicator">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-                  />
-                </svg>
-                <span className="badge badge-xs text-white badge-primary indicator-item">
-                  1
-                </span>
-              </div>
-            </button> */}
+
+            <NotificationIcon />
             <div className="dropdown dropdown-end">
               <label
                 tabIndex={0}
@@ -456,7 +439,7 @@ const Navbar = () => {
                     Refine recommendations
                   </NavLink>
                 </li>
-                <li
+                {/* <li
                   className={
                     isDarkMode
                       ? "justify-between bg-black-250 text-white text-lg font-semibold text-semibold"
@@ -473,7 +456,7 @@ const Navbar = () => {
                   >
                     Manage publications
                   </NavLink>
-                </li>
+                </li> */}
                 <div className="divider"></div>
                 <li
                   className={

@@ -6,6 +6,7 @@ import { APIContext } from "../../../contexts/APIProvider";
 
 import ArticlesCard from "../../ArticlesSection/ArticlesCard/ArticlesCard";
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
 const Saved = () => {
   const [visible, setVisible] = useState(true);
   const { isDarkMode, fetchAPI } = useContext(APIContext);
@@ -54,13 +55,14 @@ const Saved = () => {
           >
             Start a list
           </button>
-          {/* <Link to="/payment" className={isDarkMode ?"text-gray-900 underline":"underline text-gray-900"}>
-            Start a list
-          </Link> */}
         </div>
       )}
       <div className="card lg:card-side bg-base-200 mt-8">
-        <div className="card-body">
+        <div
+          className={
+            isDarkMode ? "card-body bg-black-250 text-white" : "card-body"
+          }
+        >
           <h2 className="card-title">Reading list</h2>
 
           <ul>

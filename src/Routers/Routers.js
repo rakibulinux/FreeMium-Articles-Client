@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import MessageLayout from "../Layout/MessageLayout";
 import {
   DashboardLayout,
   WelcomeDashboard,
@@ -131,10 +132,7 @@ const router = createBrowserRouter([
         loader: async ({ params }) =>
           await fetch(`${process.env.REACT_APP_API_URL}/hexa-ai/${params.id}`),
       },
-      {
-        path: "/messages",
-        element: <Messages />,
-      },
+
       {
         path: "/search",
         element: <Search></Search>,
@@ -231,6 +229,25 @@ const router = createBrowserRouter([
     ],
   },
   {
+    path: "/messages",
+    element: (
+      <PrivateRoute>
+        <MessageLayout />
+      </PrivateRoute>
+    ),
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "/messages",
+        element: (
+          <PrivateRoute>
+            <Messages />
+          </PrivateRoute>
+        ),
+      },
+    ],
+  },
+  {
     path: "/dashboard",
     element: (
       <AdminRoute>
@@ -247,6 +264,7 @@ const router = createBrowserRouter([
           </AdminRoute>
         ),
       },
+
       {
         path: "/dashboard",
         element: (

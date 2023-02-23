@@ -38,8 +38,11 @@ const ArticleDetailsCard = ({ articleData, users }) => {
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
   };
+
   const title = articleTitle?.replace(/<[^>]+>/g, "");
   const details = articleDetails?.replace(/<[^>]+>/g, "");
+
+  
 
   const lightIcon = (
     <svg
@@ -73,7 +76,16 @@ const ArticleDetailsCard = ({ articleData, users }) => {
       />
     </svg>
   );
-
+  const handleCopyLink = () => {
+    const pageUrl = window.location.href;
+    navigator.clipboard.writeText(pageUrl).then(
+      () => {
+       toast.success("Page URL copied to clipboard!");
+      },
+      (err) => {
+        console.error("Failed to copy page URL: ", err);
+      }
+    );}
   // reported handler
   const reportedHandler = (id) => {
     fetch(`${process.env.REACT_APP_API_URL}/story/reportedStory/${id}`, {
@@ -258,8 +270,8 @@ const ArticleDetailsCard = ({ articleData, users }) => {
               </TwitterShareButton>
 
             <li>
-              <a
-                href="/"
+              <p
+               onClick={handleCopyLink}
                 className={
                   isDarkMode
                     ? "text-gray-200 transition hover:text-gray-300"
@@ -267,7 +279,7 @@ const ArticleDetailsCard = ({ articleData, users }) => {
                 }
               >
                 <LinkIcon className="h-6 w-6  text-gray " />
-              </a>
+              </p>
             </li>
 
             <li>

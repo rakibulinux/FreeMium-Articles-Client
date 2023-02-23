@@ -31,6 +31,8 @@
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.6.2",
     "react-scripts": "5.0.1",
+    "react-share": "^4.4.1",
+    "react-slick": "^0.29.0",
     "react-speech-kit": "^3.0.1",
     "recharts": "^2.3.2",
     "simple-peer": "^9.11.1",

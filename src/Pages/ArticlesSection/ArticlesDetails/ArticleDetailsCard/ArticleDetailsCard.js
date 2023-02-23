@@ -1,5 +1,5 @@
 import { LinkIcon, ShareIcon } from "@heroicons/react/24/solid";
-
+import { FacebookShareButton,TwitterShareButton,} from "react-share";
 import { useContext } from "react";
 import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
@@ -23,6 +23,8 @@ const ArticleDetailsCard = ({
   const { user } = useContext(AuthContext);
   const { fetchAPI } = useContext(APIContext);
 
+  const currentPageUrl =  'https://freemiumarticles.web.app/'
+  // window.location.href
   // const ArticleDetailsCard = ({ articleData,users,setUsers }) => {
   //   const { user } = useContext(AuthContext);
 
@@ -45,8 +47,11 @@ const ArticleDetailsCard = ({
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
   };
+
   const title = articleTitle?.replace(/<[^>]+>/g, "");
   const details = articleDetails?.replace(/<[^>]+>/g, "");
+
+  
 
   const lightIcon = (
     <svg
@@ -80,7 +85,16 @@ const ArticleDetailsCard = ({
       />
     </svg>
   );
-
+  const handleCopyLink = () => {
+    const pageUrl = window.location.href;
+    navigator.clipboard.writeText(pageUrl).then(
+      () => {
+       toast.success("Page URL copied to clipboard!");
+      },
+      (err) => {
+        console.error("Failed to copy page URL: ", err);
+      }
+    );}
   // reported handler
   const reportedHandler = (id) => {
     fetch(`${process.env.REACT_APP_API_URL}/story/reportedStory/${id}`, {
@@ -179,11 +193,14 @@ const ArticleDetailsCard = ({
           {/*  card right side writter socials */}
           {/* <div  className=" flex gap-5  rounded-md border bg-white text-center"> */}
           <ul className="flex justify-start items-center col-span-2 gap-6 lg:col-span-5 lg:justify-end">
+            <FacebookShareButton
+            url={currentPageUrl}
+            >
             <li>
-              <a
-                href="/"
-                rel="noreferrer"
-                target="_blank"
+              <p
+                // href=" "
+                // rel="noreferrer"
+                // target="_blank"
                 className={
                   isDarkMode
                     ? "text-gray-200 transition hover:text-gray-300"
@@ -204,9 +221,9 @@ const ArticleDetailsCard = ({
                     clipRule="evenodd"
                   />
                 </svg>
-              </a>
+              </p>
             </li>
-
+            </FacebookShareButton>
             <li>
               <a
                 href="/"
@@ -235,11 +252,12 @@ const ArticleDetailsCard = ({
               </a>
             </li>
 
+              <TwitterShareButton
+              url={currentPageUrl}
+              >
             <li>
-              <a
-                href="/"
-                rel="noreferrer"
-                target="_blank"
+              <p
+                
                 className={
                   isDarkMode
                     ? "text-gray-200 transition hover:text-gray-300"
@@ -256,12 +274,13 @@ const ArticleDetailsCard = ({
                 >
                   <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
                 </svg>
-              </a>
+              </p>
             </li>
+              </TwitterShareButton>
 
             <li>
-              <a
-                href="/"
+              <p
+               onClick={handleCopyLink}
                 className={
                   isDarkMode
                     ? "text-gray-200 transition hover:text-gray-300"
@@ -269,7 +288,7 @@ const ArticleDetailsCard = ({
                 }
               >
                 <LinkIcon className="h-6 w-6  text-gray " />
-              </a>
+              </p>
             </li>
 
             <li>

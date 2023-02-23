@@ -7,7 +7,7 @@ import { AuthContext } from "../../contexts/AuthProvider";
 import { fetchUserData } from "../../store/fetchGetSlice";
 import { fetchAsync } from "../../store/fetchSlice";
 const socket = io(`${process.env.REACT_APP_API_URL}`); // Replace with your server URL
-
+const redux = "start";
 const Notification = () => {
   const dispatch = useDispatch();
   const [notifications, setNotifications] = useState([]);

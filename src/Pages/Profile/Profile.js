@@ -3,29 +3,33 @@ import React, { useContext, useEffect, useState } from "react";
 import { BiUserCircle } from "react-icons/bi";
 import { FaMapMarkerAlt, FaUser } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
+import { useSelector } from "react-redux";
 import Counter from "../../components/Counter";
 import Spinner from "../../components/Spinner/Spinner";
 import { AuthContext } from "../../contexts/AuthProvider";
+import { refetchData } from "../../store/fetchSlice";
 import { APIContext } from "./../../contexts/APIProvider";
 
 const Profile = () => {
   const { user } = useContext(AuthContext);
   const { isDarkMode, fetchAPI } = useContext(APIContext);
   const [editMode, setEditMode] = useState(false);
+  const singleUsers = useSelector((state) => state.fetch.data);
+  const isLoading = useSelector((state) => state.fetch.isLoading);
   // const [singleUsers, setSingleUsers] = useState({});
   const toggleEditMode = () => {
     setEditMode(!editMode);
   };
-
+  console.log(singleUsers);
   const userId = localStorage.getItem("userId");
 
-  const {
-    isLoading,
-    refetch,
-    data: singleUsers,
-  } = useQuery(["user", user?.email], () =>
-    fetchAPI(`${process.env.REACT_APP_API_URL}/user/${user?.email}`)
-  );
+  // const {
+  //   isLoading,
+  //   refetch,
+  //   data: singleUsers,
+  // } = useQuery(["user", user?.email], () =>
+  //   fetchAPI(`${process.env.REACT_APP_API_URL}/user/${user?.email}`)
+  // );
 
   const [formData, setFormData] = useState({
     name: singleUsers?.name,
@@ -41,7 +45,7 @@ const Profile = () => {
       ...formData,
       [event.target.name]: event.target.value,
     });
-    refetch();
+    // refetch();
   };
 
   const updateProfile = (formData) => {
@@ -69,7 +73,7 @@ const Profile = () => {
       .then((data) => {
         console.log(data);
         // Update your state with the updated user data here
-        refetch();
+        // refetch();
       })
       .catch((error) => {
         console.error(error);
@@ -80,7 +84,7 @@ const Profile = () => {
     event.preventDefault();
     updateProfile(formData);
     toggleEditMode();
-    refetch();
+    // refetch();
   };
   if (isLoading) {
     return <Spinner />;

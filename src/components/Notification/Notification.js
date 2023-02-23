@@ -7,20 +7,31 @@ import { AuthContext } from "../../contexts/AuthProvider";
 import { fetchUserData } from "../../store/fetchGetSlice";
 import { fetchAsync } from "../../store/fetchSlice";
 const socket = io(`${process.env.REACT_APP_API_URL}`); // Replace with your server URL
-const redux = "start";
+
 const Notification = () => {
   const dispatch = useDispatch();
   const [notifications, setNotifications] = useState([]);
   const { user } = useContext(AuthContext);
-  const {
-    isLoading,
-    refetch,
-    data: singleUsers,
-  } = useQuery(["user", user?.email], () =>
+
+  const singleUsers = useSelector((state) => state.fetch.data);
+  const isLoading = useSelector((state) => state.fetch.isLoading);
+  const error = useSelector((state) => state.fetch.error);
+
+  useEffect(() => {
     dispatch(
-      fetchUserData(`${process.env.REACT_APP_API_URL}/user/${user?.email}`)
-    )
-  );
+      fetchAsync(`${process.env.REACT_APP_API_URL}/user/${user?.email}`)
+    );
+  }, [dispatch, user]);
+
+  // const {
+  //   isLoading,
+  //   refetch,
+  //   data: singleUsers,
+  // } = useQuery(["user", user?.email], () =>
+  //   dispatch(
+  //     fetchUserData(`${process.env.REACT_APP_API_URL}/user/${user?.email}`)
+  //   )
+  // );
   // const selector = useSelector((state) => state.fetch.data);
   // useEffect(() => {
   //   fetchAsync(`${process.env.REACT_APP_API_URL}/user/${user?.email}`);
@@ -58,7 +69,7 @@ const Notification = () => {
       socket.off("new_notification");
       socket.off("notification_updated");
     };
-  }, [notifications]);
+  }, [notifications, singleUsers]);
 
   const handleReadClick = (notification) => {
     // Update notification as read

@@ -291,17 +291,17 @@ soket work
                           Good after noon! how can i help you?
                         </div>
                       </div>
-                      <div className="flex-shrink-0 ml-2 self-end mb-1">
+                      {/* <div className="flex-shrink-0 ml-2 self-end mb-1">
                         <span className="flex items-center justify-center h-5 w-5 bg-red-500 text-white text-xs rounded-full">
                           3
                         </span>
-                      </div>
+                      </div> */}
                     </div>
                   ))
                 : "no friend"}
             </div>
             <div className="absolute bottom-0 right-0 mr-2">
-              <button className="flex items-center justify-center shadow-sm h-10 w-10 bg-red-500 text-white rounded-full">
+              {/* <button className="flex items-center justify-center shadow-sm h-10 w-10 bg-red-500 text-white rounded-full">
                 <svg
                   className="w-6 h-6"
                   fill="none"
@@ -316,7 +316,7 @@ soket work
                     d="M12 6v6m0 0v6m0-6h6m-6 0H6"
                   ></path>
                 </svg>
-              </button>
+              </button> */}
             </div>
           </div>
         </div>

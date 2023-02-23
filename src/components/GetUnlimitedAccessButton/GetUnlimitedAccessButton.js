@@ -8,8 +8,8 @@ const GetUnlimitedAccessButton = ({ text }) => {
     <button
       className={
         isDarkMode
-          ? "bg-black-250 text-black font-semibold rounded-3xl py-3 px-2 w-10/12"
-          : "bg-black-350 text-white rounded-3xl py-3 px-2 w-10/12"
+          ? "bg-black-250 text-black font-semibold rounded-3xl py-3 px-2 w-full"
+          : "bg-black-350 text-white rounded-3xl py-3 px-2 w-full"
       }
     >
       {text}

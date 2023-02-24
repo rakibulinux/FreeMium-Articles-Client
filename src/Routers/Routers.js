@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import Notification from "../components/Notification/Notification";
 import MessageLayout from "../Layout/MessageLayout";
 import {
   DashboardLayout,
@@ -121,17 +122,6 @@ const router = createBrowserRouter([
         path: "/our-story",
         element: <OurStory></OurStory>,
       },
-      {
-        path: "/hexa-ai",
-        element: <AskMeAnything />,
-        children: [{}],
-      },
-      {
-        path: "/hexa-ai/:id",
-        element: <HistoryAns></HistoryAns>,
-        loader: async ({ params }) =>
-          await fetch(`${process.env.REACT_APP_API_URL}/hexa-ai/${params.id}`),
-      },
 
       {
         path: "/search",
@@ -167,6 +157,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <List></List>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/notifications",
+        element: (
+          <PrivateRoute>
+            <Notification />
           </PrivateRoute>
         ),
       },
@@ -228,6 +226,29 @@ const router = createBrowserRouter([
       },
     ],
   },
+
+  {
+    path: "/hexa-ai",
+    element: (
+      <PrivateRoute>
+        <MessageLayout />
+      </PrivateRoute>
+    ),
+    children: [
+      {
+        path: "/hexa-ai",
+        element: <AskMeAnything />,
+        children: [{}],
+      },
+      {
+        path: "/hexa-ai/:id",
+        element: <HistoryAns></HistoryAns>,
+        loader: async ({ params }) =>
+          await fetch(`${process.env.REACT_APP_API_URL}/hexa-ai/${params.id}`),
+      },
+    ],
+  },
+
   {
     path: "/messages",
     element: (
@@ -275,31 +296,59 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/category",
-        element: <DashbordCategory></DashbordCategory>,
+        element: (
+          <AdminRoute>
+            <DashbordCategory />
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/storys",
-        element: <DashbordStory></DashbordStory>,
+        element: (
+          <AdminRoute>
+            <DashbordStory />
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/editors",
-        element: <DashbordEditors></DashbordEditors>,
+        element: (
+          <AdminRoute>
+            <DashbordEditors />
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/pendingArticle",
-        element: <PendingArticles />,
+        element: (
+          <AdminRoute>
+            <PendingArticles />
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/charts",
-        element: <DasReCharts></DasReCharts>,
+        element: (
+          <AdminRoute>
+            <DasReCharts />
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/reportedStory",
-        element: <DasReportedStory></DasReportedStory>,
+        element: (
+          <AdminRoute>
+            <DasReportedStory />
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/addCategory",
-        element: <DasAddCategory></DasAddCategory>,
+        element: (
+          <AdminRoute>
+            <DasAddCategory />
+          </AdminRoute>
+        ),
       },
     ],
   },

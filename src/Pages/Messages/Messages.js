@@ -7,6 +7,7 @@ import { APIContext } from "../../contexts/APIProvider";
 import { AuthContext } from "../../contexts/AuthProvider";
 import MessagesJsRightSide from "./MessagesJsRightSide";
 import "./Messages.css";
+import Navbar from "../Shared/Navbar/Navbar";
 const ENDPOINT = `${process.env.REACT_APP_API_URL}`;
 // const socket = socketIOClient(ENDPOINT);
 const socket = io.connect(ENDPOINT);
@@ -195,6 +196,7 @@ soket work
           : "flex flex-row overflow-hidden h-screen antialiased text-gray-800"
       }
     >
+      <Navbar />
       <div className="flex flex-row w-96 flex-shrink-0  p-4">
         <div className="flex flex-col w-full h-full pl-4 pr-4 py-4 -mr-4">
           <div className="flex flex-row items-center">

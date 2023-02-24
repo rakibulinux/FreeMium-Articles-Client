@@ -203,7 +203,7 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className="container mx-auto print:hidden">
+    <div className="mx-auto print:hidden">
       {user?.uid ? (
         <div className="navbar p-0">
           <div className="navbar-start h-16">
@@ -241,13 +241,13 @@ const Navbar = () => {
               <Search searchPlaceholder={"Search article"} propsStyle={"4px"} />
             </div>
           </div>
-          <div className="navbar-end gap-4 items-center">
+          <div className="navbar-end gap-1 md:gap-4 items-center">
             <div className="block">
               <NavLink
                 className={
                   isDarkMode
-                    ? "flex items-center gap-2 text-white hover:text-black"
-                    : "flex items-center gap-2 text-gray-900 hover:text-black"
+                    ? "text-white hover:text-black"
+                    : "text-gray-900 hover:text-black"
                 }
                 to="/write-stories"
               >
@@ -258,8 +258,8 @@ const Navbar = () => {
               <NavLink
                 className={
                   isDarkMode
-                    ? "flex items-center gap-2 text-white hover:text-black"
-                    : "flex items-center gap-2 text-gray-900 hover:text-black"
+                    ? "text-white hover:text-black"
+                    : "text-gray-900 hover:text-black"
                 }
                 to="/hexa-ai"
               >
@@ -273,8 +273,8 @@ const Navbar = () => {
               <NavLink
                 className={
                   isDarkMode
-                    ? "flex items-center gap-2 text-white hover:text-black"
-                    : "flex items-center gap-2 text-gray-900 hover:text-black"
+                    ? "text-white hover:text-black"
+                    : "text-gray-900 hover:text-black"
                 }
                 to="/messages"
               >

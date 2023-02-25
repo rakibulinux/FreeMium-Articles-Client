@@ -7,7 +7,9 @@ import { AiOutlineLike } from "react-icons/ai";
 import { HiOutlineChat } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import ReplyComment from "./ReplyComment";
-import axios from "axios";
+
+
+
 
 const Comments = ({ id }) => {
     const { register, handleSubmit, reset, watch } = useForm();
@@ -19,8 +21,7 @@ const Comments = ({ id }) => {
 
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState(false);
-
-    // console.log(comments);
+    
 
     const handleComment = (data) => {
         // console.log(data);
@@ -32,7 +33,7 @@ const Comments = ({ id }) => {
             comment: data.comment,
             commentDate: date,
         };
-        // console.log(comment);
+        
         // save post information to the database
 
         fetch(`${process.env.REACT_APP_API_URL}/comments`, {
@@ -84,18 +85,7 @@ const Comments = ({ id }) => {
                 }
             });
     };
-
-    //   Update comment
-    const handleUpdateComment = (id) => {
-        console.log('click');
-    }
-
-
-// const fetchComment =()=>{
-
-// }
-    // }
-
+   
     useEffect(() => {
 
         fetch(`${process.env.REACT_APP_API_URL}/comments?articleId=${id}`)
@@ -141,7 +131,7 @@ const Comments = ({ id }) => {
                     <div>
                         {
                             comments?.map((comment) => (
-                                <div className="border-y" key={comment._id}>
+                                <div className="border-y" key={comment?._id}>
                                     <div className="my-5">
                                         <div className="flex justify-between">
                                             <div className="flex">
@@ -188,8 +178,7 @@ const Comments = ({ id }) => {
                                                                     className="dropdown-content  mt-5 border menu p-2 shadow-lg bg-base-100 rounded-box w-44"
                                                                 >
                                                                     <li>
-
-                                                                        <label onClick={()=>handleUpdateComment(comment?._id)} htmlFor="my-modal" className=" text-xs font-semibold">Edit this respond</label>
+                                                                        <label  htmlFor="my-modal" className=" text-xs font-semibold">Edit this respond</label>
                                                                     </li>
                                                                     <li>
                                                                         <button onClick={() => deleteCommentHandle(comment?._id)} className="text-xs font-semibold">
@@ -219,7 +208,11 @@ const Comments = ({ id }) => {
                                         <input type="checkbox" id="my-modal" className="modal-toggle" />
                                         <div className="modal">
                                             <div className="modal-box">
-                                                <textarea defaultValue={comment?.comment} name="updateComment" className=" border-none textarea-lg w-full"></textarea>
+                                            <form >
+                                                <textarea  name="updateComment" className=" border-none textarea-lg w-full"></textarea>
+                                                {/* <textarea name="CategoryName" className="textarea textarea-bordered" placeholder="write updated Category" required></textarea><br /> */}
+        <button type='submit' className=" border-2 rounded-full px-5 py-1 bg-green-500 text-white" >update</button>
+                                                </form>
                                                 <div className="modal-action">
                                                     <label htmlFor="my-modal" className="btn btn-sm rounded-full bg-primary">Cancel</label>
                                                     <label htmlFor="my-modal" className="btn btn-sm rounded-full bg-primary">update</label>

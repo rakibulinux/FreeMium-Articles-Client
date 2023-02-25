@@ -1,12 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useState, useEffect, useContext, useRef } from "react";
-import { toast } from "react-hot-toast";
+import { toast, Toaster } from "react-hot-toast";
 
 import  { io } from "socket.io-client";
 import { APIContext } from "../../contexts/APIProvider";
 import { AuthContext } from "../../contexts/AuthProvider";
 import MessagesJsRightSide from "./MessagesJsRightSide";
-
+import useSound from 'use-sound'
+import notificationSound from "../../audio/Notification - Notification.mp3"
 // const ENDPOINT = `${process.env.REACT_APP_API_URL}`;
 // const socket = socketIOClient(ENDPOINT);
 const socket = io.connect(`http://localhost:5000/`)
@@ -18,17 +19,20 @@ function Messages({ userId }) {
   const { user } = useContext(AuthContext);
   const scrollRef = useRef();
   const { fetchAPI, isDarkMode } = useContext(APIContext);
-  
   const [newMessages, setNewMessages] = useState([]); 
+  const [socketMessages, setSocketMessages] = useState(''); 
  const [active,setActive] =useState([])
   const [currentFriend, setCurrentFriend] = useState(""); 
+  const [typingMessage,setTypingMessage] =useState('')
+  const [notificationSplay] = useSound(notificationSound);
+
+
+
   const imageHostKey = process.env.REACT_APP_IMG_BB_KEY;
   // console.log(getMessage);
   // console.log(currentFriend?._id);
 
-  // useEffect(() => {
-  //    socket = io.connect(`http://localhost:5000/`)
-  // }, []);
+  
 
 
   const {
@@ -70,10 +74,16 @@ function Messages({ userId }) {
   // message input handler
   const messageInputHandl = (e) => {
     setNewMessages(e.target.value);
+    socket.emit('typingMessage',{
+      senderId: singleUsers?._id,
+      reciverId: currentFriend?._id,
+      msg:e.target.value
+    })
   };
+  // send message handler
   const sendMessage = (e) => {
     e.preventDefault();
-    console.log(newMessages);
+    notificationSplay()
     const data = {
       senderName: singleUsers?.name,
       senderId: singleUsers?._id,
@@ -81,8 +91,6 @@ function Messages({ userId }) {
       message: { text: newMessages ? newMessages : "", image: "" },
       date: new Date(),
     };
-    console.log(data);
-
     // send message in socket server
     socket.emit('sendMessage',{
       senderId: singleUsers?._id,
@@ -91,7 +99,12 @@ function Messages({ userId }) {
       message: { text: newMessages ? newMessages : "", image: "" },
       date: new Date(),
     })
-
+// set typing message empty
+    socket.emit('typingMessage',{
+      senderId: singleUsers?._id,
+      reciverId: currentFriend?._id,
+      msg:''
+    })
     fetch(`${process.env.REACT_APP_API_URL}/sendMessage`, {
       method: "POST",
       headers: {
@@ -110,9 +123,12 @@ function Messages({ userId }) {
 /*==============
 soket work
 ================*/
+
   // send user
   useEffect(() => {
     socket.emit('addUser',singleUsers?._id,singleUsers)
+
+    
   }, [singleUsers]);
 
   // get user from socket
@@ -122,7 +138,39 @@ soket work
       setActive(filterUsers)
     })
   }, []);
-console.log(active)
+// get message from socket.
+useEffect(() => {
+  socket.on('getMessage',(message)=>{
+    setSocketMessages(message)
+  })
+  
+}, []);
+ // get typing message
+useEffect(() => { 
+  socket.on('getTypingMessage',(data)=>{
+    setTypingMessage(data)
+  })
+}, []);
+// show messsage in user window.
+useEffect(() => {
+  if(socketMessages && currentFriend){
+    if(socketMessages.senderId===currentFriend._id &&
+      socketMessages.reciverId===singleUsers?._id){
+        setGetMessage(socketMessages);
+        setSocketMessages('')
+    }
+  }
+}, [socketMessages]);
+// get notification messsage .
+useEffect(() => {
+  
+    if(socketMessages && socketMessages.senderId!==currentFriend._id &&
+      socketMessages.reciverId===singleUsers?._id){
+        notificationSplay()
+      toast.success(`${socketMessages.senderName} send a new message`)
+   
+  }
+}, [socketMessages]);
 //get message
   useEffect(() => {
     fetch(
@@ -139,15 +187,29 @@ console.log(active)
   const emojiHnadler = (emoje) => {
     console.log(newMessages);
     setNewMessages(`${newMessages}` + emoje);
+    // set typing message empty
+    socket.emit('typingMessage',{
+      senderId: singleUsers?._id,
+      reciverId: currentFriend?._id,
+      msg:emoje
+    })
   };
   //  img send
   const sendImage = (e) => {
     if (e.target.files.length !== 0) {
       // console.log(e.target.files[0]);
+      notificationSplay()
       const img = e.target.files[0] 
-    
-      const formData = new FormData();
-    
+          // send img socket server
+      socket.emit('sendMessage',{
+      senderId: singleUsers?._id,
+      senderName: singleUsers?.name,
+      reciverId: currentFriend?._id,
+      message: { text:"", image:img},
+      date: new Date(),
+    })
+
+      const formData = new FormData();    
       formData.append("image", img);     
       const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`
       fetch(url,{
@@ -164,7 +226,7 @@ console.log(active)
               message: { text: "", image: imgData.data.url },
               date: new Date(),
             };
-            console.log(data);
+           
             fetch(`${process.env.REACT_APP_API_URL}/send-image`, {
               method: "POST",
               headers: {
@@ -188,6 +250,10 @@ console.log(active)
   }
   return (
     <div>
+      {/* <Toaster
+      position={"top-right"}
+      reverseOrder={false}
+      toastOptions={{style:{fontSize:'18px'}}}></Toaster> */}
       <div
         className={
           isDarkMode
@@ -341,6 +407,7 @@ console.log(active)
               emojiHnadler={emojiHnadler}
               sendImage={sendImage}
               active={active}
+              typingMessage={typingMessage}
             ></MessagesJsRightSide>
           ) : (
             <p className="text-xl font-bold text-centar">

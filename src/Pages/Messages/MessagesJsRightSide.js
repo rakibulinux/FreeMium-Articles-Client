@@ -14,7 +14,8 @@ const MessagesJsRightSide = ({
   singleUsers,
   scrollRef,
   emojiHnadler,
-  active
+  active,
+  typingMessage
 }) => {
   const { picture, name,_id } = currentFriend;
 
@@ -52,6 +53,7 @@ const MessagesJsRightSide = ({
   ];
 
   return (
+    <>
     <div
       className={
         isDarkMode
@@ -238,6 +240,36 @@ const MessagesJsRightSide = ({
           </div>
         </div>
       </div>
+      {
+        typingMessage && typingMessage.msg && typingMessage.senderId === _id?
+        <div className="typing-Message">
+        <div className="col-start-1 col-end-8 p-3 rounded-lg">
+                          <div className="flex flex-row items-center">
+                            <img
+                              src={picture}
+                              alt="img"
+                              className="flex items-center justify-center h-10 w-10 rounded-full  flex-shrink-0"
+                            ></img>
+                            <div
+                              className={
+                                isDarkMode
+                                  ? "relative ml-3 text-sm bg-black-250 py-2 px-4 shadow rounded-xl"
+                                  : "relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl"
+                              }
+                            >
+                              <div>
+                                typing message......
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+        </div>
+        :
+        ''
+      }
+      {/* show typing message */}
+     
+    {/* end typing message */}
       <div className="flex flex-row items-center ">
         <div className="flex flex-row items-center w-full border rounded-3xl h-12 px-2">
           <button className="flex items-center justify-center h-10 w-10 text-gray-400 ml-1">
@@ -357,6 +389,8 @@ const MessagesJsRightSide = ({
         </div>
       </div>
     </div>
+  
+    </>
   );
 };
 

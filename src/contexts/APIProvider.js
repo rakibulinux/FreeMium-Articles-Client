@@ -10,6 +10,8 @@ const APIProvider = ({ children }) => {
   const [allUsers, setAllUsers] = useState([]);
   const [threeUsers, setThreeUsers] = useState([]);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [searchArticles, setSearchArticles] = useState([]);
+  const [suggestions, setSuggestions] = useState([]);
   const { user } = useContext(AuthContext);
   const fetchAPI = async (url) => {
     try {
@@ -18,7 +20,7 @@ const APIProvider = ({ children }) => {
       return data;
     } catch (error) {
       throw new Error(
-        `Failed to fetch API Data from Backend: ${error.message}`
+        `Failed to fetch API Data from Backend: ${error?.message}`
       );
     }
   };
@@ -139,7 +141,10 @@ const APIProvider = ({ children }) => {
     reportLoading,
     reportRefetch,
     fetchAPI,
-
+    searchArticles,
+    setSearchArticles,
+    suggestions,
+    setSuggestions,
     // friends,
     // friendsLoading,
     // friendsRefetch,

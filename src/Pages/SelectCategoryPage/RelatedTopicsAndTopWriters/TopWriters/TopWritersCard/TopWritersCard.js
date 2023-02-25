@@ -14,8 +14,8 @@ const TopWritersCard = ({ writerData }) => {
       <div
         className={
           isDarkMode
-            ? "card card-compact w-80 lg:w-96 bg-black-250 shadow-xl rounded-none mb-2 lg:mb-0 mx-auto"
-            : "card card-compact w-80 lg:w-96 bg-base-100 shadow-xl rounded-none mb-2 lg:mb-0 mx-auto"
+            ? "card card-compact w-full lg:w-full bg-black-250 shadow-xl rounded-none mb-2 lg:mb-0 mx-auto"
+            : "card card-compact w-full lg:w-full bg-base-100 shadow-xl rounded-none mb-2 lg:mb-0 mx-auto"
         }
       >
         <div className="card-body">

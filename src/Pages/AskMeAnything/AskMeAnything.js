@@ -84,8 +84,8 @@ const AskMeAnything = () => {
                 {/* <code className="!whitespace-pre max-w-xl">{response}</code> */}
               </div>
             </div>
-            <div className="p-16 mx-10 my-2 bottom-0 rounded-lg mt-56 absolute top-[353px]">
-              <div className='flex items-center justify-center gap-4 w-[50rem]'>
+
+            <div className="flex items-center justify-center gap-4 bottom-0">
               <input
                 type="text"
                 value={prompt}
@@ -101,12 +101,6 @@ const AskMeAnything = () => {
                     className="text-4xl text-green-550 cursor-pointer"
                   />
                 </button>
-                {/* <AiOutlineSend
-                  type="submit"
-                  title="Sent"
-                  className="text-4xl text-green-550 cursor-pointer"
-                /> */}
-              </div>
               </div>
             </div>
           </div>

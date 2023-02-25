@@ -1,5 +1,5 @@
 import { LinkIcon, ShareIcon } from "@heroicons/react/24/solid";
-
+import { FacebookShareButton, TwitterShareButton } from "react-share";
 import { useContext } from "react";
 import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
@@ -12,16 +12,31 @@ import UpvoteButton from "../../UpvoteButton/UpvoteButton";
 import { HiOutlineChat } from "react-icons/hi";
 import ListenButton from "./ListenButton";
 import { useQuery } from "@tanstack/react-query";
+import Notification from "../../../../components/Notification/Notification";
 
 const ArticleDetailsCard = ({
   articleData,
   users,
   handleUpvote,
   handleDownvote,
+  singleUsers,
 }) => {
   const { user } = useContext(AuthContext);
   const { fetchAPI } = useContext(APIContext);
 
+  const {
+    isLoading,
+    isError,
+    data: articleData3,
+    error,
+  } = useQuery(["my-stories-3", user?.email], () =>
+    fetchAPI(
+      `${process.env.REACT_APP_API_URL}/my-stories-3?email=${user?.email}`
+    )
+  );
+
+  const currentPageUrl = "https://freemiumarticles.web.app/";
+  // window.location.href
   // const ArticleDetailsCard = ({ articleData,users,setUsers }) => {
   //   const { user } = useContext(AuthContext);
 
@@ -35,15 +50,16 @@ const ArticleDetailsCard = ({
     articleImg,
     writerName,
     userEmail,
-    upVote,
-    downVote,
+    upvotes,
+    downvotes,
     isPaid,
   } = articleData;
-  console.log(upVote, downVote);
+  console.log(upvotes, downvotes);
   const { isDarkMode, setIsDarkMode } = useContext(APIContext);
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
   };
+
   const title = articleTitle?.replace(/<[^>]+>/g, "");
   const details = articleDetails?.replace(/<[^>]+>/g, "");
 
@@ -79,7 +95,17 @@ const ArticleDetailsCard = ({
       />
     </svg>
   );
-
+  const handleCopyLink = () => {
+    const pageUrl = window.location.href;
+    navigator.clipboard.writeText(pageUrl).then(
+      () => {
+        toast.success("Page URL copied to clipboard!");
+      },
+      (err) => {
+        console.error("Failed to copy page URL: ", err);
+      }
+    );
+  };
   // reported handler
   const reportedHandler = (id) => {
     fetch(`${process.env.REACT_APP_API_URL}/story/reportedStory/${id}`, {
@@ -178,34 +204,35 @@ const ArticleDetailsCard = ({
           {/*  card right side writter socials */}
           {/* <div  className=" flex gap-5  rounded-md border bg-white text-center"> */}
           <ul className="flex justify-start items-center col-span-2 gap-6 lg:col-span-5 lg:justify-end">
-            <li>
-              <a
-                href="/"
-                rel="noreferrer"
-                target="_blank"
-                className={
-                  isDarkMode
-                    ? "text-gray-200 transition hover:text-gray-300"
-                    : "text-gray-500 transition hover:text-black"
-                }
-              >
-                <span className="sr-only">Facebook</span>
-
-                <svg
-                  className="w-6 h-6"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
+            <FacebookShareButton url={currentPageUrl}>
+              <li>
+                <p
+                  // href=" "
+                  // rel="noreferrer"
+                  // target="_blank"
+                  className={
+                    isDarkMode
+                      ? "text-gray-200 transition hover:text-gray-300"
+                      : "text-gray-500 transition hover:text-black"
+                  }
                 >
-                  <path
-                    fillRule="evenodd"
-                    d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </a>
-            </li>
+                  <span className="sr-only">Facebook</span>
 
+                  <svg
+                    className="w-6 h-6"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </p>
+              </li>
+            </FacebookShareButton>
             <li>
               <a
                 href="/"
@@ -234,33 +261,32 @@ const ArticleDetailsCard = ({
               </a>
             </li>
 
-            <li>
-              <a
-                href="/"
-                rel="noreferrer"
-                target="_blank"
-                className={
-                  isDarkMode
-                    ? "text-gray-200 transition hover:text-gray-300"
-                    : "text-gray-500 transition hover:text-black"
-                }
-              >
-                <span className="sr-only">Twitter</span>
-
-                <svg
-                  className="w-6 h-6"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
+            <TwitterShareButton url={currentPageUrl}>
+              <li>
+                <p
+                  className={
+                    isDarkMode
+                      ? "text-gray-200 transition hover:text-gray-300"
+                      : "text-gray-500 transition hover:text-black"
+                  }
                 >
-                  <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
-                </svg>
-              </a>
-            </li>
+                  <span className="sr-only">Twitter</span>
+
+                  <svg
+                    className="w-6 h-6"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
+                  </svg>
+                </p>
+              </li>
+            </TwitterShareButton>
 
             <li>
-              <a
-                href="/"
+              <p
+                onClick={handleCopyLink}
                 className={
                   isDarkMode
                     ? "text-gray-200 transition hover:text-gray-300"
@@ -268,7 +294,7 @@ const ArticleDetailsCard = ({
                 }
               >
                 <LinkIcon className="h-6 w-6  text-gray " />
-              </a>
+              </p>
             </li>
 
             <li>
@@ -367,9 +393,9 @@ const ArticleDetailsCard = ({
         {/* bottom link */}
         <div>
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 mt-5">
-            <div className="flex  justify-start gap-2 text-xs ">
+            <div className="flex justify-start items-center gap-2 text-xs">
               {user?.uid ? (
-                <div className="flex   gap-2 border rounded-full ">
+                <div className="flex gap-2 border rounded-full">
                   <UpvoteButton
                     user={user}
                     users={users}
@@ -377,12 +403,13 @@ const ArticleDetailsCard = ({
                     userEmail={userEmail}
                     upVoteId={user?.email}
                     articleData={articleData}
+                    // upVote={upVote}
+                    // downVote={downVote}
                     // refetch={refetch}
                     handleUpvote={handleUpvote}
                   ></UpvoteButton>
-
-                  <p className="pl-0 p-2"> {upVote?.length}</p>
-                  <DownVoteButton
+                  {/* <p className="pl-0 p-2"> {upvotes}</p> */}
+                  {/* <DownVoteButton
                     user={user}
                     users={users}
                     storyId={_id}
@@ -391,12 +418,12 @@ const ArticleDetailsCard = ({
                     articleData={articleData}
                     handleDownvote={handleDownvote}
                     // refetch={refetch}
-                  ></DownVoteButton>
-                  <p className="pl-0 p-2"> {downVote?.length}</p>
+                  ></DownVoteButton> */}
+                  {/* <p className="pl-0 p-2"> {downvotes}</p> */}
                 </div>
               ) : (
                 <Link to="/login">
-                  <div className="flex   gap-2 border rounded-full ">
+                  <div className="flex gap-2 border rounded-full ">
                     <UpvoteButton
                       user={user}
                       users={users}
@@ -405,7 +432,7 @@ const ArticleDetailsCard = ({
                       upVoteId={user?.email}
                     ></UpvoteButton>
 
-                    <p className="pl-0 p-2"> {upVote?.length}</p>
+                    {/* <p className="pl-0 p-2"> {downvotes}</p> */}
                     <DownVoteButton
                       user={user}
                       users={users}
@@ -420,10 +447,7 @@ const ArticleDetailsCard = ({
 
               {/* Modal for comment */}
               {/* The button to open modal */}
-              <label
-                htmlFor="comment-modal"
-                className=" ml-5 mt-2 cursor-pointer"
-              >
+              <label htmlFor="comment-modal" className="ml-5 cursor-pointer">
                 <HiOutlineChat className="text-2xl"></HiOutlineChat>
               </label>
             </div>
@@ -493,11 +517,8 @@ const ArticleDetailsCard = ({
               >
                 More from {writerName}
               </h1>
-              <p>
-                Top Writer in Self Improvement | Here to help you live and think
-                better. Reach out: alfredeye@tutamail.com
-              </p>
-              <DemoWritter articleData={articleData}></DemoWritter>
+              <p>{users?.bio}</p>
+              <DemoWritter articleData={articleData3}></DemoWritter>
             </div>
           </div>
 

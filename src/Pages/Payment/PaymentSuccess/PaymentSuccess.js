@@ -15,7 +15,7 @@ const PaymentSuccess = () => {
       .then((data) => setPaymentUser(data));
   }, [transactionId]);
 
-  // console.log(paymentUser);
+  console.log(paymentUser);
   return (
     <div>
       <h1 className="text-4xl text-center text-sky-700 my-2">

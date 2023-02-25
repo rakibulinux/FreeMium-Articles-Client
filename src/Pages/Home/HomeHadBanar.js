@@ -15,7 +15,7 @@ const HomeHadBanar = () => {
   return (
     <div className="flex lg:justify-around items-center lg:flex-row">
       {/* import particle js */}
-      <div className="hero justify-start px-10 ">
+      <div className="hero justify-start">
         <div className="hero-content">
           <div className="lg:max-w-md max-w-prose">
             <h1
@@ -41,11 +41,11 @@ const HomeHadBanar = () => {
             <button
               className={
                 isDarkMode
-                  ? "btn bg-black-250 hover:bg-black-250 border-0 rounded-full"
-                  : "btn bg-black-250 hover:bg-black-250 border-0 rounded-full"
+                  ? "text-white py-2 px-3 font-medium bg-black-250 hover:bg-black-250 border-0 rounded-full"
+                  : "text-white py-2 px-3 font-medium bg-black-250 hover:bg-black-250 border-0 rounded-full"
               }
             >
-              Start bloging
+              Start Bloging
             </button>
           </div>
         </div>

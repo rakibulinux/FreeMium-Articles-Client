@@ -1,86 +1,122 @@
-import axios from "axios";
-import React from "react";
-import { useContext } from "react";
-import { useState } from "react";
-import { useEffect } from "react";
-import { BiUpvote } from "react-icons/bi";
+import { useQuery } from "@tanstack/react-query";
+import React, { useState, useEffect, useContext } from "react";
+import { BiDownvote, BiUpvote } from "react-icons/bi";
 import { APIContext } from "../../../contexts/APIProvider";
 
-const UpvoteButton = ({
-  refetch,
-  articleData,
-  user,
-  storyId,
-  upVoteId,
-  classes,
-  handleUpvote,
-}) => {
-  const [upVote, setUpVote] = useState(false);
-  const [fetchData, setFetchData] = useState(false);
+function UpvoteButton({ storyId, title, content, upvotes, downvotes }) {
+  const [vote, setVote] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const { fetchAPI } = useContext(APIContext);
 
-  const { isDarkMode } = useContext(APIContext);
+  const {
+    data,
+    isLoading: isLoadings,
+    refetch: refetchs,
+  } = useQuery(["view-story", storyId], () =>
+    fetchAPI(`${process.env.REACT_APP_API_URL}/view-story/${storyId}`)
+  );
+  // const [post, setPost] = useState(null);
+  // setPost(data);
+  // Helper function to update the vote count in the state
+  function updateVoteCount(voteType) {
+    if (voteType === "upvote") {
+      setVote("upvote");
+    } else if (voteType === "downvote") {
+      setVote("downvote");
+    }
+  }
+
+  // Add event listener for upvote button
+  async function handleUpvote() {
+    setIsLoading(true);
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/view-story/${storyId}/upvote`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ vote: "upvote" }),
+        }
+      );
+      const post = await response.json();
+      updateVoteCount("upvote");
+      setPost(post);
+      refetchs();
+    } catch (err) {
+      console.error(err);
+    }
+    setIsLoading(false);
+  }
+
+  // Add event listener for downvote button
+  async function handleDownvote() {
+    setIsLoading(true);
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/view-story/${storyId}/upvote`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ vote: "downvote" }),
+        }
+      );
+      const post = await response.json();
+      updateVoteCount("downvote");
+      setPost(post);
+      refetchs();
+    } catch (err) {
+      console.error(err);
+    }
+    setIsLoading(false);
+  }
+
+  // Fetch post data on mount
+  const [post, setPost] = useState(null);
   useEffect(() => {
-    axios
-      .get(
-        `${process.env.REACT_APP_API_URL}/users/${storyId}/upVote/${user?.email}`
-      )
-      .then((res) => {
-        setUpVote(res?.data?.upVote);
-      });
-  }, [storyId, user?.email, fetchData]);
+    async function fetchPost() {
+      try {
+        const response = await fetch(
+          `${process.env.REACT_APP_API_URL}/view-story/${storyId}`
+        );
+        const post = await response.json();
+        setPost(post);
+        console.log(post);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    fetchPost();
+  }, [storyId, data]);
 
-  const handleUpVote = () => {
-    axios
-      .post(`${process.env.REACT_APP_API_URL}/users/upVote`, {
-        storyId,
-        upVoteId,
-      })
-      .then((res) => {
-        setUpVote(true);
-        setFetchData(!fetchData);
-        refetch();
-      });
-  };
+  if (!post) {
+    return <p>Loading...</p>;
+  }
 
-  const handleDecUpVote = () => {
-    axios
-      .post(`${process.env.REACT_APP_API_URL}/users/decUpVote`, {
-        storyId,
-        decUpVoteId: upVoteId,
-      })
-      .then((res) => {
-        setUpVote(false);
-        setFetchData(!fetchData);
-        refetch();
-      });
-  };
   return (
-    <div>
-      {upVote ? (
-        <button
-          onClick={handleUpvote}
-          className={
-            isDarkMode
-              ? `btn btn-sm bg-gray-100 text-gray-800  hover:bg-gray-300 hover:text-gray-800 rounded-full btn-outline ${classes}`
-              : `btn btn-sm rounded-full bg-white border-0 text-[#ff5200]  hover:bg-white hover:text-gray-800 btn-outline ${classes}`
-          }
-        >
-          <BiUpvote className="h-4 w-4  " />
-        </button>
-      ) : (
-        <button
-          onClick={handleUpvote}
-          className={
-            isDarkMode
-              ? `btn btn-sm bg-gray-100 hover:bg-white hover:text-gray-800 text-gray-900 rounded-full btn-outline ${classes}`
-              : `btn btn-sm rounded-full bg-white text-gray-800  hover:bg-white hover:text-gray-800 border-0  ${classes}`
-          }
-        >
-          <BiUpvote className="h-4 w-4  " />
-        </button>
-      )}
+    <div className="flex gap-4">
+      <button
+        className="flex gap-2"
+        onClick={handleUpvote}
+        disabled={isLoading || vote === "upvote"}
+      >
+        <BiUpvote className="h-4 w-4" />
+        {post?.upvotes}
+      </button>
+
+      <button
+        className="flex gap-2"
+        onClick={handleDownvote}
+        disabled={isLoading || vote === "downvote"}
+      >
+        <BiDownvote className="h-4 w-4" />
+        {post?.downvotes}
+      </button>
     </div>
   );
-};
+}
 
 export default UpvoteButton;

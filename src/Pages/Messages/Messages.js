@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useState, useEffect, useContext, useRef } from "react";
-import { toast } from "react-hot-toast";
+import { toast, Toaster } from "react-hot-toast";
 
 import { io } from "socket.io-client";
 import { APIContext } from "../../contexts/APIProvider";
@@ -8,26 +8,32 @@ import { AuthContext } from "../../contexts/AuthProvider";
 import MessagesJsRightSide from "./MessagesJsRightSide";
 import "./Messages.css";
 import Navbar from "../Shared/Navbar/Navbar";
-const ENDPOINT = `${process.env.REACT_APP_API_URL}`;
+import useSound from 'use-sound'
+import notificationSound from "../../audio/Notification - Notification.mp3"
+// const ENDPOINT = `${process.env.REACT_APP_API_URL}`;
 // const socket = socketIOClient(ENDPOINT);
+const ENDPOINT = `${process.env.REACT_APP_API_URL}`;
 const socket = io.connect(ENDPOINT);
 
 function Messages({ userId }) {
-  // const [getMessage, setGetMessage] = useState();
+  const [getMessage, setGetMessage] = useState();
   const { user } = useContext(AuthContext);
 
   const { fetchAPI, isDarkMode } = useContext(APIContext);
+  const [newMessages, setNewMessages] = useState([]); 
+  const [socketMessages, setSocketMessages] = useState(''); 
+ const [active,setActive] =useState([])
+  const [currentFriend, setCurrentFriend] = useState(""); 
+  const [typingMessage,setTypingMessage] =useState('')
+  const [notificationSplay] = useSound(notificationSound);
 
-  const [newMessages, setNewMessages] = useState([]);
-  const [active, setActive] = useState([]);
-  const [currentFriend, setCurrentFriend] = useState("");
+
+
   const imageHostKey = process.env.REACT_APP_IMG_BB_KEY;
   // console.log(getMessage);
   // console.log(currentFriend?._id);
 
-  // useEffect(() => {
-  //    socket = io.connect(`http://localhost:5000/`)
-  // }, []);
+  
 
   const {
     isLoading,
@@ -59,10 +65,16 @@ function Messages({ userId }) {
   // message input handler
   const messageInputHandl = (e) => {
     setNewMessages(e.target.value);
+    socket.emit('typingMessage',{
+      senderId: singleUsers?._id,
+      reciverId: currentFriend?._id,
+      msg:e.target.value
+    })
   };
+  // send message handler
   const sendMessage = (e) => {
     e.preventDefault();
-    console.log(newMessages);
+    notificationSplay()
     const data = {
       senderName: singleUsers?.name,
       senderId: singleUsers?._id,
@@ -70,17 +82,20 @@ function Messages({ userId }) {
       message: { text: newMessages ? newMessages : "", image: "" },
       date: new Date(),
     };
-    console.log(data);
-
     // send message in socket server
-    socket.emit("sendMessage", {
+    socket.emit('sendMessage',{
       senderId: singleUsers?._id,
       senderName: singleUsers?.name,
       reciverId: currentFriend?._id,
       message: { text: newMessages ? newMessages : "", image: "" },
       date: new Date(),
-    });
-
+    })
+// set typing message empty
+    socket.emit('typingMessage',{
+      senderId: singleUsers?._id,
+      reciverId: currentFriend?._id,
+      msg:''
+    })
     fetch(`${process.env.REACT_APP_API_URL}/sendMessage`, {
       method: "POST",
       headers: {
@@ -93,66 +108,130 @@ function Messages({ userId }) {
         console.log(result);
         toast.success(`Saved message`);
         setNewMessages("");
-        getMessageRefetch();
+        // getMessageRefetch();
       });
   };
   /*==============
 soket work
 ================*/
+
   // send user
   useEffect(() => {
-    socket.emit("addUser", singleUsers?._id, singleUsers);
+    socket.emit('addUser',singleUsers?._id,singleUsers)
+
+    
   }, [singleUsers]);
 
   // get user from socket
+//   socket.on("getUsers", (users) => {
+//     const filterUsers = users?.filter((u) => u.userId !== singleUsers?._id);
+//     setActive(filterUsers);
+//   });
+// }, [singleUsers]);
+// console.log(active);
+// //get message
+// const {
+//   data: getMessage,
+//   isLoading: getMessageLoading,
+//   refetch: getMessageRefetch,
+// } = useQuery(["sendMessage", currentFriend?._id, singleUsers?._id], () =>
+//   fetchAPI(
+
+
+  // hkhjkgh
   useEffect(() => {
-    socket.on("getUsers", (users) => {
-      const filterUsers = users?.filter((u) => u.userId !== singleUsers?._id);
-      setActive(filterUsers);
-    });
-  }, [singleUsers]);
-  console.log(active);
-  //get message
-  const {
-    data: getMessage,
-    isLoading: getMessageLoading,
-    refetch: getMessageRefetch,
-  } = useQuery(["sendMessage", currentFriend?._id, singleUsers?._id], () =>
-    fetchAPI(
+    socket.on('getUsers',(users)=>{
+      const filterUsers = users?.filter(u=>u.userId !== singleUsers?._id)
+      setActive(filterUsers)
+    })
+  }, []);
+// get message from socket.
+useEffect(() => {
+  socket.on('getMessage',(message)=>{
+    setSocketMessages(message)
+  })
+  
+}, []);
+ // get typing message
+useEffect(() => { 
+  socket.on('getTypingMessage',(data)=>{
+    setTypingMessage(data)
+  })
+}, []);
+// show messsage in user window.
+useEffect(() => {
+  if(socketMessages && currentFriend){
+    if(socketMessages.senderId===currentFriend._id &&
+      socketMessages.reciverId===singleUsers?._id){
+        setGetMessage(socketMessages);
+        setSocketMessages('')
+    }
+  }
+}, [socketMessages]);
+// get notification messsage .
+useEffect(() => {
+  
+    if(socketMessages && socketMessages.senderId!==currentFriend._id &&
+      socketMessages.reciverId===singleUsers?._id){
+        notificationSplay()
+      toast.success(`${socketMessages.senderName} send a new message`)
+   
+  }
+}, [socketMessages]);
+//get message
+// const {
+//     data: getMessage,
+//     isLoading: getMessageLoading,
+//     refetch: getMessageRefetch,
+//   } = useQuery(["sendMessage", currentFriend?._id, singleUsers?._id], () =>
+//     fetchAPI(
+//       `${process.env.REACT_APP_API_URL}/sendMessage/${currentFriend?._id}/getMseeage/${singleUsers?._id}`
+//     )
+//     );
+
+  useEffect(() => {
+    fetch(
       `${process.env.REACT_APP_API_URL}/sendMessage/${currentFriend?._id}/getMseeage/${singleUsers?._id}`
     )
-  );
+      .then((res) => res.json())
+      .then((data) => {
+        setGetMessage(data);
+        friendsRefetch();
+      });
+  }, [currentFriend]);
 
-  // useEffect(() => {
-  //   fetch(
-  //     `${process.env.REACT_APP_API_URL}/sendMessage/${currentFriend?._id}/getMseeage/${singleUsers?._id}`
-  //   )
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setGetMessage(data);
-  //       friendsRefetch();
-  //     });
-  // }, [currentFriend, getMessage]);
-
-  // emonji handler
+  // emonji handler , getMessage
   const emojiHnadler = (emoje) => {
     console.log(newMessages);
     setNewMessages(`${newMessages}` + emoje);
-    getMessageRefetch();
+    // set typing message empty
+    socket.emit('typingMessage',{
+      senderId: singleUsers?._id,
+      reciverId: currentFriend?._id,
+      msg:emoje
+    })
   };
   //  img send
   const sendImage = (e) => {
     if (e.target.files.length !== 0) {
       // console.log(e.target.files[0]);
-      const img = e.target.files[0];
+      notificationSplay()
+      const img = e.target.files[0] 
+          // send img socket server
+      socket.emit('sendMessage',{
+      senderId: singleUsers?._id,
+      senderName: singleUsers?.name,
+      reciverId: currentFriend?._id,
+      message: { text:"", image:img},
+      date: new Date(),
+    })
 
-      const formData = new FormData();
-
-      formData.append("image", img);
-      const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
-      fetch(url, {
-        method: "POST",
-        body: formData,
+      const formData = new FormData();    
+      formData.append("image", img);     
+      const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`
+      fetch(url,{
+        method:'POST',
+        body:formData
       })
         .then((res) => res.json())
         .then((imgData) => {
@@ -164,7 +243,7 @@ soket work
               message: { text: "", image: imgData.data.url },
               date: new Date(),
             };
-            console.log(data);
+           
             fetch(`${process.env.REACT_APP_API_URL}/send-image`, {
               method: "POST",
               headers: {
@@ -176,7 +255,7 @@ soket work
               .then((result) => {
                 console.log(result);
                 toast.success(`Saved img`);
-                getMessageRefetch();
+                // getMessageRefetch();
 
                 setNewMessages("");
               });
@@ -185,7 +264,7 @@ soket work
     }
   };
 
-  if (isLoading && friendsLoading && getMessageLoading) {
+  if (isLoading && friendsLoading ) {
     return;
   }
   return (
@@ -196,7 +275,7 @@ soket work
           : "flex flex-row overflow-hidden h-screen antialiased text-gray-800"
       }
     >
-      <Navbar />
+      {/* <Navbar /> */}
       <div className="flex flex-row w-96 flex-shrink-0  p-4">
         <div className="flex flex-col w-full h-full pl-4 pr-4 py-4 -mr-4">
           <div className="flex flex-row items-center">
@@ -322,33 +401,33 @@ soket work
             </div>
           </div>
         </div>
-      </div>
-      <div
-        className={
-          isDarkMode
-            ? "flex flex-col justify-between w-full bg-black-350 text-white px-4 "
-            : "flex flex-col justify-between w-full bg-white px-4 "
-        }
-      >
-        {currentFriend ? (
-          <MessagesJsRightSide
-            friends={friends}
-            currentFriend={currentFriend}
-            newMessages={newMessages}
-            messageInputHandl={messageInputHandl}
-            sendMessage={sendMessage}
-            getMessage={getMessage}
-            singleUsers={singleUsers}
-            // scrollRef={scrollRef}
-            emojiHnadler={emojiHnadler}
-            sendImage={sendImage}
-            active={active}
-          ></MessagesJsRightSide>
-        ) : (
-          <p className="text-xl font-bold text-centar">
-            Please select your friend
-          </p>
-        )}
+        <div
+          className={
+            isDarkMode
+              ? "flex flex-col justify-between w-full bg-black-350 text-white px-4 "
+              : "flex flex-col justify-between w-full bg-white px-4 "
+          }
+        >
+          {currentFriend ? (
+            <MessagesJsRightSide
+              friends={friends}
+              currentFriend={currentFriend}
+              newMessages={newMessages}
+              messageInputHandl={messageInputHandl}
+              sendMessage={sendMessage}
+              getMessage={getMessage}
+              singleUsers={singleUsers}
+              emojiHnadler={emojiHnadler}
+              sendImage={sendImage}
+              active={active}
+              typingMessage={typingMessage}
+            ></MessagesJsRightSide>
+          ) : (
+            <p className="text-xl font-bold text-centar">
+              Please select your friend
+            </p>
+          )}
+        </div>
       </div>
     </div>
   );

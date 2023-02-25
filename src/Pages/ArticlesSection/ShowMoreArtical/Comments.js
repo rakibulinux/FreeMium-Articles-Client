@@ -7,7 +7,9 @@ import { AiOutlineLike } from "react-icons/ai";
 import { HiOutlineChat } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import ReplyComment from "./ReplyComment";
-// import axios from "axios";
+
+
+
 
 const Comments = ({ id }) => {
     const { register, handleSubmit, reset, watch } = useForm();
@@ -35,7 +37,7 @@ const Comments = ({ id }) => {
             comment: data.comment,
             commentDate: date,
         };
-        // console.log(comment);
+        
         // save post information to the database
 
         fetch(`${process.env.REACT_APP_API_URL}/comments`, {
@@ -171,7 +173,7 @@ const Comments = ({ id }) => {
                     <div>
                         {
                             comments?.map((comment) => (
-                                <div className="border-y" key={comment._id}>
+                                <div className="border-y" key={comment?._id}>
                                     <div className="my-5">
                                         <div className="flex justify-between">
                                             <div className="flex">

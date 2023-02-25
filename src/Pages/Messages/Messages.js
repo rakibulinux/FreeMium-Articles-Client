@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useState, useEffect, useContext, useRef } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { toast } from "react-hot-toast";
 import "./Messages.css";
 import { io } from "socket.io-client";

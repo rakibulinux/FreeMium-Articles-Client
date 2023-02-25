@@ -1,11 +1,11 @@
 import React from "react";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { APIContext } from "./../../contexts/APIProvider";
+import { APIContext } from "../../contexts/APIProvider";
 
-const DemoWritter = ({ articleData }) => {
+const OwnStory = ({ articleData }) => {
   const { isDarkMode } = useContext(APIContext);
-
+  console.log(articleData);
   const {
     articleDetails,
     articleImg,
@@ -93,4 +93,4 @@ const DemoWritter = ({ articleData }) => {
   );
 };
 
-export default DemoWritter;
+export default OwnStory;

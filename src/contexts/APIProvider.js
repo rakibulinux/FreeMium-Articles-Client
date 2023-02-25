@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { createContext, useContext, useEffect, useState } from "react";
-import { AuthContext } from "./AuthProvider";
+import React, { createContext, useEffect, useState } from "react";
 
 export const APIContext = createContext();
 
@@ -12,7 +11,6 @@ const APIProvider = ({ children }) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [searchArticles, setSearchArticles] = useState([]);
   const [suggestions, setSuggestions] = useState([]);
-  const { user } = useContext(AuthContext);
   const fetchAPI = async (url) => {
     try {
       const response = await fetch(url);
@@ -98,30 +96,7 @@ const APIProvider = ({ children }) => {
       return data;
     },
   });
-  const userIds = localStorage?.getItem("userId");
-  // const {
-  //   isLoading,
-  //   refetch,
-  //   data: singleUsers,
-  // } = useQuery(["user", user?.email], () =>
-  //   fetchAPI(`${process.env.REACT_APP_API_URL}/user/${user?.email}`)
-  // );
-  // console.log(singleUsers);
-  //get friends
-  const userId = localStorage.getItem("userId");
-  // const {
-  //   data: friends = [],
-  //   isLoading: friendsLoading,
-  //   refetch: friendsRefetch,
-  // } = useQuery({
-  //   queryKey: ["friends", userIds],
-  //   queryFn: async () => {
-  //     const res = await fetch();
-  //     // `${process.env.REACT_APP_API_URL}/friends?myId=${userId?._id}`
-  //     const data = await res.json();
-  //     return data;
-  //   },
-  // });
+
   const apiInfo = {
     categoryButton,
     isCategoryLoading,

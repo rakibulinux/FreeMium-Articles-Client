@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
-import Notification from "../components/Notification/Notification";
-import MessageLayout from "../Layout/MessageLayout";
 import {
+  Notification,
+  MessageLayout,
   DashboardLayout,
   WelcomeDashboard,
   Main,

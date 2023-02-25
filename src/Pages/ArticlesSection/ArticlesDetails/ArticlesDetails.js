@@ -20,41 +20,8 @@ const ArticlesDetails = () => {
   const [error, setError] = useState(null);
   const [newLoading, setNewLoading] = useState(true);
   const { id } = useParams();
-  // const [users, setUsers] = useState({});
   const { user } = useContext(AuthContext);
   const { isDarkMode, fetchAPI } = useContext(APIContext);
-  // const [newUpvote,setNewUpvote]=useState()
-
-  // const visitorId = cookie.load("visitorId");
-  // const visitorMacAddress = cookie.load("visitorMacAddress");
-  // const userIds = localStorage.getItem("userId");
-  // const headers = {
-  //   "Content-Type": "application/json",
-  //   "Visitor-Id": visitorId,
-  //   "Visitor-Mac-Address": visitorMacAddress,
-  // };
-  // if (userIds) {
-  //   headers["user-id"] = userIds;
-  // }
-
-  // const {
-  //   data,
-  //   isLoading: isLoadings,
-  //   refetch: refetchs,
-  // } = useQuery(["story", id], () =>
-  //   fetchAPI(`${process.env.REACT_APP_API_URL}/view-story/${id}`, headers)
-  // );
-
-  // useEffect(() => {
-  //   if (!isLoadings) {
-  //     if (data.error) {
-  //       setError(data.error);
-  //     } else {
-  //       setStory(data);
-  //     }
-  //     setNewLoading(false);
-  //   }
-  // }, [isLoadings, data]);
 
   const {
     isLoading: isUserLoading,
@@ -63,44 +30,7 @@ const ArticlesDetails = () => {
   } = useQuery(["user", user?.email], () =>
     fetchAPI(`${process.env.REACT_APP_API_URL}/user/${user?.email}`)
   );
-  console.log(singleUsers);
-  const handleUpvote = async () => {
-    if (!user) {
-      return alert("Please login to upvote");
-    }
 
-    if (story?.upVote?.includes(singleUsers?._id)) {
-      return alert("You already upvoted this article");
-    }
-
-    const { data } = await axios.post(
-      `${process.env.REACT_APP_API_URL}/view-story/${story._id}/upvote`,
-      { userId: singleUsers?._id }
-    );
-    setStory(data.article);
-    console.log(data.article);
-  };
-
-  const handleDownvote = async () => {
-    if (!user) {
-      return alert("Please login to downvote");
-    }
-
-    if (story?.downVote?.includes(singleUsers?._id)) {
-      return alert("You already downvoted this article");
-    }
-
-    const { data } = await axios.post(
-      `${process.env.REACT_APP_API_URL}/view-story/${story._id}/downvote`,
-      { userId: singleUsers?._id }
-    );
-    setStory(data.article);
-    console.log(data.article);
-  };
-  console.log(story.article);
-  const handleUpgradeClick = () => {
-    // handle upgrade click
-  };
   useEffect(() => {
     let visitorId = cookie.load("visitorId");
     let visitorMacAddress = cookie.load("visitorMacAddress");
@@ -194,10 +124,6 @@ const ArticlesDetails = () => {
               articleData={story}
               users={users}
               error={error}
-              // refetch={refetchs}
-              handleUpvote={handleUpvote}
-              handleDownvote={handleDownvote}
-              // setUsers={setUsers}
               singleUsers={singleUsers}
             />
           </div>

@@ -114,52 +114,50 @@ const Notification = () => {
   // };
 
   return (
-    <div>
-      <div
-        className="absolute right-0 mt-2 mr-4 bg-white rounded-md shadow-lg overflow-hidden z-20"
-        style={{ width: "20rem" }}
-      >
-        <div className="p-2">
-          <ul className="p-2">
-            {notifications.map((notification) => (
-              // <li
-              //   className="my-2"
-              //   key={notification._id}
-              //   onClick={() => handleReadClick(notification)}
-              // >
-              //   {notification?.message} (
-              //   {notification?.read ? "read" : "unread"})
-              // </li>
-              <li
-                href="#"
-                class="flex items-center px-4 py-3 border-b hover:bg-gray-100 -mx-2"
-              >
-                <img
-                  class="h-8 w-8 rounded-full object-cover mx-1"
-                  src="https://images.unsplash.com/photo-1450297350677-623de575f31c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
-                  alt="avatar"
-                />
-                <p class="text-gray-600 text-sm mx-2">
-                  <span class="font-bold" href="#">
-                    Jane Doe
-                  </span>{" "}
-                  Like Your reply on{" "}
-                  <span class="font-bold text-blue-500" href="#">
-                    Test with TDD
-                  </span>{" "}
+    <div
+      className="absolute right-0 mt-2 mr-4 bg-white rounded-md shadow-lg overflow-hidden z-20"
+      style={{ width: "20rem" }}
+    >
+      <div className="p-2">
+        <ul className="p-2">
+          {notifications.map((notification) => (
+            // <li
+            //   className="my-2"
+            //   key={notification._id}
+            //   onClick={() => handleReadClick(notification)}
+            // >
+            //   {notification?.message} (
+            //   {notification?.read ? "read" : "unread"})
+            // </li>
+            <li
+              href="#"
+              class="flex items-center px-4 py-3 border-b hover:bg-gray-100 -mx-2"
+            >
+              <img
+                class="h-8 w-8 rounded-full object-cover mx-1"
+                src="https://images.unsplash.com/photo-1450297350677-623de575f31c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
+                alt="avatar"
+              />
+              <p class="text-gray-600 text-sm mx-2">
+                <span class="font-bold" href="#">
+                  Jane Doe
+                </span>{" "}
+                {notification?.message} (
+                {notification?.read ? "read" : "unread"})
+                <span class="font-bold text-blue-500" href="#">
                   artical . 1h
-                </p>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <Link
-          to="/notifications"
-          className="block bg-gray-800 text-white text-center font-bold py-2"
-        >
-          See all notifications
-        </Link>
+                </span>{" "}
+              </p>
+            </li>
+          ))}
+        </ul>
       </div>
+      <Link
+        to="/notifications"
+        className="block bg-gray-800 text-white text-center font-bold py-2"
+      >
+        See all notifications
+      </Link>
     </div>
   );
 };

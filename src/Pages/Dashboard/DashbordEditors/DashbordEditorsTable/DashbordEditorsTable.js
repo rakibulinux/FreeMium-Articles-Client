@@ -11,8 +11,8 @@ import { Link } from "react-router-dom";
 import { APIContext } from "../../../../contexts/APIProvider";
 const DashbordEditorsTable = ({ selectedNumber }) => {
   const [users, setUsers] = useState([]);
-  const { isDarkMode } = useContext(APIContext);
-  // console.log(users)
+  const { isDarkMode, searchResults } = useContext(APIContext);
+  console.log(searchResults)
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/all-users/${selectedNumber}`)
       .then((res) => res.json())
@@ -60,7 +60,10 @@ const DashbordEditorsTable = ({ selectedNumber }) => {
               </th>
             </tr>
           </thead>
-          <tbody>
+          {
+            searchResults?.length === 0 
+            ?
+<tbody>
             {users.map((userData) => (
               <tr>
                 <td>
@@ -110,6 +113,10 @@ const DashbordEditorsTable = ({ selectedNumber }) => {
               </tr>
             ))}
           </tbody>
+          :
+          ''
+          }
+          
         </table>
       </div>
     </div>

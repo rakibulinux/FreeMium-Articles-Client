@@ -1,8 +1,7 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-
 import { APIContext } from "../../contexts/APIProvider";
-import VoiceCall from "./VoiceCall/VoiceCall";
+
 const MessagesJsRightSide = ({
   currentFriend,
   friends,
@@ -12,17 +11,15 @@ const MessagesJsRightSide = ({
   sendMessage,
   getMessage,
   singleUsers,
-  // scrollRef,
+  scrollRef,
   emojiHnadler,
   active,
   typingMessage
 }) => {
-  const { picture, name, _id } = currentFriend;
-  const scrollRef = useRef();
+  const { picture, name,_id } = currentFriend;
+
   const { isDarkMode } = useContext(APIContext);
-  useEffect(() => {
-    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [getMessage]);
+console.log(getMessage)
   const emojis = [
     "😨",
     "🤔",
@@ -69,17 +66,16 @@ const MessagesJsRightSide = ({
         <div className="avatar">
           <div className="w-10 rounded-full">
             <img src={picture} alt="img" />
-            <div className="flex flex-col ml-3">
-              <div className="font-semibold text-sm">{name}</div>
-              {active &&
-              active.length > 0 &&
-              active.some((u) => u.userId === _id) ? (
-                <div className="text-xs text-gray-500">Active</div>
-              ) : (
-                ""
-              )}
-            </div>
+          <div className="flex flex-col ml-3">
+            <div className="font-semibold text-sm">{name}</div>
+            {
+              active && active.length>0 && active.some(u=>u.userId === _id)?
+      <div className="text-xs text-gray-500">Active</div>
+        :''
+            }
+            
           </div>
+        </div>
         </div>
         {/* <div className="flex flex-col ml-3">
           <div className="font-semibold text-sm">{name}</div>
@@ -160,7 +156,6 @@ const MessagesJsRightSide = ({
           </ul>
         </div>
       </div>
-
       <div className="h-full overflow-hidden py-4">
         <div className="h-full overflow-y-auto">
           <div className="grid grid-cols-12 gap-y-2">
@@ -178,16 +173,15 @@ const MessagesJsRightSide = ({
               ? getMessage?.map((m) =>
                   m.senderId === singleUsers?._id ? (
                     <div
-                      key={m?._id + 1}
+                      key={m?._id}
                       className="col-start-6 col-end-13 p-3 rounded-lg"
                     >
                       <div
-                        key={m?._id + 2}
+                        
                         className="flex items-center justify-start flex-row-reverse"
                       >
-                        {/* <div ref={scrollRef} /> */}
                         <div
-                          key={m?._id + 3}
+                         
                           className="flex items-center justify-center h-10 w-10 rounded-full flex-shrink-0"
                         >
                           <img
@@ -196,16 +190,15 @@ const MessagesJsRightSide = ({
                             alt=""
                           />
                         </div>
-
                         <div
-                          key={m?._id + 5}
+                          
                           className={
                             isDarkMode
                               ? "relative mr-3 text-sm bg-black-250 py-2 px-4 shadow rounded-xl"
                               : "relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl"
                           }
                         >
-                          <div className="rs" key={m?._id + 5}>
+                          <div >
                             {m?.message?.text === "" ? (
                               <img src={m?.message?.image} alt="img"></img>
                             ) : (
@@ -216,7 +209,7 @@ const MessagesJsRightSide = ({
                       </div>
                     </div>
                   ) : (
-                    <div className="col-start-1 col-end-8 p-3 rounded-lg">
+                    <div  key={m?._id} className="col-start-1 col-end-8 p-3 rounded-lg">
                       <div className="flex flex-row items-center">
                         <img
                           src={picture}
@@ -244,7 +237,6 @@ const MessagesJsRightSide = ({
                 )
               : ""}
           </div>
-          <div ref={scrollRef} />
         </div>
       </div>
       {
@@ -400,5 +392,4 @@ const MessagesJsRightSide = ({
     </>
   );
 };
-
 export default MessagesJsRightSide;

@@ -43,6 +43,7 @@ import {
   PendingArticles,
   PendingArticlesDetailsCard,
 } from "../Pages/index";
+import SearchDetails from "../Pages/Shared/Search/SearchDetails";
 
 const router = createBrowserRouter([
   {
@@ -125,7 +126,7 @@ const router = createBrowserRouter([
 
       {
         path: "/search",
-        element: <Search></Search>,
+        element: <SearchDetails></SearchDetails>,
       },
 
       {

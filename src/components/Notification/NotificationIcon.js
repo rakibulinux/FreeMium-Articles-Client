@@ -27,7 +27,7 @@ const NotificationIcon = () => {
       socket.off("notification_updated");
     };
   }, []);
-
+  console.log(unreadCount);
   return (
     <div className="flex justify-center">
       <div className="object-center">

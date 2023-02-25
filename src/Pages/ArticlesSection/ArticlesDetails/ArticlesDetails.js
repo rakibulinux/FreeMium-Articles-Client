@@ -198,6 +198,7 @@ const ArticlesDetails = () => {
               handleUpvote={handleUpvote}
               handleDownvote={handleDownvote}
               // setUsers={setUsers}
+              singleUsers={singleUsers}
             />
           </div>
         </div>
@@ -233,11 +234,7 @@ const ArticlesDetails = () => {
             >
               {users?.following?.length} Followers
             </p>
-            <p className="text-sm">
-              Aussie Blogger with 500M+ views — Writer for CNBC & Business
-              Insider. Inspiring the world through Personal Development and
-              Entrepreneurship — timdenning.com/mb Follow
-            </p>
+            <p className="text-sm">{users?.bio}</p>
             <div className="card-actions justify-center lg:justify-start items-center">
               {user?.uid ? (
                 <FollowButton

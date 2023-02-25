@@ -124,7 +124,7 @@ const Navbar = () => {
           }
           to="/write-stories"
         >
-          {writeIcon} Write
+          Write
         </NavLink>
       </li>
 
@@ -236,12 +236,14 @@ const Navbar = () => {
                 }
                 to="/"
               >
-                <img className="w-56 md:h-10 md:w-40" src={logoFM} alt="" />
+                <img className="w-56 md:w-40" src={logoFM} alt="" />
               </NavLink>
-              <Search searchPlaceholder={"Search article"} propsStyle={"4px"} />
+              {/* <NavLink to="/search"> */}
+              <Search searchPlaceholder={"Search Story"} propsStyle={"4px"} />
+              {/* </NavLink> */}
             </div>
           </div>
-          <div className="navbar-end gap-1 md:gap-4 items-center">
+          <div className="navbar-end gap-1 md:gap-8 items-center">
             <div className="block">
               <NavLink
                 className={

@@ -20,7 +20,7 @@ const APIProvider = ({ children }) => {
       return data;
     } catch (error) {
       throw new Error(
-        `Failed to fetch API Data from Backend: ${error.message}`
+        `Failed to fetch API Data from Backend: ${error?.message}`
       );
     }
   };

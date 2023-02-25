@@ -203,7 +203,9 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className="mx-auto print:hidden">
+    <div className="border-b-[1px]">
+    <div className=" w-11/12 xl:w-11/12 mx-auto">
+    <div className="mx-auto print:hidden ">
       {user?.uid ? (
         <div className="navbar p-0">
           <div className="navbar-start h-16">
@@ -616,6 +618,8 @@ const Navbar = () => {
           </div>
         </div>
       )}
+    </div>
+    </div>
     </div>
   );
 };

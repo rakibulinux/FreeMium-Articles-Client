@@ -14,17 +14,18 @@ import "./Home.css";
 const Home = () => {
   const { user } = useContext(AuthContext);
   return (
-    <div className="py-10">
-      {user?.uid ? ( // after log in user  UI
+    <div className="">
+      {user?.uid ? ( // after log in user  UI  grid sm:grid-rows-1 md:grid-cols-3 lg:grid-cols-3 gap-0 md:gap-4
         <div>
-          <div className="grid sm:grid-rows-1 md:grid-cols-3 lg:grid-cols-3 gap-0 md:gap-4">
-            <section className="col-span-2 order-last md:order-first">
-              <AfterLoginHadBanar />
+          <div className=" container mx-auto lg:grid lg:grid-cols-3 grid-cols-1">
+            <section className="col-span-2 order-last md:order-first border-r-0 lg:border-r-[1px] pr-10">
+              {/* <AfterLoginHadBanar /> */}
               <Manubar />
 
               <Articles></Articles>
             </section>
-            <aside className="m-8 md:m-0">
+            {/* home right side content m-8 md:m-0  */}
+            <aside className="lg:mx-auto my-10 lg:px-10 text-center lg:text-start">
               <div className="flex justify-center ">
                 <Link className="w-full text-center" to="/payment">
                   <GetUnlimitedAccessButton text={"Get unlimited access"} />

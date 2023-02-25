@@ -8,7 +8,6 @@ import ArticlesCard from "../../ArticlesSection/ArticlesCard/ArticlesCard";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 function Search({ searchPlaceholder, propsStyle }) {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
   const [query, setQuery] = useState("");
   const { searchArticles, setSearchArticles, suggestions, setSuggestions } =
     useContext(APIContext);

@@ -31,7 +31,7 @@ function UpvoteButton({ storyId, title, content, upvotes, downvotes }) {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/view-story/${storyId}/upvote`,
+        `${process.env.REACT_APP_API_URL}/upvote-story/${storyId}/upvote`,
         {
           method: "POST",
           headers: {
@@ -55,7 +55,7 @@ function UpvoteButton({ storyId, title, content, upvotes, downvotes }) {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/view-story/${storyId}/upvote`,
+        `${process.env.REACT_APP_API_URL}/upvote-story/${storyId}/upvote`,
         {
           method: "POST",
           headers: {

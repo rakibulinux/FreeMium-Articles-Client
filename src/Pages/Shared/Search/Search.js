@@ -1,17 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
-import { toast } from "react-hot-toast";
-import { useDispatch } from "react-redux";
-import Spinner from "../../../components/Spinner/Spinner";
+// import { toast } from "react-hot-toast";
+// import { useDispatch } from "react-redux";
+// import Spinner from "../../../components/Spinner/Spinner";
 import { APIContext } from "../../../contexts/APIProvider";
-import { deleteArticle, saveArticle } from "../../../store/savedArticlesSlice";
-import ArticlesCard from "../../ArticlesSection/ArticlesCard/ArticlesCard";
+
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 function Search({ searchPlaceholder, propsStyle }) {
   const [query, setQuery] = useState("");
   const { searchArticles, setSearchArticles, suggestions, setSuggestions } =
     useContext(APIContext);
-  const dispatch = useDispatch();
+
   useEffect(() => {
     const fetchSearchResults = async () => {
       const response = await axios.get(
@@ -26,13 +25,15 @@ function Search({ searchPlaceholder, propsStyle }) {
       setSearchArticles([]);
       setSuggestions([]);
     }
-  }, [query]);
+  }, [query, setSearchArticles, setSuggestions]);
   const navigate = useNavigate();
   const handleInputChange = (event) => {
     setQuery(event.target.value);
     navigate("/search");
   };
-
+  const clearSearch = () => {
+    setQuery("");
+  };
   console.log(searchArticles);
   console.log(suggestions);
   return (
@@ -72,22 +73,24 @@ function Search({ searchPlaceholder, propsStyle }) {
       </form>
       {suggestions.length > 0 && (
         <ul
-          className="absolute left-64 top-12 bg-white rounded-md shadow-lg overflow-hidden p-2 "
+          className="absolute left-56 top-16 bg-white rounded-md shadow-lg overflow-hidden p-2 z-50"
           style={{ width: "20rem" }}
         >
           {suggestions.map((article) => (
             <Link key={article?._id} to={`/view-story/${article?._id}`}>
-              <li className="flex items-center px-4 py-3 border-b hover:bg-gray-100 -mx-2">
-                <img
-                  className="h-10 w-10 object-cover mx-1"
-                  src={article?.articleImg}
-                  alt={article?.articleTitle}
-                />
-                <p
-                  className="text-gray-600 font-bold text-sm mx-2"
-                  dangerouslySetInnerHTML={{ __html: article?.articleTitle }}
-                />
-              </li>
+              <button onClick={clearSearch}>
+                <li className="flex items-center px-4 py-3 border-b hover:bg-gray-100 -mx-2">
+                  <img
+                    className="h-10 w-10 object-cover mx-1"
+                    src={article?.articleImg}
+                    alt={article?.articleTitle}
+                  />
+                  <p
+                    className="text-gray-600 font-bold text-sm mx-2"
+                    dangerouslySetInnerHTML={{ __html: article?.articleTitle }}
+                  />
+                </li>
+              </button>
             </Link>
           ))}
         </ul>

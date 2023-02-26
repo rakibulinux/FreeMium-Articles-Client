@@ -8,7 +8,8 @@ import PendingArticlesDetailsCard from "./Dashboard/PendingArticles/PendingArtic
 import PendingArticles from "./Dashboard/PendingArticles/PendingArticles";
 import PaymentFail from "./Payment/PaymentFail/PaymentFail";
 import PaymentForm from "./Payment/PaymentForm/PaymentForm";
-
+import Notification from "../components/Notification/Notification";
+import MessageLayout from "../Layout/MessageLayout";
 import Profile from "./Profile/Profile";
 import Register from "./Register/Register";
 import Settings from "./UserProfileMenu/Settings/Settings";
@@ -42,6 +43,8 @@ import ImportStory from "./UserProfileMenu/Stories/ImportStory";
 import HistoryAns from "./AskMeAnything/HistoryAns/HistoryAns";
 
 export {
+  Notification,
+  MessageLayout,
   DashboardLayout,
   WelcomeDashboard,
   Main,

@@ -63,7 +63,7 @@ const Login = () => {
         const user = result.user;
         toast.success("Login with google success");
         setLoginUserEmail(user?.email);
-        setAuthToken(user, role);
+        setAuthToken(user);
       })
       .catch((err) => {
         toast.error(err.message);

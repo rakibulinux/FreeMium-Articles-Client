@@ -5,7 +5,7 @@ import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { APIContext } from "../../../../contexts/APIProvider";
 import { AuthContext } from "../../../../contexts/AuthProvider";
-import DemoWritter from "../../../Home/DemoWritter";
+import OwnStory from "../../../Home/OwnStory";
 import DownVoteButton from "../../DownVoteButton/DownVoteButton";
 import Comments from "../../ShowMoreArtical/Comments";
 import UpvoteButton from "../../UpvoteButton/UpvoteButton";
@@ -28,10 +28,9 @@ const ArticleDetailsCard = ({
     isLoading,
     isError,
     data: articleData3,
-    error,
   } = useQuery(["my-stories-3", user?.email], () =>
     fetchAPI(
-      `${process.env.REACT_APP_API_URL}/my-stories-3?email=${user?.email}`
+      `${process.env.REACT_APP_API_URL}/my-stories-3?email=${users?.email}`
     )
   );
 
@@ -50,11 +49,9 @@ const ArticleDetailsCard = ({
     articleImg,
     writerName,
     userEmail,
-    upvotes,
-    downvotes,
     isPaid,
   } = articleData;
-  console.log(upvotes, downvotes);
+
   const { isDarkMode, setIsDarkMode } = useContext(APIContext);
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
@@ -518,7 +515,9 @@ const ArticleDetailsCard = ({
                 More from {writerName}
               </h1>
               <p>{users?.bio}</p>
-              <DemoWritter articleData={articleData3}></DemoWritter>
+              {articleData3?.map((articleData) => (
+                <OwnStory key={articleData._id} articleData={articleData} />
+              ))}
             </div>
           </div>
 

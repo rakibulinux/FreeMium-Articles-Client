@@ -15,12 +15,23 @@ const StaffPicks = () => {
   } = useQuery(["allArticles"], () =>
     fetchAPI(`${process.env.REACT_APP_API_URL}/allArticles`)
   );
-  if (isLoading) {
+
+  // limited article data
+  const {
+    isLoading: limitIsLoading,
+    // refetch,
+    data: limitArticles,
+  } = useQuery(["limit-articles"], () =>
+    fetchAPI(`${process.env.REACT_APP_API_URL}/limit-articles`)
+  );
+
+  if (isLoading && limitIsLoading) {
     return;
   }
+  // console.log(limitArticles);
   return (
     <div>
-      <div>
+      <div className="mx-5">
         <h1
           className={
             isDarkMode
@@ -30,8 +41,8 @@ const StaffPicks = () => {
         >
           Staff Picks
         </h1>
-        {articles.map((article) => (
-          <StaffPicksStory key={article._id} article={article} />
+        {limitArticles?.map((article) => (
+          <StaffPicksStory key={article?._id} article={article} />
         ))}
       </div>
     </div>

@@ -127,13 +127,10 @@ const APIProvider = ({ children }) => {
     setQuery,
     setWriterSuggestions,
     writerSuggestions,
-<<<<<<< HEAD
     searchWriter,
     setSearchWriter,
-=======
     searchWriter, 
     setSearchWriter
->>>>>>> rahad
     // friends,
     // friendsLoading,
     // friendsRefetch,

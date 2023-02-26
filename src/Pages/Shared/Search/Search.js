@@ -5,11 +5,20 @@ import React, { useContext, useEffect, useState } from "react";
 import { APIContext } from "../../../contexts/APIProvider";
 
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import SearchResults from "./SearchResults";
 function Search({ searchPlaceholder, propsStyle }) {
-  const [query, setQuery] = useState("");
-  const { searchArticles, setSearchArticles, suggestions, setSuggestions } =
-    useContext(APIContext);
+  const {
+    searchArticles,
+    query,
+    setQuery,
+    setSearchArticles,
+    suggestions,
+    setSuggestions,
+  } = useContext(APIContext);
+
+  const [searchParams] = useSearchParams();
+  // const query = searchParams.get("q");
 
   useEffect(() => {
     const fetchSearchResults = async () => {
@@ -19,17 +28,18 @@ function Search({ searchPlaceholder, propsStyle }) {
       setSearchArticles(response.data.articles);
       setSuggestions(response.data.suggestions);
     };
-    if (query.length > 0) {
+    if (query?.length > 0) {
       fetchSearchResults();
     } else {
       setSearchArticles([]);
       setSuggestions([]);
     }
   }, [query, setSearchArticles, setSuggestions]);
+
   const navigate = useNavigate();
   const handleInputChange = (event) => {
     setQuery(event.target.value);
-    navigate("/search");
+    navigate(`/search?q=${query}`);
   };
   const clearSearch = () => {
     setQuery("");
@@ -38,6 +48,7 @@ function Search({ searchPlaceholder, propsStyle }) {
   console.log(suggestions);
   return (
     <>
+      {/* <Link to={`/search/query=${query}`}> */}
       <form onSubmit={handleInputChange} className="hidden md:block">
         <div
           className={`relative ${propsStyle} text-gray-600 focus-within:text-gray-400`}
@@ -71,6 +82,7 @@ function Search({ searchPlaceholder, propsStyle }) {
           />
         </div>
       </form>
+      {/* </Link> */}
       {suggestions.length > 0 && (
         <ul
           className="absolute left-56 top-16 bg-white rounded-md shadow-lg overflow-hidden p-2 z-50"
@@ -103,6 +115,7 @@ function Search({ searchPlaceholder, propsStyle }) {
           handleDelete={handleDelete}
         ></ArticlesCard>
       ))} */}
+      {/* {searchArticles.length > 0 && <SearchResults query={query} />} */}
     </>
   );
 }

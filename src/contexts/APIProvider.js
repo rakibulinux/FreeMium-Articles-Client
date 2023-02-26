@@ -11,6 +11,7 @@ const APIProvider = ({ children }) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [searchArticles, setSearchArticles] = useState([]);
   const [suggestions, setSuggestions] = useState([]);
+  const [query, setQuery] = useState("");
   const fetchAPI = async (url) => {
     try {
       const response = await fetch(url);
@@ -120,6 +121,8 @@ const APIProvider = ({ children }) => {
     setSearchArticles,
     suggestions,
     setSuggestions,
+    query,
+    setQuery,
     // friends,
     // friendsLoading,
     // friendsRefetch,

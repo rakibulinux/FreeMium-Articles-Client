@@ -9,16 +9,48 @@ import { BiImageAlt } from "react-icons/bi";
 import "./DashordEditorsTable.css";
 import { Link } from "react-router-dom";
 import { APIContext } from "../../../../contexts/APIProvider";
+import Swal from "sweetalert2";
 const DashbordEditorsTable = ({ selectedNumber }) => {
   const [users, setUsers] = useState([]);
   const { isDarkMode, searchResults, writerSuggestions } = useContext(APIContext);
   // console.log(searchResults)
   useEffect(() => {
+
     fetch(`${process.env.REACT_APP_API_URL}/all-users/${selectedNumber}`)
       .then((res) => res.json())
       .then((data) => setUsers(data));
   }, [selectedNumber, users]);
 
+  const deleteWriter = (_id)=>{
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "Do you want to delete this user",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Delete'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`${process.env.REACT_APP_API_URL}/writer-delete/${_id}`, {
+          method: "DELETE",
+      })
+          .then((res) => res.json())
+          .then((data) => {
+              // console.log(data);
+              if (data.deletedCount > 0) {
+                Swal.fire(
+                  'Deleted!',
+                  'the user has been deleted.',
+                  'success'
+                )
+              }
+          });
+       
+      }
+    })
+     // console.log(id);
+  }
   return (
     <div>
       <div className="overflow-x-auto hideScrollbar">
@@ -103,9 +135,10 @@ const DashbordEditorsTable = ({ selectedNumber }) => {
                         </Link> */}
                       </li>
                       <li>
-                        <Link to={""} className="font-semibold text-gray-900">
+                        <span onClick={()=>deleteWriter(userData?._id)} className='text-red-600 font-semibold'>Delete user</span>
+                        {/* <Link to={""} className="font-semibold text-gray-900">
                           Report user
-                        </Link>
+                        </Link> */}
                       </li>
                     </ul>
                   </div>
@@ -154,9 +187,10 @@ const DashbordEditorsTable = ({ selectedNumber }) => {
                         </Link>
                       </li> */}
                       <li>
-                        <Link to={""} className="font-semibold text-gray-900">
+                      <span onClick={()=>deleteWriter(userData?._id)} className='text-red-600 font-semibold'>Delete user</span>
+                        {/* <Link to={""} className="font-semibold text-gray-900">
                           Report user
-                        </Link>
+                        </Link> */}
                       </li>
                     </ul>
                   </div>

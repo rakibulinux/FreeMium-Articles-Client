@@ -47,10 +47,10 @@ const Stories = () => {
     { id: 3, label: " Responses", content: <div>Responses</div> },
   ];
   return (
-    <div className="container w-11/12 mx-auto mt-14 py-10">
+    <div className="mt-10">
       <div className="flex row">
         <div className=" basis-3/4 mb-10">
-          <div className="flex justify-between">
+          <div className="flex flex-col md:flex-row gap-4 justify-between text-center">
             <h1
               className={
                 isDarkMode
@@ -60,16 +60,16 @@ const Stories = () => {
             >
               Your stories
             </h1>
-            <div>
+            <div className="flex flex-col md:flex-row gap-3">
               <Link
-                className="btn rounded-full btn-primary font-semibold ml-3 border-[1px] hover:border-green-550 border-green-550 bg-green-550 text-white hover:bg-green-550"
+                className="btn rounded-full btn-primary font-semibold border-[1px] hover:border-green-550 border-green-550 bg-green-550 text-white hover:bg-green-550"
                 to="/write-stories"
               >
                 Write a story
               </Link>
               <Link
                 to="/import-story"
-                className="btn rounded-full btn-primary font-semibold ml-3 border-[1px] hover:border-green-550 border-green-550 bg-slate-50 text-green-550 hover:bg-white"
+                className="btn rounded-full btn-primary font-semibold border-[1px] hover:border-green-550 border-green-550 bg-slate-50 text-green-550 hover:bg-white"
               >
                 Import a story
               </Link>

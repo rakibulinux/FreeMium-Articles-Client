@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../../contexts/AuthProvider";
@@ -19,10 +20,17 @@ const ArticlesDetails = () => {
   const [error, setError] = useState(null);
   const [newLoading, setNewLoading] = useState(true);
   const { id } = useParams();
-  // const [users, setUsers] = useState({});
   const { user } = useContext(AuthContext);
   const { isDarkMode, fetchAPI } = useContext(APIContext);
-  // const [newUpvote,setNewUpvote]=useState()
+
+  const {
+    isLoading: isUserLoading,
+    refetch: refetchUser,
+    data: singleUsers,
+  } = useQuery(["user", user?.email], () =>
+    fetchAPI(`${process.env.REACT_APP_API_URL}/user/${user?.email}`)
+  );
+
   useEffect(() => {
     let visitorId = cookie.load("visitorId");
     let visitorMacAddress = cookie.load("visitorMacAddress");
@@ -69,7 +77,7 @@ const ArticlesDetails = () => {
     story;
   const {
     isLoading,
-
+    refetch,
     data: users,
   } = useQuery(["user", userEmail], () =>
     fetchAPI(`${process.env.REACT_APP_API_URL}/user/${userEmail}`)
@@ -107,7 +115,7 @@ const ArticlesDetails = () => {
   }
 
   return (
-    <div className="border-t-[1px] w-11/12 mx-auto">
+    <div className="border-t-[1px] ">
       <div className="container mx-auto lg:grid lg:grid-cols-3 grid-cols-1">
         {/* left side content */}
         <div className="border-r-0 lg:border-r-[1px] col-span-2  ">
@@ -116,7 +124,7 @@ const ArticlesDetails = () => {
               articleData={story}
               users={users}
               error={error}
-              // setUsers={setUsers}
+              singleUsers={singleUsers}
             />
           </div>
         </div>
@@ -152,11 +160,7 @@ const ArticlesDetails = () => {
             >
               {users?.following?.length} Followers
             </p>
-            <p className="text-sm">
-              Aussie Blogger with 500M+ views — Writer for CNBC & Business
-              Insider. Inspiring the world through Personal Development and
-              Entrepreneurship — timdenning.com/mb Follow
-            </p>
+            <p className="text-sm">{users?.bio}</p>
             <div className="card-actions justify-center lg:justify-start items-center">
               {user?.uid ? (
                 <FollowButton
@@ -166,6 +170,7 @@ const ArticlesDetails = () => {
                   userEmail={userEmail}
                   followingId={user?.email}
                   unfollowingId={user?.email}
+                  refetch={refetch}
                 />
               ) : (
                 <Link to="/login">

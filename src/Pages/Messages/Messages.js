@@ -1,43 +1,99 @@
-import React, { useState, useEffect, useContext, useRef } from "react";
+import { useQuery } from "@tanstack/react-query";
+import React, { useState, useEffect, useContext } from "react";
 import { toast } from "react-hot-toast";
-import { useQuery } from "react-query";
-import { Link } from "react-router-dom";
-import socketIOClient from "socket.io-client";
+import "./Messages.css";
+import { io } from "socket.io-client";
 import { APIContext } from "../../contexts/APIProvider";
 import { AuthContext } from "../../contexts/AuthProvider";
 import MessagesJsRightSide from "./MessagesJsRightSide";
-
+import useSound from "use-sound";
+import notificationSound from "../../audio/Notification - Notification.mp3";
 const ENDPOINT = `${process.env.REACT_APP_API_URL}`;
-const socket = socketIOClient(ENDPOINT);
+// const socket = socketIOClient(ENDPOINT);
+const socket = io.connect(ENDPOINT);
 
-function Messages({ userId }) {
-  const { user } = useContext(AuthContext);
-  const scrollRef = useRef();
-  const { friends, singleUsers, friendsRefetch } = useContext(APIContext);
-
-  const [newMessages, setNewMessages] = useState([]);
+function Messages() {
   const [getMessage, setGetMessage] = useState();
-  const [inputValue, setInputValue] = useState("");
+  const { user } = useContext(AuthContext);
+  const { fetchAPI, isDarkMode } = useContext(APIContext);
+  const [newMessages, setNewMessages] = useState([]);
+  const [socketMessages, setSocketMessages] = useState("");
+  const [active, setActive] = useState([]);
   const [currentFriend, setCurrentFriend] = useState("");
-  const { name, _id } = singleUsers;
+  const [typingMessage, setTypingMessage] = useState("");
+  const [notificationSplay] = useSound(notificationSound);
+
+  const imageHostKey = process.env.REACT_APP_IMG_BB_KEY;
   // console.log(getMessage);
   // console.log(currentFriend?._id);
+
+  const { isLoading, data: singleUsers } = useQuery(["user", user?.email], () =>
+    fetchAPI(`${process.env.REACT_APP_API_URL}/user/${user?.email}`)
+  );
+
+  // Get Message data
+
+  const {
+    isGetMessagesLoading,
+    data: getMessages,
+    refetch: getMessageRefetch,
+  } = useQuery(["sendMessage", currentFriend?._id, singleUsers?._id], () =>
+    fetchAPI(
+      `${process.env.REACT_APP_API_URL}/sendMessage/${currentFriend?._id}/getMseeage/${singleUsers?._id}`
+    )
+  );
+
+  const {
+    data: friends,
+    isLoading: friendsLoading,
+    refetch: friendsRefetch,
+  } = useQuery(["friends", singleUsers?._id], () =>
+    fetchAPI(
+      `${process.env.REACT_APP_API_URL}/friends?myId=${singleUsers?._id}`
+    )
+  );
+
+  //get default frist friend message
+  useEffect(() => {
+    if (friends && friends?.length > 0) {
+      setCurrentFriend(friends[0]);
+    }
+  }, [friends]);
 
   // message input handler
   const messageInputHandl = (e) => {
     setNewMessages(e.target.value);
+    socket.emit("typingMessage", {
+      senderId: singleUsers?._id,
+      reciverId: currentFriend?._id,
+      msg: e.target.value,
+    });
   };
+  // send message handler
   const sendMessage = (e) => {
     e.preventDefault();
-    console.log(newMessages);
+    notificationSplay();
     const data = {
-      senderName: name,
-      senderId: _id,
+      senderName: singleUsers?.name,
+      senderId: singleUsers?._id,
       reciverId: currentFriend?._id,
       message: { text: newMessages ? newMessages : "", image: "" },
       date: new Date(),
     };
-    console.log(data);
+    // send message in socket server
+    socket.emit("sendMessage", {
+      senderId: singleUsers?._id,
+      senderName: singleUsers?.name,
+      reciverId: currentFriend?._id,
+      message: { text: newMessages ? newMessages : "", image: "" },
+      date: new Date(),
+    });
+    // set typing message empty
+    socket.emit("typingMessage", {
+      senderId: singleUsers?._id,
+      reciverId: currentFriend?._id,
+      msg: "",
+    });
     fetch(`${process.env.REACT_APP_API_URL}/sendMessage`, {
       method: "POST",
       headers: {
@@ -50,8 +106,60 @@ function Messages({ userId }) {
         console.log(result);
         toast.success(`Saved message`);
         setNewMessages("");
+        getMessageRefetch();
       });
   };
+  /*==============
+soket work
+================*/
+
+  // send user
+  useEffect(() => {
+    socket.emit("addUser", singleUsers?._id, singleUsers);
+  }, [singleUsers]);
+
+  // get user from socket
+  useEffect(() => {
+    socket.on("getUsers", (users) => {
+      const filterUsers = users?.filter((u) => u.userId !== singleUsers?._id);
+      setActive(filterUsers);
+    });
+  }, []);
+  // get message from socket.
+  useEffect(() => {
+    socket.on("getMessage", (message) => {
+      setSocketMessages(message);
+    });
+  }, []);
+  // get typing message
+  useEffect(() => {
+    socket.on("getTypingMessage", (data) => {
+      setTypingMessage(data);
+    });
+  }, []);
+  // show messsage in user window.
+  useEffect(() => {
+    if (socketMessages && currentFriend) {
+      if (
+        socketMessages.senderId === currentFriend._id &&
+        socketMessages.reciverId === singleUsers?._id
+      ) {
+        setGetMessage(socketMessages);
+        setSocketMessages("");
+      }
+    }
+  }, [socketMessages]);
+  // get notification messsage .
+  useEffect(() => {
+    if (
+      socketMessages &&
+      socketMessages.senderId !== currentFriend._id &&
+      socketMessages.reciverId === singleUsers?._id
+    ) {
+      notificationSplay();
+      toast.success(`${socketMessages.senderName} send a new message`);
+    }
+  }, [socketMessages]);
   //get message
   useEffect(() => {
     fetch(
@@ -61,57 +169,86 @@ function Messages({ userId }) {
       .then((data) => {
         setGetMessage(data);
         friendsRefetch();
+        // getMessageRefetch();
       });
-  }, [currentFriend, getMessage]);
-
-  //get default frist friend message
-  useEffect(() => {
-    if (friends && friends?.length > 0) {
-      setCurrentFriend(friends[0]);
-    }
-  }, [friends]);
-  // scrollRef
-  useEffect(() => {
-    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, []);
+  }, [currentFriend, getMessages]);
 
   // emonji handler
   const emojiHnadler = (emoje) => {
-    console.log(newMessages);
+    // console.log(newMessages);
     setNewMessages(`${newMessages}` + emoje);
+    // set typing message empty
+    socket.emit("typingMessage", {
+      senderId: singleUsers?._id,
+      reciverId: currentFriend?._id,
+      msg: emoje,
+    });
   };
   //  img send
   const sendImage = (e) => {
     if (e.target.files.length !== 0) {
-      console.log(e.target.files[0]);
-      const imgName = e.target.files[0].name;
-      const newImgName = Date.new() + imgName;
+      // console.log(e.target.files[0]);
+      notificationSplay();
+      const img = e.target.files[0];
+      // send img socket server
+      socket.emit("sendMessage", {
+        senderId: singleUsers?._id,
+        senderName: singleUsers?.name,
+        reciverId: currentFriend?._id,
+        message: { text: "", image: img },
+        date: new Date(),
+      });
+
       const formData = new FormData();
-      formData.append("senderName", name);
-      formData.append("reciverId", currentFriend?._id);
-      formData.append("imageName", newImgName);
-      formData.append("image", e.target.files[0]);
+      formData.append("image", img);
+      const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
+      fetch(url, {
+        method: "POST",
+        body: formData,
+      })
+        .then((res) => res.json())
+        .then((imgData) => {
+          if (imgData.success) {
+            const data = {
+              senderName: singleUsers?.name,
+              senderId: singleUsers?._id,
+              reciverId: currentFriend?._id,
+              message: { text: "", image: imgData.data.url },
+              date: new Date(),
+            };
 
-      // fetch(`${process.env.REACT_APP_API_URL}/sendImage`, {
-      //   method: "POST",
-      //   headers: {
-      //     "content-type": "application/json",
-      //   },
-      //   body: JSON.stringify({formData}),
-      // })
-      //   .then((res) => res.json())
-      //   .then((result) => {
-      //     console.log(result);
-      //     toast.success(`Saved Image`);
-
-      //   });
+            fetch(`${process.env.REACT_APP_API_URL}/send-image`, {
+              method: "POST",
+              headers: {
+                "content-type": "application/json",
+              },
+              body: JSON.stringify({ data }),
+            })
+              .then((res) => res.json())
+              .then((result) => {
+                console.log(result);
+                toast.success(`Saved img`);
+                getMessageRefetch();
+                setNewMessages("");
+              });
+          }
+        });
     }
   };
 
+  if (isLoading && friendsLoading && isGetMessagesLoading) {
+    return;
+  }
   return (
     <div>
-      <div className="flex flex-row h-screen antialiased text-gray-800">
-        <div className="flex flex-row w-96 flex-shrink-0 bg-gray-100 p-4">
+      <div
+        className={
+          isDarkMode
+            ? "flex flex-row h-screen antialiased bg-black-350 text-white"
+            : "flex flex-row h-screen antialiased text-gray-800"
+        }
+      >
+        <div className="flex flex-row w-96 flex-shrink-0  p-4">
           <div className="flex flex-col w-full h-full pl-4 pr-4 py-4 -mr-4">
             <div className="flex flex-row items-center">
               <div className="flex flex-row items-center">
@@ -130,7 +267,13 @@ function Messages({ userId }) {
                       <div className="text-sm font-medium">
                         {user?.displayName}
                       </div>
-                      <div className="h-2 w-2 rounded-full bg-green-500 ml-2"></div>
+                      {active &&
+                      active.length > 0 &&
+                      active.some((u) => u.userId === singleUsers?._id) ? (
+                        <div className="h-2 w-2 rounded-full bg-green-500 ml-2"></div>
+                      ) : (
+                        ""
+                      )}
                     </div>
                     <div className="text-xs truncate w-40">
                       Full Stack Web Developer
@@ -148,9 +291,9 @@ function Messages({ userId }) {
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
                       d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
                     ></path>
                   </svg>
@@ -159,14 +302,9 @@ function Messages({ userId }) {
             </div>
             <div className="mt-5">
               <ul className="flex flex-row items-center justify-between">
-                <li>
-                  <Link
-                    to="/"
-                    className="flex items-center pb-3 text-xs font-semibold relative text-indigo-800"
-                  >
-                    <span>All Conversations</span>
-                    <span className="absolute left-0 bottom-0 h-1 w-6 bg-indigo-800 rounded-full"></span>
-                  </Link>
+                <li className="flex items-center pb-3 text-xs font-semibold relative text-green-500">
+                  <span>All Conversations</span>
+                  <span className="absolute left-0 bottom-0 h-1 w-6 bg-green-500 rounded-full"></span>
                 </li>
               </ul>
             </div>
@@ -179,7 +317,7 @@ function Messages({ userId }) {
                       <div
                         onClick={() => setCurrentFriend(user)}
                         user={user}
-                        key={user._id}
+                        key={user?._id}
                         className="flex flex-row items-center p-4 relative"
                       >
                         <div className="absolute text-xs text-gray-500 right-0 top-0 mr-4 mt-3">
@@ -196,6 +334,13 @@ function Messages({ userId }) {
                             <div className="text-sm font-medium">
                               {user.name}
                             </div>
+                            {active &&
+                            active.length > 0 &&
+                            active.some((u) => u.userId === user._id) ? (
+                              <div className="h-2 w-2 rounded-full bg-green-500 ml-2"></div>
+                            ) : (
+                              ""
+                            )}
                           </div>
                           <div className="text-xs truncate w-40">
                             Good after noon! how can i help you?
@@ -220,9 +365,9 @@ function Messages({ userId }) {
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
                       d="M12 6v6m0 0v6m0-6h6m-6 0H6"
                     ></path>
                   </svg>
@@ -231,7 +376,13 @@ function Messages({ userId }) {
             </div>
           </div>
         </div>
-        <div className="flex flex-col justify-between w-full bg-white px-4 ">
+        <div
+          className={
+            isDarkMode
+              ? "flex flex-col justify-between w-full bg-black-350 text-white px-4 "
+              : "flex flex-col justify-between w-full bg-white px-4 "
+          }
+        >
           {currentFriend ? (
             <MessagesJsRightSide
               friends={friends}
@@ -241,9 +392,10 @@ function Messages({ userId }) {
               sendMessage={sendMessage}
               getMessage={getMessage}
               singleUsers={singleUsers}
-              scrollRef={scrollRef}
               emojiHnadler={emojiHnadler}
               sendImage={sendImage}
+              active={active}
+              typingMessage={typingMessage}
             ></MessagesJsRightSide>
           ) : (
             <p className="text-xl font-bold text-centar">

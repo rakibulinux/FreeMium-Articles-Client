@@ -8,16 +8,22 @@ import { HiOutlineChat } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import ReplyComment from "./ReplyComment";
 
+
+
+
 const Comments = ({ id }) => {
     const { register, handleSubmit, reset, watch } = useForm();
     const comment = watch("comment");
     const { user } = useContext(AuthContext);
     const date = format(new Date(), "PP");
 
-    const [reply, setReply]=useState();
+    const [reply, setReply] = useState();
 
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState(false);
+    // Update comment state
+    const [singleComent, setSingleComent] = useState([])
+    console.log(singleComent);
 
     // console.log(comments);
 
@@ -31,7 +37,7 @@ const Comments = ({ id }) => {
             comment: data.comment,
             commentDate: date,
         };
-        // console.log(comment);
+        
         // save post information to the database
 
         fetch(`${process.env.REACT_APP_API_URL}/comments`, {
@@ -48,48 +54,79 @@ const Comments = ({ id }) => {
                     toast.success("Respond placed successfully");
 
                     reset();
-            
+
 
                     setNewComment(true);
                 }
             });
     };
 
-// fetch comment after delete
+    // fetch comment after delete
 
-const fetchComments = () => {
-    fetch(`${process.env.REACT_APP_API_URL}/comments?articleId=${id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setComments(data);
-      });
-  };
-    
-
+    const fetchComments = () => {
+        fetch(`${process.env.REACT_APP_API_URL}/comments?articleId=${id}`)
+            .then((res) => res.json())
+            .then((data) => {
+                setComments(data);
+            });
+    };
 
 
- // for delete comment
- const deleteCommentHandle = (id) => {
-    // console.log(id);
-    fetch(`${process.env.REACT_APP_API_URL}/comment/deleteComment/${id}`, {
-      method: "DELETE",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data.deletedCount > 0) {
-          toast.success("successfully delete");
-        fetchComments();
-        }
-      });
-  };
-
-//   Update comment
 
 
-// const fetchComment =()=>{
+    // for delete comment
+    const deleteCommentHandle = (id) => {
+        // console.log(id);
+        fetch(`${process.env.REACT_APP_API_URL}/comment/deleteComment/${id}`, {
+            method: "DELETE",
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data);
+                if (data.deletedCount > 0) {
+                    toast.success("successfully delete");
+                    fetchComments();
+                }
+            });
+    };
 
-// }
+    //   Update comment
+    // get specific comment
+    const handleGetComment = id => {
+        // console.log(id)
+        const singleComent = comments.find(c => c._id === id)
+        setSingleComent(singleComent)
+    }
+
+    const handleUpdateComment = event => {
+
+        event.preventDefault();
+        const form = event.target;
+        const comment = form.updateComment.value;
+        console.log(comment)
+
+        fetch(`${process.env.REACT_APP_API_URL}/updateComment/${singleComent?._id}`, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({ comment })
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if (data.modifiedCount > 0) {
+                    toast("successful update comment");
+                    reset();
+                    fetchComments();
+
+
+                }
+
+            })
+    }
+
+
 
     useEffect(() => {
 
@@ -100,7 +137,7 @@ const fetchComments = () => {
                 // fetchComments();
                 // console.log(data);
             });
-    }, [id, newComment,reply]);
+    }, [id, newComment, reply]);
 
     return (
         <div>
@@ -127,12 +164,16 @@ const fetchComments = () => {
                     <span>Please <Link to='/login' className='text-[#059b00] font-semibold'>Login</Link> to Respond</span>
             }
 
+
+
+
+
             <div>
                 <div>
                     <div>
                         {
                             comments?.map((comment) => (
-                                <div className="border-y" key={comment._id}>
+                                <div className="border-y" key={comment?._id}>
                                     <div className="my-5">
                                         <div className="flex justify-between">
                                             <div className="flex">
@@ -179,12 +220,10 @@ const fetchComments = () => {
                                                                     className="dropdown-content  mt-5 border menu p-2 shadow-lg bg-base-100 rounded-box w-44"
                                                                 >
                                                                     <li>
-                                                                        <button className="text-xs font-semibold">
-                                                                            Edit This Response
-                                                                        </button>
+                                                                        <label onClick={() => handleGetComment(comment?._id)} htmlFor="my-modal" className=" text-xs font-semibold">Edit this respond</label>
                                                                     </li>
                                                                     <li>
-                                                                        <button onClick={()=>deleteCommentHandle(comment?._id)} className="text-xs font-semibold">
+                                                                        <button onClick={() => deleteCommentHandle(comment?._id)} className="text-xs font-semibold">
                                                                             Delete
                                                                         </button>
                                                                     </li>
@@ -207,6 +246,27 @@ const fetchComments = () => {
                                                 </div>
                                             </div>
                                         </div>
+
+
+                                        {/* Put this part before </body> tag */}
+                                        <input type="checkbox" id="my-modal" className="modal-toggle" />
+                                        <div className="modal">
+                                            <div className="modal-box">
+                                                <form onSubmit={handleUpdateComment}>
+                                                    <textarea defaultValue={singleComent?.comment} name="updateComment" className=" border-none textarea-lg w-full"></textarea>
+                                                    <div className="flex justify-end  items-end">
+                                                        <div className="modal-action">
+                                                            <label htmlFor="my-modal" className="btn btn-sm rounded-full bg-primary">Cancel</label>
+                                                        </div>
+                                                        <button type='submit' className=" rounded-full btn btn-sm mx-2 bg-green-500 text-white" >update</button>
+                                                    </div>
+                                                </form>
+
+                                            </div>
+                                        </div>
+
+
+
                                         <p className="text-xs my-2 ">{comment?.comment}</p>
 
                                         <div className="grid grid-cols-12 justify-center items-center">
@@ -283,7 +343,7 @@ const fetchComments = () => {
                                                     tabIndex={1}
                                                     className="dropdown-content"
                                                 >   <ReplyComment comment={comment}
-                                                setReply={setReply}
+                                                    setReply={setReply}
                                                 ></ReplyComment>
                                                 </div>
 

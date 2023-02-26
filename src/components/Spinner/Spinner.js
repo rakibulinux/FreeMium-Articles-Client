@@ -1,11 +1,24 @@
+import { motion } from "framer-motion";
 import React from "react";
+import { ThreeDots } from "react-loader-spinner";
 
-const Spinner = () => {
+export default function Spinner() {
   return (
-    <div className="flex justify-center items-center h-full min-h-screen my-10">
-      <div className="w-20 h-20 border-8 border-dotted rounded-full animate-spin mt-5 border-gray-600 hover:text-gray-100"></div>
-    </div>
+    <motion.div
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      className="flex justify-center items-center"
+    >
+      <ThreeDots
+        height="180"
+        width="180"
+        radius="9"
+        color="#7289da"
+        ariaLabel="three-dots-loading"
+        wrapperStyle={{}}
+        visible={true}
+      />
+    </motion.div>
   );
-};
-
-export default Spinner;
+}

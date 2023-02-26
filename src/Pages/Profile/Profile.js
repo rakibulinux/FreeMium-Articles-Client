@@ -3,19 +3,24 @@ import React, { useContext, useEffect, useState } from "react";
 import { BiUserCircle } from "react-icons/bi";
 import { FaMapMarkerAlt, FaUser } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
+import { useSelector } from "react-redux";
+import Counter from "../../components/Counter";
 import Spinner from "../../components/Spinner/Spinner";
 import { AuthContext } from "../../contexts/AuthProvider";
+import { refetchData } from "../../store/fetchSlice";
 import { APIContext } from "./../../contexts/APIProvider";
 
 const Profile = () => {
   const { user } = useContext(AuthContext);
   const { isDarkMode, fetchAPI } = useContext(APIContext);
   const [editMode, setEditMode] = useState(false);
+  // const singleUsers = useSelector((state) => state.fetch.data);
+  // const isLoading = useSelector((state) => state.fetch.isLoading);
   // const [singleUsers, setSingleUsers] = useState({});
   const toggleEditMode = () => {
     setEditMode(!editMode);
   };
-
+  // console.log(singleUsers);
   const userId = localStorage.getItem("userId");
 
   const {
@@ -66,7 +71,7 @@ const Profile = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         // Update your state with the updated user data here
         refetch();
       })
@@ -235,7 +240,7 @@ const Profile = () => {
                   Edit Profile
                 </button>
               </div>
-
+              {/* <Counter /> */}
               <div className="w-full p-8 mx-2 flex justify-center items-center">
                 <img
                   id="showImage"

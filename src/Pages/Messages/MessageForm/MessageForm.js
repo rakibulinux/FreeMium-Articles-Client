@@ -41,10 +41,10 @@ const MessageForm = ({ recipient, setRecipient }) => {
 
     <div className="flex flex-row h-screen antialiased text-gray-800">
       <div className="flex flex-row w-96 flex-shrink-0 bg-gray-100 p-4">
-        <div className="flex flex-col items-center py-4 flex-shrink-0 w-20 bg-indigo-800 rounded-3xl">
+        <div className="flex flex-col items-center py-4 flex-shrink-0 w-20 bg-green-500 rounded-3xl">
           <Link
             to="/"
-            className="flex items-center justify-center h-12 w-12 bg-indigo-100 text-indigo-800 rounded-full"
+            className="flex items-center justify-center h-12 w-12 bg-indigo-100 text-green-500 rounded-full"
           >
             <svg
               className="w-8 h-8"
@@ -198,10 +198,10 @@ const MessageForm = ({ recipient, setRecipient }) => {
               <li>
                 <Link
                   to="/"
-                  className="flex items-center pb-3 text-xs font-semibold relative text-indigo-800"
+                  className="flex items-center pb-3 text-xs font-semibold relative text-green-500"
                 >
                   <span>All Conversations</span>
-                  <span className="absolute left-0 bottom-0 h-1 w-6 bg-indigo-800 rounded-full"></span>
+                  <span className="absolute left-0 bottom-0 h-1 w-6 bg-green-500 rounded-full"></span>
                 </Link>
               </li>
               <li>
@@ -551,7 +551,7 @@ const MessageForm = ({ recipient, setRecipient }) => {
                   </div>
                   <div className="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl">
                     <div className="flex flex-row items-center">
-                      <button className="flex items-center justify-center bg-indigo-600 hover:bg-indigo-800 rounded-full h-8 w-10">
+                      <button className="flex items-center justify-center bg-indigo-600 hover:bg-green-500 rounded-full h-8 w-10">
                         <svg
                           className="w-6 h-6 text-white"
                           fill="none"
@@ -674,7 +674,7 @@ const MessageForm = ({ recipient, setRecipient }) => {
             </div>
           </div>
           <div className="ml-6">
-            <button className="flex items-center justify-center h-10 w-10 rounded-full bg-gray-200 hover:bg-gray-300 text-indigo-800 text-white">
+            <button className="flex items-center justify-center h-10 w-10 rounded-full bg-gray-200 hover:bg-gray-300 text-green-500 text-white">
               <svg
                 className="w-5 h-5 transform rotate-90 -mr-px"
                 fill="none"

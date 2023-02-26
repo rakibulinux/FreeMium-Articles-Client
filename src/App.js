@@ -20,7 +20,13 @@ function App() {
         isDarkMode ? "bg-black-350 text-white" : "bg-base-100 text-black-350"
       }
     >
-      <RouterProvider router={router} />
+      <div
+        className={
+          isDarkMode ? "bg-black-350 text-white" : "bg-base-100 text-black-350"
+        }
+      >
+        <RouterProvider router={router} />
+      </div>
     </div>
   );
 }

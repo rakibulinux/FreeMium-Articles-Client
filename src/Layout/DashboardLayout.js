@@ -32,8 +32,8 @@ const DashboardLayout = () => {
           <div
             className={
               isDarkMode
-                ? "w-11/12 mx-auto bg-black-350 text-white"
-                : "w-11/12 mx-auto bg-base-100 text-black-350"
+                ? "bg-black-350 text-white"
+                : "bg-base-100 text-black-350"
             }
           >
             <Navbar />

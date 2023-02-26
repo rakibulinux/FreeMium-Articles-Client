@@ -206,7 +206,7 @@ const Navbar = () => {
   );
   return (
     <div className="border-b-[1px]">
-      <div className=" w-11/12 xl:w-11/12 mx-auto">
+      <div className="w-11/12 xl:w-11/12 mx-auto">
         <div className="mx-auto print:hidden ">
           {user?.uid ? (
             <div className="navbar p-0">
@@ -237,7 +237,9 @@ const Navbar = () => {
                       <div class="text-3xl font-bold rounded-full bg-black-350 text-white flex items-center justify-center h-12 w-12 mr-2 p-2">
                         FM
                       </div>
-                      <h1 class="text-xl text-black-350 font-bold">FreeMium</h1>
+                      <h1 class="hidden md:block text-xl text-black-350 font-bold">
+                        FreeMium
+                      </h1>
                     </div>
                     {/* <img className="w-56 md:w-40" src={logoFM} alt="" /> */}
                   </NavLink>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Search from "../../../Shared/Search/Search";
 import DashbordEditorsTable from "../DashbordEditorsTable/DashbordEditorsTable";
 import { useForm } from "react-hook-form";
+import Search from "./SearchBox/Search";
 // import '../DashbordEditorsTable/DashordEditorsTable.css';
 const DashbordEditorsCard = () => {
   const {

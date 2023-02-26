@@ -38,6 +38,7 @@ function Search({ searchPlaceholder, propsStyle }) {
 
   const navigate = useNavigate();
   const handleInputChange = (event) => {
+    event.preventDefault();
     setQuery(event.target.value);
     navigate(`/search?q=${query}`);
   };

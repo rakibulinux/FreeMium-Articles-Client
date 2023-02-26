@@ -194,170 +194,62 @@ const WriteStories = () => {
     return <Spinner />;
   }
   return user?.uid ? (
-    <form
-      onSubmit={handleSubmitStories}
-      className={
-        isDarkMode
-          ? "w-10/12 mx-auto rounded-md p-0 m-0 sm:py-8 md:py-10 text-white"
-          : "w-10/12 mx-auto p-6 mt-6 rounded-md sm:p-10 py-10 text-gray-900"
-      }
-    >
-      <div className="flex justify-between mb-4 items-center">
-        <h3 className="text-lg font-medium">Publish a post</h3>
-        <button
-          className="bg-green-600 text-white py-2 px-3 rounded-3xl ml-auto"
-          // onClick={}
-        >
-          Publish
-        </button>
-      </div>
-      <div className="mb-4">
-        <label className="block font-medium mb-2">Title of the Story</label>
-        <input
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          placeholder="Title"
-          className={
-            isDarkMode
-              ? "bg-black-350 border border-gray-400 p-3 rounded-lg w-full label-text text-white"
-              : "border border-gray-400 p-3 rounded-lg w-full label-text text-black-350"
-          }
-        />
-      </div>
-
-      <div className="form-control w-full">
-        <label className="label">
-          <span
-            className={
-              isDarkMode
-                ? "label-text  text-white"
-                : "label-text text-black-350"
-            }
-          >
-            Read Time
-          </span>
-        </label>
-        <input
-          type="number"
-          name="number"
-          placeholder="Read Time"
-          className={
-            isDarkMode
-              ? "bg-black-350 border border-gray-400 p-3 rounded-lg w-full label-text text-white"
-              : "border border-gray-400 p-3 rounded-lg w-full label-text text-black-350"
-          }
-        />
-      </div>
-      <label className="label">
-        <span
-          className={
-            isDarkMode ? "label-text  text-white" : "label-text text-black-350"
-          }
-        >
-          Select Category
-        </span>
-      </label>
-      <select
-        name="category"
+    <div className="mt-4 pb-36">
+      <form
+        onSubmit={handleSubmitStories}
         className={
           isDarkMode
-            ? "bg-black-350 border border-gray-400 p-3 rounded-lg w-full label-text text-white"
-            : "bg-white border border-gray-400 p-3 rounded-lg w-full label-text text-black-350"
+            ? "w-10/12 mx-auto rounded-md p-0 m-0 sm:py-8 md:py-10 text-white"
+            : "w-10/12 mx-auto p-6 mt-6 rounded-md sm:p-10 py-10 text-gray-900"
         }
       >
-        {categoryButton.map((category, idx) => (
-          <option key={idx} value={category?.CategoryName}>
-            {categoryButton.length && category?.CategoryName}
-          </option>
-        ))}
-      </select>
-      <label className="label">
-        <span
-          className={
-            isDarkMode ? "label-text  text-white" : "label-text text-black-350"
-          }
-        >
-          Select article type
-        </span>
-      </label>
-      <select
-        name="articleType"
-        className={
-          isDarkMode
-            ? "bg-black-350 border border-gray-400 p-3 rounded-lg w-full label-text text-white"
-            : "bg-white border border-gray-400 p-3 rounded-lg w-full label-text text-black-350"
-        }
-      >
-        <option>Paid Article</option>
-        <option>Free Article</option>
-      </select>
-      <div className="flex flex-col my-4 justify-center">
-        <label className="label">
-          <span
-            className={
-              isDarkMode
-                ? "label-text  text-white"
-                : "label-text text-black-350"
-            }
+        <div className="flex justify-between mb-4 items-center">
+          <h3 className="text-2xl font-medium">Publish a Story</h3>
+          <button
+            className="bg-green-600 text-white py-2 px-3 rounded-3xl ml-auto"
+            // onClick={}
           >
-            Select Image
-          </span>
-        </label>
-        <label
-          htmlFor="image-input"
-          className={
-            isDarkMode
-              ? "flex flex-col items-center justify-center border  py-2 hover:bg-bray-800 bg-black-350 border-gray-400 hover:border-gray-500 hover:bg-black-250 rounded-lg"
-              : "flex flex-col items-center justify-center border-black-250 border py-2 rounded-lg cursor-pointer bg-gray-50"
-          }
-        >
-          <div className="flex flex-col items-center justify-center">
-            {preview ? (
-              <div>
-                <img
-                  src={preview || "https://via.placeholder.com/300x300"}
-                  alt=""
-                  className="w-full h-72"
-                />
-              </div>
-            ) : (
-              <>
-                <svg
-                  aria-hidden="true"
-                  className="w-10 h-10 mb-3 text-gray-400"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
-                  ></path>
-                </svg>
-                <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                  <span className="font-semibold">Click to upload</span> or drag
-                  and drop
-                </p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">
-                  SVG, PNG, JPG or GIF (MAX. 800x400px)
-                </p>
-              </>
-            )}
-          </div>
+            Publish
+          </button>
+        </div>
+        <div className="mb-4">
+          <label className="block font-medium mb-2">Title of the Story</label>
           <input
-            type="file"
-            accept="image/*"
-            onChange={handleImageChange}
-            className="hidden"
-            id="image-input"
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder="Title"
+            className={
+              isDarkMode
+                ? "bg-black-350 border border-gray-400 p-3 rounded-lg w-full label-text text-white"
+                : "border border-gray-400 p-3 rounded-lg w-full label-text text-black-350"
+            }
           />
-        </label>
-      </div>
-      <div className={isDarkMode ? "py-2 text-white" : "py-2 text-black-350"}>
+        </div>
+
+        <div className="form-control w-full">
+          <label className="label">
+            <span
+              className={
+                isDarkMode
+                  ? "label-text  text-white"
+                  : "label-text text-black-350"
+              }
+            >
+              Read Time
+            </span>
+          </label>
+          <input
+            type="number"
+            name="number"
+            placeholder="Read Time"
+            className={
+              isDarkMode
+                ? "bg-black-350 border border-gray-400 p-3 rounded-lg w-full label-text text-white"
+                : "border border-gray-400 p-3 rounded-lg w-full label-text text-black-350"
+            }
+          />
+        </div>
         <label className="label">
           <span
             className={
@@ -366,27 +258,141 @@ const WriteStories = () => {
                 : "label-text text-black-350"
             }
           >
-            Write your story
+            Select Category
           </span>
         </label>
-        <ReactQuill
-          value={content}
-          onChange={setContent}
-          modules={modules}
-          formats={formats}
-          placeholder="Write your story here..."
-          theme="snow"
-          style={
+        <select
+          name="category"
+          className={
             isDarkMode
-              ? { height: "500px", color: "white" }
-              : { height: "500px" }
+              ? "bg-black-350 border border-gray-400 p-3 rounded-lg w-full label-text text-white"
+              : "bg-white border border-gray-400 p-3 rounded-lg w-full label-text text-black-350"
           }
-          className={isDarkMode ? "text-white" : "text-black-350"}
-          bounds=".app"
-          callback={handleImageUpload}
-        />
-      </div>
-    </form>
+        >
+          {categoryButton.map((category, idx) => (
+            <option key={idx} value={category?.CategoryName}>
+              {categoryButton.length && category?.CategoryName}
+            </option>
+          ))}
+        </select>
+        <label className="label">
+          <span
+            className={
+              isDarkMode
+                ? "label-text  text-white"
+                : "label-text text-black-350"
+            }
+          >
+            Select article type
+          </span>
+        </label>
+        <select
+          name="articleType"
+          className={
+            isDarkMode
+              ? "bg-black-350 border border-gray-400 p-3 rounded-lg w-full label-text text-white"
+              : "bg-white border border-gray-400 p-3 rounded-lg w-full label-text text-black-350"
+          }
+        >
+          <option>Paid Article</option>
+          <option>Free Article</option>
+        </select>
+        <div className="flex flex-col my-4 justify-center">
+          <label className="label">
+            <span
+              className={
+                isDarkMode
+                  ? "label-text  text-white"
+                  : "label-text text-black-350"
+              }
+            >
+              Select Image
+            </span>
+          </label>
+          <label
+            htmlFor="image-input"
+            className={
+              isDarkMode
+                ? "flex flex-col items-center justify-center border  py-2 hover:bg-bray-800 bg-black-350 border-gray-400 hover:border-gray-500 hover:bg-black-250 rounded-lg"
+                : "flex flex-col items-center justify-center border-black-250 border py-2 rounded-lg cursor-pointer bg-gray-50"
+            }
+          >
+            <div className="flex flex-col items-center justify-center">
+              {preview ? (
+                <div>
+                  <img
+                    src={preview || "https://via.placeholder.com/300x300"}
+                    alt=""
+                    className="w-full h-72"
+                  />
+                </div>
+              ) : (
+                <>
+                  <svg
+                    aria-hidden="true"
+                    className="w-10 h-10 mb-3 text-gray-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                    ></path>
+                  </svg>
+                  <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                    <span className="font-semibold">Click to upload</span> or
+                    drag and drop
+                  </p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">
+                    SVG, PNG, JPG or GIF (MAX. 800x400px)
+                  </p>
+                </>
+              )}
+            </div>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
+              className="hidden"
+              id="image-input"
+            />
+          </label>
+        </div>
+        <div className={isDarkMode ? "py-2 text-white" : "py-2 text-black-350"}>
+          <label className="label">
+            <span
+              className={
+                isDarkMode
+                  ? "label-text  text-white"
+                  : "label-text text-black-350"
+              }
+            >
+              Write your story
+            </span>
+          </label>
+          <ReactQuill
+            value={content}
+            onChange={setContent}
+            modules={modules}
+            formats={formats}
+            placeholder="Write your story here..."
+            theme="snow"
+            style={
+              isDarkMode
+                ? { height: "500px", color: "white" }
+                : { height: "500px", color: "black" }
+            }
+            className={isDarkMode ? "text-white" : "text-black-350"}
+            bounds=".app"
+            callback={handleImageUpload}
+          />
+        </div>
+      </form>
+    </div>
   ) : (
     <Creator />
   );

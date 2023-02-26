@@ -29,8 +29,7 @@ const DasReportedStory = () => {
       });
   };
   console.log(reportedItems);
-  // const reportedTitle = item.articleTitle
-  // const title = reportedTitle.replace(/<[^>]+>/g, "").slice(0, 25);
+  
   if (reportLoading) {
     return <Spinner />;
   }

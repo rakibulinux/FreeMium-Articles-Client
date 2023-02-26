@@ -75,7 +75,7 @@ const DashboardLayout = () => {
                   <Link to="/dashboard/editors">
                     {" "}
                     <FaPencilRuler />
-                    Editors
+                    Writers
                   </Link>
                 </li>
                 <li>

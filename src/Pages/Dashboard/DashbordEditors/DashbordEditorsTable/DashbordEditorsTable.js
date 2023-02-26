@@ -11,8 +11,8 @@ import { Link } from "react-router-dom";
 import { APIContext } from "../../../../contexts/APIProvider";
 const DashbordEditorsTable = ({ selectedNumber }) => {
   const [users, setUsers] = useState([]);
-  const { isDarkMode, searchResults } = useContext(APIContext);
-  console.log(searchResults)
+  const { isDarkMode, searchResults, writerSuggestions } = useContext(APIContext);
+  // console.log(searchResults)
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/all-users/${selectedNumber}`)
       .then((res) => res.json())
@@ -61,7 +61,7 @@ const DashbordEditorsTable = ({ selectedNumber }) => {
             </tr>
           </thead>
           {
-            searchResults?.length === 0 
+            writerSuggestions?.length === 0 
             ?
 <tbody>
             {users.map((userData) => (
@@ -98,9 +98,9 @@ const DashbordEditorsTable = ({ selectedNumber }) => {
                       className="dropdown-content menu p-2 shadow-lg rounded-box w-52 bg-white"
                     >
                       <li>
-                        <Link to={""} className="font-semibold text-gray-900">
+                        {/* <Link to={""} className="font-semibold text-gray-900">
                           Message
-                        </Link>
+                        </Link> */}
                       </li>
                       <li>
                         <Link to={""} className="font-semibold text-gray-900">
@@ -114,7 +114,56 @@ const DashbordEditorsTable = ({ selectedNumber }) => {
             ))}
           </tbody>
           :
-          ''
+          <tbody>
+            {writerSuggestions.map((userData) => (
+              <tr>
+                <td>
+                  {userData?.picture ? (
+                    <img src={userData?.picture} className="w-20" alt="" />
+                  ) : (
+                    <h4 className="text-gray-900 font-medium">Not found</h4>
+                  )}
+                </td>
+                <td>
+                  <h4 className="font-serif font-medium text-gray-900">
+                    {userData?.name ? userData?.name : "Not found"}
+                  </h4>
+                </td>
+                <td>
+                  <h4>
+                    {userData?.following ? userData?.following?.length : 0}
+                  </h4>
+                </td>
+                <td>
+                  {/* <button >Action<RiArrowDropDownLine className='text-xl' /></button> */}
+                  <div className="dropdown">
+                    <label
+                      tabIndex={0}
+                      className="btn btn-sm bg-green-550 hover:bg-green-550 border-none text-white flex items-center"
+                    >
+                      Action
+                      <RiArrowDropDownLine className="text-xl" />
+                    </label>
+                    <ul
+                      tabIndex={0}
+                      className="dropdown-content menu p-2 shadow-lg rounded-box w-52 bg-white"
+                    >
+                      {/* <li>
+                        <Link to={""} className="font-semibold text-gray-900">
+                          Message
+                        </Link>
+                      </li> */}
+                      <li>
+                        <Link to={""} className="font-semibold text-gray-900">
+                          Report user
+                        </Link>
+                      </li>
+                    </ul>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
           }
           
         </table>

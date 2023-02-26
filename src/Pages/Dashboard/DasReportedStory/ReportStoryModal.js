@@ -11,7 +11,7 @@ const ReportStoryModal = ({title,message,closeReportedModal,btnName,deleteHandle
     <p className="py-4">{message}</p>
     <div className="modal-action">   
      <label onClick={()=>deleteHandler(itemData)} htmlFor="delete-modal" className="btn btn-primary ">{btnName}</label>
-     <button onClick={closeReportedModal} className='btn btn-outline'>cancle</button>
+     <button onClick={closeReportedModal} className='btn btn-outline'>cancel</button>
     </div>
   </div>
 </div>

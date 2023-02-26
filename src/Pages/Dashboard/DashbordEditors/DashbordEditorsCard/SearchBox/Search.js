@@ -7,35 +7,33 @@ import { APIContext } from "../../../../../contexts/APIProvider";
 
 function Search({ searchPlaceholder, propsStyle }) {
   const [query, setQuery] = useState("");
-  const { searchArticles, setSearchArticles, suggestions, setSuggestions } =
-    useContext(APIContext);
-  const dispatch = useDispatch();
+  const {writerSuggestions,setWriterSuggestions, searchWriter, setSearchWriter} = useContext(APIContext);
   useEffect(() => {
     const fetchSearchResults = async () => {
       const response = await axios.get(
         `${process.env.REACT_APP_API_URL}/writer-search/${query}`
       );
-      setSearchArticles(response.data.articles);
-      setSuggestions(response.data.suggestions);
+      setSearchWriter(response.data.articles);
+      setWriterSuggestions(response.data.suggestions);
     };
     if (query.length > 0) {
       fetchSearchResults();
     } else {
-      setSearchArticles([]);
-      setSuggestions([]);
+      setSearchWriter([]);
+      setWriterSuggestions([]);
     }
   }, [query]);
-  const navigate = useNavigate();
-  const handleInputChange = (event) => {
-    setQuery(event.target.value);
-    navigate("/search");
-  };
+  // const navigate = useNavigate();
+  // const handleInputChange = (event) => {
+  //   setQuery(event.target.value);
+  //   navigate("/search");
+  // };
 
-  console.log(searchArticles);
-  console.log(suggestions);
+  console.log(searchWriter);
+  console.log(writerSuggestions);
   return (
     <>
-      <form onSubmit={handleInputChange} className="hidden md:block">
+      <div className="hidden md:block">
         <div
           className={`relative ${propsStyle} text-gray-600 focus-within:text-gray-400`}
         >
@@ -67,7 +65,7 @@ function Search({ searchPlaceholder, propsStyle }) {
             autoComplete="off"
           />
         </div>
-      </form>
+      </div>
     </>
   );
 }

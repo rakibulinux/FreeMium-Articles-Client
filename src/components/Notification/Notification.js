@@ -1,23 +1,22 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import io from "socket.io-client";
 import { AuthContext } from "../../contexts/AuthProvider";
 import { fetchUserData } from "../../store/fetchGetSlice";
 import { fetchAsync } from "../../store/fetchSlice";
+import Scroll from "../Scroll/Scroll";
 const socket = io(`${process.env.REACT_APP_API_URL}`); // Replace with your server URL
 
-const Notification = () => {
+const Notification = ({ notifications, setNotifications }) => {
   const dispatch = useDispatch();
-  const [notifications, setNotifications] = useState([]);
   const { user } = useContext(AuthContext);
-
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const loaderRef = useRef(null);
   const singleUsers = useSelector((state) => state.fetch.data);
-  const isLoading = useSelector((state) => state.fetch.isLoading);
-  const error = useSelector((state) => state.fetch.error);
-
   useEffect(() => {
     dispatch(
       fetchAsync(`${process.env.REACT_APP_API_URL}/user/${user?.email}`)
@@ -26,14 +25,17 @@ const Notification = () => {
 
   useEffect(() => {
     // Fetch all notifications
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/notifications/${singleUsers?._id}`)
-      .then((response) => {
-        setNotifications(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    const loadNotifications = async () => {
+      const res = await fetch(
+        `${process.env.REACT_APP_API_URL}/notifications/${singleUsers?._id}?page=${page}`
+      );
+      const data = await res.json();
+      if (data.length === 0) {
+        setHasMore(false);
+      }
+      setNotifications((prevNotifications) => [...prevNotifications, ...data]);
+    };
+    loadNotifications();
 
     // Listen for new notifications
     socket.on("new_notification", (newNotification) => {
@@ -56,7 +58,7 @@ const Notification = () => {
       socket.off("new_notification");
       socket.off("notification_updated");
     };
-  }, [notifications, singleUsers]);
+  }, [singleUsers?._id, page]);
 
   const handleReadClick = (notification) => {
     // Update notification as read
@@ -80,45 +82,67 @@ const Notification = () => {
         console.error(error);
       });
   };
-  console.log(notifications);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (
+        loaderRef.current &&
+        loaderRef.current.getBoundingClientRect().bottom <= window.innerHeight
+      ) {
+        setPage((prevPage) => prevPage + 1);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+    // notificationsSection.addEventListener("scroll", handleScroll);
+
+    // return () => {
+    //   notificationsSection.removeEventListener("scroll", handleScroll);
+    // };
+  }, []);
 
   return (
     <div
-      className="absolute right-0 mt-2 mr-4 bg-white rounded-md shadow-lg overflow-hidden p-2 z-20"
+      className="absolute right-16 mt-2 mr-4 bg-white rounded-md shadow-lg overflow-hidden p-2 z-20"
       style={{ width: "20rem" }}
     >
-      <ul className="p-2">
-        {notifications.map((notification) => (
-          // <li
-          //   className="my-2"
-          //   key={notification._id}
-          //   onClick={() => handleReadClick(notification)}
-          // >
-          //   {notification?.message} (
-          //   {notification?.read ? "read" : "unread"})
-          // </li>
-          <li
-            key={notification._id}
-            onClick={() => handleReadClick(notification)}
-            className="flex items-center px-4 py-3 border-b hover:bg-gray-100 -mx-2"
-          >
-            <img
-              className="h-8 w-8 rounded-full object-cover mx-1"
-              src={singleUsers?.picture}
-              alt="avatar"
-            />
-            <p className="text-gray-600 text-sm mx-2">
-              <span className="font-bold" href="#">
-                {singleUsers?.name}
-              </span>{" "}
-              {notification?.message} ({notification?.read ? "read" : "unread"})
-              <span className="font-bold text-blue-500" href="#">
-                artical . 1h
-              </span>{" "}
-            </p>
-          </li>
-        ))}
-      </ul>
+      <Scroll>
+        <ul className="p-2">
+          {notifications.map((notification) => (
+            // <li
+            //   className="my-2"
+            //   key={notification._id}
+            //   onClick={() => handleReadClick(notification)}
+            // >
+            //   {notification?.message} (
+            //   {notification?.read ? "read" : "unread"})
+            // </li>
+
+            <li
+              key={notification._id + 1}
+              onClick={() => handleReadClick(notification)}
+              className="flex items-center px-4 py-3 border-b hover:bg-gray-100 -mx-2"
+            >
+              <img
+                className="h-8 w-8 rounded-full object-cover mx-1"
+                src={singleUsers?.picture}
+                alt="avatar"
+              />
+              <p className="text-gray-600 text-sm mx-2">
+                <span className="font-bold" href="#">
+                  {singleUsers?.name}
+                </span>{" "}
+                {notification?.message} (
+                {notification?.read ? "read" : "unread"})
+                <span className="font-bold text-blue-500" href="#">
+                  artical . 1h
+                </span>{" "}
+              </p>
+            </li>
+          ))}
+          {hasMore && <div ref={loaderRef}>Loading more notifications...</div>}
+        </ul>
+      </Scroll>
     </div>
   );
 };

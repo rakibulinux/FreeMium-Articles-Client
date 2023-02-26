@@ -8,7 +8,7 @@ export default function Spinner() {
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
-      className="flex justify-center items-center"
+      className="h-screen flex justify-center items-center"
     >
       <ThreeDots
         height="180"

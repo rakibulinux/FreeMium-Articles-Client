@@ -4,22 +4,20 @@ import Notification from "./Notification";
 const socket = io(`${process.env.REACT_APP_API_URL}`); // Replace with your server URL
 
 const NotificationIcon = () => {
+  const [notifications, setNotifications] = useState([]);
   const [unreadCount, setUnreadCount] = useState(0);
-  // const [notifications, setNotifications] = useState([]);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   useEffect(() => {
     // Listen for new notifications
-    socket.on("new_notification", (newNotification) => {
+    socket.on("new_notification", () => {
       setUnreadCount((count) => count + 1);
     });
 
     // Listen for notification updates
     socket.on("notification_updated", (updatedNotification) => {
-      if (!updatedNotification.read) {
-        setUnreadCount((count) => count + 1);
-      } else {
-        setUnreadCount((count) => count - 1);
-      }
+      setUnreadCount((count) =>
+        updatedNotification.read && count > 0 ? count - 1 : count
+      );
     });
 
     return () => {
@@ -27,7 +25,15 @@ const NotificationIcon = () => {
       socket.off("notification_updated");
     };
   }, []);
-  console.log(unreadCount);
+  const filterNot = notifications.filter(
+    (noti) => !noti.read === !notifications.read
+  );
+  console.log(filterNot);
+  // const handleNotificationsClick = () => {
+  //   setDropdownOpen(true);
+  //   setUnreadCount(0); // clear unread count when dropdown is opened
+  // };
+  // console.log(unreadCount);
   return (
     <div className="flex justify-center">
       <div className="object-center">
@@ -56,7 +62,7 @@ const NotificationIcon = () => {
             </svg>
 
             <span className="badge badge-xs text-white badge-primary indicator-item">
-              {unreadCount?.length || 0}
+              {filterNot?.length}
             </span>
           </div>
         </button>
@@ -70,8 +76,8 @@ const NotificationIcon = () => {
 
         {dropdownOpen && (
           <Notification
-          // notifications={notifications}
-          // setNotifications={setNotifications}
+            notifications={notifications}
+            setNotifications={setNotifications}
           />
         )}
       </div>

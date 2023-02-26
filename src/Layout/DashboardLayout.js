@@ -15,6 +15,7 @@ import {
 } from "react-icons/fa";
 import "../Pages/Dashboard/DashbordEditors/DashbordEditorsTable/DashordEditorsTable.css";
 import { APIContext } from "../contexts/APIProvider";
+import { AiOutlineUser } from "react-icons/ai";
 const DashboardLayout = () => {
   const { user, loading } = useContext(AuthContext);
   const { isDarkMode } = useContext(APIContext);
@@ -74,8 +75,8 @@ const DashboardLayout = () => {
                 <li>
                   <Link to="/dashboard/editors">
                     {" "}
-                    <FaPencilRuler />
-                    Writers
+                    <AiOutlineUser />
+                    Users
                   </Link>
                 </li>
                 <li>

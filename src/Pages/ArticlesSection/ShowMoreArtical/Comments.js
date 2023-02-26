@@ -251,7 +251,7 @@ const Comments = ({ id }) => {
                                         <div className="modal">
                                             <div className="modal-box">
                                                 <form onSubmit={handleUpdateComment}>
-                                                    <textarea defaultValue={singleComent?.comment} name="updateComment" className=" border-none textarea-lg w-full"></textarea>
+                                                    <textarea defaultValue={singleComent?.comment} name="updateComment" className="textarea border-none w-full"></textarea>
                                                     <div className="flex justify-end  items-end">
                                                         <div className="modal-action">
                                                             <label htmlFor="my-modal" className="btn btn-sm rounded-full bg-primary">Cancel</label>
@@ -330,7 +330,6 @@ const Comments = ({ id }) => {
                                                     </div>
                                                     <div>
                                                     </div>
-
                                                 </div>
                                             </div>
                                             <div className="dropdown dropdown-top dropdown-left">

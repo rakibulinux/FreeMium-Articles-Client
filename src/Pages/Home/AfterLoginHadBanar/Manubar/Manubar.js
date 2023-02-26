@@ -7,6 +7,9 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
+import "./Menubar.css";
+// import required modules
+import { Navigation } from "swiper";
 const Manubar = () => {
   const { categoryButton, isCategoryLoading } = useContext(APIContext);
   // const [swiperRef, setSwiperRef] = useState(null);
@@ -24,20 +27,20 @@ const Manubar = () => {
         }
         style={{ width: "100%", alignItems: "center" }}
       >
-        <Swiper
+        <Swiper navigation={true} modules={[Navigation]} 
           // onSwiper={setSwiperRef}
-          slidesPerView={4}
+          // slidesPerView={5}
           centeredSlides={true}
-          spaceBetween={30}
+          // spaceBetween={40}
           // pagination={{
           //   type: "function",
           // }}
           // navigation={true}
-          className="flex"
+          className="flex mySwiper"
         >
           {categoryButton.map((category) => (
             <SwiperSlide
-              className="py-3 mr-0"
+              className="py-3 mr-0 font-bold"
               style={{
                 width: "16px",
                 marginRight: 0,

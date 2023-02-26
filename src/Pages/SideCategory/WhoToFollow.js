@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { APIContext } from "./../../contexts/APIProvider";
 import WhoToFollowUsers from "./WhoToFollowUsers";
@@ -11,7 +11,7 @@ const WhoToFollow = () => {
     fetchAPI(`${process.env.REACT_APP_API_URL}/three-users`)
   );
   return (
-    <div className="">
+    <div className="mx-5">
       <h1
         className={
           isDarkMode
@@ -21,7 +21,7 @@ const WhoToFollow = () => {
       >
         Who to follow
       </h1>
-      <div className="flex justify-between flex-col">
+      <div className="flex justify-between flex-col ">
         {threeUsers?.map((users) => (
           <WhoToFollowUsers
             key={users?._id}
@@ -29,9 +29,9 @@ const WhoToFollow = () => {
             isDarkMode={isDarkMode}
           />
         ))}
-        <Link className={isDarkMode ? "text-gray-200" : "font-semibold"} to="">
+        {/* <Link className={isDarkMode ? "text-gray-200" : "font-semibold"} to="">
           See more suggession
-        </Link>
+        </Link> */}
       </div>
     </div>
   );

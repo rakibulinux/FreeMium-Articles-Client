@@ -37,7 +37,7 @@ const DashbordCategory = () => {
   return (
     <div>
       <div className="flex justify-between mb-3">
-        <h1 className="text-2xl font-bold text-[#616060]">Category</h1>
+        <h1 className="text-4xl text-center font-bold m-5">Category</h1>
         <Link to="/dashboard/addCategory">
           <button
             className={
@@ -61,10 +61,10 @@ const DashbordCategory = () => {
           <thead>
             <tr>
               <th></th>
-              <th>name</th>
+              <th className="text-xl">Name</th>
 
-              <th>delete</th>
-              <th className="md:hidden lg:block">Edit</th>
+              <th className="text-xl">Actions</th>
+              <th className="md:hidden lg:block text-xl">Edit</th>
             </tr>
           </thead>
           <tbody>
@@ -80,9 +80,14 @@ const DashbordCategory = () => {
                   <label
                     onClick={() => setDeleteCategory(category)}
                     htmlFor="delete-modal"
-                    className="btn btn-ghost bg-red-500 hover:bg-red-600 text-white btn-xs"
+                    className={
+                      isDarkMode
+                        ? "btn btn-sm m-1 shadow-red-400 bg-black-350 text-white rounded-box w-auto"
+                        : "btn btn-sm m-1 bg-base-100  text-red-500 hover:text-white hover:bg-red-500 rounded-box w-auto"
+                    }
+                    // className="btn btn-ghost bg-red-500 hover:bg-red-600 text-white btn-xs"
                   >
-                    delete
+                    Delete
                   </label>
                 </td>
 

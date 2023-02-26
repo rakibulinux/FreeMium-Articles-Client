@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const UpdateCategory = () => {
-
+  const navigate = useNavigate();
   const [categoryData, setCategoryData] = useState()
   const { id } = useParams()
   // get specific category
@@ -36,6 +36,7 @@ const UpdateCategory = () => {
         if (data.modifiedCount > 0) {
           toast("successful update category");
           form.reset()
+          navigate('/dashboard/category')
         }
       })
   }

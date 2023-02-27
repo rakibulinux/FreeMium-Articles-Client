@@ -63,7 +63,7 @@ const HistoryAns = () => {
                 {/* <code className="!whitespace-pre max-w-xl">{response}</code> */}
               </div>
             </div>
-            <button class="cursor-pointer absolute right-6 bottom-[124px] md:bottom-[120px] z-10 rounded-full border border-gray-200 bg-gray-50 text-gray-600 dark:border-white/10 dark:bg-white/10 dark:text-gray-200">
+            <p class="cursor-pointer absolute right-6 bottom-[124px] md:bottom-[120px] z-10 rounded-full border border-gray-200 bg-gray-50 text-gray-600 dark:border-white/10 dark:bg-white/10 dark:text-gray-200">
               <svg
                 stroke="currentColor"
                 fill="none"
@@ -79,8 +79,9 @@ const HistoryAns = () => {
                 <line x1="12" y1="5" x2="12" y2="19"></line>
                 <polyline points="19 12 12 19 5 12"></polyline>
               </svg>
-            </button>
-            <div className="absolute flex gap-2 bottom-0 w-full border-t md:border-t-0 dark:border-white/20 md:border-transparent md:dark:border-transparent md:bg-vert-light-gradient bg-white dark:bg-gray-800 md:!bg-transparent dark:md:bg-vert-dark-gradient">
+            </p>
+
+            <div className=" flex justify-center px-12  gap-2 bottom-0 w-full border-t md:border-t-0 dark:border-white/20 md:border-transparent md:dark:border-transparent md:bg-vert-light-gradient bg-white dark:bg-gray-800 md:!bg-transparent dark:md:bg-vert-dark-gradient">
               <input
                 type="text"
                 value={prompt}
@@ -103,6 +104,7 @@ const HistoryAns = () => {
                 /> */}
               </div>
             </div>
+            
           </div>
         </form>
       </div>

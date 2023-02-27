@@ -59,12 +59,7 @@ const AskMeAnything = () => {
         <SideSection handleNewChat={handleNewChat} questionAns={questionAns} />
       </div>
       <div className="w-full mx-auto bg-[#343541]">
-        <form
-          onSubmit={handleSubmit}
-          className="flex flex-col justify-center items-center gap-4"
-        >
-          <div className="w-full gap-4 p-8">
-            <div className="w-full mt-8">
+      <div className="w-full mt-8">
               {/* <HistoryAns></HistoryAns> */}
               <div className="px-40 overflow-y-auto">
                 <div className="flex justify-center">
@@ -84,8 +79,15 @@ const AskMeAnything = () => {
                 {/* <code className="!whitespace-pre max-w-xl">{response}</code> */}
               </div>
             </div>
+            <footer>
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col justify-center items-center gap-4"
+        >
+          <div className="w-full gap-4 p-8">
+            
 
-            <div className="flex items-center justify-center gap-4 bottom-0">
+            <div className="flex bottom-0 items-center justify-center gap-4 mt-64 px-12">
               <input
                 type="text"
                 value={prompt}
@@ -105,6 +107,7 @@ const AskMeAnything = () => {
             </div>
           </div>
         </form>
+        </footer>
       </div>
     </div>
   );

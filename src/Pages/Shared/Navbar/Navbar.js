@@ -233,11 +233,13 @@ const Navbar = () => {
                     </svg>
                   </label>
                   <NavLink to="/">
-                    <div class="flex items-center">
-                      <div class="text-3xl font-bold rounded-full bg-black-350 text-white flex items-center justify-center h-12 w-12 mr-2 p-2">
+                    <div className="flex items-center">
+                      <div className="text-3xl font-bold rounded-full bg-black-350 text-white flex items-center justify-center h-12 w-12 mr-2 p-2">
                         FM
                       </div>
-                      <h1 class="text-xl text-black-350 font-bold">FreeMium</h1>
+                      <h1 className="text-xl text-black-350 font-bold">
+                        FreeMium
+                      </h1>
                     </div>
                     {/* <img className="w-56 md:w-40" src={logoFM} alt="" /> */}
                   </NavLink>

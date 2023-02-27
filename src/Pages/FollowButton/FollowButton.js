@@ -10,7 +10,7 @@ function FollowButton({ refetch, user, userId, followingId, classes }) {
   const { data: singleUsers } = useQuery(["user", user?.email], () =>
     fetchAPI(`${process.env.REACT_APP_API_URL}/user/${user?.email}`)
   );
-  console.log(singleUsers);
+
   useEffect(() => {
     axios
       .get(

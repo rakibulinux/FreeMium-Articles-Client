@@ -5,7 +5,14 @@ import PrimaryButton from "../../components/Button/PrimaryButton";
 import { AuthContext } from "../../contexts/AuthProvider";
 import { setAuthToken } from "../../APIs/Auth";
 import { APIContext } from "../../contexts/APIProvider";
+import { useLottie } from "lottie-react";
+import loginAnimation from "../../Lottie/registration.json";
 const Register = () => {
+  const options = {
+    animationData: loginAnimation,
+    loop: true
+  };
+  const { View } = useLottie(options);
   const [role, setRole] = useState("user");
   const { createUserAccount, updateUserProfile, signInWithGoogle, setLoading } =
     useContext(AuthContext);
@@ -76,12 +83,18 @@ const Register = () => {
   };
 
   return (
-    <div className="flex justify-center min-h-screen items-center pt-8 my-10">
+    <div className="lg:grid grid-cols-2 items-center">
+      <div className='w-[70%] h-[70%] mx-auto lg:block hidden'>
+        {
+          View
+        }
+      </div>
+      <div className="min-h-screen items-center lg:px-0 px-5 pt-8 my-10">
       <div
         className={
           isDarkMode
-            ? "flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-black-250 text-white"
-            : "flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900"
+            ? "flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-white text-gray-900 shadow-lg border-[1px] border-[#ddd] lg:ml-0 mx-auto"
+            : "flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-white text-gray-900 shadow-lg border-[1px] border-[#ddd] lg:ml-0 mx-auto"
         }
       >
         <div className="mb-8 text-center">
@@ -157,8 +170,8 @@ const Register = () => {
                 type="submit"
                 classes={
                   isDarkMode
-                    ? "w-full px-8 py-3 font-semibold rounded-md bg-black-350 hover:bg-gray-700 hover:text-white text-gray-100"
-                    : "w-full px-8 py-3 font-semibold rounded-md bg-gray-900 hover:bg-gray-700 hover:text-white text-gray-100"
+                    ? "w-full px-8 py-3 font-semibold rounded-md bg-[#1A8917] hover:text-white text-gray-100"
+                    : "w-full px-8 py-3 font-semibold rounded-md bg-[#1A8917] hover:text-white text-gray-100"
                 }
               >
                 Register
@@ -208,6 +221,7 @@ const Register = () => {
           </p>
         </div>
       </div>
+    </div>
     </div>
   );
 };

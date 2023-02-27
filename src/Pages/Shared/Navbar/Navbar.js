@@ -171,12 +171,12 @@ const Navbar = () => {
         <NavLink
           className={
             isDarkMode
-              ? "flex items-center gap-2 text-white hover:text-black"
-              : "flex items-center gap-2 text-gray-900 hover:text-black"
+              ? "flex items-center gap-2 text-white hover:text-black border-animate"
+              : "flex items-center gap-2 text-gray-900 hover:text-black border-animate"
           }
           to="/write-stories"
         >
-          {writeIcon} Write
+           Write
         </NavLink>
       </li>
 

@@ -7,8 +7,17 @@ import { setAuthToken } from "../../APIs/Auth";
 import Spinner from "../../components/Spinner/Spinner";
 import useToken from "../../hooks/useToken";
 import { APIContext } from "../../contexts/APIProvider";
-
+import loginImg from "../../Assets/login.png";
+import { useLottie } from "lottie-react";
+import loginAnimation from "../../Lottie/login.json";
 const Login = () => {
+  // lottie animation gif
+  const options = {
+    animationData: loginAnimation,
+    loop: true
+  };
+  const { View } = useLottie(options);
+
   const { isDarkMode } = useContext(APIContext);
   const [role] = useState("user");
   const {
@@ -91,12 +100,19 @@ const Login = () => {
     navigate("/");
   }
   return (
-    <div className="flex justify-center items-center pt-8 my-10">
+    <div className="lg:grid grid-cols-2 items-center">
+      <div className="lg:block hidden">
+        {/* <img className="mx-auto" src={loginImg} alt="" /> */}
+        {
+          View
+        }
+      </div>
+      <div className="pt-8 my-10 lg:px-0 px-5">
       <div
         className={
           isDarkMode
-            ? "flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-black-250 text-white"
-            : "flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900"
+            ? "flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-[white] shadow-lg border-[1px] border-[#ddd] text-gray-900 lg:ml-0 mx-auto"
+            : "flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-[white] shadow-lg border-[1px] border-[#ddd] text-gray-900 lg:ml-0 mx-auto"
         }
       >
         <div className="mb-8 text-center">
@@ -151,8 +167,8 @@ const Login = () => {
               type="submit"
               classes={
                 isDarkMode
-                  ? "w-full px-8 py-3 font-semibold rounded-md bg-black-350 hover:bg-gray-700 hover:text-white text-gray-100"
-                  : "w-full px-8 py-3 font-semibold rounded-md bg-gray-900 hover:bg-gray-700 hover:text-white text-gray-100"
+                  ? "w-full px-8 py-3 font-semibold rounded-md bg-[#1A8917] text-white"
+                  : "w-full px-8 py-3 font-semibold rounded-md bg-[#1A8917] text-white"
               }
             >
               Login
@@ -209,6 +225,7 @@ const Login = () => {
           </p>
         </div>
       </div>
+    </div>
     </div>
   );
 };

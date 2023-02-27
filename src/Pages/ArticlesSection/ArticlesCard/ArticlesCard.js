@@ -46,11 +46,11 @@ const ArticlesCard = ({ data, handleSave, handleDelete }) => {
       articleType === true ? <div
       className={
         isDarkMode
-          ? "my-7 w-full mx-auto bg-black-250 rounded-xl shadow-md text-white"
-          : "my-7 w-full mx-auto bg-base-100 rounded-xl shadow-md text-gray-800"
+          ? " w-full mx-auto bg-black-250 border-y  text-white"
+          : " w-full mx-auto bg-base-100  border-y text-gray-800"
       }
     >
-      <div className="card-body md:flex">
+      <div className="card-body md:flex px-0">
         <div className="flex gap-2 items-center">
           {/* blog auther img */}
           <img className="rounded-full w-10 h-10" src={writerImg} alt="" />

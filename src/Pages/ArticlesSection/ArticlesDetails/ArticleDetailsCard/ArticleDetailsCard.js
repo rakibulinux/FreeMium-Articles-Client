@@ -44,7 +44,7 @@ const ArticleDetailsCard = ({
     _id,
     articleDetails,
     articleRead,
-    articleSubmitDate,
+    timestamp,
     articleTitle,
     writerImg,
     articleImg,
@@ -151,7 +151,7 @@ const ArticleDetailsCard = ({
                           : "text-xs font-medium text-gray-600"
                       }
                     >
-                      {articleSubmitDate}
+                      {timestamp}
                     </span>
                   </li>
 

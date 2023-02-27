@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import Spinner from "../../../../components/Spinner/Spinner";
@@ -14,7 +15,7 @@ const MyStorie = ({ story }) => {
   const {
     articleDetails,
     articleRead,
-    articleSubmitDate,
+    timestamp,
     articleTitle,
     writerImg,
     writerName,
@@ -65,9 +66,11 @@ const MyStorie = ({ story }) => {
           </Link>
           <div className="flex items-center justify-between">
             <div className="flex items-center ml-3 lg:ml-2 ">
-              <span className="block font-semibold">{articleSubmitDate}</span>
+              <span className="block font-semibold">
+                {format(new Date(timestamp), "PP")}
+              </span>
               <span className="block ml-3 text-red-500 font-semibold">
-                {articleRead}-read
+                {articleRead} min read
               </span>
             </div>
             {user && (

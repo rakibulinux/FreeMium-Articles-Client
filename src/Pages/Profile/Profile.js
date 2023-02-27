@@ -1,13 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { BiUserCircle } from "react-icons/bi";
 import { FaMapMarkerAlt, FaUser } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
-import { useSelector } from "react-redux";
-import Counter from "../../components/Counter";
 import Spinner from "../../components/Spinner/Spinner";
 import { AuthContext } from "../../contexts/AuthProvider";
-import { refetchData } from "../../store/fetchSlice";
 import { APIContext } from "./../../contexts/APIProvider";
 
 const Profile = () => {

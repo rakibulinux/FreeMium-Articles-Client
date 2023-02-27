@@ -5,15 +5,9 @@ import { toast } from "react-hot-toast";
 
 import ReportStoryModal from "../DasReportedStory/ReportStoryModal";
 const DashboardStoriesTable = ({ article, isDarkMode, idx, refetch }) => {
-  const {
-    writerName,
-    articleTitle,
-    articleImg,
-    _id,
-    category,
-    articleSubmitDate,
-  } = article;
-  const title = articleTitle.replace(/<[^>]+>/g, "").slice(0, 25);
+  const { writerName, articleTitle, articleImg, _id, category, timestamp } =
+    article;
+  const title = articleTitle.replace(/<[^>]+>/g, "").slice(0, 50);
 
   const [deleteItem, setDeleteItem] = useState(null);
   const closeReportedModal = () => {
@@ -42,14 +36,17 @@ const DashboardStoriesTable = ({ article, isDarkMode, idx, refetch }) => {
       <tr className="hover:bg-slate-800">
         <th>{idx + 1}</th>
         <td>
-          <img src={articleImg} className="w-16 h-14 rounded" title={title} alt={title} />
+          <img
+            src={articleImg}
+            className="w-16 h-14 rounded"
+            title={title}
+            alt={title}
+          />
         </td>
         <td>{title}</td>
         <td className="hidden lg:table-cell p-0">{category}</td>
-        <td className="hidden lg:table-cell font-bold">
-        {writerName}
-        </td>
-        <td className="hidden lg:table-cell">{articleSubmitDate}</td>
+        <td className="hidden lg:table-cell font-bold">{writerName}</td>
+        <td className="hidden lg:table-cell">{timestamp}</td>
         <td>
           <div className="dropdown dropdown-end">
             <label

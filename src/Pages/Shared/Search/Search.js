@@ -45,8 +45,7 @@ function Search({ searchPlaceholder, propsStyle }) {
   const clearSearch = () => {
     setQuery("");
   };
-  console.log(searchArticles);
-  console.log(suggestions);
+
   return (
     <>
       {/* <Link to={`/search/query=${query}`}> */}

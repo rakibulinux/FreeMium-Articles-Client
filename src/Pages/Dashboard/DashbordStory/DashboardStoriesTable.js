@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { FaCheck, FaTimes } from "react-icons/fa";
+
 import { toast } from "react-hot-toast";
 
 import ReportStoryModal from "../DasReportedStory/ReportStoryModal";
@@ -13,7 +13,7 @@ const DashboardStoriesTable = ({ article, isDarkMode, idx, refetch }) => {
     category,
     articleSubmitDate,
   } = article;
-  const title = articleTitle.replace(/<[^>]+>/g, "").slice(0, 50);
+  const title = articleTitle.replace(/<[^>]+>/g, "").slice(0, 25);
 
   const [deleteItem, setDeleteItem] = useState(null);
   const closeReportedModal = () => {
@@ -38,24 +38,16 @@ const DashboardStoriesTable = ({ article, isDarkMode, idx, refetch }) => {
   //   return <Spinner />;
   // }
   return (
-    <tbody>
+    <tbody className="hover:bg-slate-800">
       <tr className="hover:bg-slate-800">
         <th>{idx + 1}</th>
         <td>
-          <img src={articleImg} className="w-16 h-14 rounded" alt={title} />
+          <img src={articleImg} className="w-16 h-14 rounded" title={title} alt={title} />
         </td>
         <td>{title}</td>
         <td className="hidden lg:table-cell p-0">{category}</td>
-        <td className="hidden lg:table-cell">
-          <label className="swap">
-            <input type="checkbox" />
-            <div className="swap-on ">
-              <FaTimes className="text-xl" />
-            </div>
-            <div className="swap-off">
-              <FaCheck />
-            </div>
-          </label>
+        <td className="hidden lg:table-cell font-bold">
+        {writerName}
         </td>
         <td className="hidden lg:table-cell">{articleSubmitDate}</td>
         <td>

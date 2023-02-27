@@ -29,12 +29,13 @@ const DasReportedStory = () => {
       });
   };
   console.log(reportedItems);
+  
   if (reportLoading) {
     return <Spinner />;
   }
   return (
     <div>
-      <h2 className="text-center text-2xl">Reported Stories</h2>
+      <h2 className="text-4xl text-center font-bold m-5">Reported Stories</h2>
       <div className="overflow-x-auto w-full">
         <table
           className={
@@ -46,13 +47,13 @@ const DasReportedStory = () => {
           <thead>
             <tr>
               <th></th>
-              <th>product</th>
-              <th>name</th>
-              <th>Email</th>
-              <th>delete</th>
+              <th className="text-xl">IMAGE</th>
+              <th className="text-xl">STORY TITLE</th>
+              <th className="text-xl">Writer</th>
+              <th className="text-xl">Actions</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="hover:bg-slate-800">
             {/* <!-- row 1 --> */}
             {reportedItems?.map((item, i) => (
               <tr key={item._id} item={item}>
@@ -61,25 +62,27 @@ const DasReportedStory = () => {
                 </th>
 
                 <td>
-                  <div className="avatar">
-                    <div className="mask mask-squircle w-12 h-12">
-                      <img
-                        src={item.writerImg}
-                        alt="Avatar Tailwind CSS Component"
+                <img
+                        src={item.articleImg}
+                        className="w-16 h-14 rounded"
+                        alt=""
                       />
-                    </div>
-                  </div>
                 </td>
+                <td>{item.articleTitle.replace(/<[^>]+>/g, "").slice(0, 35)}</td>
                 <td>{item.writerName}</td>
-                <td>{item.userEmail}</td>
 
                 <td>
                   <label
                     onClick={() => setDeleteItem(item)}
                     htmlFor="delete-modal"
-                    className="btn btn-ghost btn-xs bg-red-500 hover:bg-red-600 text-white"
+                    className={
+                      isDarkMode
+                        ? "btn btn-sm m-1 shadow-red-400 bg-black-350 text-white rounded-box w-auto"
+                        : "btn btn-sm m-1 bg-base-100  text-red-500 hover:text-white hover:bg-red-500 rounded-box w-auto"
+                    }
+                    // className="btn btn-ghost btn-xs bg-red-500 hover:bg-red-600 text-white"
                   >
-                    delete
+                    Delete
                   </label>
                 </td>
 

@@ -90,7 +90,7 @@ const PaymentForm = () => {
       >
         <div className="flex-col lg:flex-row-reverse">
           <div></div>
-          <div className="grid lg:grid-cols-2 grid-cols-1 gap-9 mx-2 my-5">
+          <div className="grid lg:grid-cols-2 grid-cols-1 justify-items-center gap-9 mx-2 my-5">
             <div
               className={
                 isDarkMode
@@ -98,7 +98,7 @@ const PaymentForm = () => {
                   : "card  bg-base-100 shadow-xl"
               }
             >
-              <div className="card-body">
+              <div className="card-body grid items-center justify-items-center hover:bg-lime-100 rounded-md">
                 <h2
                   className={
                     isDarkMode
@@ -108,21 +108,22 @@ const PaymentForm = () => {
                 >
                   Weekly
                 </h2>
-                <p className={isDarkMode ? "text-gray-100" : "text-gray-900"}>
+                <p className={isDarkMode ? "text-gray-100 text-xl" : "text-gray-900 text-xl"}>
                   100 Tk/week
                 </p>
                 <div className="card-actions">
                   <button
-                    className={
-                      isDarkMode
-                        ? "btn btn-outline btn-success text-gray-100"
-                        : "btn btn-outline btn-success text-gray-900"
-                    }
+                    
+                      className={
+                        isDarkMode
+                          ? "btn btn-sm m-1 font-bold px-8 shadow-red-400 bg-black-350 text-white rounded-box w-auto"
+                          : "btn btn-sm m-1 font-bold px-8 bg-base-100  text-black-450 hover:text-white hover:bg-green-600 rounded-box w-auto"
+                      }
                     onClick={() => {
                       setPriceTk(100);
                     }}
                   >
-                    100 Tk{" "}
+                   Select
                   </button>
                 </div>
               </div>
@@ -135,7 +136,7 @@ const PaymentForm = () => {
                   : "card  bg-base-100 shadow-xl"
               }
             >
-              <div className="card-body">
+              <div className="card-body grid items-center justify-items-center hover:bg-lime-100 rounded-md">
                 <h2
                   className={
                     isDarkMode
@@ -145,7 +146,7 @@ const PaymentForm = () => {
                 >
                   Monthly
                 </h2>
-                <p className={isDarkMode ? "text-gray-100" : "text-gray-900"}>
+                <p className={isDarkMode ? "text-gray-100 text-xl" : "text-gray-900 text-xl"}>
                   400 Tk/Month
                 </p>
                 <div
@@ -158,14 +159,14 @@ const PaymentForm = () => {
                   <button
                     className={
                       isDarkMode
-                        ? "btn btn-outline btn-success text-gray-100"
-                        : "btn btn-outline btn-success text-gray-900"
+                        ? "btn btn-sm m-1 font-bold px-8 shadow-red-400 bg-black-350 text-white rounded-box w-auto"
+                        : "btn btn-sm m-1 font-bold px-8 bg-base-100  text-black-450 hover:text-white hover:bg-green-600 rounded-box w-auto"
                     }
                     onClick={() => {
                       setPriceTk(400);
                     }}
                   >
-                    400 Tk
+                   Select
                   </button>
                 </div>
               </div>

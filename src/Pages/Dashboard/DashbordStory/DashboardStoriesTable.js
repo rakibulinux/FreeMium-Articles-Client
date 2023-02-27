@@ -5,14 +5,8 @@ import { toast } from "react-hot-toast";
 
 import ReportStoryModal from "../DasReportedStory/ReportStoryModal";
 const DashboardStoriesTable = ({ article, isDarkMode, idx, refetch }) => {
-  const {
-    writerName,
-    articleTitle,
-    articleImg,
-    _id,
-    category,
-    articleSubmitDate,
-  } = article;
+  const { writerName, articleTitle, articleImg, _id, category, timestamp } =
+    article;
   const title = articleTitle.replace(/<[^>]+>/g, "").slice(0, 50);
 
   const [deleteItem, setDeleteItem] = useState(null);
@@ -57,7 +51,7 @@ const DashboardStoriesTable = ({ article, isDarkMode, idx, refetch }) => {
             </div>
           </label>
         </td>
-        <td className="hidden lg:table-cell">{articleSubmitDate}</td>
+        <td className="hidden lg:table-cell">{timestamp}</td>
         <td>
           <div className="dropdown dropdown-end">
             <label

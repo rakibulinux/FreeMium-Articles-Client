@@ -10,7 +10,7 @@ const OwnStory = ({ articleData }) => {
     articleDetails,
     articleImg,
     articleRead,
-    articleSubmitDate,
+    timestamp,
     articleTitle,
     writerName,
     _id,
@@ -74,7 +74,7 @@ const OwnStory = ({ articleData }) => {
                 isDarkMode ? "text-xs text-gray-100" : "text-xs text-gray-700"
               }
             >
-              {articleSubmitDate}
+              {timestamp}
             </dd>
           </div>
 

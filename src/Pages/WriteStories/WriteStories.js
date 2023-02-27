@@ -26,7 +26,7 @@ const WriteStories = () => {
 
   const [typeArticle, setTypeArticle] = useState("");
   const navigate = useNavigate();
-  const date = format(new Date(), "PP");
+  // const date = format(new Date(), "PP");
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/user/${user?.email}`)
       .then((res) => res.json())
@@ -85,7 +85,6 @@ const WriteStories = () => {
             writerName: user?.displayName,
             writerImg: user?.photoURL,
             articleTitle: title,
-            articleSubmitDate: date,
             articleRead: number,
             articleImg: imgData?.data?.url,
             category,
@@ -132,7 +131,7 @@ const WriteStories = () => {
   //           writerName: user?.displayName,
   //           writerImg: user?.photoURL,
   //           articleTitle: title,
-  //           articleSubmitDate: date,
+  //           timestamp: date,
   //           articleRead: number,
   //           articleImg: imgData?.data?.url,
   //           category,

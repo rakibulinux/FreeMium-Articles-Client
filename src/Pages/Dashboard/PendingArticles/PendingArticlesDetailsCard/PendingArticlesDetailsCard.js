@@ -7,84 +7,75 @@ import { Link, useLoaderData, useNavigate } from "react-router-dom";
 // import UpvoteButton from "../../UpvoteButton/UpvoteButton";
 // import { HiOutlineChat } from "react-icons/hi";
 // import ListenButton from "./ListenButton";
-import { AuthContext } from './../../../../contexts/AuthProvider';
-import { APIContext } from './../../../../contexts/APIProvider';
+import { AuthContext } from "./../../../../contexts/AuthProvider";
+import { APIContext } from "./../../../../contexts/APIProvider";
 import Swal from "sweetalert2";
 
 const PendingArticlesDetailsCard = ({ users }) => {
   const navigate = useNavigate();
   const articleData = useLoaderData();
-//   console.log(articleData)
-//   console.log(articleData?.articleImg)
+  //   console.log(articleData)
+  //   console.log(articleData?.articleImg)
   const { user } = useContext(AuthContext);
-  const data ={
+  const data = {
     articleType: true,
-  }
-const publishPermission=(_id)=>{
-
+  };
+  const publishPermission = (_id) => {
     fetch(`${process.env.REACT_APP_API_URL}/editArticleType/${_id}`, {
-        method: "PUT",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(data),
-      })
-      .then(res=>res.json())
-      .then(data=>{
-        if(data?.acknowledged){
-            Swal.fire({
-                position: 'top-center',
-                icon: 'success',
-                title: 'Article publish successful',
-                showConfirmButton: false,
-                timer: 1500,
-              })
-              navigate('/dashboard/pendingArticle');
-        }else{
-            toast.error("Publishing failed. TRY AGAIN");
-        }
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(data),
     })
-}
-
-
-//   article rejected function
-  const rejectPublish=(_id)=>{
-    Swal.fire({
-        title: 'Are you sure?',
-        text: "You want to be rejected this article!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, rejected!'
-      }).then((result) => {
-        if (result.isConfirmed) {
-            fetch(
-                `${process.env.REACT_APP_API_URL}/Story/reportedStory/${_id}`,
-                {
-                  method: "DELETE",
-                }
-              )
-                .then((res) => res.json())
-                .then((data) => {
-                  console.log(data);
-                  if (data.deletedCount > 0) {
-                    Swal.fire(
-                        'rejected!',
-                        'Your file has been rejected.',
-                        'success'
-                      )
-                        navigate('/dashboard/pendingArticle');
-                  }
-                });
+      .then((res) => res.json())
+      .then((data) => {
+        if (data?.acknowledged) {
+          Swal.fire({
+            position: "top-center",
+            icon: "success",
+            title: "Article publish successful",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          navigate("/dashboard/pendingArticle");
+        } else {
+          toast.error("Publishing failed. TRY AGAIN");
         }
-      })
-  }
+      });
+  };
+
+  //   article rejected function
+  const rejectPublish = (_id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You want to be rejected this article!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, rejected!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`${process.env.REACT_APP_API_URL}/Story/reportedStory/${_id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            if (data.deletedCount > 0) {
+              Swal.fire("rejected!", "Your file has been rejected.", "success");
+              navigate("/dashboard/pendingArticle");
+            }
+          });
+      }
+    });
+  };
   const {
     _id,
     articleDetails,
     articleRead,
-    articleSubmitDate,
+    timestamp,
     articleTitle,
     writerImg,
     articleImg,
@@ -181,7 +172,7 @@ const publishPermission=(_id)=>{
                           : "text-xs font-medium text-gray-600"
                       }
                     >
-                      {articleSubmitDate}
+                      {timestamp}
                     </span>
                   </li>
 
@@ -232,7 +223,6 @@ const publishPermission=(_id)=>{
           {/*  card right side writter socials */}
           {/* <div  className=" flex gap-5  rounded-md border bg-white text-center"> */}
           <ul className="flex justify-start items-center col-span-2 gap-6 lg:col-span-5 lg:justify-end">
-
             <li>
               {/* <a
                 href="/"
@@ -269,15 +259,24 @@ const publishPermission=(_id)=>{
                       : "mt-2 px-3 py-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box text-black-350 w-52"
                   }
                 >
-
-                      <li>
-                      <button onClick={()=>publishPermission(_id)} className="btn bg-[#4CAF50] hover:bg-[#4CAF50] border-none w-full rounded-none text-white">Publish</button>
-                        {/* <a href="/">Publish</a> */}
-                      </li>
-                      <li className="mt-2">
-                      <button  onClick={() => rejectPublish(_id)} className="btn bg-[#d11a2a] hover:bg-[#cc1d2b] border-none w-full rounded-none text-white ">Rejected</button>
-                        {/* <a href="/">Rejected</a> */}
-                      </li>
+                  <li>
+                    <button
+                      onClick={() => publishPermission(_id)}
+                      className="btn bg-[#4CAF50] hover:bg-[#4CAF50] border-none w-full rounded-none text-white"
+                    >
+                      Publish
+                    </button>
+                    {/* <a href="/">Publish</a> */}
+                  </li>
+                  <li className="mt-2">
+                    <button
+                      onClick={() => rejectPublish(_id)}
+                      className="btn bg-[#d11a2a] hover:bg-[#cc1d2b] border-none w-full rounded-none text-white "
+                    >
+                      Rejected
+                    </button>
+                    {/* <a href="/">Rejected</a> */}
+                  </li>
                 </ul>
               </div>
 
@@ -305,8 +304,6 @@ const publishPermission=(_id)=>{
         </div>
         {/* bottom link */}
         <div>
-         
-
           {/* Modal body for comment */}
           {/* Put this part before </body> tag */}
           {/* <input type="checkbox" id="comment-modal" className="modal-toggle" />

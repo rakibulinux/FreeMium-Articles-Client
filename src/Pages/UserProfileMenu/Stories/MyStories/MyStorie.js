@@ -14,7 +14,7 @@ const MyStorie = ({ story }) => {
   const {
     articleDetails,
     articleRead,
-    articleSubmitDate,
+    timestamp,
     articleTitle,
     writerImg,
     writerName,
@@ -65,7 +65,7 @@ const MyStorie = ({ story }) => {
           </Link>
           <div className="flex items-center justify-between">
             <div className="flex items-center ml-3 lg:ml-2 ">
-              <span className="block font-semibold">{articleSubmitDate}</span>
+              <span className="block font-semibold">{timestamp}</span>
               <span className="block ml-3 text-red-500 font-semibold">
                 {articleRead}-read
               </span>

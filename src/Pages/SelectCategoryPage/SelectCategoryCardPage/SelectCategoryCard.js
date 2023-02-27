@@ -8,7 +8,7 @@ const SelectCategoryCard = ({ data }) => {
   const {
     articleDetails,
     articleRead,
-    articleSubmitDate,
+    timestamp,
     articleTitle,
     writerImg,
     writerName,
@@ -81,7 +81,7 @@ const SelectCategoryCard = ({ data }) => {
                     : "block text-gray-700 font-semibold"
                 }
               >
-                {articleSubmitDate}
+                {timestamp}
               </span>
               <span className="block ml-3 text-red-500 font-semibold">
                 {articleRead}-read

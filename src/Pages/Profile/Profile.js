@@ -1,13 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { BiUserCircle } from "react-icons/bi";
 import { FaMapMarkerAlt, FaUser } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
-import { useSelector } from "react-redux";
-import Counter from "../../components/Counter";
 import Spinner from "../../components/Spinner/Spinner";
 import { AuthContext } from "../../contexts/AuthProvider";
-import { refetchData } from "../../store/fetchSlice";
 import { APIContext } from "./../../contexts/APIProvider";
 
 const Profile = () => {
@@ -93,8 +90,8 @@ const Profile = () => {
     <div
       className={
         isDarkMode
-          ? "w-full mx-auto mt-10 p-10 min-h-screen bg-black-350 text-white rounded-lg shadow-lg"
-          : "w-full mx-auto mt-10 p-10 min-h-screen bg-white text-black-350 rounded-lg shadow-lg"
+          ? "w-11/12 mx-auto mt-10 py-10 h-screen bg-black-350 text-white rounded-lg shadow-lg"
+          : "w-11/12 mx-auto mt-10 py-10 h-screen bg-white text-black-350 rounded-lg shadow-lg"
       }
     >
       {editMode ? (

@@ -28,7 +28,6 @@ const NotificationIcon = () => {
   const filterNot = notifications.filter(
     (noti) => !noti.read === !notifications.read
   );
-  console.log(filterNot);
   // const handleNotificationsClick = () => {
   //   setDropdownOpen(true);
   //   setUnreadCount(0); // clear unread count when dropdown is opened

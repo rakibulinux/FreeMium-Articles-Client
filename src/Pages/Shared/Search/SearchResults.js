@@ -5,6 +5,9 @@ import { useDispatch } from "react-redux";
 import { deleteArticle, saveArticle } from "../../../store/savedArticlesSlice";
 import { toast } from "react-hot-toast";
 import { APIContext } from "../../../contexts/APIProvider";
+import SideCategory from "../../SideCategory/SideCategory";
+import GetUnlimitedAccessButton from "../../../components/GetUnlimitedAccessButton/GetUnlimitedAccessButton";
+import { Link } from "react-router-dom";
 
 function SearchResults() {
   const { query } = useContext(APIContext);
@@ -13,11 +16,9 @@ function SearchResults() {
   const handleSave = (data) => {
     dispatch(saveArticle(data))
       .then(() => {
-        console.log("data saved");
         toast.success("Saved article");
       })
       .catch((error) => {
-        console.log(error.message);
         toast.error(error.message);
       });
   };
@@ -25,11 +26,9 @@ function SearchResults() {
   const handleDelete = (id) => {
     dispatch(deleteArticle(id))
       .then(() => {
-        console.log("data deleted");
         toast.success("Successfully Unsave");
       })
       .catch((error) => {
-        console.log(error.message);
         toast.error(error.message);
       });
   };
@@ -46,11 +45,10 @@ function SearchResults() {
 
     fetchSearchResults();
   }, [query]);
-  console.log(searchResults);
   return (
-    <div>
-      {searchResults &&
-        searchResults.map((data) => (
+    <div className="w-11/12 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="col-span-2">
+        {searchResults.map((data) => (
           <ArticlesCard
             data={data}
             key={data?._id}
@@ -58,6 +56,15 @@ function SearchResults() {
             handleDelete={handleDelete}
           />
         ))}
+      </div>
+      <aside className="lg:mx-auto my-10 lg:px-10 text-center lg:text-start">
+        <div className="flex justify-center ">
+          <Link className="w-full text-center" to="/payment">
+            <GetUnlimitedAccessButton text={"Get unlimited access"} />
+          </Link>
+        </div>
+        <SideCategory />
+      </aside>
     </div>
   );
 }

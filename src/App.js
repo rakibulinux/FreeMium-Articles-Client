@@ -17,7 +17,9 @@ function App() {
   return (
     <div
       className={
-        isDarkMode ? "bg-black-350 text-white" : "bg-base-100 text-black-350"
+        isDarkMode
+          ? "w-full bg-black-350 text-white"
+          : "w-full bg-base-100 text-black-350"
       }
     >
       <div

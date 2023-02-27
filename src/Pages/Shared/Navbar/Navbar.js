@@ -174,12 +174,12 @@ const Navbar = () => {
         <NavLink
           className={
             isDarkMode
-              ? "flex items-center gap-2 text-white hover:text-black"
-              : "flex items-center gap-2 text-gray-900 hover:text-black"
+              ? "flex items-center gap-2 text-white hover:text-black border-animate"
+              : "flex items-center gap-2 text-gray-900 hover:text-black border-animate"
           }
           to="/write-stories"
         >
-          {writeIcon} Write
+          Write
         </NavLink>
       </li>
 
@@ -233,11 +233,23 @@ const Navbar = () => {
                     </svg>
                   </label>
                   <NavLink to="/">
-                    <div class="flex items-center">
-                      <div class="text-3xl font-bold rounded-full bg-black-350 text-white flex items-center justify-center h-12 w-12 mr-2 p-2">
+                    <div className="flex items-center">
+                      <div
+                        className={
+                          isDarkMode
+                            ? "text-3xl font-bold rounded-full bg-white text-black-350 flex items-center justify-center h-12 w-12 mr-2 p-2"
+                            : "text-3xl font-bold rounded-full bg-black-350 text-white flex items-center justify-center h-12 w-12 mr-2 p-2"
+                        }
+                      >
                         FM
                       </div>
-                      <h1 class="hidden md:block text-xl text-black-350 font-bold">
+                      <h1
+                        className={
+                          isDarkMode
+                            ? "text-xl text-white font-bold"
+                            : "text-xl text-black-350 font-bold"
+                        }
+                      >
                         FreeMium
                       </h1>
                     </div>

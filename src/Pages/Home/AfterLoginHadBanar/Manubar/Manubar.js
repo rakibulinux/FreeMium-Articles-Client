@@ -11,9 +11,9 @@ import "./Menubar.css";
 // import required modules
 import { Navigation } from "swiper";
 const Manubar = () => {
-  const { categoryButton, isCategoryLoading } = useContext(APIContext);
+  const { categoryButton, isDarkMode, isCategoryLoading } =
+    useContext(APIContext);
   // const [swiperRef, setSwiperRef] = useState(null);
-  const { isDarkMode } = useContext(APIContext);
   if (isCategoryLoading) {
     return <Spinner />;
   }
@@ -22,12 +22,14 @@ const Manubar = () => {
       <ul
         className={
           isDarkMode
-            ? "menu menu-vertical lg:menu-horizontal bg-black-250 border my-8 w-full items-center rounded-md"
+            ? "bg-black-350 menu menu-vertical lg:menu-horizontal border my-8 w-full items-center rounded-md"
             : "menu menu-vertical lg:menu-horizontal bg-base-100 border my-8 w-full items-center rounded-md"
         }
         style={{ width: "100%", alignItems: "center" }}
       >
-        <Swiper navigation={true} modules={[Navigation]} 
+        <Swiper
+          navigation={true}
+          modules={[Navigation]}
           // onSwiper={setSwiperRef}
           // slidesPerView={5}
           centeredSlides={true}

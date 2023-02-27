@@ -47,7 +47,7 @@ const DashbordStory = () => {
               <th className="text-xl">Image</th>
               <th className="text-xl">Story Title</th>
               <th className="text-xl hidden lg:table-cell p-0">Category</th>
-              <th className="text-xl hidden lg:table-cell p-0 ">Status</th>
+              <th className="text-xl hidden lg:table-cell p-2 ">Writer</th>
               <th className="text-xl hidden lg:table-cell ">Date</th>
               <th className="text-xl">Actions</th>
             </tr>

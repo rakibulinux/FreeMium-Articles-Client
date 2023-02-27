@@ -7,7 +7,6 @@ export const setAuthToken = (user, role, verify, isPaid) => {
     verify,
     isPaid,
   };
-  console.log(currentUser);
   // Save user is DB
   fetch(`${process.env.REACT_APP_API_URL}/users/${user?.email}`, {
     method: "PUT",
@@ -19,7 +18,6 @@ export const setAuthToken = (user, role, verify, isPaid) => {
   })
     .then((res) => res.json())
     .then((data) => {
-      console.log(data);
       localStorage.setItem("freeMiumToken", data.token);
     });
 };

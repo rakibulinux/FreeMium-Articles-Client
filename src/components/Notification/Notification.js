@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { format } from "date-fns";
 import React, { useState, useEffect, useContext, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -14,6 +15,7 @@ const Notification = ({ notifications, setNotifications }) => {
   const dispatch = useDispatch();
   const { user } = useContext(AuthContext);
   const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(5);
   const [hasMore, setHasMore] = useState(true);
   const loaderRef = useRef(null);
   const singleUsers = useSelector((state) => state.fetch.data);
@@ -27,7 +29,7 @@ const Notification = ({ notifications, setNotifications }) => {
     // Fetch all notifications
     const loadNotifications = async () => {
       const res = await fetch(
-        `${process.env.REACT_APP_API_URL}/notifications/${singleUsers?._id}?page=${page}`
+        `${process.env.REACT_APP_API_URL}/notifications/${singleUsers?._id}?page=${page}&limit=${limit}`
       );
       const data = await res.json();
       if (data.length === 0) {
@@ -109,15 +111,6 @@ const Notification = ({ notifications, setNotifications }) => {
       <Scroll>
         <ul className="p-2">
           {notifications.map((notification) => (
-            // <li
-            //   className="my-2"
-            //   key={notification._id}
-            //   onClick={() => handleReadClick(notification)}
-            // >
-            //   {notification?.message} (
-            //   {notification?.read ? "read" : "unread"})
-            // </li>
-
             <li
               key={notification._id + 1}
               onClick={() => handleReadClick(notification)}
@@ -125,19 +118,22 @@ const Notification = ({ notifications, setNotifications }) => {
             >
               <img
                 className="h-8 w-8 rounded-full object-cover mx-1"
-                src={singleUsers?.picture}
+                src={notification?.senderPicture}
                 alt="avatar"
               />
-              <p className="text-gray-600 text-sm mx-2">
-                <span className="font-bold" href="#">
-                  {singleUsers?.name}
-                </span>{" "}
-                {notification?.message} (
-                {notification?.read ? "read" : "unread"})
-                <span className="font-bold text-blue-500" href="#">
-                  artical . 1h
-                </span>{" "}
-              </p>
+              <div className="text-gray-600 text-sm mx-2 flex flex-col gap-2">
+                <p className="font-bold">{notification?.senderName}</p>
+                <p>
+                  <span className="font-bold">{notification?.type}:</span>
+                  <span className="ml-2">
+                    {notification?.message} (
+                    {notification?.read ? "read" : "unread"})
+                  </span>
+                </p>
+                <p className="font-bold text-blue-500">
+                  {format(new Date(notification?.timestamp), "PP")}
+                </p>
+              </div>
             </li>
           ))}
           {hasMore && <div ref={loaderRef}>Loading more notifications...</div>}

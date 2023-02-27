@@ -41,8 +41,9 @@ import AskMeAnything from "./AskMeAnything/AskMeAnything";
 import Messages from "./Messages/Messages";
 import ImportStory from "./UserProfileMenu/Stories/ImportStory";
 import HistoryAns from "./AskMeAnything/HistoryAns/HistoryAns";
-
+import SearchResults from "./Shared/Search/SearchResults";
 export {
+  SearchResults,
   Notification,
   MessageLayout,
   DashboardLayout,

@@ -25,7 +25,6 @@ const DasAddCategory = () => {
     })
       .then((res) => res.json())
       .then((result) => {
-        console.log(result);
         toast.success(`${data?.categoryname} added successfully`);
         navigate("/dashboard/category");
       });

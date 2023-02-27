@@ -84,7 +84,6 @@ function UpvoteButton({ storyId, title, content, upvotes, downvotes }) {
         );
         const post = await response.json();
         setPost(post);
-        console.log(post);
       } catch (err) {
         console.error(err);
       }

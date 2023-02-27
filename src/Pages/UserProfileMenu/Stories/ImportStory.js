@@ -28,7 +28,7 @@ const ImportStory = () => {
       userEmail: user?.email,
       writerName: user?.displayName,
       writerImg: user?.photoURL,
-      articleSubmitDate: date,
+      timestamp: date,
       articleRead: 2,
       category: category.target.value,
     };

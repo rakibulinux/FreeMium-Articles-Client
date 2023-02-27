@@ -41,8 +41,8 @@ const HomeHadBanar = () => {
             <button
               className={
                 isDarkMode
-                  ? "text-white py-2 px-3 font-medium bg-black-250 hover:bg-black-250 border-0 rounded-full"
-                  : "text-white py-2 px-3 font-medium bg-black-250 hover:bg-black-250 border-0 rounded-full"
+                  ? "text-white py-3 px-4 font-medium bg-black-250 hover:bg-black-250 border-0 rounded-full"
+                  : "text-white py-3 px-4 font-medium bg-black-250 hover:bg-black-250 border-0 rounded-full"
               }
             >
               Start Bloging

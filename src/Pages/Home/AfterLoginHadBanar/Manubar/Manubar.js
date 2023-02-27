@@ -22,7 +22,7 @@ const Manubar = () => {
       <ul
         className={
           isDarkMode
-            ? "menu menu-vertical lg:menu-horizontal bg-black-250 border my-8 w-full items-center rounded-md"
+            ? "menu menu-vertical lg:menu-horizontal bg-black-250 border my-8 w-full items-center rounded-md "
             : "menu menu-vertical lg:menu-horizontal bg-base-100 border my-8 w-full items-center rounded-md"
         }
         style={{ width: "100%", alignItems: "center" }}

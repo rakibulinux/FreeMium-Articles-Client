@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 const StaffPicksStory = ({ article }) => {
   const { _id, articleTitle, writerName, writerImg } = article;
   const title = articleTitle.replace(/<[^>]+>/g, "");
+  // const title = articleTitle.slice(0)
   return (
     <div>
       <div className="flex mt-3 mb-3">

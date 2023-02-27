@@ -15,11 +15,13 @@ const SideCategory = () => {
     return <Spinner />;
   }
   return (
-    <div className="lg:sticky lg:top-0">
+   
+     <div className="lg:sticky lg:top-0  hidden lg:block">
       {user && <StaffPicks />}
-      <div className={user?.uid ? "hidden" : "mt-5"}>
+      <div className="ml-5">
         <p className={isDarkMode ?"text-base font-semibold text-gray-300 my-3 lg:ml-0":"text-base font-semibold text-gray-800 my-3 lg:ml-0"}>
-          DISCOVER MORE OF WHAT MATTERS TO YOU
+          {/* {user && <span>DISCOVER MORE OF WHAT MATTERS TO YOU</span> } */}
+          {user ? <span>Recommended topics</span> : <span>DISCOVER MORE OF WHAT MATTERS TO YOU</span> }
         </p>
         <div className="lg:flex flex-wrap lg:gap-3 gap-2 grid grid-cols-2 mt-4 lg:mt-0">
           {categoryButton.map((category) => (
@@ -32,6 +34,7 @@ const SideCategory = () => {
       </div>
       {user && <WhoToFollow></WhoToFollow>}
     </div>
+   
   );
 };
 

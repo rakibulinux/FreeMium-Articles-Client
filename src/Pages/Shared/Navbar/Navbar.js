@@ -4,19 +4,21 @@ import toast from "react-hot-toast";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthProvider";
 import logoFM from "../../../Assets/logoFM.png";
-// import BlackScreen from "../../../Assets/Black-screen-tp.png";
 import { CgProfile } from "react-icons/cg";
-import { AiOutlineDashboard, AiOutlineLogout } from "react-icons/ai";
+import {
+  AiOutlineDashboard,
+  AiOutlineLogout,
+  AiOutlineQuestionCircle,
+} from "react-icons/ai";
 import { BsBookmarksFill } from "react-icons/bs";
 import { MdAmpStories } from "react-icons/md";
 import { GiNetworkBars } from "react-icons/gi";
-import { TiMessages } from "react-icons/ti";
 import { CiLogin } from "react-icons/ci";
 import "./Navebar.css";
 import Search from "../Search/Search";
 import { APIContext } from "../../../contexts/APIProvider";
-import { FaRobot } from "react-icons/fa";
 import NotificationIcon from "../../../components/Notification/NotificationIcon";
+import { RiMessengerLine } from "react-icons/ri";
 //
 const Navbar = () => {
   const { user, logoutUserAccount } = useContext(AuthContext);
@@ -75,6 +77,7 @@ const Navbar = () => {
       viewBox="0 0 24 24"
       fill="none"
       aria-label="Write"
+      className="font-bold"
     >
       <path
         d="M14 4a.5.5 0 0 0 0-1v1zm7 6a.5.5 0 0 0-1 0h1zm-7-7H4v1h10V3zM3 4v16h1V4H3zm1 17h16v-1H4v1zm17-1V10h-1v10h1zm-1 1a1 1 0 0 0 1-1h-1v1zM3 20a1 1 0 0 0 1 1v-1H3zM4 3a1 1 0 0 0-1 1h1V3z"
@@ -229,15 +232,14 @@ const Navbar = () => {
                       />
                     </svg>
                   </label>
-                  <NavLink
-                    className={({ isActive }) =>
-                      isActive
-                        ? "text-sky-600 font-semibold bg-none active:bg-none hover:bg-none"
-                        : ""
-                    }
-                    to="/"
-                  >
-                    <img className="w-56 md:w-40" src={logoFM} alt="" />
+                  <NavLink to="/">
+                    <div class="flex items-center">
+                      <div class="text-3xl font-bold rounded-full bg-black-350 text-white flex items-center justify-center h-12 w-12 mr-2 p-2">
+                        FM
+                      </div>
+                      <h1 class="text-xl text-black-350 font-bold">FreeMium</h1>
+                    </div>
+                    {/* <img className="w-56 md:w-40" src={logoFM} alt="" /> */}
                   </NavLink>
                   {/* <NavLink to="/search"> */}
                   <Search
@@ -269,7 +271,7 @@ const Navbar = () => {
                     }
                     to="/hexa-ai"
                   >
-                    <FaRobot
+                    <AiOutlineQuestionCircle
                       data-tip="Ask me Anything"
                       className="tooltip w-6 h-6"
                     />
@@ -284,7 +286,7 @@ const Navbar = () => {
                     }
                     to="/messages"
                   >
-                    <TiMessages className="w-6 h-6" />
+                    <RiMessengerLine className="w-6 h-6" />
                   </NavLink>
                 </div>
 

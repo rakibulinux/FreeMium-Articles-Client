@@ -11,7 +11,7 @@ const CategoryDeletModal = ({title,message,closeCategoryModal,btnName,deleteHand
     <p className="py-4">{message}</p>
     <div className="modal-action">   
      <label onClick={()=>deleteHandler(categoryData)} htmlFor="delete-modal" className="btn btn-primary ">{btnName}</label>
-     <button onClick={closeCategoryModal} className='btn btn-outline'>cancle</button>
+     <button onClick={closeCategoryModal} className='btn btn-outline'>cancel</button>
     </div>
   </div>
 </div>

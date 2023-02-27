@@ -4,8 +4,7 @@ import { AuthContext } from "../../../contexts/AuthProvider";
 import Spinner from "../../../components/Spinner/Spinner";
 import { APIContext } from "../../../contexts/APIProvider";
 import { BsBookmarkCheckFill, BsBookmarkPlus } from "react-icons/bs";
-import ReactTimeAgo from "react-time-ago";
-import { format, formatISO9075 } from "date-fns";
+import { format } from "date-fns";
 const ArticlesCard = ({ data, handleSave, handleDelete }) => {
   const [Like, setLike] = useState(true);
   const { loading, user } = useContext(AuthContext);

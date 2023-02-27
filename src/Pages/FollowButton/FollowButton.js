@@ -1,25 +1,31 @@
 import React, { useState, useEffect, useContext } from "react";
+import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { APIContext } from "../../contexts/APIProvider";
 function FollowButton({ refetch, user, userId, followingId, classes }) {
   const [isFollowing, setIsFollowing] = useState(false);
-  const { isDarkMode } = useContext(APIContext);
+  const { isDarkMode, fetchAPI } = useContext(APIContext);
+
+  const { data: singleUsers } = useQuery(["user", user?.email], () =>
+    fetchAPI(`${process.env.REACT_APP_API_URL}/user/${user?.email}`)
+  );
+  console.log(singleUsers);
   useEffect(() => {
     axios
       .get(
-        `${process.env.REACT_APP_API_URL}/users/${userId}/following/${user?.email}`
+        `${process.env.REACT_APP_API_URL}/users/${userId}/following/${singleUsers?._id}`
       )
       .then((res) => {
         setIsFollowing(res.data.isFollowing);
       });
-  }, [userId, user?.email]);
+  }, [userId, singleUsers?._id]);
 
   const handleFollow = () => {
     axios
       .post(`${process.env.REACT_APP_API_URL}/users/follow`, {
         userId,
-        followingId,
+        followingId: singleUsers?._id,
       })
       .then((res) => {
         setIsFollowing(true);
@@ -32,7 +38,7 @@ function FollowButton({ refetch, user, userId, followingId, classes }) {
     axios
       .post(`${process.env.REACT_APP_API_URL}/users/unfollow`, {
         userId,
-        unfollowingId: followingId,
+        unfollowingId: singleUsers?._id,
       })
       .then((res) => {
         setIsFollowing(false);
@@ -40,10 +46,6 @@ function FollowButton({ refetch, user, userId, followingId, classes }) {
         toast.success(`${followingId} Successfully unfollowed user`);
       });
   };
-
-  // if (!userId) {
-  //   return <Spinner />;
-  // }
 
   return (
     <div>

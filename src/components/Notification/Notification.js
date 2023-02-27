@@ -125,12 +125,12 @@ const Notification = ({ notifications, setNotifications }) => {
             >
               <img
                 className="h-8 w-8 rounded-full object-cover mx-1"
-                src={singleUsers?.picture}
+                src={notification?.senderPicture}
                 alt="avatar"
               />
               <p className="text-gray-600 text-sm mx-2">
                 <span className="font-bold" href="#">
-                  {singleUsers?.name}
+                  {notification?.senderName}
                 </span>{" "}
                 {notification?.message} (
                 {notification?.read ? "read" : "unread"})

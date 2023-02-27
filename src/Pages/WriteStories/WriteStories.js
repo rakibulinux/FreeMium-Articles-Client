@@ -85,7 +85,7 @@ const WriteStories = () => {
             writerName: user?.displayName,
             writerImg: user?.photoURL,
             articleTitle: title,
-            timestamp: new Date(),
+            // timestamp: new Date(),
             articleRead: number,
             articleImg: imgData?.data?.url,
             category,
@@ -100,7 +100,7 @@ const WriteStories = () => {
               })
             );
             articlesRefetch();
-            navigate("/");
+            // navigate("/");
             console.log(data);
           } catch (error) {
             console.error(error);

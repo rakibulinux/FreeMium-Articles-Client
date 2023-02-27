@@ -42,9 +42,8 @@ import {
   UpdateCategory,
   PendingArticles,
   PendingArticlesDetailsCard,
+  SearchResults,
 } from "../Pages/index";
-import SearchDetails from "../Pages/Shared/Search/SearchDetails";
-import SearchResults from "../Pages/Shared/Search/SearchResults";
 
 const router = createBrowserRouter([
   {

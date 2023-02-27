@@ -10,13 +10,8 @@ const HistoryAns = () => {
   const { fetchAPI } = useContext(APIContext);
   const { user } = useContext(AuthContext);
   const data = useLoaderData();
-  console.log(data);
   const navigate = useNavigate();
-  const {
-    isLoading,
-
-    data: singleUsers,
-  } = useQuery(["user", user?.email], () =>
+  const { data: singleUsers } = useQuery(["user", user?.email], () =>
     fetchAPI(`${process.env.REACT_APP_API_URL}/user/${user?.email}`)
   );
 

@@ -1,5 +1,9 @@
 import { LinkIcon, ShareIcon } from "@heroicons/react/24/solid";
-import { FacebookShareButton, TwitterShareButton, LinkedinShareButton } from "react-share";
+import {
+  FacebookShareButton,
+  TwitterShareButton,
+  LinkedinShareButton,
+} from "react-share";
 import { useContext } from "react";
 import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
@@ -12,8 +16,9 @@ import UpvoteButton from "../../UpvoteButton/UpvoteButton";
 import { HiOutlineChat } from "react-icons/hi";
 import ListenButton from "./ListenButton";
 import { useQuery } from "@tanstack/react-query";
-import { FaLinkedin} from "react-icons/fa"
+import { FaLinkedin } from "react-icons/fa";
 import Notification from "../../../../components/Notification/Notification";
+import { format } from "date-fns";
 
 const ArticleDetailsCard = ({
   articleData,
@@ -111,7 +116,6 @@ const ArticleDetailsCard = ({
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.acknowledged === true) {
           toast.success("Add Report  successfully");
         }
@@ -151,7 +155,7 @@ const ArticleDetailsCard = ({
                           : "text-xs font-medium text-gray-600"
                       }
                     >
-                      {timestamp}
+                      {format(new Date(timestamp), "PP")}
                     </span>
                   </li>
 
@@ -232,15 +236,15 @@ const ArticleDetailsCard = ({
               </li>
             </FacebookShareButton>
             <LinkedinShareButton url={currentPageUrl}>
-            <li>
-              <FaLinkedin 
-              className={
-                isDarkMode
-                  ? "text-gray-200 transition hover:text-gray-300 text-xl"
-                  : "text-gray-500 transition hover:text-black text-xl"
-              }
-              />
-            </li>
+              <li>
+                <FaLinkedin
+                  className={
+                    isDarkMode
+                      ? "text-gray-200 transition hover:text-gray-300 text-xl"
+                      : "text-gray-500 transition hover:text-black text-xl"
+                  }
+                />
+              </li>
             </LinkedinShareButton>
             <TwitterShareButton url={currentPageUrl}>
               <li>

@@ -66,6 +66,7 @@ const MyStorie = ({ story }) => {
           </Link>
           <div className="flex items-center justify-between">
             <div className="flex items-center ml-3 lg:ml-2 ">
+              {/* <ReactTimeAgo date={timestamp} locale="en-US" /> */}
               <span className="block font-semibold">
                 {format(new Date(timestamp), "PP")}
               </span>

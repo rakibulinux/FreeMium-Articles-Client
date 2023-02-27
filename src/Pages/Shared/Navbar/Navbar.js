@@ -234,10 +234,22 @@ const Navbar = () => {
                   </label>
                   <NavLink to="/">
                     <div className="flex items-center">
-                      <div className="text-3xl font-bold rounded-full bg-black-350 text-white flex items-center justify-center h-12 w-12 mr-2 p-2">
+                      <div
+                        className={
+                          isDarkMode
+                            ? "text-3xl font-bold rounded-full bg-white text-black-350 flex items-center justify-center h-12 w-12 mr-2 p-2"
+                            : "text-3xl font-bold rounded-full bg-black-350 text-white flex items-center justify-center h-12 w-12 mr-2 p-2"
+                        }
+                      >
                         FM
                       </div>
-                      <h1 className="text-xl text-black-350 font-bold">
+                      <h1
+                        className={
+                          isDarkMode
+                            ? "text-xl text-white font-bold"
+                            : "text-xl text-black-350 font-bold"
+                        }
+                      >
                         FreeMium
                       </h1>
                     </div>

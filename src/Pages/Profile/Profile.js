@@ -90,8 +90,8 @@ const Profile = () => {
     <div
       className={
         isDarkMode
-          ? "w-full mx-auto mt-10 p-10 min-h-screen bg-black-350 text-white rounded-lg shadow-lg"
-          : "w-full mx-auto mt-10 p-10 min-h-screen bg-white text-black-350 rounded-lg shadow-lg"
+          ? "w-11/12 mx-auto mt-10 py-10 h-screen bg-black-350 text-white rounded-lg shadow-lg"
+          : "w-11/12 mx-auto mt-10 py-10 h-screen bg-white text-black-350 rounded-lg shadow-lg"
       }
     >
       {editMode ? (

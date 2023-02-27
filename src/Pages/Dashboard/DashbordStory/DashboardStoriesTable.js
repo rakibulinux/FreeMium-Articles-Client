@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { toast } from "react-hot-toast";
 
 import ReportStoryModal from "../DasReportedStory/ReportStoryModal";
+import { format } from "date-fns";
 const DashboardStoriesTable = ({ article, isDarkMode, idx, refetch }) => {
   const { writerName, articleTitle, articleImg, _id, category, timestamp } =
     article;
@@ -20,7 +21,6 @@ const DashboardStoriesTable = ({ article, isDarkMode, idx, refetch }) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.deletedCount > 0) {
           toast.success("successfully delete");
           refetch();
@@ -46,7 +46,9 @@ const DashboardStoriesTable = ({ article, isDarkMode, idx, refetch }) => {
         <td>{title}</td>
         <td className="hidden lg:table-cell p-0">{category}</td>
         <td className="hidden lg:table-cell font-bold">{writerName}</td>
-        <td className="hidden lg:table-cell">{timestamp}</td>
+        <td className="hidden lg:table-cell">
+          {format(new Date(timestamp), "PP")}
+        </td>
         <td>
           <div className="dropdown dropdown-end">
             <label

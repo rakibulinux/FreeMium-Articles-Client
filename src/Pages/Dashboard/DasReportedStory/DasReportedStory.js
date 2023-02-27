@@ -21,15 +21,13 @@ const DasReportedStory = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.deletedCount > 0) {
           toast.success("successfully delete");
           reportRefetch();
         }
       });
   };
-  console.log(reportedItems);
-  
+
   if (reportLoading) {
     return <Spinner />;
   }
@@ -62,13 +60,15 @@ const DasReportedStory = () => {
                 </th>
 
                 <td>
-                <img
-                        src={item.articleImg}
-                        className="w-16 h-14 rounded"
-                        alt=""
-                      />
+                  <img
+                    src={item.articleImg}
+                    className="w-16 h-14 rounded"
+                    alt=""
+                  />
                 </td>
-                <td>{item.articleTitle.replace(/<[^>]+>/g, "").slice(0, 35)}</td>
+                <td>
+                  {item.articleTitle.replace(/<[^>]+>/g, "").slice(0, 35)}
+                </td>
                 <td>{item.writerName}</td>
 
                 <td>

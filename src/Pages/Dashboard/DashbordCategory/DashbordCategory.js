@@ -19,7 +19,6 @@ const DashbordCategory = () => {
   if (isCategoryLoading) {
     return <Spinner />;
   }
-  console.log(categoryButton);
   // delete seller
   const categoryDeleteHandl = (category) => {
     fetch(`${process.env.REACT_APP_API_URL}/categoryButton/${category._id}`, {
@@ -27,7 +26,6 @@ const DashbordCategory = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.deletedCount > 0) {
           toast.success(`successfully delete ${category.CategoryName}`);
           reFetchCategory();

@@ -4,6 +4,7 @@ import { BsBookmarkCheckFill, BsBookmarkPlus } from "react-icons/bs";
 import { AuthContext } from "../../../../contexts/AuthProvider";
 import Spinner from "../../../../components/Spinner/Spinner";
 import { APIContext } from "../../../../contexts/APIProvider";
+import { format } from "date-fns";
 
 const PendingArticlesCard = ({ data, handleSave, handleDelete }) => {
   const [Like, setLike] = useState(true);
@@ -24,8 +25,6 @@ const PendingArticlesCard = ({ data, handleSave, handleDelete }) => {
   const title = articleTitle.replace(/<[^>]+>/g, "").slice(0, 60) + "...";
   const description = articleDetails.replace(/<[^>]+>/g, "");
   //   conditional array
-  const articleTypeData = [!articleType];
-  console.log(articleTypeData[0]);
   const paidSimble = (
     <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
       <path
@@ -80,9 +79,12 @@ const PendingArticlesCard = ({ data, handleSave, handleDelete }) => {
             </Link>
             <div className="flex items-center justify-between">
               <div className="flex items-center ml-3 lg:ml-2 ">
-                <span className="block font-semibold">{timestamp}</span>
+                {/* <ReactTimeAgo date={timestamp} locale="en-US" /> */}
+                <span className="block font-semibold">
+                  {format(new Date(timestamp), "PP")}
+                </span>
                 <span className="block ml-3 text-red-500 font-semibold">
-                  {articleRead}-read
+                  {articleRead} min read
                 </span>
               </div>
               {/* {user && Like ?

@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import React from "react";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
@@ -81,7 +82,7 @@ const SelectCategoryCard = ({ data }) => {
                     : "block text-gray-700 font-semibold"
                 }
               >
-                {timestamp}
+                {format(new Date(timestamp), "PP")}
               </span>
               <span className="block ml-3 text-red-500 font-semibold">
                 {articleRead}-read

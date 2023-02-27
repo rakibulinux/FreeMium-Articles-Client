@@ -100,8 +100,7 @@ const WriteStories = () => {
               })
             );
             articlesRefetch();
-            // navigate("/");
-            console.log(data);
+            navigate("/");
           } catch (error) {
             console.error(error);
           }

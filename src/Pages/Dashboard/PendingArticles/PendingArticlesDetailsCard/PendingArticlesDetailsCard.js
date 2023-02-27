@@ -10,6 +10,7 @@ import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import { AuthContext } from "./../../../../contexts/AuthProvider";
 import { APIContext } from "./../../../../contexts/APIProvider";
 import Swal from "sweetalert2";
+import { format } from "date-fns";
 
 const PendingArticlesDetailsCard = ({ users }) => {
   const navigate = useNavigate();
@@ -172,7 +173,7 @@ const PendingArticlesDetailsCard = ({ users }) => {
                           : "text-xs font-medium text-gray-600"
                       }
                     >
-                      {timestamp}
+                      {format(new Date(timestamp), "PP")}
                     </span>
                   </li>
 

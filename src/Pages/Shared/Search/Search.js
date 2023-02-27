@@ -107,15 +107,6 @@ function Search({ searchPlaceholder, propsStyle }) {
           ))}
         </ul>
       )}
-      {/* {searchArticles.map((data) => (
-        <ArticlesCard
-          data={data}
-          key={data?._id}
-          handleSave={handleSave}
-          handleDelete={handleDelete}
-        ></ArticlesCard>
-      ))} */}
-      {/* {searchArticles.length > 0 && <SearchResults query={query} />} */}
     </>
   );
 }

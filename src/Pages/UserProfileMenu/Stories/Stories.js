@@ -111,7 +111,7 @@ const Stories = () => {
         </div>
         <div className="divider divider-horizontal"></div>
         <aside className="basis-1/4 hidden md:block lg:block">
-          <GetUnlimitedAccessButton text={"Get unlimited access"} />
+          <GetUnlimitedAccessButton text={"Get Unlimited Access"} />
           {/* <button className="bg-black text-white rounded-3xl py-3 w-10/12">
             Get unlimited access
           </button> */}

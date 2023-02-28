@@ -58,7 +58,7 @@ const List = () => {
         ></div>
         <aside className="basis-1/4  hidden md:block lg:block">
           <Link to={"/payment"}>
-            <GetUnlimitedAccessButton text={"Get unlimited access"} />
+            <GetUnlimitedAccessButton text={"Get Unlimited Access"} />
           </Link>
           {/* <button className="bg-black text-white rounded-3xl py-3 w-10/12">
             Get unlimited access

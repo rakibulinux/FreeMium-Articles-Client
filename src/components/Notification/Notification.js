@@ -9,9 +9,9 @@ import { AuthContext } from "../../contexts/AuthProvider";
 import { fetchUserData } from "../../store/fetchGetSlice";
 import { fetchAsync } from "../../store/fetchSlice";
 import Scroll from "../Scroll/Scroll";
-const socket = io(`${process.env.REACT_APP_API_URL}`); // Replace with your server URL
+// const socket = io(`${process.env.REACT_APP_API_URL}`); // Replace with your server URL
 
-const Notification = ({ notifications, setNotifications }) => {
+const Notification = ({ notifications, setNotifications, socket }) => {
   const dispatch = useDispatch();
   const { user } = useContext(AuthContext);
   const [page, setPage] = useState(1);

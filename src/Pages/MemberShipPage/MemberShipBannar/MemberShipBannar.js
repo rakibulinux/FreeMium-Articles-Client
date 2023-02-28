@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const MemberShipBannar = () => {
   return (
@@ -20,12 +21,12 @@ const MemberShipBannar = () => {
             </p>
 
             <div className="mt-8 flex flex-wrap justify-center gap-4">
-              <a
+              <Link
                 className="block w-full rounded-full  bg-white px-12 py-3 text-xl font-medium  shadow hover:bg-[#4171f8] hover:border-2 hover:text-white sm:w-auto"
-                href="/"
+                to="/payment"
               >
-                Get unlimited access
-              </a>
+                Get Unlimited Access
+              </Link>
             </div>
           </div>
         </div>

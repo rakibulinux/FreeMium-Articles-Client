@@ -67,26 +67,26 @@ const MessagesJsRightSide = ({
             </img> */}
           <div className="avatar">
             <div className="w-10 rounded-full">
-              <img src={picture} alt="img" />              
+              <img src={picture} alt="img" />
             </div>
           </div>
           <div className="flex flex-col ml-3">
-                <div className="  text-sm">{name}</div>
-                {active &&
-                active.length > 0 &&
-                active.some((u) => u.userId === _id) ? (
-                  <div className="text-green-500 text-sm">Active</div>
-                ) : (
-                  ""
-                )}
-              </div>
+            <div className="  text-sm">{name}</div>
+            {active &&
+            active.length > 0 &&
+            active.some((u) => u.userId === _id) ? (
+              <div className="text-green-500 text-sm">Active</div>
+            ) : (
+              ""
+            )}
+          </div>
           {/* <div className="flex flex-col ml-3">
           <div className="font-semibold text-sm">{name}</div>
           <div className="text-xs text-gray-500">Active</div>
         </div> */}
-          <div className="ml-auto">
+          {/* <div className="ml-auto">
             <ul className="flex flex-row items-center space-x-2">
-              {/* <li>
+              <li>
                 <Link
                   to="/"
                   className="flex items-center justify-center bg-gray-100 hover:bg-gray-200 text-gray-400 h-10 w-10 rounded-full"
@@ -108,8 +108,8 @@ const MessagesJsRightSide = ({
                     </svg>
                   </span>
                 </Link>
-              </li> */}
-              {/* <VoiceCall /> */}
+              </li>
+              <VoiceCall />
               <li>
                 <Link
                   to="/"
@@ -157,7 +157,7 @@ const MessagesJsRightSide = ({
                 </Link>
               </li>
             </ul>
-          </div>
+          </div> */}
         </div>
         <div className="h-full overflow-hidden py-4">
           <div className="h-full overflow-y-auto">

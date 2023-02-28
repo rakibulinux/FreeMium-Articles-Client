@@ -101,7 +101,7 @@ const ArticlesCard = ({ data, handleSave, handleDelete }) => {
                   {articleRead} min read
                 </span>
               </div>
-              {user && Like ? (
+              {/* {user && Like ? (
                 <div className="tooltip" data-tip="Save">
                   <button onClick={() => handleSave(data, setLike(false))}>
                     <BsBookmarkPlus className="text-xl" />
@@ -113,7 +113,7 @@ const ArticlesCard = ({ data, handleSave, handleDelete }) => {
                     <BsBookmarkCheckFill className="text-green-600 text-xl" />
                   </button>
                 </div>
-              )}
+              )} */}
             </div>
           </div>
         </div>

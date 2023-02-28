@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useContext } from "react";
 import toast from "react-hot-toast";
 import { NavLink } from "react-router-dom";
@@ -19,10 +19,13 @@ import Search from "../Search/Search";
 import { APIContext } from "../../../contexts/APIProvider";
 import NotificationIcon from "../../../components/Notification/NotificationIcon";
 import { RiMessengerLine } from "react-icons/ri";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAsync } from "../../../store/fetchSlice";
 //
 const Navbar = () => {
   const { user, logoutUserAccount } = useContext(AuthContext);
   const { isDarkMode, setIsDarkMode } = useContext(APIContext);
+  const dispatch = useDispatch();
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
   };
@@ -35,7 +38,12 @@ const Navbar = () => {
         toast.error(err.message);
       });
   };
-
+  const singleUsers = useSelector((state) => state.fetch.data);
+  useEffect(() => {
+    dispatch(
+      fetchAsync(`${process.env.REACT_APP_API_URL}/user/${user?.email}`)
+    );
+  }, [dispatch, user]);
   const lightIcon = (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -237,8 +245,8 @@ const Navbar = () => {
                       <div
                         className={
                           isDarkMode
-                            ? "text-3xl font-bold rounded-full bg-white text-black-350 flex items-center justify-center h-12 w-12 mr-2 p-2"
-                            : "text-3xl font-bold rounded-full bg-black-350 text-white flex items-center justify-center h-12 w-12 mr-2 p-2"
+                            ? "hidden text-3xl font-bold rounded-full bg-white text-black-350 md:flex items-center justify-center h-12 w-12 mr-2 p-2"
+                            : "hidden  text-3xl font-bold rounded-full bg-black-350 text-white md:flex items-center justify-center h-12 w-12 mr-2 p-2"
                         }
                       >
                         FM
@@ -329,24 +337,26 @@ const Navbar = () => {
                         : "menu menu-compact dropdown-content mt-3 p-2 shadow rounded-sm bg-base-100 box-border w-max border-2 border-gray-50 text-black-250"
                     }
                   >
-                    <li
-                      className={
-                        isDarkMode
-                          ? "justify-between bg-black-250 text-white text-lg font-semibold text-semibold"
-                          : "justify-between bg-white text-black text-lg font-semibold text-semibold"
-                      }
-                    >
-                      <NavLink
-                        className={({ isActive }) =>
-                          isActive
-                            ? "text-sky-600 font-semibold bg-none active:bg-none hover:bg-none"
-                            : ""
+                    {singleUsers?.role === "admin" && (
+                      <li
+                        className={
+                          isDarkMode
+                            ? "justify-between bg-black-250 text-white text-lg font-semibold text-semibold"
+                            : "justify-between bg-white text-black text-lg font-semibold text-semibold"
                         }
-                        to="/dashboard"
                       >
-                        <AiOutlineDashboard /> Dashboard
-                      </NavLink>
-                    </li>
+                        <NavLink
+                          className={({ isActive }) =>
+                            isActive
+                              ? "text-sky-600 font-semibold bg-none active:bg-none hover:bg-none"
+                              : ""
+                          }
+                          to="/dashboard"
+                        >
+                          <AiOutlineDashboard /> Dashboard
+                        </NavLink>
+                      </li>
+                    )}
                     <li
                       className={
                         isDarkMode

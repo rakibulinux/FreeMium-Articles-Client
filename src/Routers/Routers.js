@@ -95,14 +95,14 @@ const router = createBrowserRouter([
         path: "/write-stories",
         element: <WriteStories />,
       },
-      // {
-      //   path: "/login",
-      //   element: <Login />,
-      // },
-      // {
-      //   path: "/register",
-      //   element: <Register />,
-      // },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/register",
+        element: <Register />,
+      },
       {
         path: "/payment",
         element: (
@@ -238,39 +238,47 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/hexa-ai",
-        element: <AskMeAnything />,
+        element: (
+          <PrivateRoute>
+            <AskMeAnything />
+          </PrivateRoute>
+        ),
         children: [{}],
       },
       {
         path: "/hexa-ai/:id",
-        element: <HistoryAns></HistoryAns>,
+        element: (
+          <PrivateRoute>
+            <HistoryAns />
+          </PrivateRoute>
+        ),
         loader: async ({ params }) =>
           await fetch(`${process.env.REACT_APP_API_URL}/hexa-ai/${params.id}`),
       },
     ],
   },
-  {
-    path: "/login",
-    element: <MessageLayout />,
-    errorElement: <ErrorPage />,
-    children: [
-      {
-        path: "/login",
-        element: <Login />,
-      },
-    ],
-  },
-  {
-    path: "/register",
-    element: <MessageLayout />,
-    errorElement: <ErrorPage />,
-    children: [
-      {
-        path: "/register",
-        element: <Register />,
-      },
-    ],
-  },
+  // {
+  //   path: "/login",
+  //   element: <MessageLayout />,
+  //   errorElement: <ErrorPage />,
+  //   children: [
+  //     {
+  //       path: "/login",
+  //       element: <Login />,
+  //     },
+  //   ],
+  // },
+  // {
+  //   path: "/register",
+  //   element: <MessageLayout />,
+  //   errorElement: <ErrorPage />,
+  //   children: [
+  //     {
+  //       path: "/register",
+  //       element: <Register />,
+  //     },
+  //   ],
+  // },
   {
     path: "/messages",
     element: (

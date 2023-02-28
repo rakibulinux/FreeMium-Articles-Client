@@ -23,7 +23,7 @@ function Messages() {
   const [currentFriend, setCurrentFriend] = useState("");
   const [typingMessage, setTypingMessage] = useState("");
   const [notificationSplay] = useSound(notificationSound);
-const [messageSendSuccess,setMessageSendSuccess] = useState(false)
+  const [messageSendSuccess, setMessageSendSuccess] = useState(false);
   const imageHostKey = process.env.REACT_APP_IMG_BB_KEY;
   console.log(getMessage);
   // console.log(currentFriend?._id);
@@ -60,14 +60,14 @@ const [messageSendSuccess,setMessageSendSuccess] = useState(false)
       setCurrentFriend(friends[0]?.frindInfo);
     }
   }, [friends]);
-console.log(currentFriend)
+  console.log(currentFriend);
   // message input handler
   const messageInputHandl = (e) => {
     setNewMessages(e.target.value);
     socket.emit("typingMessage", {
       senderId: singleUsers?._id,
       reciverId: currentFriend?._id,
-      senderImage:singleUsers?.picture,
+      senderImage: singleUsers?.picture,
       msg: e.target.value,
     });
   };
@@ -78,23 +78,23 @@ console.log(currentFriend)
     const data = {
       senderName: singleUsers?.name,
       senderId: singleUsers?._id,
-      senderImage:singleUsers?.picture,
+      senderImage: singleUsers?.picture,
       reciverId: currentFriend?._id,
       message: { text: newMessages ? newMessages : "", image: "" },
       date: new Date(),
     };
-    console.log(data)
+    console.log(data);
     // send message in socket server last modify
 
     socket.emit("sendMessage", {
       senderId: singleUsers?._id,
       senderName: singleUsers?.name,
-      senderImage:singleUsers?.picture,
+      senderImage: singleUsers?.picture,
       reciverId: currentFriend?._id,
       message: { text: newMessages ? newMessages : "", image: "" },
       date: new Date(),
     });
-    
+
     // set typing message empty
     socket.emit("typingMessage", {
       senderId: singleUsers?._id,
@@ -111,7 +111,7 @@ console.log(currentFriend)
       .then((res) => res.json())
       .then((result) => {
         console.log(result);
-        setMessageSendSuccess(true)
+        setMessageSendSuccess(true);
         // toast.success(`Saved message`);
         setNewMessages("");
         getMessageRefetch();
@@ -242,21 +242,21 @@ soket work
         });
     }
   };
-// sendMseeage successfully last modify
-// useEffect(() => {
-//   if (messageSendSuccess === true) {
-//     socket.emit("sendMessage",
-//      {
-//         senderId: singleUsers?._id,
-//         senderName: singleUsers?.name,
-//         senderImage:singleUsers?.picture,
-//         reciverId: currentFriend?._id,
-//         message: { text: newMessages ? newMessages : "", image: "" },
-//         date: new Date(),
-//       }
-//       );
-//   }
-// }, [messageSendSuccess]);
+  // sendMseeage successfully last modify
+  // useEffect(() => {
+  //   if (messageSendSuccess === true) {
+  //     socket.emit("sendMessage",
+  //      {
+  //         senderId: singleUsers?._id,
+  //         senderName: singleUsers?.name,
+  //         senderImage:singleUsers?.picture,
+  //         reciverId: currentFriend?._id,
+  //         message: { text: newMessages ? newMessages : "", image: "" },
+  //         date: new Date(),
+  //       }
+  //       );
+  //   }
+  // }, [messageSendSuccess]);
 
   if (isLoading && friendsLoading && isGetMessagesLoading) {
     return;
@@ -266,12 +266,12 @@ soket work
       <div
         className={
           isDarkMode
-            ? " w-11/12 mx-auto flex flex-row h-screen antialiased bg-black-350 text-white"
-            : " w-11/12 mx-auto flex flex-row h-screen antialiased text-gray-800"
+            ? " flex flex-row h-screen antialiased bg-black-350 text-white"
+            : " flex flex-row h-screen antialiased text-gray-800"
         }
       >
-        <div className="flex flex-row w-96 flex-shrink-0  ">
-          <div className="flex flex-col w-full h-full pl-4 pr-4 py-4 ">
+        <div className="flex flex-row w-32 md:w-96 flex-shrink-0  ">
+          <div className="flex flex-col w-32 md:w-full h-full pl-4 pr-4 py-4 ">
             <div className="flex flex-row items-center">
               <div className="flex flex-row items-center">
                 {/* <div className="text-xl font-semibold">Messages</div>
@@ -284,7 +284,7 @@ soket work
                     alt="img"
                     className="flex items-center justify-center h-10 w-10 rounded-full  font-bold flex-shrink-0"
                   ></img>
-                  <div className="flex flex-col flex-grow ml-3">
+                  <div className="hidden md:flex flex-col flex-grow ml-3">
                     <div className="flex items-center">
                       <div className="text-sm font-medium">
                         {user?.displayName}
@@ -335,7 +335,7 @@ soket work
               <div className="flex flex-col divide-y h-full overflow-y-auto -mx-4">
                 {/* friends */}
                 {friends && friends.length > 0
-                  ? friends?.map((friends) => 
+                  ? friends?.map((friends) => (
                       <div
                         onClick={() => setCurrentFriend(friends?.frindInfo)}
                         friends={friends}
@@ -373,16 +373,12 @@ soket work
                             3
                           </span>
                         </div> */}
-                      <Friends
-                     friends={friends}
-                     active={active}
-                    ></Friends>
+                        <Friends friends={friends} active={active}></Friends>
                       </div>
-                    )
-                    
+                    ))
                   : "no friend"}
               </div>
-              <div className="absolute bottom-0 right-0 mr-2">
+              {/* <div className="absolute bottom-0 right-0 mr-2">
                 <button className="flex items-center justify-center shadow-sm h-10 w-10 bg-red-500 text-white rounded-full">
                   <svg
                     className="w-6 h-6"
@@ -399,7 +395,7 @@ soket work
                     ></path>
                   </svg>
                 </button>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

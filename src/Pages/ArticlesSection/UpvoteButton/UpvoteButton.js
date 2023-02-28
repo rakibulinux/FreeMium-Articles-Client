@@ -80,7 +80,7 @@ function UpvoteButton({ storyId, title, content, upvotes, downvotes }) {
     async function fetchPost() {
       try {
         const response = await fetch(
-          `${process.env.REACT_APP_API_URL}/view-story/${storyId}`
+          `${process.env.REACT_APP_API_URL}/vote-story/${storyId}`
         );
         const post = await response.json();
         setPost(post);

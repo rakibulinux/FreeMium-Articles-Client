@@ -36,8 +36,8 @@ const Login = () => {
   const location = useLocation();
 
   const from = location.state?.from?.pathname || "/";
-  const [loginUserEmail, setLoginUserEmail] = useState("");
-  const [token] = useToken(loginUserEmail);
+  // const [loginUserEmail, setLoginUserEmail] = useState("");
+  // const [token] = useToken(loginUserEmail);
 
   const [userEmail, setUserEmail] = useState("");
 
@@ -56,7 +56,7 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         toast.success("Login with email success");
-        setLoginUserEmail(user?.email);
+        // setLoginUserEmail(user?.email);
         setAuthToken(user);
         navigate(from, { replace: true });
       })
@@ -73,7 +73,7 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         toast.success("Login with google success");
-        setLoginUserEmail(user?.email);
+        // setLoginUserEmail(user?.email);
         setAuthToken(user);
       })
       .catch((err) => {
@@ -98,7 +98,7 @@ const Login = () => {
   if (loading) {
     return <Spinner />;
   }
-  if (user?.uid && token) {
+  if (user?.uid) {
     navigate("/");
   }
   return (

@@ -418,13 +418,13 @@ const ArticleDetailsCard = ({
                     ></UpvoteButton>
 
                     {/* <p className="pl-0 p-2"> {downvotes}</p> */}
-                    <DownVoteButton
+                    {/* <DownVoteButton
                       user={user}
                       users={users}
                       storyId={_id}
                       userEmail={userEmail}
                       downVoteId={user?.email}
-                    ></DownVoteButton>
+                    ></DownVoteButton> */}
                     {/* <p className="pl-0 p-2"> {downVote?.length}</p> */}
                   </div>
                 </Link>

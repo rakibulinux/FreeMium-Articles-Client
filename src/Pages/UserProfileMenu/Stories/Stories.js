@@ -47,7 +47,7 @@ const Stories = () => {
     { id: 3, label: " Responses", content: <div>Responses</div> },
   ];
   return (
-    <div className="mt-10">
+    <div className="w-11/12 mx-auto mt-10">
       <div className="flex row">
         <div className=" basis-3/4 mb-10">
           <div className="flex flex-col md:flex-row gap-4 justify-between text-center">

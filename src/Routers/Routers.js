@@ -132,10 +132,10 @@ const router = createBrowserRouter([
       {
         path: "/view-story/:id",
         element: <ArticlesDetails></ArticlesDetails>,
-        loader: async ({ params }) =>
-          await fetch(
-            `${process.env.REACT_APP_API_URL}/view-story/${params.id}`
-          ),
+        // loader: async ({ params }) =>
+        //   await fetch(
+        //     `${process.env.REACT_APP_API_URL}/view-story/${params.id}`
+        //   ),
       },
       {
         path: "/checkArticle/:id",
@@ -253,25 +253,23 @@ const router = createBrowserRouter([
     path: "/login",
     element: <MessageLayout />,
     errorElement: <ErrorPage />,
-    children:[
+    children: [
       {
         path: "/login",
         element: <Login />,
       },
-      
-    ]
+    ],
   },
   {
     path: "/register",
     element: <MessageLayout />,
     errorElement: <ErrorPage />,
-    children:[
+    children: [
       {
         path: "/register",
         element: <Register />,
       },
-      
-    ]
+    ],
   },
   {
     path: "/messages",

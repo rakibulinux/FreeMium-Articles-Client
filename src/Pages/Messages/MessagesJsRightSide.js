@@ -22,7 +22,6 @@ const MessagesJsRightSide = ({
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [getMessage]);
-  console.log(currentFriend);
   const emojis = [
     "😨",
     "🤔",

@@ -38,6 +38,9 @@ module.exports = {
           550: "#1A8917",
         },
       },
+      fontSize: {
+        1.5: "14px",
+      },
     },
   },
   plugins: [require("daisyui"), require("tailwind-scrollbar-hide")],

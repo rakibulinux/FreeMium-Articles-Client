@@ -42,9 +42,8 @@ import {
   UpdateCategory,
   PendingArticles,
   PendingArticlesDetailsCard,
+  SearchResults,
 } from "../Pages/index";
-import SearchDetails from "../Pages/Shared/Search/SearchDetails";
-import SearchResults from "../Pages/Shared/Search/SearchResults";
 
 const router = createBrowserRouter([
   {
@@ -96,14 +95,14 @@ const router = createBrowserRouter([
         path: "/write-stories",
         element: <WriteStories />,
       },
-      {
-        path: "/login",
-        element: <Login />,
-      },
-      {
-        path: "/register",
-        element: <Register />,
-      },
+      // {
+      //   path: "/login",
+      //   element: <Login />,
+      // },
+      // {
+      //   path: "/register",
+      //   element: <Register />,
+      // },
       {
         path: "/payment",
         element: (
@@ -250,7 +249,30 @@ const router = createBrowserRouter([
       },
     ],
   },
-
+  {
+    path: "/login",
+    element: <MessageLayout />,
+    errorElement: <ErrorPage />,
+    children:[
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      
+    ]
+  },
+  {
+    path: "/register",
+    element: <MessageLayout />,
+    errorElement: <ErrorPage />,
+    children:[
+      {
+        path: "/register",
+        element: <Register />,
+      },
+      
+    ]
+  },
   {
     path: "/messages",
     element: (

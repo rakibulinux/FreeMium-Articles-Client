@@ -20,20 +20,19 @@ const DashboardLayout = () => {
   const { user, loading } = useContext(AuthContext);
   const { isDarkMode } = useContext(APIContext);
   const [isAdmin, isAdminLoading] = useAdmin(user?.email);
-  console.log(isAdmin, isAdminLoading);
   const navigation = useNavigate();
   if (loading && isAdminLoading) {
     return <Spinner />;
   }
   return (
-    <div>
+    <div className="">
       {isAdmin ? (
         <>
           <div
             className={
               isDarkMode
-                ? "w-11/12 mx-auto bg-black-350 text-white"
-                : "w-11/12 mx-auto bg-base-100 text-black-350"
+                ? "bg-black-350 text-white"
+                : "bg-base-100 text-black-350"
             }
           >
             <Navbar />
@@ -44,7 +43,7 @@ const DashboardLayout = () => {
               type="checkbox"
               className="drawer-toggle"
             />
-            <div className="drawer-content p-4 scrollbar-hide">
+            <div className=" drawer-content p-4 scrollbar-hide">
               <Outlet />
             </div>
             <div className="drawer-side ">
@@ -52,7 +51,13 @@ const DashboardLayout = () => {
                 htmlFor="dashboard-drawer"
                 className="drawer-overlay"
               ></label>
-              <ul className="menu p-4 w-80 bg-[#0B2C47] text-base-300">
+              <ul
+                className={
+                  isDarkMode
+                    ? "menu p-4 w-80 bg-black-250 text-base-300"
+                    : "menu p-4 w-80 bg-black-350 text-base-300"
+                }
+              >
                 <li>
                   <Link to="/dashboard">
                     <FaLaptop /> Dashboard

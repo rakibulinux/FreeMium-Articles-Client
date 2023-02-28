@@ -14,9 +14,7 @@ const MessageLayout = () => {
       <Navbar />
       <div
         className={
-          isDarkMode
-            ? "w-11/12 mx-auto bg-black-350 text-white"
-            : "w-11/12 mx-auto bg-base-100 text-black-350"
+          isDarkMode ? "bg-black-350 text-white" : "bg-base-100 text-black-350"
         }
       ></div>
       <Outlet />

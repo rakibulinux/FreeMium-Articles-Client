@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import React from "react";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
@@ -5,12 +6,11 @@ import { APIContext } from "../../contexts/APIProvider";
 
 const OwnStory = ({ articleData }) => {
   const { isDarkMode } = useContext(APIContext);
-  console.log(articleData);
   const {
     articleDetails,
     articleImg,
     articleRead,
-    articleSubmitDate,
+    timestamp,
     articleTitle,
     writerName,
     _id,
@@ -74,7 +74,7 @@ const OwnStory = ({ articleData }) => {
                 isDarkMode ? "text-xs text-gray-100" : "text-xs text-gray-700"
               }
             >
-              {articleSubmitDate}
+              {format(new Date(timestamp), "PP")}
             </dd>
           </div>
 

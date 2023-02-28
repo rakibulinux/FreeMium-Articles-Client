@@ -14,12 +14,12 @@ import "./Home.css";
 const Home = () => {
   const { user } = useContext(AuthContext);
   return (
-    <div className="">
+    <div className="w-11/12 mx-auto">
       {user?.uid ? ( // after log in user  UI  grid sm:grid-rows-1 md:grid-cols-3 lg:grid-cols-3 gap-0 md:gap-4
         <div>
           <div className="lg:grid lg:grid-cols-3 grid-cols-1">
             <section className="col-span-2 order-last md:order-first border-r-0 lg:border-r-[1px] pr-10">
-             
+            {/* <section className="col-span-2 border-r-0 lg:border-r-[1px] pr-10"> */}
               <Manubar />
 
               <Articles></Articles>

@@ -1,18 +1,13 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { FaCheck, FaTimes } from "react-icons/fa";
+
 import { toast } from "react-hot-toast";
 
 import ReportStoryModal from "../DasReportedStory/ReportStoryModal";
+import { format } from "date-fns";
 const DashboardStoriesTable = ({ article, isDarkMode, idx, refetch }) => {
-  const {
-    writerName,
-    articleTitle,
-    articleImg,
-    _id,
-    category,
-    articleSubmitDate,
-  } = article;
+  const { writerName, articleTitle, articleImg, _id, category, timestamp } =
+    article;
   const title = articleTitle.replace(/<[^>]+>/g, "").slice(0, 50);
 
   const [deleteItem, setDeleteItem] = useState(null);
@@ -26,7 +21,6 @@ const DashboardStoriesTable = ({ article, isDarkMode, idx, refetch }) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.deletedCount > 0) {
           toast.success("successfully delete");
           refetch();
@@ -38,26 +32,23 @@ const DashboardStoriesTable = ({ article, isDarkMode, idx, refetch }) => {
   //   return <Spinner />;
   // }
   return (
-    <tbody>
+    <tbody className="hover:bg-slate-800">
       <tr className="hover:bg-slate-800">
         <th>{idx + 1}</th>
         <td>
-          <img src={articleImg} className="w-16 h-14 rounded" alt={title} />
+          <img
+            src={articleImg}
+            className="w-16 h-14 rounded"
+            title={title}
+            alt={title}
+          />
         </td>
         <td>{title}</td>
         <td className="hidden lg:table-cell p-0">{category}</td>
+        <td className="hidden lg:table-cell font-bold">{writerName}</td>
         <td className="hidden lg:table-cell">
-          <label className="swap">
-            <input type="checkbox" />
-            <div className="swap-on ">
-              <FaTimes className="text-xl" />
-            </div>
-            <div className="swap-off">
-              <FaCheck />
-            </div>
-          </label>
+          {format(new Date(timestamp), "PP")}
         </td>
-        <td className="hidden lg:table-cell">{articleSubmitDate}</td>
         <td>
           <div className="dropdown dropdown-end">
             <label

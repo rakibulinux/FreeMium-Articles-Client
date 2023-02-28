@@ -7,7 +7,6 @@ import { APIContext } from "./../../../../../contexts/APIProvider";
 const TopWritersCard = ({ writerData }) => {
   const { isDarkMode } = useContext(APIContext);
   const { user } = useContext(AuthContext);
-  console.log(writerData);
   const { name, picture } = writerData;
   return (
     <div>

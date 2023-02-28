@@ -7,7 +7,12 @@ import { APIContext } from "../../../../../contexts/APIProvider";
 
 function Search({ searchPlaceholder, propsStyle }) {
   const [query, setQuery] = useState("");
-  const {writerSuggestions,setWriterSuggestions, searchWriter, setSearchWriter} = useContext(APIContext);
+  const {
+    writerSuggestions,
+    setWriterSuggestions,
+    searchWriter,
+    setSearchWriter,
+  } = useContext(APIContext);
   useEffect(() => {
     const fetchSearchResults = async () => {
       const response = await axios.get(
@@ -29,8 +34,6 @@ function Search({ searchPlaceholder, propsStyle }) {
   //   navigate("/search");
   // };
 
-  console.log(searchWriter);
-  console.log(writerSuggestions);
   return (
     <>
       <div className="hidden md:block">

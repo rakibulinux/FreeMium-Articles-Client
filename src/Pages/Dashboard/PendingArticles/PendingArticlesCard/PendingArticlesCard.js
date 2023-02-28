@@ -4,28 +4,27 @@ import { BsBookmarkCheckFill, BsBookmarkPlus } from "react-icons/bs";
 import { AuthContext } from "../../../../contexts/AuthProvider";
 import Spinner from "../../../../components/Spinner/Spinner";
 import { APIContext } from "../../../../contexts/APIProvider";
+import { format } from "date-fns";
 
 const PendingArticlesCard = ({ data, handleSave, handleDelete }) => {
-  const [Like, setLike ]  = useState(true);
+  const [Like, setLike] = useState(true);
   const { loading, user } = useContext(AuthContext);
   const { isDarkMode } = useContext(APIContext);
   const {
     articleDetails,
     articleRead,
-    articleSubmitDate,
+    timestamp,
     articleTitle,
     writerImg,
     writerName,
     articleImg,
     _id,
-    isPaid, 
-    articleType
+    isPaid,
+    articleType,
   } = data;
   const title = articleTitle.replace(/<[^>]+>/g, "").slice(0, 60) + "...";
   const description = articleDetails.replace(/<[^>]+>/g, "");
-//   conditional array
-const articleTypeData = [!articleType];
-console.log(articleTypeData[0]);
+  //   conditional array
   const paidSimble = (
     <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
       <path
@@ -44,48 +43,51 @@ console.log(articleTypeData[0]);
   }
   return (
     <>
-    {
-      !articleType ? <div
-      className={
-        isDarkMode
-          ? "my-7 w-full mx-auto bg-black-250 rounded-xl shadow-md text-white"
-          : "my-7 w-full mx-auto bg-base-100 rounded-xl shadow-md text-gray-800"
-      }
-    >
-      <div className="card-body md:flex">
-        <div className="flex gap-2 items-center">
-          {/* blog auther img */}
-          <img className="rounded-full w-10 h-10" src={writerImg} alt="" />
-          <h3 className="ml-2 font-bold">{writerName}</h3>
-          {isPaid && paidSimble}
-          {isPaid && <p>Member-only</p>}
-        </div>
-        <Link to={`/checkArticle/${_id}`}>
-          <div
-            className="lg:grid flex flex-col-reverse lg:flex-row"
-            style={{ gridTemplateColumns: "4fr 2fr" }}
-          >
-            <div className="px-3">
-              <h1
-                className="text-2xl font-semibold"
-                dangerouslySetInnerHTML={{ __html: title }}
-              />
-              <div dangerouslySetInnerHTML={{ __html: descriptionSlice }} />
+      {!articleType ? (
+        <div
+          className={
+            isDarkMode
+              ? "my-7 w-full mx-auto bg-black-250 rounded-xl shadow-md text-white"
+              : "my-7 w-full mx-auto bg-base-100 rounded-xl shadow-md text-gray-800"
+          }
+        >
+          <div className="card-body md:flex">
+            <div className="flex gap-2 items-center">
+              {/* blog auther img */}
+              <img className="rounded-full w-10 h-10" src={writerImg} alt="" />
+              <h3 className="ml-2 font-bold">{writerName}</h3>
+              {isPaid && paidSimble}
+              {isPaid && <p>Member-only</p>}
             </div>
-            {/* blog right img */}
-            <div className="flex justify-center items-center p-2 ">
-              <img className="w-56 h-32" src={articleImg} alt="" />
-            </div>
-          </div>
-        </Link>
-        <div className="flex items-center justify-between">
-          <div className="flex items-center ml-3 lg:ml-2 ">
-            <span className="block font-semibold">{articleSubmitDate}</span>
-            <span className="block ml-3 text-red-500 font-semibold">
-              {articleRead}-read
-            </span>
-          </div>
-          {/* {user && Like ?
+            <Link to={`/checkArticle/${_id}`}>
+              <div
+                className="lg:grid flex flex-col-reverse lg:flex-row"
+                style={{ gridTemplateColumns: "4fr 2fr" }}
+              >
+                <div className="px-3">
+                  <h1
+                    className="text-2xl font-semibold"
+                    dangerouslySetInnerHTML={{ __html: title }}
+                  />
+                  <div dangerouslySetInnerHTML={{ __html: descriptionSlice }} />
+                </div>
+                {/* blog right img */}
+                <div className="flex justify-center items-center p-2 ">
+                  <img className="w-56 h-32" src={articleImg} alt="" />
+                </div>
+              </div>
+            </Link>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center ml-3 lg:ml-2 ">
+                {/* <ReactTimeAgo date={timestamp} locale="en-US" /> */}
+                <span className="block font-semibold">
+                  {format(new Date(timestamp), "PP")}
+                </span>
+                <span className="block ml-3 text-red-500 font-semibold">
+                  {articleRead} min read
+                </span>
+              </div>
+              {/* {user && Like ?
             <div className="tooltip" data-tip="Save">
             
               <button onClick={() => handleSave(data,setLike(false))}>
@@ -97,13 +99,13 @@ console.log(articleTypeData[0]);
               </button>
             </div>
           } */}
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-    :
-    <div className='hidden'></div>
-    }
-{/* {
+      ) : (
+        <div className="hidden"></div>
+      )}
+      {/* {
      articleTypeData[0] === false && <div>
     <h1>Article has not been published yet</h1>
 </div>

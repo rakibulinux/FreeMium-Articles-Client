@@ -234,7 +234,6 @@ soket work
             })
               .then((res) => res.json())
               .then((result) => {
-                console.log(result);
                 toast.success(`Saved img`);
                 getMessageRefetch();
                 setNewMessages("");

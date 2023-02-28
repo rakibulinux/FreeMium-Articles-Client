@@ -10,13 +10,8 @@ const HistoryAns = () => {
   const { fetchAPI } = useContext(APIContext);
   const { user } = useContext(AuthContext);
   const data = useLoaderData();
-  console.log(data);
   const navigate = useNavigate();
-  const {
-    isLoading,
-
-    data: singleUsers,
-  } = useQuery(["user", user?.email], () =>
+  const { data: singleUsers } = useQuery(["user", user?.email], () =>
     fetchAPI(`${process.env.REACT_APP_API_URL}/user/${user?.email}`)
   );
 
@@ -63,7 +58,7 @@ const HistoryAns = () => {
                 {/* <code className="!whitespace-pre max-w-xl">{response}</code> */}
               </div>
             </div>
-            <button class="cursor-pointer absolute right-6 bottom-[124px] md:bottom-[120px] z-10 rounded-full border border-gray-200 bg-gray-50 text-gray-600 dark:border-white/10 dark:bg-white/10 dark:text-gray-200">
+            <button className="cursor-pointer absolute right-6 bottom-[124px] md:bottom-[120px] z-10 rounded-full border border-gray-200 bg-gray-50 text-gray-600 dark:border-white/10 dark:bg-white/10 dark:text-gray-200">
               <svg
                 stroke="currentColor"
                 fill="none"
@@ -71,7 +66,7 @@ const HistoryAns = () => {
                 viewBox="0 0 24 24"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-                class="h-4 w-4 m-1"
+                className="h-4 w-4 m-1"
                 height="1em"
                 width="1em"
                 xmlns="http://www.w3.org/2000/svg"
@@ -80,7 +75,8 @@ const HistoryAns = () => {
                 <polyline points="19 12 12 19 5 12"></polyline>
               </svg>
             </button>
-            <div className="absolute flex gap-2 bottom-0 w-full border-t md:border-t-0 dark:border-white/20 md:border-transparent md:dark:border-transparent md:bg-vert-light-gradient bg-white dark:bg-gray-800 md:!bg-transparent dark:md:bg-vert-dark-gradient">
+
+            <div className=" flex justify-center px-12  gap-2 bottom-0 w-full border-t md:border-t-0 dark:border-white/20 md:border-transparent md:dark:border-transparent md:bg-vert-light-gradient bg-white dark:bg-gray-800 md:!bg-transparent dark:md:bg-vert-dark-gradient">
               <input
                 type="text"
                 value={prompt}

@@ -27,7 +27,7 @@ const List = () => {
 
   const { isDarkMode } = useContext(APIContext);
   return (
-    <div className="py-10">
+    <div className="w-11/12 mx-auto h-screen py-10">
       <div className="flex row">
         <div className=" basis-3/4 mb-10">
           <div className="flex justify-between">

@@ -15,7 +15,6 @@ const PaymentSuccess = () => {
       .then((data) => setPaymentUser(data));
   }, [transactionId]);
 
-  console.log(paymentUser);
   return (
     <div>
       <h1 className="text-4xl text-center text-sky-700 my-2">
@@ -81,7 +80,9 @@ const PaymentSuccess = () => {
 
                 <tr className="active">
                   <td className="text-lg text-center font-bold">Total</td>
-                  <td className="text-lg text-center font-bold">{paymentUser.amount} Tk</td>
+                  <td className="text-lg text-center font-bold">
+                    {paymentUser.amount} Tk
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -95,9 +96,9 @@ const PaymentSuccess = () => {
 
         <h4 className="text-2xl text-center font-bold my-3 print:hidden">
           <Link className="text-blue-600 underline underline-offset-4" to="/">
-          <PrimaryButton classes="px-8 py-3 font-semibold rounded">
-            Back to Homepage
-          </PrimaryButton>
+            <PrimaryButton classes="px-8 py-3 font-semibold rounded">
+              Back to Homepage
+            </PrimaryButton>
           </Link>
         </h4>
         <button

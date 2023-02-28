@@ -1,5 +1,7 @@
 import React from "react";
 import { useContext } from "react";
+import { useLottie } from "lottie-react";
+import writingGif from "../../Lottie/Rander.json";
 // import ParticlesComponent from '../../components/particleJS/Particle';
 // import penimg from "../../Assets/pen-pic.png";
 import penimg from "../../Assets/pen-pic.webp";
@@ -13,8 +15,14 @@ const HomeHadBanar = () => {
   // };
   // const { View } = useLottie(options);
   const { isDarkMode } = useContext(APIContext);
+  const options = {
+    animationData: writingGif,
+    loop: true
+  };
+
+  const { View } = useLottie(options);
   return (
-    <div className="flex lg:justify-around items-center lg:flex-row ">
+    <div className="flex lg:justify-around items-center lg:flex-row py-20">
       {/* import particle js */}
       <div className="w-11/12 mx-auto flex">
         <div className="hero justify-start ">
@@ -51,9 +59,11 @@ const HomeHadBanar = () => {
             </div>
           </div>
         </div>
-        <div id="slideshow">
-          <img className="hidden lg:block" src={penimg} alt="" />
-        </div>
+      </div>
+      <div id="slideshow">
+        {
+          View
+        }
       </div>
     </div>
   );

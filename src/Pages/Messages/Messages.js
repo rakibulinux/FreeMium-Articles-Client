@@ -8,6 +8,7 @@ import { AuthContext } from "../../contexts/AuthProvider";
 import MessagesJsRightSide from "./MessagesJsRightSide";
 import useSound from "use-sound";
 import notificationSound from "../../audio/Notification - Notification.mp3";
+import Friends from "./Friends/Friends";
 const ENDPOINT = `${process.env.REACT_APP_API_URL}`;
 // const socket = socketIOClient(ENDPOINT);
 const socket = io.connect(ENDPOINT);
@@ -22,9 +23,9 @@ function Messages() {
   const [currentFriend, setCurrentFriend] = useState("");
   const [typingMessage, setTypingMessage] = useState("");
   const [notificationSplay] = useSound(notificationSound);
-
+const [messageSendSuccess,setMessageSendSuccess] = useState(false)
   const imageHostKey = process.env.REACT_APP_IMG_BB_KEY;
-  // console.log(getMessage);
+  console.log(getMessage);
   // console.log(currentFriend?._id);
 
   const { isLoading, data: singleUsers } = useQuery(["user", user?.email], () =>
@@ -52,20 +53,21 @@ function Messages() {
       `${process.env.REACT_APP_API_URL}/friends?myId=${singleUsers?._id}`
     )
   );
-
+  // console.log(singleUsers);
   //get default frist friend message
   useEffect(() => {
     if (friends && friends?.length > 0) {
-      setCurrentFriend(friends[0]);
+      setCurrentFriend(friends[0]?.frindInfo);
     }
   }, [friends]);
-
+console.log(currentFriend)
   // message input handler
   const messageInputHandl = (e) => {
     setNewMessages(e.target.value);
     socket.emit("typingMessage", {
       senderId: singleUsers?._id,
       reciverId: currentFriend?._id,
+      senderImage:singleUsers?.picture,
       msg: e.target.value,
     });
   };
@@ -76,18 +78,23 @@ function Messages() {
     const data = {
       senderName: singleUsers?.name,
       senderId: singleUsers?._id,
+      senderImage:singleUsers?.picture,
       reciverId: currentFriend?._id,
       message: { text: newMessages ? newMessages : "", image: "" },
       date: new Date(),
     };
-    // send message in socket server
+    console.log(data)
+    // send message in socket server last modify
+
     socket.emit("sendMessage", {
       senderId: singleUsers?._id,
       senderName: singleUsers?.name,
+      senderImage:singleUsers?.picture,
       reciverId: currentFriend?._id,
       message: { text: newMessages ? newMessages : "", image: "" },
       date: new Date(),
     });
+    
     // set typing message empty
     socket.emit("typingMessage", {
       senderId: singleUsers?._id,
@@ -104,7 +111,8 @@ function Messages() {
       .then((res) => res.json())
       .then((result) => {
         console.log(result);
-        toast.success(`Saved message`);
+        setMessageSendSuccess(true)
+        // toast.success(`Saved message`);
         setNewMessages("");
         getMessageRefetch();
       });
@@ -235,6 +243,21 @@ soket work
         });
     }
   };
+// sendMseeage successfully last modify
+// useEffect(() => {
+//   if (messageSendSuccess === true) {
+//     socket.emit("sendMessage",
+//      {
+//         senderId: singleUsers?._id,
+//         senderName: singleUsers?.name,
+//         senderImage:singleUsers?.picture,
+//         reciverId: currentFriend?._id,
+//         message: { text: newMessages ? newMessages : "", image: "" },
+//         date: new Date(),
+//       }
+//       );
+//   }
+// }, [messageSendSuccess]);
 
   if (isLoading && friendsLoading && isGetMessagesLoading) {
     return;
@@ -244,19 +267,19 @@ soket work
       <div
         className={
           isDarkMode
-            ? "flex flex-row h-screen antialiased bg-black-350 text-white"
-            : "flex flex-row h-screen antialiased text-gray-800"
+            ? " w-11/12 mx-auto flex flex-row h-screen antialiased bg-black-350 text-white"
+            : " w-11/12 mx-auto flex flex-row h-screen antialiased text-gray-800"
         }
       >
-        <div className="flex flex-row w-96 flex-shrink-0  p-4">
-          <div className="flex flex-col w-full h-full pl-4 pr-4 py-4 -mr-4">
+        <div className="flex flex-row w-96 flex-shrink-0  ">
+          <div className="flex flex-col w-full h-full pl-4 pr-4 py-4 ">
             <div className="flex flex-row items-center">
               <div className="flex flex-row items-center">
                 {/* <div className="text-xl font-semibold">Messages</div>
                 <div className="flex items-center justify-center ml-2 text-xs h-5 w-5 text-white bg-red-500 rounded-full font-medium">
                   5
                 </div> */}
-                <div className="flex flex-row items-center p-4">
+                <div className="flex flex-row items-center py-4">
                   <img
                     src={user?.photoURL}
                     alt="img"
@@ -313,46 +336,51 @@ soket work
               <div className="flex flex-col divide-y h-full overflow-y-auto -mx-4">
                 {/* friends */}
                 {friends && friends.length > 0
-                  ? friends?.map((user) => (
+                  ? friends?.map((friends) => 
                       <div
-                        onClick={() => setCurrentFriend(user)}
-                        user={user}
-                        key={user?._id}
-                        className="flex flex-row items-center p-4 relative"
+                        onClick={() => setCurrentFriend(friends?.frindInfo)}
+                        friends={friends}
+                        key={friends?.frindInfo?._id}
+                        className="cursor-pointer"
                       >
-                        <div className="absolute text-xs text-gray-500 right-0 top-0 mr-4 mt-3">
+                        {/* <div className=" sm:hidden  absolute text-xs text-gray-500 right-0 top-0 mr-4 mt-3">
                           2 hours ago
                         </div>
 
                         <div className={`avatar`}>
                           <div className="w-10 rounded-full">
-                            <img src={user.picture} alt="img" />
+                            <img src={user?.frindInfo?.picture} alt="img" />
                           </div>
                         </div>
                         <div className="flex flex-col flex-grow ml-3">
                           <div className="flex items-center">
                             <div className="text-sm font-medium">
-                              {user.name}
+                              {user?.frindInfo?.name}
                             </div>
                             {active &&
                             active.length > 0 &&
-                            active.some((u) => u.userId === user._id) ? (
+                            active.some((u) => u.userId === user?.frindInfo?._id) ? (
                               <div className="h-2 w-2 rounded-full bg-green-500 ml-2"></div>
                             ) : (
                               ""
                             )}
                           </div>
-                          <div className="text-xs truncate w-40">
+                          <div className="sm:hidden lg:block text-xs truncate w-40">
                             Good after noon! how can i help you?
                           </div>
                         </div>
-                        <div className="flex-shrink-0 ml-2 self-end mb-1">
+                        <div className="sm:hidden md:block lg:block flex-shrink-0 ml-2 self-end mb-1">
                           <span className="flex items-center justify-center h-5 w-5 bg-red-500 text-white text-xs rounded-full">
                             3
                           </span>
-                        </div>
+                        </div> */}
+                      <Friends
+                     friends={friends}
+                     active={active}
+                    ></Friends>
                       </div>
-                    ))
+                    )
+                    
                   : "no friend"}
               </div>
               <div className="absolute bottom-0 right-0 mr-2">

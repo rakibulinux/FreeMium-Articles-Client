@@ -22,7 +22,7 @@ const MessagesJsRightSide = ({
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [getMessage]);
-  console.log(getMessage);
+  console.log(currentFriend);
   const emojis = [
     "😨",
     "🤔",
@@ -68,19 +68,19 @@ const MessagesJsRightSide = ({
             </img> */}
           <div className="avatar">
             <div className="w-10 rounded-full">
-              <img src={picture} alt="img" />
-              <div className="flex flex-col ml-3">
-                <div className="font-semibold text-sm">{name}</div>
+              <img src={picture} alt="img" />              
+            </div>
+          </div>
+          <div className="flex flex-col ml-3">
+                <div className="  text-sm">{name}</div>
                 {active &&
                 active.length > 0 &&
                 active.some((u) => u.userId === _id) ? (
-                  <div className="text-xs text-gray-500">Active</div>
+                  <div className="text-green-500 text-sm">Active</div>
                 ) : (
                   ""
                 )}
               </div>
-            </div>
-          </div>
           {/* <div className="flex flex-col ml-3">
           <div className="font-semibold text-sm">{name}</div>
           <div className="text-xs text-gray-500">Active</div>

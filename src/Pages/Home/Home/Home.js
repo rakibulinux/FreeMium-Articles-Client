@@ -4,7 +4,7 @@ import GetUnlimitedAccessButton from "../../../components/GetUnlimitedAccessButt
 import Articles from "../../ArticlesSection/Articles";
 
 import SideCategory from "../../SideCategory/SideCategory";
-import AfterLoginHadBanar from "../AfterLoginHadBanar/AfterLoginHadBanar";
+
 import Manubar from "../AfterLoginHadBanar/Manubar/Manubar";
 import HomeHadBanar from "../HomeHadBanar";
 import { AuthContext } from "./../../../contexts/AuthProvider";
@@ -19,7 +19,7 @@ const Home = () => {
         <div>
           <div className="lg:grid lg:grid-cols-3 grid-cols-1">
             <section className="col-span-2 order-last md:order-first border-r-0 lg:border-r-[1px] pr-10">
-              {/* <AfterLoginHadBanar /> */}
+             
               <Manubar />
 
               <Articles></Articles>

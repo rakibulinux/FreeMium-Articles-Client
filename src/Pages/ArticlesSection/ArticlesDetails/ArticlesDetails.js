@@ -116,7 +116,7 @@ const ArticlesDetails = () => {
 
   return (
     <div className="border-t-[1px] ">
-      <div className="container mx-auto lg:grid lg:grid-cols-3 grid-cols-1">
+      <div className="w-11/12 mx-auto lg:grid lg:grid-cols-3 grid-cols-1">
         {/* left side content */}
         <div className="border-r-0 lg:border-r-[1px] col-span-2  ">
           <div className="mr-10 my-10">

@@ -1,12 +1,28 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import io from "socket.io-client";
+import { AuthContext } from "../../contexts/AuthProvider";
+import { fetchAsync } from "../../store/fetchSlice";
 import Notification from "./Notification";
 const socket = io(`${process.env.REACT_APP_API_URL}`); // Replace with your server URL
 
 const NotificationIcon = () => {
   const [notifications, setNotifications] = useState([]);
   const [unreadCount, setUnreadCount] = useState(0);
+  const { user } = useContext(AuthContext);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(5);
+  const [hasMore, setHasMore] = useState(true);
+  const loaderRef = useRef(null);
+  const dispatch = useDispatch();
+  const singleUsers = useSelector((state) => state.fetch.data);
+  useEffect(() => {
+    dispatch(
+      fetchAsync(`${process.env.REACT_APP_API_URL}/user/${user?.email}`)
+    );
+  }, [dispatch, user]);
+
   useEffect(() => {
     // Listen for new notifications
     socket.on("new_notification", () => {
@@ -20,19 +36,44 @@ const NotificationIcon = () => {
       );
     });
 
+    // Fetch notifications from the API
+    fetch(
+      `${process.env.REACT_APP_API_URL}/notifications/${singleUsers?._id}?page=${page}&limit=${limit}`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        setNotifications(data);
+        setUnreadCount(data.filter((n) => !n.read).length);
+      })
+      .catch((error) => console.log(error));
+
     return () => {
       socket.off("new_notification");
       socket.off("notification_updated");
     };
-  }, []);
-  const filterNot = notifications.filter(
-    (noti) => !noti.read === !notifications.read
-  );
+  }, [singleUsers]);
   // const handleNotificationsClick = () => {
   //   setDropdownOpen(true);
   //   setUnreadCount(0); // clear unread count when dropdown is opened
   // };
   // console.log(unreadCount);
+  useEffect(() => {
+    const handleScroll = () => {
+      if (
+        loaderRef.current &&
+        loaderRef.current.getBoundingClientRect().bottom <= window.innerHeight
+      ) {
+        setPage((prevPage) => prevPage + 1);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+    // notificationsSection.addEventListener("scroll", handleScroll);
+
+    // return () => {
+    //   notificationsSection.removeEventListener("scroll", handleScroll);
+    // };
+  }, []);
   return (
     <div className="flex justify-center">
       <div className="object-center">
@@ -61,7 +102,7 @@ const NotificationIcon = () => {
             </svg>
 
             <span className="badge badge-xs text-white badge-primary indicator-item">
-              {filterNot?.length}
+              {unreadCount}
             </span>
           </div>
         </button>
@@ -75,6 +116,7 @@ const NotificationIcon = () => {
 
         {dropdownOpen && (
           <Notification
+            socket={socket}
             notifications={notifications}
             setNotifications={setNotifications}
           />

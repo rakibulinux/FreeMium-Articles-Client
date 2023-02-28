@@ -10,7 +10,7 @@ const AnotherSlide = () => {
         </h1>
         {/* <GetUnlimitedAccessButton text={"Get unlimited access"} /> */}
         <button className="btn bg-gray-900 hover:bg-[#333] hover:text-white text-xl text-white border-0 hover:border-2 hover:border-gray-900 w-72 btn-accent ">
-          get unlimited access
+          Get Unlimited Access
         </button>
         <img
           src="https://cdn-static-1.medium.com/sites/medium.com/membership/images/Membership_Footer.svg"

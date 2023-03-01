@@ -31,7 +31,7 @@ const WelcomeDashboard = () => {
       <h1 className="text-center text-3xl font-medium text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-sky-600 sm:mr-3 md:mb-0">
         Admin Dashboard
       </h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 my-6 items-center justify-center">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 my-6 items-center justify-center">
         {/* Categories card */}
         <Link to="/dashboard/category">
           <div className="card w-80 bg-[#F24D2E] text-white shadow-xl p-0">

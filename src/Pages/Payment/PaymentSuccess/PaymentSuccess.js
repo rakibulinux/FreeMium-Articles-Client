@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import PrimaryButton from "../../../components/Button/PrimaryButton";
+import { APIContext } from "../../../contexts/APIProvider";
 
 const PaymentSuccess = () => {
   const [paymentUser, setPaymentUser] = useState({});
   const location = useLocation();
   const query = new URLSearchParams(location.search);
+  const { isDarkMode } = useContext(APIContext);
   const transactionId = query.get("transactionId");
   //
   useEffect(() => {
@@ -96,7 +98,13 @@ const PaymentSuccess = () => {
 
         <h4 className="text-2xl text-center font-bold my-3 print:hidden">
           <Link className="text-blue-600 underline underline-offset-4" to="/">
-            <PrimaryButton classes="px-8 py-3 font-semibold rounded">
+            <PrimaryButton
+              classes={
+                isDarkMode
+                  ? "bg-black-250 text-white px-8 py-3 font-semibold rounded"
+                  : "bg-black-250 text-white px-8 py-3 font-semibold rounded"
+              }
+            >
               Back to Homepage
             </PrimaryButton>
           </Link>

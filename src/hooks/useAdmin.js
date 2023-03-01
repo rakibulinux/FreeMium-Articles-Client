@@ -18,7 +18,7 @@ const useAdmin = (email) => {
           setIsAdminLoading(false);
         })
         .catch((err) => {
-          navigate("/");
+          // navigate("/");
         });
       // .finally({
       //   setIsAdminLoading()

@@ -131,6 +131,7 @@ const Register = () => {
                     id="image"
                     name="image"
                     accept="image/*"
+                    className="file-input border rounded-md border-gray-300 focus:outline-gray-500 bg-gray-200 text-gray-900 w-full  "
                     required
                   />
                 </div>

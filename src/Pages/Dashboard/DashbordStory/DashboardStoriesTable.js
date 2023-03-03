@@ -8,7 +8,7 @@ import { format } from "date-fns";
 const DashboardStoriesTable = ({ article, isDarkMode, idx, refetch }) => {
   const { writerName, articleTitle, articleImg, _id, category, timestamp } =
     article;
-  const title = articleTitle.replace(/<[^>]+>/g, "").slice(0, 50);
+  const title = articleTitle.replace(/<[^>]+>/g, "").slice(0, 20);
 
   const [deleteItem, setDeleteItem] = useState(null);
   const closeReportedModal = () => {
@@ -46,7 +46,7 @@ const DashboardStoriesTable = ({ article, isDarkMode, idx, refetch }) => {
         <td>{title}</td>
         <td className="hidden lg:table-cell p-0">{category}</td>
         <td className="hidden lg:table-cell font-bold">{writerName}</td>
-        <td className="hidden lg:table-cell">
+        <td className="hidden lg:table-cell p-0">
           {format(new Date(timestamp), "PP")}
         </td>
         <td>

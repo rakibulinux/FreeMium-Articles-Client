@@ -2,23 +2,23 @@
 
 ## Clone the project repository from GitHub:
 
-### `git clone https://github.com/rakibulinux/FreeMium-Articles-Client.git`
+#### `git clone https://github.com/rakibulinux/FreeMium-Articles-Client.git`
 
-### `cd FreeMium-Articles-Client`
+#### `cd FreeMium-Articles-Client`
 
 ## Copy env file and do your configuration.
 
-### `cp .env.local.example .env.local`
+#### `cp .env.local.example .env.local`
 
-### `nano .env.local`
+#### `nano .env.local`
 
 ## Available Scripts
 
 In the project directory, you can run:
 
-### `npm install -f`
+#### `npm install -f`
 
-### `npm start`
+#### `npm start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
@@ -26,14 +26,14 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-### `npm test`
+#### `npm test`
 
-### `npm run build`
+#### `npm run build`
 
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
-### `npm run eject`
+#### `npm run eject`
 
 **Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
